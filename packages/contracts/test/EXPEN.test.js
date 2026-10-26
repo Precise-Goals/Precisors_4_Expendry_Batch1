@@ -33,6 +33,10 @@ describe("EXPEN ERC-20 Token", function () {
     it("should have correct DAILY_CAP constant (50 EXPEN)", async function () {
       expect(await expen.DAILY_CAP()).to.equal(ethers.parseEther("50"));
     });
+
+    it("should start unpaused", async function () {
+      expect(await expen.paused()).to.equal(false);
+    });
   });
 
   describe("Operator-controlled Minting", function () {
@@ -69,7 +73,6 @@ describe("EXPEN ERC-20 Token", function () {
   describe("Daily Reward Cap Enforcement", function () {
     it("should allow minting up to 50 EXPEN per day in multiple batches", async function () {
       const tenExpen = ethers.parseEther("10");
-      // 5 rewards of 10 EXPEN = 50 EXPEN
       for (let i = 0; i < 5; i++) {
         await expen.connect(owner).mint(user1.address, tenExpen);
       }
@@ -80,7 +83,6 @@ describe("EXPEN ERC-20 Token", function () {
 
     it("should reject minting when 50 EXPEN daily cap is exceeded", async function () {
       await expen.connect(owner).mint(user1.address, ethers.parseEther("50"));
-      // Attempting even 1 more wei of EXPEN should revert
       await expect(
         expen.connect(owner).mint(user1.address, ethers.parseEther("1"))
       ).to.be.revertedWith("EXPEN: Daily cap of 50 EXPEN exceeded");
@@ -88,7 +90,6 @@ describe("EXPEN ERC-20 Token", function () {
 
     it("should isolate daily caps per wallet", async function () {
       await expen.connect(owner).mint(user1.address, ethers.parseEther("50"));
-      // User 2 should still be able to receive 50 EXPEN
       await expect(
         expen.connect(owner).mint(user2.address, ethers.parseEther("50"))
       ).to.not.be.reverted;
@@ -99,15 +100,58 @@ describe("EXPEN ERC-20 Token", function () {
       await expen.connect(owner).mint(user1.address, ethers.parseEther("50"));
       expect(await expen.getDailyRemaining(user1.address)).to.equal(0);
 
-      // Advance time by 24 hours (86,400 seconds)
       await time.increase(86400);
 
       expect(await expen.getDailyRemaining(user1.address)).to.equal(ethers.parseEther("50"));
-      // Minting next day should succeed
       await expect(
         expen.connect(owner).mint(user1.address, ethers.parseEther("10"))
       ).to.not.be.reverted;
       expect(await expen.balanceOf(user1.address)).to.equal(ethers.parseEther("60"));
+    });
+  });
+
+  describe("Pause and Emergency Stop", function () {
+    it("should allow owner to pause and unpause", async function () {
+      await expen.connect(owner).pause();
+      expect(await expen.paused()).to.equal(true);
+
+      await expen.connect(owner).unpause();
+      expect(await expen.paused()).to.equal(false);
+    });
+
+    it("should prevent non-owner from pausing or unpausing", async function () {
+      await expect(
+        expen.connect(user1).pause()
+      ).to.be.revertedWithCustomError(expen, "OwnableUnauthorizedAccount");
+
+      await expen.connect(owner).pause();
+
+      await expect(
+        expen.connect(user1).unpause()
+      ).to.be.revertedWithCustomError(expen, "OwnableUnauthorizedAccount");
+    });
+
+    it("should revert minting when contract is paused", async function () {
+      await expen.connect(owner).pause();
+      await expect(
+        expen.connect(owner).mint(user1.address, ethers.parseEther("10"))
+      ).to.be.revertedWithCustomError(expen, "EnforcedPause");
+    });
+
+    it("should revert transfers when contract is paused", async function () {
+      await expen.connect(owner).mint(user1.address, ethers.parseEther("10"));
+      await expen.connect(owner).pause();
+
+      await expect(
+        expen.connect(user1).transfer(user2.address, ethers.parseEther("5"))
+      ).to.be.revertedWithCustomError(expen, "EnforcedPause");
+
+      // Resuming after unpause
+      await expen.connect(owner).unpause();
+      await expect(
+        expen.connect(user1).transfer(user2.address, ethers.parseEther("5"))
+      ).to.not.be.reverted;
+      expect(await expen.balanceOf(user2.address)).to.equal(ethers.parseEther("5"));
     });
   });
 });

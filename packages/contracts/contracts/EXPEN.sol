@@ -3,13 +3,15 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 
 /**
  * @title EXPEN Token
  * @notice Native utility & reward token for the Expendry manufacturing ecosystem.
- * @dev Implements ERC-20 with operator-controlled minting and per-wallet daily reward cap (50 EXPEN).
+ * @dev Implements ERC-20 with operator-controlled minting, per-wallet daily reward cap (50 EXPEN),
+ *      and Pausable emergency stop safety mechanism.
  */
-contract EXPEN is ERC20, Ownable {
+contract EXPEN is ERC20, Ownable, Pausable {
     /// @notice Maximum reward tokens a wallet can be minted per 24-hour UTC day (50 EXPEN)
     uint256 public constant DAILY_CAP = 50 * 10**18;
 
@@ -31,11 +33,25 @@ contract EXPEN is ERC20, Ownable {
     {}
 
     /**
+     * @notice Triggers emergency stop. Restricts token minting and transfers.
+     */
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    /**
+     * @notice Resumes normal contract operations.
+     */
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+
+    /**
      * @notice Mints tokens to a recipient while strictly enforcing the daily reward cap.
      * @param to Recipient wallet address
      * @param amount Amount to mint in wei (18 decimals)
      */
-    function mint(address to, uint256 amount) public virtual onlyOwner {
+    function mint(address to, uint256 amount) public virtual onlyOwner whenNotPaused {
         require(amount > 0, "EXPEN: mint amount must be greater than zero");
         require(to != address(0), "EXPEN: cannot mint to zero address");
 
@@ -46,6 +62,13 @@ contract EXPEN is ERC20, Ownable {
         dailyMinted[to][currentDay] = dayTotal;
         _mint(to, amount);
         emit RewardMinted(to, amount, dayTotal);
+    }
+
+    /**
+     * @notice Enforces pause state on token transfers.
+     */
+    function _update(address from, address to, uint256 value) internal virtual override whenNotPaused {
+        super._update(from, to, value);
     }
 
     /**
