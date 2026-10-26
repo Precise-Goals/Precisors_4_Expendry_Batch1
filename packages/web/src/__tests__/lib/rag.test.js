@@ -8,6 +8,8 @@ import {
   fetchCommunityPosts,
   calculateRecencyScore,
   POST_TYPE_WEIGHTS,
+  scoreBM25Lite,
+  assembleContext,
 } from "../../lib/rag.js";
 
 describe("RAG Engine Post Chunker & Normalizer Unit Tests", () => {
@@ -184,4 +186,54 @@ Check [Machining Handbook](https://example.com/handbook) for details.
       expect(nullDbResult).toEqual([]);
     });
   });
+
+  describe("BM25-Lite Scoring & Context Assembler", () => {
+    it("scores matching keywords with BM25-lite term frequency saturation", () => {
+      const query = "carbide end mill feeds";
+      const chunk1 = "For a carbide end mill, feeds and speeds should be calculated carefully.";
+      const chunk2 = "General maintenance tips for lubrication pump.";
+
+      const score1 = scoreBM25Lite(query, chunk1);
+      const score2 = scoreBM25Lite(query, chunk2);
+
+      expect(score1).toBeGreaterThan(0);
+      expect(score2).toBe(0);
+      expect(score1).toBeGreaterThan(score2);
+    });
+
+    it("assembles ranked top-K context within max token limits", async () => {
+      const posts = [
+        {
+          id: "p-101",
+          title: "Titanium Ti-6Al-4V Milling Handbook",
+          content: "Use sharp positive rake geometry carbide inserts with copious emulsion coolant to mill titanium alloys.",
+          type: "Blueprint",
+        },
+        {
+          id: "p-102",
+          title: "Brass Turning Speeds",
+          content: "Free-cutting brass can be turned dry at high surface speeds with zero rake angle.",
+          type: "Setup Tip",
+        },
+      ];
+
+      const ctx = await assembleContext("titanium milling coolant", posts, 5, 1500);
+      expect(ctx.contextText).toContain("Titanium Ti-6Al-4V");
+      expect(ctx.sources.length).toBe(1);
+      expect(ctx.sources[0].id).toBe("p-101");
+      expect(ctx.sources[0].type).toBe("Blueprint");
+      expect(ctx.tokenCount).toBeLessThanOrEqual(1500);
+    });
+
+    it("handles empty query or empty posts gracefully without crashing", async () => {
+      const emptyQuery = await assembleContext("", [{ id: "p1", title: "Test", content: "Test" }]);
+      expect(emptyQuery.contextText).toBe("");
+      expect(emptyQuery.sources).toEqual([]);
+
+      const emptyPosts = await assembleContext("titanium", []);
+      expect(emptyPosts.contextText).toBe("");
+      expect(emptyPosts.sources).toEqual([]);
+    });
+  });
 });
+

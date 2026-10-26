@@ -166,3 +166,112 @@ export async function fetchCommunityPosts(db = adminDb, limit = 50) {
     return [];
   }
 }
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Calculates BM25-lite term frequency score for a chunk given a user query.
+ */
+export function scoreBM25Lite(query, chunk) {
+  if (!query || typeof query !== "string" || !chunk || typeof chunk !== "string") {
+    return 0;
+  }
+
+  const queryTerms = query
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((w) => w.length > 2);
+
+  if (queryTerms.length === 0) return 0;
+
+  const chunkLower = chunk.toLowerCase();
+  let score = 0;
+
+  for (const term of queryTerms) {
+    const escaped = escapeRegExp(term);
+    const matches = chunkLower.match(new RegExp(escaped, "g"));
+    const occurrences = matches ? matches.length : 0;
+    if (occurrences > 0) {
+      // BM25 term frequency saturation
+      score += (occurrences * 2.2) / (occurrences + 1.2);
+    }
+  }
+
+  return score;
+}
+
+/**
+ * Assembles ranked, top-K RAG context under max token limit (default 1500).
+ * Offline-safe (no external embedding APIs required).
+ */
+export async function assembleContext(
+  query,
+  postsOrDb = null,
+  k = 5,
+  maxTokens = 1500
+) {
+  if (!query || typeof query !== "string" || !query.trim()) {
+    return { contextText: "", sources: [], tokenCount: 0 };
+  }
+
+  let posts = [];
+  if (Array.isArray(postsOrDb)) {
+    posts = postsOrDb;
+  } else {
+    posts = await fetchCommunityPosts(postsOrDb || adminDb);
+  }
+
+  if (!posts || posts.length === 0) {
+    return { contextText: "", sources: [], tokenCount: 0 };
+  }
+
+  const scoredChunks = [];
+
+  for (const post of posts) {
+    const postChunks = chunkPost(post);
+    for (const item of postChunks) {
+      const rawScore = scoreBM25Lite(query, item.chunk);
+      if (rawScore > 0) {
+        scoredChunks.push({
+          ...item,
+          score: rawScore * (item.weight || 1.0),
+        });
+      }
+    }
+  }
+
+  scoredChunks.sort((a, b) => b.score - a.score);
+  const selected = scoredChunks.slice(0, k);
+
+  let contextText = "";
+  const sources = [];
+  let currentTokens = 0;
+
+  for (const item of selected) {
+    const snippet = `[Source: ${item.postTitle} (${item.postType})]: ${item.chunk}\n`;
+    const snippetTokens = estimateTokens(snippet);
+    if (currentTokens + snippetTokens > maxTokens && currentTokens > 0) {
+      break;
+    }
+
+    contextText += snippet;
+    currentTokens += snippetTokens;
+
+    if (!sources.find((s) => s.id === item.postId)) {
+      sources.push({
+        id: item.postId,
+        title: item.postTitle,
+        type: item.postType,
+      });
+    }
+  }
+
+  return {
+    contextText: contextText.trim(),
+    sources,
+    tokenCount: estimateTokens(contextText),
+  };
+}
+
