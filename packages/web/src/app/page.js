@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -52,7 +53,15 @@ export default function Home() {
           className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         >
           <div className="text-center max-w-3xl mx-auto space-y-6">
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-3">
+              <Image
+                src="/globe.svg"
+                alt="Expendry Network"
+                width={20}
+                height={20}
+                priority={true}
+                className="w-5 h-5"
+              />
               <Badge variant="accent" size="md">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
                 MST Testnet • Chain ID {CHAIN_ID}
