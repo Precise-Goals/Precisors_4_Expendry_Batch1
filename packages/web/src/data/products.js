@@ -265,7 +265,7 @@ export function filterProducts(
   if (search && typeof search === "string") {
     const sanitized = search
       .replace(/<[^>]*>/g, "")
-      .replace(/--.*$/g, "")
+      .replace(/--+/g, " ")
       .replace(/['";]/g, "")
       .trim();
 
