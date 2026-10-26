@@ -150,18 +150,56 @@ CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_
 
 def classify(msg):
     head = msg.split(":", 1)[0].lower()
-    return {"missing": "MISSING", "unconfigured": "UNCONFIGURED", "stale": "STALE"}.get(head, "INVALID")
+    return {"missing": "MISSING", "unconfigured": "UNCONFIGURED", "stale": "STALE", "drifted": "DRIFTED"}.get(head, "INVALID")
+
+def _run_check(c, root):
+    try:
+        return c(root)
+    except TypeError:
+        return c()
+
+def get_reconcile_gaps(root=ROOT):
+    failures = [e for c in CHECKS for e in _run_check(c, root)]
+    return [{"status": classify(e), "detail": e} for e in failures]
+
+def plan_reconcile(root=ROOT, gaps=None):
+    if gaps is None:
+        gaps = get_reconcile_gaps(root)
+    preserve = []
+    create = []
+    regenerate = []
+    configure = []
+    for g in gaps:
+        status = g["status"]
+        detail = g["detail"]
+        parts = detail.split(":", 1)
+        rel = parts[1].strip().split()[0] if len(parts) > 1 else detail
+        if status == "DRIFTED":
+            preserve.append(rel)
+        elif status == "MISSING":
+            create.append(rel)
+        elif status == "STALE":
+            regenerate.append(rel)
+        elif status == "UNCONFIGURED":
+            configure.append(rel)
+    return {
+        "preserve": preserve,
+        "create": create,
+        "regenerate": regenerate,
+        "configure": configure,
+        "overwrite": regenerate + create,
+    }
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
-    failures = [e for c in CHECKS for e in c()]
+    gaps = get_reconcile_gaps(ROOT)
     if "--json" in argv:
-        print(json.dumps([{"status": classify(e), "detail": e} for e in failures], indent=2))
-        return 1 if failures else 0
-    for e in failures:
-        print(f"FAIL  {e}")
-    print(f"{'OK' if not failures else 'HARNESS UNHEALTHY'} — {len(failures)} problem(s)")
-    return 1 if failures else 0
+        print(json.dumps(gaps, indent=2))
+        return 1 if gaps else 0
+    for g in gaps:
+        print(f"FAIL  {g['detail']}")
+    print(f"{'OK' if not gaps else 'HARNESS UNHEALTHY'} — {len(gaps)} problem(s)")
+    return 1 if gaps else 0
 
 if __name__ == "__main__":
     sys.exit(main())
