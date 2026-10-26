@@ -2,11 +2,15 @@
   "name": "ethosh-project",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:e2e": "bun tests/e2e/runner.js"
   },
   "dependencies": {
     "next": "16.4.1",
