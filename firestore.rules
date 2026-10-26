@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isWalletUser(walletAddress) {
+      return isAuthenticated() && (request.auth.uid == 'wallet:' + walletAddress.lower());
+    }
+
+    function isValidPostType(type) {
+      return type in ['Experience', 'Blueprint', 'Idea', 'Setup Tip', 'Video Note'];
+    }
+
+    // Community Posts collection
+    match /posts/{postId} {
+      // Tacit knowledge posts are publicly readable by guests, machinists, and RAG indexers
+      allow read: if true;
+
+      // Creation requires wallet-authenticated author matching authorWallet, valid fields, and valid enum type
+      allow create: if isAuthenticated() &&
+        request.resource.data.title is string &&
+        request.resource.data.title.size() >= 3 &&
+        request.resource.data.content is string &&
+        request.resource.data.content.size() >= 10 &&
+        isValidPostType(request.resource.data.type) &&
+        request.resource.data.authorWallet is string &&
+        isWalletUser(request.resource.data.authorWallet);
+
+      // Updates restricted to author
+      allow update: if isAuthenticated() && isWalletUser(resource.data.authorWallet);
+
+      // Client-side deletions forbidden to ensure immutable archival of tacit knowledge
+      allow delete: if false;
+    }
+
+    // User Profiles
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated() && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    // Reward records and daily tallies (managed exclusively via Server Admin SDK)
+    match /rewards/{rewardId} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
