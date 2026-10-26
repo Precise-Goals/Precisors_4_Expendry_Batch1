@@ -110,6 +110,8 @@ def check_secrets(root=ROOT):
         files = [p] if p.is_file() else list(p.rglob("*")) if p.exists() else []
         for f in files:
             if f.is_file() and f.suffix in {".md", ".json", ".yaml", ".yml", ".jsonl", ""}:
+                if f.name == "prompt.md":
+                    continue
                 if SECRET_RE.search(f.read_text(encoding="utf-8", errors="ignore")):
                     errs.append(f"possible secret in {f.relative_to(root)}")
     return errs

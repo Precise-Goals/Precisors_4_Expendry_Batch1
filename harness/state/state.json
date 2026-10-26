@@ -2,29 +2,30 @@
   "harness_version": "1.0.0",
   "profile": "fullstack-web+blockchain",
   "derived_from": {
-    "raw_md_sha": "",
-    "harness_md_sha": ""
+    "raw_md_sha": "9e53a17cc81bbe1cb4a8c9280ac32ac32f260dcacc6eb3b09c7c5ace5738589c",
+    "harness_md_sha": "bb3c39a5ecd3668c3ec234e71881d08533c3ccee9f633fad001239950c74a625"
   },
-  "mode": "CURATION",
+  "mode": "SCAFFOLD",
   "sprint": 0,
   "task_id": null,
-  "current_stage": "harness.md-draft",
+  "current_stage": "harness-bootstrap",
   "stages": {
     "discovery": "done",
-    "curation": "in_progress"
+    "curation": "done",
+    "scaffold": "in_progress"
   },
   "lanes": [],
   "attempts": {},
   "last_commit": "",
   "last_gate": {
-    "name": null,
-    "status": null,
-    "at": null,
-    "log": null
+    "name": "G0",
+    "status": "pass",
+    "at": "2026-10-26T20:10:00Z",
+    "log": "harness/logs/events.jsonl"
   },
   "breaker": {
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-27T00:51:00+05:30"
+  "updated_at": "2026-10-26T20:10:00Z"
 }
