@@ -3,11 +3,17 @@ import { adminDb } from "@/lib/firebase-admin";
 import { isValidAddress } from "@/lib/wallet";
 import { claimPostReward, DailyCapExceededError } from "@/lib/reward";
 import { POST_TYPES } from "shared/constants";
+import { postsRateLimiter, applyRateLimit } from "@/lib/rateLimit";
 
 let postDeps = {};
 
 export function setPostsDependencies(deps) {
   postDeps = deps || {};
+  postsRateLimiter.clear();
+}
+
+export function clearRateLimits() {
+  postsRateLimiter.clear();
 }
 
 export async function GET(request) {
@@ -33,6 +39,10 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+  // Enforce token-bucket rate limit (10 req/min per IP)
+  const rateLimitResponse = applyRateLimit(request, postsRateLimiter);
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     let body;
     try {

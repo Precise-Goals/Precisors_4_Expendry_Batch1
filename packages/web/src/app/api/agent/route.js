@@ -6,10 +6,8 @@ import {
   SarvamError,
   SARVAM_MODEL,
 } from "@/lib/sarvam";
+import { agentRateLimiter } from "@/lib/rateLimit";
 
-// In-memory rate limiting map: ip -> { count, resetTime }
-const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 20;
 
 let agentDeps = {};
@@ -19,36 +17,15 @@ export function setAgentDependencies(deps) {
 }
 
 export function clearRateLimits() {
-  rateLimitMap.clear();
+  agentRateLimiter.clear();
 }
 
 function checkRateLimit(ip) {
-  const now = Date.now();
-  let record = rateLimitMap.get(ip);
-
-  if (!record || now > record.resetTime) {
-    record = { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS };
-    rateLimitMap.set(ip, record);
-    return {
-      allowed: true,
-      remaining: MAX_REQUESTS_PER_WINDOW - 1,
-      resetTime: record.resetTime,
-    };
-  }
-
-  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
-    return {
-      allowed: false,
-      remaining: 0,
-      resetTime: record.resetTime,
-    };
-  }
-
-  record.count++;
+  const result = agentRateLimiter.check(ip);
   return {
-    allowed: true,
-    remaining: MAX_REQUESTS_PER_WINDOW - record.count,
-    resetTime: record.resetTime,
+    allowed: result.allowed,
+    remaining: result.remaining,
+    retryAfter: result.retryAfter,
   };
 }
 
@@ -58,7 +35,7 @@ export async function POST(request) {
   const ip = forwardedFor ? forwardedFor.split(",")[0].trim() : "127.0.0.1";
 
   const rateCheck = checkRateLimit(ip);
-  const retryAfterSec = Math.ceil((rateCheck.resetTime - Date.now()) / 1000);
+  const retryAfterSec = rateCheck.retryAfter || 1;
 
   if (!rateCheck.allowed) {
     return new Response(
