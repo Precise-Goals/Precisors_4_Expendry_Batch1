@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useCommunityFeed } from "@/hooks/useCommunityFeed";
 import PostCard from "@/components/community/PostCard";
+import FilterTabs from "@/components/community/FilterTabs";
 import { Button } from "@/components/ui/Button";
 
 export default function CommunityFeed({ initialType = "All" }) {
@@ -37,6 +38,9 @@ export default function CommunityFeed({ initialType = "All" }) {
 
   return (
     <div className="w-full space-y-6" id="community-feed-panel">
+      {/* Post Type Filter Tabs with URL Sync */}
+      <FilterTabs activeType={activeType} onSelectType={setActiveType} />
+
       {/* Error state */}
       {error && (
         <div
@@ -94,7 +98,9 @@ export default function CommunityFeed({ initialType = "All" }) {
       {!isLoading && posts.length === 0 && (
         <div className="p-12 text-center rounded-2xl bg-[#121212] border border-[#262626] space-y-3">
           <span className="text-4xl block">🔍</span>
-          <h4 className="text-base font-bold text-[#ededed]">No posts found</h4>
+          <h4 className="text-base font-bold text-[#ededed]">
+            No posts found in {activeType}
+          </h4>
           <p className="text-xs text-[#a1a1aa] max-w-sm mx-auto">
             Be the first veteran machinist to document a note in this category and
             earn 10 EXPEN on MST testnet!
