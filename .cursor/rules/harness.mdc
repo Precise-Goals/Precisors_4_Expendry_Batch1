@@ -1,0 +1,10 @@
+---
+description: Expendry Harness Operating Rules
+globs: *
+alwaysApply: true
+---
+# Cursor Rules — Expendry
+
+Operating rules, commands, role descriptions, and safety gates are defined canonically in `AGENTS.md`.
+Refer to `AGENTS.md` and `harness/state/state.json` for current project state and task assignments.
+Follow Conventional Commits per `harness/standards/git.md`.
