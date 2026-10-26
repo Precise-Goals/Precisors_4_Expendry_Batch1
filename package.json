@@ -6,23 +6,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
+    "dev": "bun --filter=web run dev",
+    "build": "bun scripts/build.js",
+    "start": "bun --filter=web run start",
+    "lint": "bun --filter=web run lint",
     "test:e2e": "bun tests/e2e/runner.js"
-  },
-  "dependencies": {
-    "next": "16.4.1",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
-    "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.1",
-    "tailwindcss": "^4"
   },
   "packageManager": "bun@1.3.14",
   "ignoreScripts": [
