@@ -151,6 +151,11 @@ export async function fetchCommunityPosts(db = adminDb, limit = 50) {
     return [];
   }
 
+  // Avoid unhandled GCP metadata network timeout in local/test environment without service account
+  if (db === adminDb && !process.env.FIREBASE_PRIVATE_KEY && !process.env.FIREBASE_CLIENT_EMAIL) {
+    return [];
+  }
+
   try {
     const snapshot = await db
       .collection("posts")

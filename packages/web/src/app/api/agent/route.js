@@ -153,14 +153,46 @@ ${
           if (sarvamRes && sarvamRes.body) {
             const reader = sarvamRes.body.getReader();
             const decoder = new TextDecoder();
+            let buffer = "";
             while (true) {
               const { done, value } = await reader.read();
               if (done) break;
-              controller.enqueue(value);
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split("\n\n");
+              buffer = lines.pop() || "";
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith("data: ")) {
+                  const dataStr = trimmed.slice(6).trim();
+                  if (dataStr === "[DONE]") continue;
+                  try {
+                    const parsed = JSON.parse(dataStr);
+                    const deltaContent =
+                      parsed.choices?.[0]?.delta?.content || "";
+                    if (deltaContent) {
+                      const sse = `data: ${JSON.stringify({
+                        delta: deltaContent,
+                        done: false,
+                      })}\n\n`;
+                      controller.enqueue(encoder.encode(sse));
+                    }
+                  } catch {
+                    // Ignore parse error on partial chunks
+                  }
+                }
+              }
             }
+            // Stream complete from external Sarvam, emit done event
+            const finalEvent = `data: ${JSON.stringify({
+              delta: "",
+              done: true,
+              sources,
+              resolvedLang,
+            })}\n\n`;
+            controller.enqueue(encoder.encode(finalEvent));
             usedExternal = true;
           }
-        } catch (err) {
+        } catch {
           // Fallback to local response generator
         }
       }
