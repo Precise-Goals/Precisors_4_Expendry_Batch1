@@ -51,7 +51,35 @@ def check_harness_md(root=ROOT):
         errs.append("harness.md Open Questions must be empty when sprint >= 1")
     return errs
 
-CHECKS = [check_required_files, check_harness_md]
+def check_agents_and_roles(root=ROOT):
+    errs, agents, roles = [], root / "harness/agents", root / "harness/roles"
+    a_names = {p.stem for p in agents.glob("*.md")} if agents.exists() else set()
+    r_names = {p.stem for p in roles.glob("*.md")} if roles.exists() else set()
+    errs += [f"agent without role: {n}" for n in sorted(a_names - r_names)]
+    errs += [f"role without agent: {n}" for n in sorted(r_names - a_names)]
+    for n in sorted(a_names & r_names):
+        a = (agents / f"{n}.md").read_text(encoding="utf-8")
+        if len(a.splitlines()) > 40:
+            errs.append(f"agent too long (>40 lines): {n}")
+        if f"role_file: harness/roles/{n}.md" not in a:
+            errs.append(f"agent {n} missing role_file front-matter")
+        r = (roles / f"{n}.md").read_text(encoding="utf-8")
+        errs += [f"role {n} missing section: {s}" for s in ROLE_SECTIONS
+                 if not re.search(rf"^#+\s*{re.escape(s)}", r, re.M | re.I)]
+    return errs
+
+def check_agents_md(root=ROOT):
+    p = root / "AGENTS.md"
+    if not p.exists():
+        return ["AGENTS.md missing"]
+    text = p.read_text(encoding="utf-8")
+    errs = ["AGENTS.md exceeds 150 lines"] if len(text.splitlines()) > 150 else []
+    for link in re.findall(r"\]\((?!https?://|#|mailto:)([^)\s]+)\)", text):
+        if not (root / link.split("#")[0]).exists():
+            errs.append(f"AGENTS.md broken link: {link}")
+    return errs
+
+CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_agents_md]
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
