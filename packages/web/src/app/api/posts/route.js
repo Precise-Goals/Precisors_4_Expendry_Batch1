@@ -4,6 +4,7 @@ import { isValidAddress } from "@/lib/wallet";
 import { claimPostReward, DailyCapExceededError } from "@/lib/reward";
 import { POST_TYPES } from "shared/constants";
 import { postsRateLimiter, applyRateLimit } from "@/lib/rateLimit";
+import DOMPurify from "isomorphic-dompurify";
 
 let postDeps = {};
 
@@ -71,15 +72,18 @@ export async function POST(request) {
       );
     }
 
-    // 2. Input validation
-    if (!title || typeof title !== "string" || title.trim().length < 3) {
+    // 2. Input validation & Sanitisation (strip HTML tags using DOMPurify)
+    const sanitizedTitle = typeof title === "string" ? DOMPurify.sanitize(title, { ALLOWED_TAGS: [] }).trim() : "";
+    const sanitizedContent = typeof content === "string" ? DOMPurify.sanitize(content, { ALLOWED_TAGS: [] }).trim() : "";
+
+    if (!sanitizedTitle || sanitizedTitle.length < 3) {
       return NextResponse.json(
         { error: "Validation error: Title is required and must be at least 3 characters." },
         { status: 400 }
       );
     }
 
-    if (!content || typeof content !== "string" || content.trim().length < 10) {
+    if (!sanitizedContent || sanitizedContent.length < 10) {
       return NextResponse.json(
         { error: "Validation error: Content is required and must be at least 10 characters." },
         { status: 400 }
@@ -119,8 +123,8 @@ export async function POST(request) {
     if (db && typeof db.collection === "function") {
       try {
         const postRef = await db.collection("posts").add({
-          title: title.trim(),
-          content: content.trim(),
+          title: sanitizedTitle,
+          content: sanitizedContent,
           type,
           authorWallet: normalizedWallet,
           txHash,

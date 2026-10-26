@@ -213,4 +213,59 @@ describe("POST /api/posts Integration Tests", () => {
     const data6 = await res6.json();
     expect(data6.error).toContain("Daily reward cap of 50 EXPEN reached");
   });
+
+  it("sanitises XSS payloads and strips HTML tags with DOMPurify before Firestore write", async () => {
+    const xssPayload = {
+      title: "CNC Spindle <script>alert('xss')</script>Setup Guide",
+      content:
+        "Calibrating runout <img src=x onerror=alert(1)> with a dial test indicator on stainless steel shaft.",
+      type: "Setup Tip",
+      authorWallet,
+    };
+
+    const req = new Request("http://localhost:3000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(xssPayload),
+    });
+
+    const res = await createPost(req);
+    expect(res.status).toBe(201);
+
+    const data = await res.json();
+    expect(data.success).toBe(true);
+    expect(data.postId).toBeDefined();
+
+    const saved = storedPosts.get(data.postId);
+    expect(saved).toBeDefined();
+    // Verify script and img onerror tags are stripped
+    expect(saved.title).toBe("CNC Spindle Setup Guide");
+    expect(saved.title).not.toContain("<script>");
+    expect(saved.title).not.toContain("alert");
+    expect(saved.content).toBe(
+      "Calibrating runout  with a dial test indicator on stainless steel shaft."
+    );
+    expect(saved.content).not.toContain("<img");
+    expect(saved.content).not.toContain("onerror");
+  });
+
+  it("rejects post if payload consists solely of HTML tags that sanitize to empty", async () => {
+    const maliciousPayload = {
+      title: "<script>alert(1)</script>",
+      content: "<style>body{color:red}</style><div><span></span></div>",
+      type: "Setup Tip",
+      authorWallet,
+    };
+
+    const req = new Request("http://localhost:3000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(maliciousPayload),
+    });
+
+    const res = await createPost(req);
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(data.error).toContain("Title is required");
+  });
 });
