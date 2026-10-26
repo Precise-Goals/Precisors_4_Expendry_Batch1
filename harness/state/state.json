@@ -3,20 +3,19 @@
   "profile": "fullstack-web+blockchain",
   "derived_from": {
     "raw_md_sha": "9e53a17cc81bbe1cb4a8c9280ac32ac32f260dcacc6eb3b09c7c5ace5738589c",
-    "harness_md_sha": "bb3c39a5ecd3668c3ec234e71881d08533c3ccee9f633fad001239950c74a625"
+    "harness_md_sha": "3dfb77d4c74b6d7f68dc4fe1bd58b44f569ff2ecbd953feeffa9dc62b150e1d7"
   },
-  "mode": "SCAFFOLD",
-  "sprint": 0,
-  "task_id": null,
-  "current_stage": "harness-bootstrap",
+  "mode": "EXECUTE",
+  "sprint": 1,
+  "task_id": "T-S1-01",
+  "current_stage": "sprint-1-kickoff",
   "stages": {
-    "discovery": "done",
-    "curation": "done",
-    "scaffold": "in_progress"
+    "sprint-0": "done",
+    "sprint-1": "in_progress"
   },
   "lanes": [],
   "attempts": {},
-  "last_commit": "",
+  "last_commit": "8e4c2d4",
   "last_gate": {
     "name": "G0",
     "status": "pass",
@@ -27,5 +26,5 @@
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-26T20:10:00Z"
+  "updated_at": "2026-10-26T20:38:00Z"
 }
