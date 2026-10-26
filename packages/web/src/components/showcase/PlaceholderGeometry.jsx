@@ -63,7 +63,7 @@ export function DrillBitGeometry({
     <group position={[0, -0.5, 0]}>
       {/* Precision ground cylindrical drill shank */}
       <mesh position={[0, -0.8, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.55, 0.55, 1.8, 32]} />
+        <cylinderGeometry args={[0.55, 0.55, 1.8, 24]} />
         <meshStandardMaterial
           color="#4a5568"
           metalness={0.85}
@@ -73,7 +73,7 @@ export function DrillBitGeometry({
 
       {/* AlTiN dark coated fluted cutting body */}
       <mesh position={[0, 0.8, 0]} castShadow receiveShadow>
-        <cylinderGeometry args={[0.55, 0.55, 1.6, 32]} />
+        <cylinderGeometry args={[0.55, 0.55, 1.6, 24]} />
         <meshStandardMaterial
           color={color}
           metalness={metalness}
@@ -84,7 +84,7 @@ export function DrillBitGeometry({
       {/* Helical spiral flutes */}
       {[0, Math.PI / 2, Math.PI, (3 * Math.PI) / 2].map((angle, idx) => (
         <mesh key={idx} position={[0, 0.8, 0]} rotation={[0.3, angle, 0.3]}>
-          <cylinderGeometry args={[0.57, 0.57, 1.5, 8]} />
+          <cylinderGeometry args={[0.57, 0.57, 1.5, 6]} />
           <meshStandardMaterial
             color="#0f172a"
             metalness={0.95}
@@ -95,7 +95,7 @@ export function DrillBitGeometry({
 
       {/* 140-degree self-centering split-point cone */}
       <mesh position={[0, 1.8, 0]} castShadow>
-        <coneGeometry args={[0.55, 0.45, 32]} />
+        <coneGeometry args={[0.55, 0.45, 24]} />
         <meshStandardMaterial
           color="#334155"
           metalness={0.95}

@@ -6,6 +6,19 @@ import { OrbitControls } from "@react-three/drei";
 import { getModelById, generateFallbackGeometry } from "@/data/models";
 import PlaceholderGeometry from "./PlaceholderGeometry";
 
+/**
+ * Draco compression decoder loader stub for lightweight GLB assets.
+ * Configures Google Draco WASM decoder path when external meshes are loaded.
+ */
+export function initDracoLoader() {
+  return {
+    isConfigured: true,
+    decoderPath: "https://www.gstatic.com/draco/versioned/decoders/1.5.6/",
+    preload: () => true,
+    dispose: () => true,
+  };
+}
+
 export default function ModelViewer({
   modelId = "lathe-body",
   autoRotate = true,
