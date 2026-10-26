@@ -114,14 +114,49 @@ def check_secrets(root=ROOT):
                     errs.append(f"possible secret in {f.relative_to(root)}")
     return errs
 
+PLACEHOLDER_RE = re.compile(r"\b(TODO|TBD|FIXME)\b|<describe here>|\{\{[^}]*\}\}")
+CONFIGURABLE = ["AGENTS.md", "harness/agents", "harness/roles", "harness/standards", "harness/workflows",
+                "harness/tools", "harness/backlog.md"]
+
+def check_unconfigured(root=ROOT):
+    """Existing-but-not-configured files: blank or still holding template placeholders."""
+    errs = []
+    for base in CONFIGURABLE:
+        p = root / base
+        files = [p] if p.is_file() else sorted(p.rglob("*")) if p.exists() else []
+        for f in files:
+            if not f.is_file() or f.name.startswith("."):
+                continue
+            txt = f.read_text(encoding="utf-8", errors="ignore")
+            rel = f.relative_to(root)
+            if not txt.strip():
+                errs.append(f"unconfigured: {rel} is blank")
+            elif PLACEHOLDER_RE.search(txt):
+                errs.append(f"unconfigured: {rel} still contains placeholders")
+    return errs
+
+def check_stale(root=ROOT):
+    """Derived files older than the problem statement / plan they were generated from."""
+    d = _load(root / "harness/state/state.json").get("derived_from") or {}
+    errs = []
+    for key, rel in (("raw_md_sha", "docs/raw.md"), ("harness_md_sha", "docs/harness.md")):
+        f = root / rel
+        if key in d and f.exists() and d[key] != hashlib.sha256(f.read_bytes()).hexdigest():
+            errs.append(f"stale: {rel} changed since harness was generated (re-run reconcile)")
+    return errs
+
 CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_agents_md,
-          check_state, check_budgets, check_locks, check_secrets]
+          check_state, check_budgets, check_locks, check_secrets, check_unconfigured, check_stale]
+
+def classify(msg):
+    head = msg.split(":", 1)[0].lower()
+    return {"missing": "MISSING", "unconfigured": "UNCONFIGURED", "stale": "STALE"}.get(head, "INVALID")
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     failures = [e for c in CHECKS for e in c()]
     if "--json" in argv:
-        print(json.dumps([{"status": "MISSING", "detail": e} for e in failures], indent=2))
+        print(json.dumps([{"status": classify(e), "detail": e} for e in failures], indent=2))
         return 1 if failures else 0
     for e in failures:
         print(f"FAIL  {e}")
