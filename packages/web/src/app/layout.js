@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "../components/layout/Navbar";
+import Footer from "../components/layout/Footer";
 
 export const metadata = {
   title: "Expendry — Manufacturing Tacit Knowledge & Token Ecosystem",
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
         <main id="main-content" className="flex-1 flex flex-col">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );
