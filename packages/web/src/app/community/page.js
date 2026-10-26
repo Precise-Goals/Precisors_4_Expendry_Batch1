@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import CommunityFeed from "@/components/community/CommunityFeed";
+import PostComposer from "@/components/community/PostComposer";
 import { Badge } from "@/components/ui/Badge";
 
 export const metadata = {
@@ -38,6 +39,10 @@ export default function CommunityPage({ searchParams }) {
 
       {/* Main Feed Slot */}
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+        {/* Post Composer wrapped in AuthGuard */}
+        <PostComposer />
+
+        {/* Feed List with Filter Tabs */}
         <Suspense
           fallback={
             <div className="space-y-4 pt-2">
