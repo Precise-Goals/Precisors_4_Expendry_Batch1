@@ -95,6 +95,7 @@ export default function Home() {
           </div>
 
           {/* Three Entry-Point CTAs Above Fold */}
+          <h2 className="sr-only">Platform Highlights</h2>
           <motion.div
             variants={containerVariants}
             className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"

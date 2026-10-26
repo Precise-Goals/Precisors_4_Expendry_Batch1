@@ -18,18 +18,7 @@ export default function AgentPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 flex flex-col pt-16">
-      {/* Skip to Content Accessible Link */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[#26d464] text-neutral-950 font-semibold rounded-md shadow-lg"
-      >
-        Skip to main content
-      </a>
-
-      <main
-        id="main-content"
-        className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6"
-      >
+      <div className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
         {/* Header and Controls */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-neutral-800">
           <div>
@@ -98,7 +87,7 @@ export default function AgentPage() {
             onSourcesUpdated={(sources) => setActiveSources(sources)}
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }

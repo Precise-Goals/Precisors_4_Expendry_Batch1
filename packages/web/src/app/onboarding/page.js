@@ -58,6 +58,16 @@ export default function OnboardingPage() {
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] min-h-[calc(100vh-4rem)]">
+      {/* Onboarding Header */}
+      <div className="w-full max-w-xl text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#ededed] font-display">
+          Machinist Onboarding
+        </h1>
+        <p className="mt-2 text-sm text-[#a1a1aa]">
+          Connect your Web3 wallet and configure your machining credentials on MST Testnet.
+        </p>
+      </div>
+
       {/* Onboarding Stepper Header */}
       <div className="w-full max-w-xl mb-8">
         <div className="flex items-center justify-between mb-4">
