@@ -1,0 +1,103 @@
+tools:
+  - name: file_read
+    kind: builtin
+    allowed_roles: [all]
+    approval: auto
+  - name: file_write
+    kind: builtin
+    allowed_roles: [role-scoped]
+    approval: auto
+    guard: scripts/guard_paths.py
+  - name: bash
+    kind: bash
+    allowed_roles: [builder, test-author, qa, security]
+    approval: auto
+    sandbox: harness/tools/sandbox.md
+  - name: git
+    kind: bash
+    allowed_roles: [orchestrator, builder]
+    approval: auto
+    forbid: ["push --force", "reset --hard origin"]
+  - name: web_fetch
+    kind: api
+    allowed_roles: [po-spec, tech-lead, librarian]
+    approval: auto
+  - name: package_install
+    kind: bash
+    allowed_roles: [builder]
+    approval: confirm
+  - name: deploy
+    kind: bash
+    allowed_roles: []
+    approval: forbidden
+  - name: contract_compile
+    kind: bash
+    allowed_roles: [builder, test-author, security]
+    approval: auto
+  - name: contract_test
+    kind: bash
+    allowed_roles: [builder, test-author, qa]
+    approval: auto
+  - name: web_build
+    kind: bash
+    allowed_roles: [builder, qa]
+    approval: auto
+  - name: static_analysis
+    kind: bash
+    allowed_roles: [security, qa]
+    approval: auto
+  - name: lint_check
+    kind: bash
+    allowed_roles: [builder, reviewer, qa]
+    approval: auto
+
+role_paths:
+  orchestrator:
+    - "harness/state/**"
+    - "harness/logs/**"
+    - "harness/tasks/**"
+  po-spec:
+    - "harness/artifacts/*/01-spec.md"
+    - "harness/artifacts/*/handoff-po-spec-to-*.json"
+    - "artifacts/*/01-spec.md"
+  tech-lead:
+    - "harness/artifacts/*/03-plan.md"
+    - "harness/artifacts/*/handoff-tech-lead-to-*.json"
+    - "docs/adr/**"
+    - "artifacts/*/03-plan.md"
+  test-author:
+    - "tests/**"
+    - "packages/*/test/**"
+    - "packages/*/__tests__/**"
+    - "harness/artifacts/*/04-tests.md"
+    - "harness/artifacts/*/handoff-test-author-to-*.json"
+    - "artifacts/*/04-tests.md"
+  builder:
+    - "packages/**"
+    - "src/**"
+    - "harness/artifacts/*/05-build.md"
+    - "harness/artifacts/*/handoff-builder-to-*.json"
+    - "artifacts/*/05-build.md"
+  reviewer:
+    - "harness/artifacts/*/06a-review.md"
+    - "harness/artifacts/*/handoff-reviewer-to-*.json"
+    - "artifacts/*/06a-review.md"
+  security:
+    - "harness/artifacts/*/06b-security.md"
+    - "harness/artifacts/*/handoff-security-to-*.json"
+    - "artifacts/*/06b-security.md"
+  qa:
+    - "harness/artifacts/*/07-qa.md"
+    - "harness/artifacts/*/handoff-qa-to-*.json"
+    - "artifacts/*/07-qa.md"
+  scribe:
+    - "harness/artifacts/*/08-release.md"
+    - "harness/artifacts/*/handoff-scribe-to-*.json"
+    - "CHANGELOG.md"
+    - "docs/**"
+    - "artifacts/*/08-release.md"
+  librarian:
+    - "docs/memory/**"
+    - "AGENTS.md"
+    - "CLAUDE.md"
+    - ".cursor/rules/**"
