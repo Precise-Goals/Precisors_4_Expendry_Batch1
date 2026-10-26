@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "bun --filter=web run dev",
     "build": "bun scripts/build.js",
+    "test": "bun scripts/test-contracts.js",
     "start": "bun --filter=web run start",
     "lint": "bun --filter=web run lint",
     "test:e2e": "bun tests/e2e/runner.js"
