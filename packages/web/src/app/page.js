@@ -198,6 +198,127 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* About Story Section — 3-Step Explainer */}
+      <section
+        aria-label="About Story Section"
+        className="py-20 sm:py-28 border-b border-[#1f1f1f] bg-[#0c0c0c]"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <Badge variant="accent" size="sm">
+              How Expendry Works
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#ededed] font-display">
+              A Knowledge Economy for Precision Manufacturing
+            </h2>
+            <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+              &quot;Where experience is never retired.&quot; We transform shop-floor
+              wisdom into immutable on-chain knowledge assets through a 3-step
+              incentive loop.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Step 1: Share */}
+            <motion.div
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: 0.1 }}
+            >
+              <Card className="h-full bg-[#121212] border-[#262626] p-6 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-sm font-bold text-[#26d464] px-2.5 py-1 rounded bg-[#26d464]/10 border border-[#26d464]/30">
+                      STEP 01
+                    </span>
+                    <span className="text-2xl">📐</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#ededed] font-display mb-2">
+                    Share Tacit Knowledge
+                  </h3>
+                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
+                    Veteran machinists document spindle calibrations, chatter
+                    dampening setups, fixturing jigs, and carbide wear patterns
+                    across 5 structured post formats.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#1f1f1f] flex flex-wrap gap-1.5">
+                  <Badge variant="default" size="sm">Experience</Badge>
+                  <Badge variant="default" size="sm">Blueprint</Badge>
+                  <Badge variant="default" size="sm">Setup Tip</Badge>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Step 2: Earn */}
+            <motion.div
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: 0.2 }}
+            >
+              <Card className="h-full bg-[#121212] border-[#262626] p-6 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-sm font-bold text-[#26d464] px-2.5 py-1 rounded bg-[#26d464]/10 border border-[#26d464]/30">
+                      STEP 02
+                    </span>
+                    <span className="text-2xl">🪙</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#ededed] font-display mb-2">
+                    Earn EXPEN on MST Testnet
+                  </h3>
+                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
+                    Every valid post initiates an on-chain mint of 10 EXPEN tokens
+                    directly to your wallet. Enforced by operator smart contracts
+                    with a strict 50 EXPEN daily safety cap.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#1f1f1f]">
+                  <div className="flex items-center justify-between text-xs text-[#26d464] font-medium bg-[#26d464]/10 px-3 py-1.5 rounded-lg border border-[#26d464]/20">
+                    <span>10 EXPEN / Post</span>
+                    <span>Max 50 EXPEN / Day</span>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Step 3: Discover */}
+            <motion.div
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4, delay: 0.3 }}
+            >
+              <Card className="h-full bg-[#121212] border-[#262626] p-6 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-sm font-bold text-[#26d464] px-2.5 py-1 rounded bg-[#26d464]/10 border border-[#26d464]/30">
+                      STEP 03
+                    </span>
+                    <span className="text-2xl">🤖</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[#ededed] font-display mb-2">
+                    Discover & Consult Sarvam AI
+                  </h3>
+                  <p className="text-sm text-[#a1a1aa] leading-relaxed">
+                    New operators query the tacit knowledge base using the Sarvam
+                    AI assistant in Hindi, Marathi, or English. BM25-lite RAG
+                    injects exact veteran blueprint snippets.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#1f1f1f] flex flex-wrap gap-1.5">
+                  <Badge variant="default" size="sm">Hindi (हिन्दी)</Badge>
+                  <Badge variant="default" size="sm">Marathi (मराठी)</Badge>
+                  <Badge variant="default" size="sm">Voice STT/TTS</Badge>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
