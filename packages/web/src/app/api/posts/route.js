@@ -4,13 +4,20 @@ import { isValidAddress } from "@/lib/wallet";
 import { claimPostReward, DailyCapExceededError } from "@/lib/reward";
 import { POST_TYPES } from "shared/constants";
 
+let postDeps = {};
+
+export function setPostsDependencies(deps) {
+  postDeps = deps || {};
+}
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const typeFilter = searchParams.get("type");
+  const db = postDeps.adminDb || adminDb;
 
-  if (adminDb && typeof adminDb.collection === "function") {
+  if (db && typeof db.collection === "function") {
     try {
-      let query = adminDb.collection("posts").orderBy("createdAt", "desc").limit(50);
+      let query = db.collection("posts").orderBy("createdAt", "desc").limit(50);
       if (typeFilter && typeFilter !== "All" && POST_TYPES.includes(typeFilter)) {
         query = query.where("type", "==", typeFilter);
       }
@@ -98,9 +105,10 @@ export async function POST(request) {
     // 4. Write to Firestore: posts collection
     let postId = `post_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
-    if (adminDb && typeof adminDb.collection === "function") {
+    const db = postDeps.adminDb || adminDb;
+    if (db && typeof db.collection === "function") {
       try {
-        const postRef = await adminDb.collection("posts").add({
+        const postRef = await db.collection("posts").add({
           title: title.trim(),
           content: content.trim(),
           type,

@@ -34,10 +34,12 @@ export function useWallet() {
       const savedType = sessionStorage.getItem(STORAGE_KEYS.PROVIDER_TYPE);
 
       if (savedAddress && isValidAddress(savedAddress)) {
-        setAddress(savedAddress.toLowerCase());
-        setChainId(savedChain || `0x${CHAIN_ID.toString(16)}`);
-        setProviderType(savedType || "bridgekey");
-        setIsConnected(true);
+        queueMicrotask(() => {
+          setAddress(savedAddress.toLowerCase());
+          setChainId(savedChain || `0x${CHAIN_ID.toString(16)}`);
+          setProviderType(savedType || "bridgekey");
+          setIsConnected(true);
+        });
       }
     } catch {
       // sessionStorage may fail in private browsing modes

@@ -69,8 +69,10 @@ export function useCommunityFeed(filterType = "All", pageSize = 10) {
 
   // Initial load and filter change
   useEffect(() => {
-    fetchFeed(true);
-  }, [filterType]);
+    queueMicrotask(() => {
+      fetchFeed(true);
+    });
+  }, [fetchFeed]);
 
   const loadMore = useCallback(() => {
     if (!isLoading && hasMore) {
@@ -81,7 +83,9 @@ export function useCommunityFeed(filterType = "All", pageSize = 10) {
   // Re-fetch when page increments
   useEffect(() => {
     if (page > 1) {
-      fetchFeed(false);
+      queueMicrotask(() => {
+        fetchFeed(false);
+      });
     }
   }, [page, fetchFeed]);
 

@@ -57,7 +57,9 @@ export function useExpenBalance(walletAddress) {
 
   useEffect(() => {
     isMounted.current = true;
-    fetchBalance();
+    queueMicrotask(() => {
+      fetchBalance();
+    });
 
     // Poll every 15 seconds as specified in commit plan
     const interval = setInterval(() => {
