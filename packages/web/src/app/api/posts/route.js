@@ -62,6 +62,17 @@ export async function POST(request) {
       );
     }
 
+    if (
+      Object.prototype.hasOwnProperty.call(body, "__proto__") ||
+      Object.prototype.hasOwnProperty.call(body, "constructor") ||
+      Object.prototype.hasOwnProperty.call(body, "prototype")
+    ) {
+      return NextResponse.json(
+        { error: "Invalid payload: Prototype pollution attempt detected" },
+        { status: 400 }
+      );
+    }
+
     const { title, content, type, authorWallet } = body;
 
     // 1. Authentication check

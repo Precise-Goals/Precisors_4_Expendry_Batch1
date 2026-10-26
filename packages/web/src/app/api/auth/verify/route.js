@@ -8,6 +8,18 @@ import {
 export async function POST(request) {
   try {
     const body = await request.json();
+    if (
+      !body ||
+      typeof body !== "object" ||
+      Object.prototype.hasOwnProperty.call(body, "__proto__") ||
+      Object.prototype.hasOwnProperty.call(body, "constructor") ||
+      Object.prototype.hasOwnProperty.call(body, "prototype")
+    ) {
+      return NextResponse.json(
+        { error: "Invalid payload: Prototype pollution attempt detected" },
+        { status: 400 }
+      );
+    }
     const { address, signature, message } = body;
     const providedNonce = body.nonce || extractNonceFromMessage(message);
 
