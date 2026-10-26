@@ -9,9 +9,13 @@ export const metadata = {
     "Explore real-world machining tacit knowledge, setups, and blueprints shared by veteran operators on the MST Testnet.",
 };
 
-export default function CommunityPage({ searchParams }) {
-  const initialType = searchParams?.type || "All";
+async function CommunityFeedSlot({ searchParams }) {
+  const params = await searchParams;
+  const initialType = params?.type || "All";
+  return <CommunityFeed initialType={initialType} />;
+}
 
+export default function CommunityPage({ searchParams }) {
   return (
     <div className="flex-1 flex flex-col bg-[#0a0a0a] min-h-[calc(100vh-4rem)]">
       {/* Community Header Shell */}
@@ -58,7 +62,7 @@ export default function CommunityPage({ searchParams }) {
             </div>
           }
         >
-          <CommunityFeed initialType={initialType} />
+          <CommunityFeedSlot searchParams={searchParams} />
         </Suspense>
       </div>
     </div>
