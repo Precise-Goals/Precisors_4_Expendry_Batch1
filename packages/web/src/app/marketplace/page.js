@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 import Link from "next/link";
-import { PRODUCTS, CATEGORIES, filterProducts } from "@/data/products";
+import { PRODUCTS, filterProducts } from "@/data/products";
 import ProductCard from "@/components/marketplace/ProductCard";
+import FilterSidebar from "@/components/marketplace/FilterSidebar";
 
 export const metadata = {
   title: "Tooling Marketplace — Expendry",
@@ -24,100 +25,85 @@ async function MarketplaceCatalog({ searchParams }) {
   });
 
   return (
-    <>
-      {/* Filter Navigation Bar */}
-      <div className="py-6 flex flex-col md:flex-row gap-4 justify-between items-start md:items-center">
-        {/* Category Pills */}
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => {
-            const isActive = selectedCategory === cat;
-            const href =
-              cat === "All"
-                ? "/marketplace"
-                : `/marketplace?category=${encodeURIComponent(cat)}`;
-            return (
-              <Link
-                key={cat}
-                href={href}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-                  isActive
-                    ? "bg-[#26d464] text-neutral-950 font-semibold"
-                    : "bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800"
-                }`}
-              >
-                {cat}
-              </Link>
-            );
-          })}
+    <div className="flex flex-col lg:flex-row gap-8 py-8 items-start">
+      {/* Sidebar Filter Form */}
+      <div className="w-full lg:w-64 shrink-0">
+        <FilterSidebar
+          selectedCategory={selectedCategory}
+          minPrice={minPrice !== undefined ? String(minPrice) : ""}
+          maxPrice={maxPrice !== undefined ? String(maxPrice) : ""}
+          search={search}
+        />
+      </div>
+
+      {/* Main Catalog Viewport */}
+      <div className="flex-1 w-full space-y-6">
+        {/* Search and Results Counter */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-neutral-800">
+          <div className="text-xs text-neutral-400">
+            Showing{" "}
+            <span className="text-neutral-200 font-semibold">
+              {filteredProducts.length}
+            </span>{" "}
+            machining products
+            {selectedCategory !== "All" && (
+              <span className="ml-1 text-[#26d464]">in {selectedCategory}</span>
+            )}
+          </div>
+
+          <form
+            method="GET"
+            action="/marketplace"
+            className="flex items-center gap-2"
+          >
+            {selectedCategory !== "All" && (
+              <input
+                type="hidden"
+                name="category"
+                value={selectedCategory}
+              />
+            )}
+            <input
+              type="text"
+              name="search"
+              defaultValue={search}
+              placeholder="Search tools..."
+              className="bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464] w-full sm:w-56"
+            />
+            <button
+              type="submit"
+              className="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium transition"
+            >
+              Search
+            </button>
+          </form>
         </div>
 
-        {/* Search and Price Quick Filters */}
-        <form
-          method="GET"
-          action="/marketplace"
-          className="flex items-center gap-2 w-full md:w-auto"
-        >
-          {selectedCategory !== "All" && (
-            <input
-              type="hidden"
-              name="category"
-              value={selectedCategory}
-            />
-          )}
-          <input
-            type="text"
-            name="search"
-            defaultValue={search}
-            placeholder="Search tools..."
-            className="bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464] w-full sm:w-44"
-          />
-          <button
-            type="submit"
-            className="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium transition"
-          >
-            Filter
-          </button>
-          {(search || selectedCategory !== "All" || minPrice || maxPrice) && (
+        {/* Product Grid */}
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20 px-4 rounded-xl border border-dashed border-neutral-800 bg-neutral-900/20">
+            <h3 className="text-base font-semibold text-neutral-300">
+              No matching tooling products found
+            </h3>
+            <p className="text-xs text-neutral-500 mt-1">
+              Try adjusting your category filter, price bounds, or search keywords.
+            </p>
             <Link
               href="/marketplace"
-              className="text-xs text-neutral-400 hover:text-neutral-200 underline ml-1"
+              className="mt-4 inline-block px-4 py-2 rounded-lg bg-neutral-800 text-neutral-200 text-xs font-medium hover:bg-neutral-700 transition"
             >
-              Reset
+              Reset Filters
             </Link>
-          )}
-        </form>
+          </div>
+        )}
       </div>
-
-      {/* Results Counter */}
-      <div className="pb-4 text-xs text-neutral-400">
-        Showing <span className="text-neutral-200 font-semibold">{filteredProducts.length}</span>{" "}
-        machining products
-      </div>
-
-      {/* Product Grid */}
-      {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-16 px-4 rounded-xl border border-dashed border-neutral-800 bg-neutral-900/20">
-          <h3 className="text-base font-semibold text-neutral-300">
-            No matching tooling products found
-          </h3>
-          <p className="text-xs text-neutral-500 mt-1">
-            Try adjusting your category filter, price bounds, or search keywords.
-          </p>
-          <Link
-            href="/marketplace"
-            className="mt-4 inline-block px-4 py-2 rounded-lg bg-neutral-800 text-neutral-200 text-xs font-medium hover:bg-neutral-700 transition"
-          >
-            Reset Filters
-          </Link>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
 
