@@ -249,7 +249,9 @@ export default function ChatInterface({
                       : "bg-neutral-900 border border-neutral-800 text-neutral-200"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{msg.content}</p>
+                  <div aria-live="polite" aria-atomic="false">
+                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                  </div>
 
                   {/* Sources pills */}
                   {msg.sources && msg.sources.length > 0 && (
