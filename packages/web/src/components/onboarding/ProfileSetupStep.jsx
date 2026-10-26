@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export default function ProfileSetupStep({
   walletAddress,
@@ -13,6 +14,8 @@ export default function ProfileSetupStep({
   isLoading = false,
 }) {
   const shouldReduceMotion = useReducedMotion();
+  const containerRef = useRef(null);
+  useFocusTrap(containerRef, true, onBack);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -109,12 +112,21 @@ export default function ProfileSetupStep({
       transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
       className="w-full max-w-xl mx-auto"
     >
-      <Card className="p-8 bg-[#121212] border-[#262626] shadow-xl">
+      <Card
+        ref={containerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="profile-step-heading"
+        className="p-8 bg-[#121212] border-[#262626] shadow-xl"
+      >
         <div className="text-center space-y-3 mb-8">
           <Badge variant="accent" size="sm">
             Step 2 of 3 • Profile Setup
           </Badge>
-          <h2 className="text-2xl font-bold tracking-tight text-[#ededed] font-display">
+          <h2
+            id="profile-step-heading"
+            className="text-2xl font-bold tracking-tight text-[#ededed] font-display"
+          >
             Machinist Profile Details
           </h2>
           <p className="text-xs text-[#a1a1aa] leading-relaxed">
