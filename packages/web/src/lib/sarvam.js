@@ -58,8 +58,8 @@ export function redactSensitive(input) {
   }
   // Generic pattern redaction for bearer or api keys
   return sanitized
-    .replace(/(api-subscription-key[:=]\s*)['"][^'"]+['"]/gi, '$1"[REDACTED]"')
-    .replace(/(Bearer\s+)[A-Za-z0-9_\-\.]{10,}/gi, "$1[REDACTED]");
+    .replace(/(api-subscription-key[:=]\s*)['"][^'"]+['"]/gi, '$1"[REDACTED_API_KEY]"')
+    .replace(/(Bearer\s+)[A-Za-z0-9_\-\.]{10,}/gi, "$1[REDACTED_API_KEY]");
 }
 
 export function normalizeLanguage(lang) {
