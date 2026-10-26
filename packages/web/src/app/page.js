@@ -319,6 +319,155 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Operator Insight Section — Veteran Personas */}
+      <section
+        aria-label="Operator Insights Section"
+        className="py-20 sm:py-28 border-b border-[#1f1f1f] bg-[#0a0a0a]"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <Badge variant="accent" size="sm">
+              Operator Insights & Personas
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#ededed] font-display">
+              Tacit Wisdom from India&apos;s Master Machinists
+            </h2>
+            <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed">
+              Illustrative veteran profiles reflecting real-world machining
+              challenges, tooling calibrations, and generational knowledge
+              preservation.
+            </p>
+          </div>
+
+          {/* Two Illustrative Persona Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            {/* Persona 1: Rameshwar */}
+            <motion.div
+              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
+            >
+              <Card className="h-full bg-[#121212] border-[#262626] p-8 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <Badge variant="accent" size="sm">
+                      Illustrative Persona • 34 Years Exp.
+                    </Badge>
+                    <span className="text-xs font-mono text-[#26d464] bg-[#26d464]/10 px-2 py-0.5 rounded border border-[#26d464]/30">
+                      Earned: 320 EXPEN
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-14 w-14 rounded-full bg-[#1a1a1a] border border-[#383838] flex items-center justify-center text-2xl">
+                      👨‍🏭
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-[#ededed] font-display">
+                        Rameshwar Kulkarni
+                      </h3>
+                      <p className="text-xs text-[#a1a1aa]">
+                        Chief CNC Turning Specialist • Aerospace Inconel • Pune, Maharashtra
+                      </p>
+                    </div>
+                  </div>
+
+                  <blockquote className="text-sm text-[#ededed]/90 italic border-l-2 border-[#26d464] pl-4 py-1 my-4 leading-relaxed bg-[#161616]/50 rounded-r">
+                    &quot;When turning Inconel 718, handbook speeds cause rapid notch wear within 4 minutes. You have to listen for the high-frequency harmonic flutter at 1,800 RPM and back off the feed by 0.03 mm/rev while targeting high-pressure flood coolant right at the tool flank.&quot;
+                  </blockquote>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-[#1f1f1f]">
+                  <p className="text-xs uppercase tracking-wider text-[#71717a] font-semibold mb-2">
+                    Key Tacit Themes
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="default" size="sm">Inconel 718 Turning</Badge>
+                    <Badge variant="default" size="sm">Chatter Dampening</Badge>
+                    <Badge variant="default" size="sm">Tool Flank Wear</Badge>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Persona 2: Devendra */}
+            <motion.div
+              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: shouldReduceMotion ? 0 : 0.4 }}
+            >
+              <Card className="h-full bg-[#121212] border-[#262626] p-8 relative flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <Badge variant="accent" size="sm">
+                      Illustrative Persona • 29 Years Exp.
+                    </Badge>
+                    <span className="text-xs font-mono text-[#26d464] bg-[#26d464]/10 px-2 py-0.5 rounded border border-[#26d464]/30">
+                      Earned: 450 EXPEN
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="h-14 w-14 rounded-full bg-[#1a1a1a] border border-[#383838] flex items-center justify-center text-2xl">
+                      🔧
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-[#ededed] font-display">
+                        Devendra Patil
+                      </h3>
+                      <p className="text-xs text-[#a1a1aa]">
+                        Precision Tool & Die Master • Auto Component Forging • Kolhapur, Maharashtra
+                      </p>
+                    </div>
+                  </div>
+
+                  <blockquote className="text-sm text-[#ededed]/90 italic border-l-2 border-[#26d464] pl-4 py-1 my-4 leading-relaxed bg-[#161616]/50 rounded-r">
+                    &quot;Junior operators often scrap entire D2 die blocks because they ignore thermal expansion during morning shifts. On a cold 18°C morning, your spindle grows by 12 microns over the first 45 minutes of warm-up before hitting thermal equilibrium.&quot;
+                  </blockquote>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-[#1f1f1f]">
+                  <p className="text-xs uppercase tracking-wider text-[#71717a] font-semibold mb-2">
+                    Key Tacit Themes
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="default" size="sm">D2 Die Steel</Badge>
+                    <Badge variant="default" size="sm">Spindle Thermal Drift</Badge>
+                    <Badge variant="default" size="sm">Micron Calibration</Badge>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* 4 Knowledge Themes Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="p-4 rounded-xl bg-[#121212] border border-[#1f1f1f] text-center">
+              <span className="text-xl mb-1 block">⚡</span>
+              <span className="text-xs font-bold text-[#ededed] font-display block">Feeds & Speeds</span>
+              <span className="text-[11px] text-[#71717a]">Non-standard alloy limits</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#121212] border border-[#1f1f1f] text-center">
+              <span className="text-xl mb-1 block">🔊</span>
+              <span className="text-xs font-bold text-[#ededed] font-display block">Chatter Dampening</span>
+              <span className="text-[11px] text-[#71717a]">Acoustic flutter tuning</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#121212] border border-[#1f1f1f] text-center">
+              <span className="text-xl mb-1 block">🗜️</span>
+              <span className="text-xs font-bold text-[#ededed] font-display block">Custom Fixturing</span>
+              <span className="text-[11px] text-[#71717a]">Thin-wall deflection jigs</span>
+            </div>
+            <div className="p-4 rounded-xl bg-[#121212] border border-[#1f1f1f] text-center">
+              <span className="text-xl mb-1 block">🔍</span>
+              <span className="text-xs font-bold text-[#ededed] font-display block">Scrap Reduction</span>
+              <span className="text-[11px] text-[#71717a]">Thermal expansion defense</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
