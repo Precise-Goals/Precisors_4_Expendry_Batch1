@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { getModelById, generateFallbackGeometry } from "@/data/models";
@@ -33,10 +33,39 @@ export default function ModelViewer({
     dampingFactor: 0.05,
   };
 
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const STEP = (15 * Math.PI) / 180; // 15 degrees in radians
+
+  const handleKeyDown = (e) => {
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        setRotation((prev) => ({ ...prev, y: prev.y - STEP }));
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        setRotation((prev) => ({ ...prev, y: prev.y + STEP }));
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setRotation((prev) => ({ ...prev, x: prev.x - STEP }));
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        setRotation((prev) => ({ ...prev, x: prev.x + STEP }));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div
-      className={`relative w-full h-full min-h-[380px] bg-neutral-950 rounded-2xl overflow-hidden select-none ${className}`}
-      aria-label={`3D inspection view of ${model.name}`}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      className={`relative w-full h-full min-h-[380px] bg-neutral-950 rounded-2xl overflow-hidden select-none focus:outline-none focus:ring-2 focus:ring-[#26d464] ${className}`}
+      aria-label="3D model viewer"
+      aria-roledescription="3D model viewer"
       role="region"
     >
       <Suspense
@@ -82,8 +111,10 @@ export default function ModelViewer({
           <directionalLight position={[-8, -6, -6]} intensity={0.5} />
           <pointLight position={[0, 4, 2]} intensity={0.9} color="#26d464" />
 
-          {/* 3D Tool Model Geometry */}
-          <PlaceholderGeometry modelId={modelId} autoRotate={autoRotate} />
+          {/* 3D Tool Model Geometry with Keyboard Rotation Wrapper */}
+          <group rotation={[rotation.x, rotation.y, 0]}>
+            <PlaceholderGeometry modelId={modelId} autoRotate={autoRotate} />
+          </group>
 
           {/* Interactive Inspection Orbit Controls */}
           <OrbitControls
@@ -99,7 +130,7 @@ export default function ModelViewer({
       {/* Control Overlay Hint */}
       <div className="absolute bottom-3 left-3 z-10 text-[11px] font-mono text-neutral-500 bg-neutral-900/80 backdrop-blur px-2.5 py-1 rounded-md border border-neutral-800 pointer-events-none flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-[#26d464]"></span>
-        <span>Left-click drag to rotate • Scroll to zoom</span>
+        <span>Left-click drag to rotate • Scroll to zoom • Arrow keys: ±15° rotation</span>
       </div>
     </div>
   );
