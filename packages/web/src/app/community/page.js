@@ -1,7 +1,26 @@
 import React, { Suspense } from "react";
+import dynamic from "next/dynamic";
 import CommunityFeed from "@/components/community/CommunityFeed";
-import PostComposer from "@/components/community/PostComposer";
 import { Badge } from "@/components/ui/Badge";
+
+const PostComposer = dynamic(
+  () => import("@/components/community/PostComposer"),
+  {
+    loading: () => (
+      <div
+        aria-label="Loading composer"
+        className="w-full p-6 rounded-2xl bg-[#121212] border border-[#262626] mb-8 animate-pulse space-y-4"
+      >
+        <div className="flex items-center justify-between">
+          <div className="h-5 w-32 bg-[#1c1c1c] rounded-full" />
+          <div className="h-6 w-20 bg-[#1c1c1c] rounded-full" />
+        </div>
+        <div className="h-10 w-full bg-[#161616] rounded-xl" />
+        <div className="h-24 w-full bg-[#161616] rounded-xl" />
+      </div>
+    ),
+  }
+);
 
 export const metadata = {
   title: "Community Knowledge Feed — Expendry",
