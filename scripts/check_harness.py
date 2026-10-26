@@ -79,7 +79,43 @@ def check_agents_md(root=ROOT):
             errs.append(f"AGENTS.md broken link: {link}")
     return errs
 
-CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_agents_md]
+def check_state(root=ROOT):
+    s = _load(root / "harness/state/state.json")
+    if not s:
+        return ["state.json missing or invalid JSON"]
+    errs = [f"state.json missing key: {k}" for k in STATE_KEYS if k not in s]
+    if s.get("mode") not in {"DISCOVERY", "CURATION", "SCAFFOLD", "EXECUTE", "RETRO"}:
+        errs.append("state.json invalid mode")
+    return errs
+
+def check_budgets(root=ROOT):
+    b = _load(root / "harness/state/budgets.json")
+    return [f"budgets.json bad/missing: {k}" for k in BREAKER_KEYS
+            if not isinstance(b.get(k), int) or b[k] <= 0]
+
+def check_locks(root=ROOT):
+    owners, errs = {}, []
+    d = root / "harness/state/locks"
+    for f in (d.glob("*.json") if d.exists() else []):
+        for path in _load(f).get("owns", []):
+            if path in owners and owners[path] != f.name:
+                errs.append(f"path {path} owned by both {owners[path]} and {f.name}")
+            owners[path] = f.name
+    return errs
+
+def check_secrets(root=ROOT):
+    errs = []
+    for base in ("harness", "docs", "AGENTS.md", ".mcp.json"):
+        p = root / base
+        files = [p] if p.is_file() else list(p.rglob("*")) if p.exists() else []
+        for f in files:
+            if f.is_file() and f.suffix in {".md", ".json", ".yaml", ".yml", ".jsonl", ""}:
+                if SECRET_RE.search(f.read_text(encoding="utf-8", errors="ignore")):
+                    errs.append(f"possible secret in {f.relative_to(root)}")
+    return errs
+
+CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_agents_md,
+          check_state, check_budgets, check_locks, check_secrets]
 
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
