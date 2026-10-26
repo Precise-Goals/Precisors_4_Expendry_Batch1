@@ -1,6 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
+@theme {
+  --color-base: #0a0a0a;
+  --color-secondary: #161616;
+  --color-surface: #121212;
+  --color-surface-hover: #1c1c1c;
+  --color-accent: #26d464;
+  --color-accent-hover: #21b856;
+  --color-accent-dim: rgba(38, 212, 100, 0.15);
+  --color-border: #262626;
+  --color-border-bright: #383838;
+  --color-text: #ededed;
+  --color-text-dim: #a1a1aa;
+  --color-text-muted: #71717a;
+}
+
 :root {
   /* Palette */
   --color-base: #0a0a0a;
