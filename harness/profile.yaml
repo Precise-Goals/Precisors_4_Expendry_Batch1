@@ -1,0 +1,48 @@
+# harness/profile.yaml
+# generated-by: harness v1 | source: harness.md | hash: profile-v1
+# Derived from docs/raw.md + interview 2026-10-27
+
+project_name: Expendry
+project_type: web-app
+languages: [javascript]
+frameworks: [nextjs, hardhat, react-three-fiber, framer-motion]
+package_manager: bun
+has_ui: true
+has_db: true          # Firebase Firestore
+has_network_integrations: true   # Sarvam AI, MST testnet RPC, Firebase
+handles_sensitive_data: true     # OPERATOR_PRIVATE_KEY, SARVAM_API_KEY, FIREBASE keys
+deploy_target: cloud             # Vercel
+team_mode: solo                  # hackathon build
+ci: none                         # no CI for hackathon prototype
+parallelism: 3
+sprint_length: by-task
+
+# MCP preset
+mcp_preset: fullstack-web
+extra_mcp_servers: [sequential-thinking]
+
+# Roles enabled / disabled
+enabled_roles:
+  - orchestrator
+  - po-spec
+  - tech-lead
+  - test-author
+  - builder
+  - reviewer
+  - security
+  - qa
+  - scribe
+  - librarian
+
+disabled_roles:
+  - designer      # UI decisions folded into PO-Spec + Tech Lead for hackathon speed
+
+# Harness configuration changes from profile signals
+# has_ui: true       → Designer disabled (speed); a11y gate in G4; playwright in registry
+# has_db: true       → migration-check note in G2 (Firestore schema); no destructive writes without approval
+# handles_sensitive_data: true → Security role mandatory + blocking; strict secret scan
+# has_network_integrations: true → mocked API tests for Sarvam AI in unit tests; allow-listed hosts
+# team_mode: solo    → Reviewer + Security can run in the same pass; fewer parallel lanes
+# parallelism: 3     → up to 3 Builder lanes concurrent
+
+confidence: 0.92
