@@ -1,0 +1,30 @@
+{
+  "harness_version": "1.0.0",
+  "profile": "fullstack-web+blockchain",
+  "derived_from": {
+    "raw_md_sha": "",
+    "harness_md_sha": ""
+  },
+  "mode": "CURATION",
+  "sprint": 0,
+  "task_id": null,
+  "current_stage": "harness.md-draft",
+  "stages": {
+    "discovery": "done",
+    "curation": "in_progress"
+  },
+  "lanes": [],
+  "attempts": {},
+  "last_commit": "",
+  "last_gate": {
+    "name": null,
+    "status": null,
+    "at": null,
+    "log": null
+  },
+  "breaker": {
+    "tripped": false,
+    "reason": null
+  },
+  "updated_at": "2026-10-27T00:51:00+05:30"
+}
