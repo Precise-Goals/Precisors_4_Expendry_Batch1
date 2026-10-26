@@ -200,7 +200,7 @@ def main(argv=None):
         return 1 if gaps else 0
     for g in gaps:
         print(f"FAIL  {g['detail']}")
-    print(f"{'OK' if not gaps else 'HARNESS UNHEALTHY'} — {len(gaps)} problem(s)")
+    print(f"{'OK' if not gaps else 'HARNESS UNHEALTHY'} - {len(gaps)} problem(s)")
     return 1 if gaps else 0
 
 if __name__ == "__main__":

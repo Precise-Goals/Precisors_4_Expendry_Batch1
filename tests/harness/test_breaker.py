@@ -99,3 +99,38 @@ def test_trip_on_malformed_handoff_twice(tmp_path):
     res = br.evaluate(r, event={"type": "malformed_handoff"})
     assert res["tripped"] is True
     assert "malformed handoff" in res["reason"]
+
+def test_green_suite_zero_failures_does_not_trip(tmp_path):
+    r = make_env(tmp_path)
+    # 4 consecutive test runs with 0 failures must never trip
+    for _ in range(4):
+        res = br.evaluate(r, event={"type": "test_progress", "failing_count": 0})
+    assert res["tripped"] is False
+
+def test_decreasing_failures_recovering_to_zero_does_not_trip(tmp_path):
+    r = make_env(tmp_path)
+    br.evaluate(r, event={"type": "test_progress", "failing_count": 4})
+    br.evaluate(r, event={"type": "test_progress", "failing_count": 2})
+    res = br.evaluate(r, event={"type": "test_progress", "failing_count": 0})
+    assert res["tripped"] is False
+
+def test_breaker_status_persistence_and_cli_retention(tmp_path):
+    r = make_env(tmp_path)
+    # Trip breaker
+    br.evaluate(r, event={"type": "guard_violation", "detail": "test violation"})
+    
+    # Evaluate with empty event (as CLI does)
+    res = br.evaluate(r)
+    assert res["tripped"] is True
+    assert "test violation" in res["reason"]
+
+def test_breaker_reset_event(tmp_path):
+    r = make_env(tmp_path)
+    br.evaluate(r, event={"type": "guard_violation", "detail": "test violation"})
+    assert br.evaluate(r)["tripped"] is True
+    
+    # Reset
+    res = br.evaluate(r, event={"type": "reset"})
+    assert res["tripped"] is False
+    assert br.evaluate(r)["tripped"] is False
+

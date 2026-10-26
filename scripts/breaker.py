@@ -45,10 +45,17 @@ def evaluate(root: Path = ROOT, event: dict = None) -> dict:
     no_prog_window = budgets.get("no_progress_window", 3)
 
     event_type = event.get("type", "")
-    tripped = False
-    reason = None
+    existing_breaker = state.get("breaker", {})
+    was_tripped = existing_breaker.get("tripped", False)
+    tripped = was_tripped
+    reason = existing_breaker.get("reason", None)
 
-    if event_type == "stage_failure":
+    if event_type == "reset":
+        tripped = False
+        reason = None
+        state["breaker"] = {"tripped": False, "reason": None}
+
+    elif event_type == "stage_failure":
         retries = event.get("retries", 0)
         if retries > max_retries:
             tripped = True
@@ -87,8 +94,8 @@ def evaluate(root: Path = ROOT, event: dict = None) -> dict:
         history.append(failing)
         if len(history) >= no_prog_window:
             recent = history[-no_prog_window:]
-            # Check if failing_count did not decrease across window
-            if not (recent[-1] < recent[0]):
+            # Check if failing_count did not decrease across window while failures still exist
+            if recent[-1] > 0 and not (recent[-1] < recent[0]):
                 tripped = True
                 reason = f"Trip on no progress window: failing test count not reduced across last {no_prog_window} iterations: {recent}"
 
@@ -112,7 +119,8 @@ def evaluate(root: Path = ROOT, event: dict = None) -> dict:
     if tripped:
         state.setdefault("breaker", {})["tripped"] = True
         state["breaker"]["reason"] = reason
-        _log_failure(root, reason)
+        if not was_tripped:
+            _log_failure(root, reason)
 
     _save_json(state_path, state)
     return {"tripped": tripped, "reason": reason}

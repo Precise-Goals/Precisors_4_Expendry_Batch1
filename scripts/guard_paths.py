@@ -12,16 +12,29 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent.parent
 
-def _normalize_path(p: str) -> str:
-    norm = str(p).replace("\\", "/").strip()
+def _normalize_pattern(pat: str) -> str:
+    norm = str(pat).replace("\\", "/").strip()
     if norm.startswith("./"):
         norm = norm[2:]
     elif norm.startswith("/"):
         norm = norm[1:]
     return norm
 
+def _normalize_path(p: str, root: Path = ROOT) -> str:
+    root_resolved = root.resolve()
+    try:
+        raw = str(p).strip()
+        if not raw:
+            return ""
+        p_obj = Path(raw)
+        resolved = p_obj.resolve() if p_obj.is_absolute() else (root_resolved / p_obj).resolve()
+        rel = resolved.relative_to(root_resolved)
+        return str(rel).replace("\\", "/").strip()
+    except (ValueError, RuntimeError):
+        return "__DISALLOWED_ESCAPED_ROOT__"
+
 def _pattern_to_regex(pat: str) -> re.Pattern:
-    pat = _normalize_path(pat)
+    pat = _normalize_pattern(pat)
     escaped = re.escape(pat)
     regex_str = escaped.replace(r"\*\*", ".*")
     regex_str = regex_str.replace(r"\*", "[^/]*")
@@ -62,7 +75,7 @@ def _load_locks(root: Path) -> list:
             try:
                 data = json.loads(f.read_text(encoding="utf-8"))
                 lane_name = data.get("lane", f.stem)
-                owns = [_normalize_path(p) for p in data.get("owns", [])]
+                owns = [_normalize_path(p, root=root) for p in data.get("owns", [])]
                 locks.append({"lane": lane_name, "owns": owns})
             except Exception:
                 continue
@@ -82,15 +95,20 @@ def check_paths(role: str, paths: list, root: Path = ROOT, current_lane: str = N
 
     violations = []
     for raw_p in paths:
-        norm_p = _normalize_path(raw_p)
+        norm_p = _normalize_path(raw_p, root=root)
         if not norm_p:
             continue
+        if norm_p == "__DISALLOWED_ESCAPED_ROOT__":
+            violations.append(f"path '{raw_p}' is outside allow-list for role '{role}' (escapes repository root)")
+            continue
+
         for lock in locks:
             if current_lane and lock["lane"] == current_lane:
                 continue
-            if norm_p in lock["owns"]:
-                violations.append(f"path '{norm_p}' is locked by another lane '{lock['lane']}'")
-                break
+            for owned in lock["owns"]:
+                if norm_p == owned or norm_p.startswith(owned.rstrip("/") + "/"):
+                    violations.append(f"path '{norm_p}' is locked by another lane '{lock['lane']}'")
+                    break
 
         matched = any(pat.match(norm_p) for pat in allowed_patterns)
         if not matched:
