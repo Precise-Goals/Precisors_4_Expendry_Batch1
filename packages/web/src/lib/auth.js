@@ -2,12 +2,54 @@ import { ethers } from "ethers";
 import { adminAuth, adminDb } from "./firebase-admin.js";
 
 /**
- * Generates a unique authentication challenge nonce.
+ * In-memory active nonce store with replay and expiration guards
  */
-export function generateNonce() {
+export const activeNonces = new Map();
+
+/**
+ * Generates and registers a unique authentication challenge nonce.
+ */
+export function generateNonce(address = null) {
   const timestamp = Date.now();
   const randomStr = Math.random().toString(36).substring(2, 15);
-  return `expendry_nonce_${timestamp}_${randomStr}`;
+  const nonce = `expendry_nonce_${timestamp}_${randomStr}`;
+  registerNonce(nonce, address);
+  return nonce;
+}
+
+/**
+ * Registers a nonce into the active tracking map.
+ */
+export function registerNonce(nonce, address = null) {
+  activeNonces.set(nonce, {
+    address: address ? address.toLowerCase() : null,
+    createdAt: Date.now(),
+    used: false,
+  });
+}
+
+/**
+ * Validates a nonce and marks/removes it to prevent replay attacks.
+ */
+export function validateAndConsumeNonce(nonce, address = null) {
+  if (!nonce || !activeNonces.has(nonce)) {
+    return false;
+  }
+  const record = activeNonces.get(nonce);
+  if (record.used) {
+    return false;
+  }
+  // Expiration: 5 minutes (300,000 ms)
+  if (Date.now() - record.createdAt > 300000) {
+    activeNonces.delete(nonce);
+    return false;
+  }
+  if (address && record.address && record.address !== address.toLowerCase()) {
+    return false;
+  }
+  record.used = true;
+  activeNonces.delete(nonce);
+  return true;
 }
 
 /**
@@ -15,6 +57,15 @@ export function generateNonce() {
  */
 export function createAuthChallenge(nonce) {
   return `Sign this message to authenticate with Expendry.\nNonce: ${nonce}\nChain: MST Testnet (91562037)`;
+}
+
+/**
+ * Extracts nonce from a standard challenge message or parameter.
+ */
+export function extractNonceFromMessage(message) {
+  if (!message || typeof message !== "string") return null;
+  const match = message.match(/Nonce:\s*(expendry_nonce_[a-zA-Z0-9_]+)/);
+  return match ? match[1] : null;
 }
 
 /**
