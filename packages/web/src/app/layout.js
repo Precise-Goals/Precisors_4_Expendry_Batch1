@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import PageTransition from "../components/layout/PageTransition";
 
 export const metadata = {
   title: "Expendry — Manufacturing Tacit Knowledge & Token Ecosystem",
@@ -49,7 +50,7 @@ export default function RootLayout({ children }) {
         </a>
         <Navbar />
         <main id="main-content" className="flex-1 flex flex-col">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
       </body>
