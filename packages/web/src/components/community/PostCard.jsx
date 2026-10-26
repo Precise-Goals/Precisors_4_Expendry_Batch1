@@ -99,7 +99,14 @@ export default function PostCard({ post }) {
           <button
             type="button"
             onClick={() => setIsExpanded((prev) => !prev)}
-            className="mt-2 text-xs font-semibold text-[#26d464] hover:underline focus:outline-none focus:ring-1 focus:ring-[#26d464] rounded"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsExpanded((prev) => !prev);
+              }
+            }}
+            aria-expanded={isExpanded}
+            className="mt-2 text-xs font-semibold text-[#26d464] hover:underline focus:outline-none focus:ring-1 focus:ring-[#26d464] rounded cursor-pointer"
           >
             {isExpanded ? "Show less" : "Read full knowledge note →"}
           </button>

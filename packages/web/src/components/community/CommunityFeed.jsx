@@ -52,7 +52,12 @@ export default function CommunityFeed({ initialType = "All" }) {
       )}
 
       {/* Feed List */}
-      <div className="space-y-4">
+      <div
+        role="feed"
+        aria-busy={isLoading}
+        aria-label="Machinist community feed"
+        className="space-y-4"
+      >
         {posts.map((post) => (
           <PostCard key={post.id} post={post} />
         ))}
