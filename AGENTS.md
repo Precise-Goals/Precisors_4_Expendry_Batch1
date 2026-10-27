@@ -23,16 +23,19 @@ Expendry is a community-driven manufacturing ecosystem connecting veteran machin
 | Harness Health | `python scripts/check_harness.py` | G0 |
 | Harness Tests | `pytest tests/harness` | G0 |
 | Contract Tests | `bun run test --filter=contracts` | G1/G2 |
+| Web Tests | `bun test --cwd packages/web` | G1 |
 | Web Build | `bun run build --filter=web` | G1/G4 |
 | Web Lint | `bun run lint` | G1 |
+| E2E Tests | `bun run test:e2e` | G3 |
 
 ## Layout
-- `harness/`: Roles, agents, workflows, standards, state, logs.
-- `scripts/`: Harness verification, guards, circuit breakers.
-- `packages/contracts/`: Hardhat ERC-20 `EXPEN.sol` contract and tests.
-- `packages/shared/`: Shared ABI and network constants.
-- `packages/web/`: Next.js 16 App Router frontend, Tailwind 4, RAG, 3D viewer.
-- `docs/`: Architecture specifications, ADRs, memory, commit plan.
+- `harness/`: Roles, agents, workflows, standards, state, logs, and audit artifacts.
+- `scripts/`: Harness verification, guards, circuit breakers, and workspace runners.
+- `packages/contracts/`: Hardhat ERC-20 `EXPEN.sol` contract, tests, and MSTScan verification scripts.
+- `packages/shared/`: Shared ABI, constants, contract addresses, and network constants.
+- `packages/web/`: Next.js 16 App Router frontend, Tailwind 4, RAG, Sarvam AI, and Three.js 3D viewer.
+- `tests/`: End-to-end integration suite and harness test cases.
+- `docs/`: Architecture specifications, ADRs, memory transcripts, and commit plan.
 
 ## Roles
 | Agent | Role Specification | Primary Artifact |
