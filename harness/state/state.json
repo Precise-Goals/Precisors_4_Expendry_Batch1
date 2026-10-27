@@ -5,26 +5,28 @@
     "raw_md_sha": "9e53a17cc81bbe1cb4a8c9280ac32ac32f260dcacc6eb3b09c7c5ace5738589c",
     "harness_md_sha": "3dfb77d4c74b6d7f68dc4fe1bd58b44f569ff2ecbd953feeffa9dc62b150e1d7"
   },
-  "mode": "EXECUTE",
-  "sprint": 1,
-  "task_id": "T-S1-01",
-  "current_stage": "sprint-1-kickoff",
+  "mode": "RETRO",
+  "sprint": 4,
+  "task_id": "T-FINAL-01",
+  "current_stage": "complete",
   "stages": {
     "sprint-0": "done",
-    "sprint-1": "in_progress"
+    "sprint-1": "done",
+    "sprint-2": "done",
+    "sprint-3": "done"
   },
   "lanes": [],
   "attempts": {},
-  "last_commit": "8e4c2d4",
+  "last_commit": "15e8ea3",
   "last_gate": {
-    "name": "G0",
+    "name": "G5",
     "status": "pass",
-    "at": "2026-10-26T20:10:00Z",
+    "at": "2026-10-27T01:40:00Z",
     "log": "harness/logs/events.jsonl"
   },
   "breaker": {
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-26T20:38:00Z"
+  "updated_at": "2026-10-27T01:40:00Z"
 }
