@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PRODUCTS, filterProducts } from "@/data/products";
 import ProductCard from "@/components/marketplace/ProductCard";
 import FilterSidebar from "@/components/marketplace/FilterSidebar";
+import { IconCube3D } from "@/components/ui/Icons";
 
 export const metadata = {
   title: "Tooling Marketplace — Expendry",
@@ -26,7 +27,7 @@ async function MarketplaceCatalog({ searchParams }) {
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 py-8 items-start">
-      {/* Sidebar Filter Form */}
+      {/* Sidebar Filter Form: Tooling Crib Drawer Index */}
       <div className="w-full lg:w-64 shrink-0">
         <FilterSidebar
           selectedCategory={selectedCategory}
@@ -39,13 +40,13 @@ async function MarketplaceCatalog({ searchParams }) {
       {/* Main Catalog Viewport */}
       <div className="flex-1 w-full space-y-6">
         {/* Search and Results Counter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-neutral-800">
-          <div className="text-xs text-neutral-400">
-            Showing{" "}
-            <span className="text-neutral-200 font-semibold">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#262626]">
+          <div className="text-xs text-[#a1a1aa] font-mono">
+            Catalog Inventory:{" "}
+            <span className="text-[#ededed] font-bold">
               {filteredProducts.length}
             </span>{" "}
-            machining products
+            items verified
             {selectedCategory !== "All" && (
               <span className="ml-1 text-[#26d464]">in {selectedCategory}</span>
             )}
@@ -67,12 +68,12 @@ async function MarketplaceCatalog({ searchParams }) {
               type="text"
               name="search"
               defaultValue={search}
-              placeholder="Search tools..."
-              className="bg-neutral-900 border border-neutral-800 rounded-lg px-3 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464] w-full sm:w-56"
+              placeholder="Search by alloy, standard, tool..."
+              className="bg-[#121212] border border-[#262626] rounded-lg px-3 py-1.5 text-xs text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464] w-full sm:w-60 font-mono"
             />
             <button
               type="submit"
-              className="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-medium transition"
+              className="px-3.5 py-1.5 rounded-lg bg-[#161616] hover:bg-[#202020] border border-[#262626] text-[#ededed] text-xs font-medium transition"
             >
               Search
             </button>
@@ -87,16 +88,16 @@ async function MarketplaceCatalog({ searchParams }) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 px-4 rounded-xl border border-dashed border-neutral-800 bg-neutral-900/20">
-            <h3 className="text-base font-semibold text-neutral-300">
-              No matching tooling products found
+          <div className="text-center py-20 px-4 rounded-xl border border-dashed border-[#262626] bg-[#0e0e0e]">
+            <h3 className="text-base font-semibold text-[#ededed]">
+              No matching tooling products found in crib
             </h3>
-            <p className="text-xs text-neutral-500 mt-1">
+            <p className="text-xs text-[#a1a1aa] mt-1">
               Try adjusting your category filter, price bounds, or search keywords.
             </p>
             <Link
               href="/marketplace"
-              className="mt-4 inline-block px-4 py-2 rounded-lg bg-neutral-800 text-neutral-200 text-xs font-medium hover:bg-neutral-700 transition"
+              className="mt-4 inline-block px-4 py-2 rounded-lg bg-[#161616] border border-[#262626] text-[#ededed] text-xs font-medium hover:bg-[#202020] transition"
             >
               Reset Filters
             </Link>
@@ -109,44 +110,32 @@ async function MarketplaceCatalog({ searchParams }) {
 
 export default function MarketplacePage({ searchParams }) {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 pt-16">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] pt-16 bg-blueprint-grid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Marketplace Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-neutral-800">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#262626]">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#26d464]" />
-              <span className="text-xs font-mono uppercase tracking-widest text-[#26d464]">
-                Tooling Catalog
+              <span className="w-2.5 h-2.5 rounded-full bg-[#26d464] animate-pulse" />
+              <span className="text-xs font-mono uppercase tracking-widest text-[#26d464] font-semibold">
+                ISO 2768-mK Vetted Tooling Catalog
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-montserrat">
               Machining & Tooling Marketplace
             </h1>
-            <p className="text-sm text-neutral-400 mt-1 max-w-2xl">
+            <p className="text-sm text-[#a1a1aa] mt-1 max-w-2xl">
               Precision carbide cutters, modular vises, metrology tools, and
-              accessories vetted by shop-floor veterans.
+              accessories vetted by shop-floor veterans. Dual priced in USD and EXPEN.
             </p>
           </div>
 
           <Link
             href="/showcase"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-neutral-900 border border-neutral-700 text-[#26d464] hover:bg-neutral-800 hover:border-[#26d464]/60 transition text-sm font-medium self-start md:self-auto"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#161616] border border-[#262626] text-[#26d464] hover:bg-[#1a1a1a] hover:border-[#26d464]/60 transition text-sm font-semibold self-start md:self-auto shadow-sm"
           >
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-              />
-            </svg>
-            <span>Open 3D Model Showcase</span>
+            <IconCube3D className="w-4 h-4 text-[#26d464]" />
+            <span>Launch 3D Tooling Showcase</span>
           </Link>
         </div>
 
@@ -156,7 +145,7 @@ export default function MarketplacePage({ searchParams }) {
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="h-80 rounded-xl bg-neutral-900/50 border border-neutral-800 animate-pulse"
+                  className="h-80 rounded-xl bg-[#121212] border border-[#262626] animate-pulse"
                 />
               ))}
             </div>

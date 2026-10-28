@@ -6,6 +6,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { useExpenBalance } from "@/hooks/useExpenBalance";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { IconToken, IconEye } from "@/components/ui/Icons";
 
 export default function CommunityHeader() {
   const { isConnected, address, formattedAddress } = useWallet();
@@ -34,14 +35,15 @@ export default function CommunityHeader() {
 
               {/* Live EXPEN Balance */}
               <Badge variant="accent" size="md" className="font-mono">
-                <span aria-hidden="true">🪙</span>
+                <IconToken className="w-3.5 h-3.5 text-[#26d464]" />
                 <span>{isLoading ? "Fetching..." : formatted}</span>
               </Badge>
             </div>
           ) : (
             <div className="flex items-center gap-3">
               <Badge variant="default" size="sm">
-                👁️ Read Only Mode
+                <IconEye className="w-3.5 h-3.5 text-[#a1a1aa]" />
+                <span>Read Only Mode</span>
               </Badge>
               <Link href="/onboarding">
                 <Button variant="primary" size="sm">

@@ -3,6 +3,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PRODUCTS, getProductById } from "@/data/products";
 import BuyButton from "@/components/marketplace/BuyButton";
+import {
+  IconCube3D,
+  IconThermal,
+  IconCaliper,
+  IconBlueprint,
+  IconSpindle,
+  IconToken,
+  IconCheck,
+} from "@/components/ui/Icons";
 
 const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzEyMTIxMiIvPjwvc3ZnPg==";
@@ -33,103 +42,166 @@ export default async function ProductDetailPage({ params }) {
     notFound();
   }
 
+  const expenTokens = (product.price * 2).toFixed(0);
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 pt-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs text-neutral-400">
-          <Link href="/marketplace" className="hover:text-neutral-200 transition">
-            Marketplace
-          </Link>
-          <span>/</span>
-          <span className="text-neutral-500">{product.category}</span>
-          <span>/</span>
-          <span className="text-neutral-200 font-medium truncate max-w-xs">
-            {product.name}
-          </span>
+    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] font-body pt-16 selection:bg-[#26d464]/20 selection:text-[#ededed]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
+        {/* Breadcrumb & Navigation Bar */}
+        <nav
+          aria-label="Breadcrumb"
+          className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#a1a1aa] pb-4 border-b border-[#262626]"
+        >
+          <div className="flex items-center gap-2">
+            <Link
+              href="/marketplace"
+              className="hover:text-[#ededed] transition text-[#a1a1aa]"
+            >
+              Marketplace
+            </Link>
+            <span className="text-[#383838]">/</span>
+            <span className="text-[#a1a1aa]">{product.category}</span>
+            <span className="text-[#383838]">/</span>
+            <span className="text-[#ededed] font-medium truncate max-w-[200px] sm:max-w-xs">
+              {product.name}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="telemetry-chip">
+              REF: EXP-TL-{product.id.toUpperCase()}
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#26d464]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none" />
+              Verified Spec
+            </span>
+          </div>
         </nav>
 
         {/* Product Hero Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-12 border-b border-neutral-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Visual Showcase Panel */}
-          <div className="lg:col-span-6 rounded-2xl border border-neutral-800 bg-[#0d0d0d] p-8 flex flex-col items-center justify-center min-h-[380px] relative overflow-hidden">
-            <div className="relative w-48 h-48 mb-6">
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                fill
-                priority={true}
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                placeholder="blur"
-                blurDataURL={BLUR_DATA_URL}
-                className="object-contain"
-              />
+          <div className="lg:col-span-6 rounded-2xl border border-[#262626] bg-[#121212] p-6 sm:p-8 flex flex-col items-center justify-between min-h-[460px] relative overflow-hidden specular-card">
+            {/* Top metadata tags inside visual viewport */}
+            <div className="w-full flex items-center justify-between mb-4">
+              <span className="telemetry-chip">
+                {product.category}
+              </span>
+              <span className="text-[10px] font-mono text-[#a1a1aa] uppercase tracking-wider">
+                Precision Grade A1
+              </span>
             </div>
 
-            {product.has3DModel ? (
-              <Link
-                href={`/showcase?model=${product.modelId}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#26d464]/10 border border-[#26d464]/30 text-[#26d464] hover:bg-[#26d464]/20 transition text-xs font-semibold"
-              >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {/* Inner Image Well */}
+            <div className="w-full rounded-xl border border-[#262626] bg-[#0e0e0e] p-8 flex items-center justify-center relative min-h-[300px] overflow-hidden">
+              {/* Specular Radial Background Highlight */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-radial from-white/[0.04] to-transparent pointer-events-none"
+              />
+
+              <div className="relative w-56 h-56 transition-transform duration-500 hover:scale-105 motion-reduce:hover:scale-100">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  fill
+                  priority={true}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                  className="object-contain"
+                />
+              </div>
+            </div>
+
+            {/* 3D Model Inspection Action */}
+            <div className="w-full mt-6">
+              {product.has3DModel ? (
+                <Link
+                  href={`/showcase?model=${product.modelId}`}
+                  className="inline-flex items-center justify-center gap-2.5 w-full px-5 py-3 rounded-xl bg-[#26d464]/10 border border-[#26d464]/30 text-[#26d464] hover:bg-[#26d464]/20 hover:border-[#26d464]/60 transition text-xs font-semibold font-montserrat shadow-sm shadow-[#26d464]/10 group"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-                  />
-                </svg>
-                <span>Inspect in Interactive 3D Viewer</span>
-              </Link>
-            ) : (
-              <span className="text-xs text-neutral-500">
-                Standard 2D Tooling Model
-              </span>
-            )}
+                  <IconCube3D className="w-4 h-4 text-[#26d464] group-hover:scale-110 transition-transform" />
+                  <span>Inspect in Interactive 3D Viewer</span>
+                </Link>
+              ) : (
+                <div className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-[#161616] border border-[#262626] text-[#a1a1aa] text-xs font-mono">
+                  <span>Standard 2D Tooling Model</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Product Meta & Purchase Panel */}
-          <div className="lg:col-span-6 flex flex-col justify-between">
+          <div className="lg:col-span-6 rounded-2xl border border-[#262626] bg-[#121212] p-6 sm:p-8 flex flex-col justify-between min-h-[460px] specular-card space-y-6">
             <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-300">
+              {/* Category & Stock Status */}
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <span className="telemetry-chip">
                   {product.category}
                 </span>
-                <span className="text-xs text-[#26d464] font-medium flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#26d464]"></span>
-                  In Stock & Ready for Dispatch
+                <span className="text-xs text-[#26d464] font-mono flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none" />
+                  In Stock &amp; Ready for Dispatch
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white font-montserrat tracking-tight">
+              {/* Title */}
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#ededed] font-montserrat tracking-tight leading-tight">
                 {product.name}
               </h1>
 
-              <div className="mt-4 flex items-baseline gap-3">
-                <span className="text-3xl font-black text-white">
-                  ${product.price.toFixed(2)}
-                </span>
-                <span className="text-sm font-mono text-[#26d464]">
-                  {(product.price * 2).toFixed(0)} EXPEN Tokens
-                </span>
+              {/* Verified machinist credentials */}
+              {product.rating && (
+                <div className="mt-3 flex items-center gap-2 text-xs font-mono text-[#a1a1aa]">
+                  <span className="text-[#ededed] font-semibold">
+                    {product.rating.toFixed(1)} / 5.0
+                  </span>
+                  <span className="text-[#383838]">•</span>
+                  <span>{product.reviewsCount} Machinist Reviews</span>
+                  <span className="text-[#383838]">•</span>
+                  <span className="text-[#26d464] flex items-center gap-1">
+                    <IconCheck className="w-3.5 h-3.5" />
+                    Verified MST Origin
+                  </span>
+                </div>
+              )}
+
+              {/* Pricing Well */}
+              <div className="mt-6 rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+                <div>
+                  <span className="text-[10px] uppercase font-mono text-[#a1a1aa] tracking-widest block mb-1">
+                    Unit Price (USD)
+                  </span>
+                  <div className="text-3xl sm:text-4xl font-black text-[#ededed] font-montserrat tracking-tight">
+                    ${product.price.toFixed(2)}
+                  </div>
+                </div>
+
+                <div className="sm:text-right">
+                  <span className="text-[10px] uppercase font-mono text-[#a1a1aa] tracking-widest block mb-1">
+                    Token Settlement
+                  </span>
+                  <div className="inline-flex items-center gap-1.5 text-sm sm:text-base font-mono text-[#26d464] font-bold">
+                    <IconToken className="w-4 h-4 text-[#26d464]" />
+                    <span>{expenTokens} EXPEN Tokens</span>
+                  </div>
+                </div>
               </div>
 
-              <p className="mt-6 text-sm text-neutral-300 leading-relaxed">
+              {/* Description */}
+              <p className="mt-6 text-sm text-[#a1a1aa] leading-relaxed font-body">
                 {product.description}
               </p>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* Acquisition Controls */}
+            <div className="pt-6 border-t border-[#262626] flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <BuyButton product={product} />
 
               <Link
                 href="/marketplace"
-                className="px-5 py-3 rounded-xl bg-neutral-900 border border-neutral-700 hover:border-neutral-600 text-neutral-200 text-sm font-semibold transition text-center"
+                className="px-5 py-3 rounded-xl bg-[#161616] hover:bg-[#1c1c1c] border border-[#262626] hover:border-[#383838] text-[#ededed] text-sm font-semibold transition text-center font-montserrat"
               >
                 Back to Catalog
               </Link>
@@ -137,49 +209,168 @@ export default async function ProductDetailPage({ params }) {
           </div>
         </div>
 
-        {/* Technical Specifications Table */}
-        <div className="py-10">
-          <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-            <span>Technical Specifications</span>
-            <span className="text-xs font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 border border-neutral-800">
-              Verified Specs
-            </span>
-          </h2>
+        {/* Metallurgical Matrix Card */}
+        <section aria-labelledby="metallurgical-matrix-title">
+          <div className="rounded-2xl border border-[#262626] bg-[#121212] p-6 sm:p-8 specular-card">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-[#262626]">
+              <div>
+                <h2
+                  id="metallurgical-matrix-title"
+                  className="text-xl font-bold text-[#ededed] font-montserrat tracking-tight"
+                >
+                  Metallurgical Matrix
+                </h2>
+                <p className="text-xs text-[#a1a1aa] font-body mt-1">
+                  Microstructure composition, hardness gradients, and thermal barrier verification.
+                </p>
+              </div>
+              <span className="telemetry-chip self-start sm:self-auto">
+                ISO 2768 / DIN 69871
+              </span>
+            </div>
 
-          <div className="rounded-xl border border-neutral-800 bg-[#0d0d0d] overflow-hidden">
-            <table className="min-w-full divide-y divide-neutral-800 text-left text-sm">
-              <tbody className="divide-y divide-neutral-800/80">
-                <tr className="bg-neutral-950/40">
-                  <td className="px-6 py-4 font-medium text-neutral-400 w-1/3">
-                    Product Identifier
-                  </td>
-                  <td className="px-6 py-4 text-neutral-200 font-mono text-xs">
-                    {product.id}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 font-medium text-neutral-400">
-                    Category Classification
-                  </td>
-                  <td className="px-6 py-4 text-neutral-200">
-                    {product.category}
-                  </td>
-                </tr>
-                {product.specs &&
-                  Object.entries(product.specs).map(([specKey, specVal]) => (
-                    <tr key={specKey} className="even:bg-neutral-950/40">
-                      <td className="px-6 py-4 font-medium text-neutral-400 capitalize">
-                        {specKey.replace(/([A-Z])/g, " $1")}
-                      </td>
-                      <td className="px-6 py-4 text-neutral-200 font-mono text-xs">
-                        {specVal}
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+              {/* Metric 1: Substrate Chemistry */}
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
+                      Substrate Chemistry
+                    </span>
+                    <IconSpindle className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <div className="text-sm font-mono font-semibold text-[#ededed]">
+                    WC-Co Sub-micron Grain (0.6 μm)
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-[#262626]/80 text-[11px] font-mono text-[#a1a1aa]">
+                  Tungsten Carbide Matrix
+                </div>
+              </div>
+
+              {/* Metric 2: Hardness */}
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
+                      Hardness
+                    </span>
+                    <IconCaliper className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <div className="text-sm font-mono font-semibold text-[#ededed]">
+                    1650 - 1800 HV30
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-[#262626]/80 text-[11px] font-mono text-[#a1a1aa]">
+                  Vickers Micro-Indentation
+                </div>
+              </div>
+
+              {/* Metric 3: Thermal Barrier */}
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
+                      Thermal Barrier
+                    </span>
+                    <IconThermal className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <div className="text-sm font-mono font-semibold text-[#ededed]">
+                    AlTiN Multilayer (Up to 900°C)
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-[#262626]/80 text-[11px] font-mono text-[#a1a1aa]">
+                  PVD Oxidation Resistance
+                </div>
+              </div>
+
+              {/* Metric 4: Quality Standard */}
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
+                      Quality Standard
+                    </span>
+                    <IconBlueprint className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <div className="text-sm font-mono font-semibold text-[#ededed]">
+                    ISO 2768-mK / DIN 69871
+                  </div>
+                </div>
+                <div className="mt-3 pt-3 border-t border-[#262626]/80 text-[11px] font-mono text-[#a1a1aa]">
+                  Tolerancing &amp; Taper Spec
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        {/* Technical Specifications Table */}
+        <section aria-labelledby="technical-specifications-title">
+          <div className="rounded-2xl border border-[#262626] bg-[#121212] p-6 sm:p-8 specular-card">
+            <div className="flex items-center justify-between pb-6 border-b border-[#262626]">
+              <div>
+                <h2
+                  id="technical-specifications-title"
+                  className="text-xl font-bold text-[#ededed] font-montserrat tracking-tight flex items-center gap-2"
+                >
+                  <span>Technical Specifications</span>
+                </h2>
+                <p className="text-xs text-[#a1a1aa] font-body mt-1">
+                  Dimensional calibrations, geometry parameters, and manufacturer tolerances.
+                </p>
+              </div>
+              <span className="telemetry-chip">
+                Calibrated Tool Data
+              </span>
+            </div>
+
+            <div className="rounded-xl border border-[#262626] bg-[#0e0e0e] overflow-hidden mt-6">
+              <table className="min-w-full divide-y divide-[#262626] text-left text-sm">
+                <tbody className="divide-y divide-[#262626]">
+                  <tr className="bg-[#161616]">
+                    <td className="px-6 py-4 font-medium text-[#a1a1aa] w-1/3 text-xs sm:text-sm font-body">
+                      Product Identifier
+                    </td>
+                    <td className="px-6 py-4 text-[#ededed] font-mono text-xs sm:text-sm">
+                      {product.id}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#0e0e0e]">
+                    <td className="px-6 py-4 font-medium text-[#a1a1aa] text-xs sm:text-sm font-body">
+                      Category Classification
+                    </td>
+                    <td className="px-6 py-4 text-[#ededed] font-mono text-xs sm:text-sm">
+                      {product.category}
+                    </td>
+                  </tr>
+                  <tr className="bg-[#161616]">
+                    <td className="px-6 py-4 font-medium text-[#a1a1aa] text-xs sm:text-sm font-body">
+                      Settlement Currency
+                    </td>
+                    <td className="px-6 py-4 text-[#26d464] font-mono text-xs sm:text-sm">
+                      EXPEN (MST Testnet ERC-20) / USD Fiat
+                    </td>
+                  </tr>
+                  {product.specs &&
+                    Object.entries(product.specs).map(([specKey, specVal], idx) => (
+                      <tr
+                        key={specKey}
+                        className={idx % 2 === 0 ? "bg-[#0e0e0e]" : "bg-[#161616]"}
+                      >
+                        <td className="px-6 py-4 font-medium text-[#a1a1aa] capitalize text-xs sm:text-sm font-body">
+                          {specKey.replace(/([A-Z])/g, " $1")}
+                        </td>
+                        <td className="px-6 py-4 text-[#ededed] font-mono text-xs sm:text-sm">
+                          {specVal}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

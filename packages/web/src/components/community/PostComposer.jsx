@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import PostCard from "@/components/community/PostCard";
+import { IconEdit, IconEye, IconSparkles, IconCheck } from "@/components/ui/Icons";
 import { POST_TYPES, EXPLORER_URL } from "shared/constants";
 
 export default function PostComposer({ onPostCreated }) {
@@ -139,7 +140,9 @@ function ComposerInner({ onPostCreated }) {
     <Card className="p-6 bg-[#121212] border-[#262626] shadow-lg mb-8">
       <div className="flex items-center justify-between border-b border-[#1f1f1f] pb-4 mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-xl">✍️</span>
+          <span className="p-2 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center">
+            <IconEdit className="w-4 h-4 text-[#26d464]" />
+          </span>
           <div>
             <h2 className="text-base font-bold text-[#ededed] font-display">
               Contribute Shop-Floor Knowledge
@@ -154,7 +157,11 @@ function ComposerInner({ onPostCreated }) {
           onClick={() => setIsPreview((prev) => !prev)}
           className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#262626] bg-[#161616] text-[#ededed] hover:border-[#383838] transition-colors focus:outline-none focus:ring-1 focus:ring-[#26d464]"
         >
-          {isPreview ? "✏️ Edit Mode" : "👁️ Preview Note"}
+          {isPreview ? (
+            <span className="inline-flex items-center gap-1.5"><IconEdit className="w-3.5 h-3.5" /> Edit Mode</span>
+          ) : (
+            <span className="inline-flex items-center gap-1.5"><IconEye className="w-3.5 h-3.5" /> Preview Note</span>
+          )}
         </button>
       </div>
 
@@ -165,7 +172,10 @@ function ComposerInner({ onPostCreated }) {
           className="mb-6 p-4 rounded-xl bg-[#26d464]/10 border border-[#26d464]/30 space-y-2 text-xs text-[#26d464]"
         >
           <div className="flex items-center justify-between font-bold">
-            <span>🎉 Post Published & +{successResult.expenRewarded} EXPEN Minted!</span>
+            <span className="inline-flex items-center gap-1.5">
+              <IconSparkles className="w-4 h-4 text-[#26d464]" />
+              <span>Post Published & +{successResult.expenRewarded} EXPEN Minted!</span>
+            </span>
             <Badge variant="accent" size="sm">
               MST Testnet
             </Badge>

@@ -7,6 +7,29 @@ import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
+export const EVALUATION_PRESETS = [
+  {
+    label: "Rameshwar Kulkarni (Aerospace Turning Specialist • Pune)",
+    data: {
+      username: "rameshwar-k",
+      email: "rameshwar@kulkarni-aerospace.in",
+      phone: "+91 98230 11452",
+      designation: "Chief CNC Turning Specialist (34 Yrs)",
+      company: "Kulkarni Aerospace Components Ltd.",
+    },
+  },
+  {
+    label: "Devendra Patil (Tool & Die Master • Kolhapur)",
+    data: {
+      username: "devendra-patil",
+      email: "devendra@patil-tooling.in",
+      phone: "+91 94220 55198",
+      designation: "Master Tool & Die Maker (29 Yrs)",
+      company: "Patil Precision Forging & Dies",
+    },
+  },
+];
+
 export default function ProfileSetupStep({
   walletAddress,
   onSubmit,
@@ -66,6 +89,11 @@ export default function ProfileSetupStep({
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
+  };
+
+  const handleApplyPreset = (presetData) => {
+    setFormData({ ...presetData });
+    setErrors({});
   };
 
   const handleSubmit = (e) => {
@@ -144,6 +172,38 @@ export default function ProfileSetupStep({
             animate="visible"
             className="space-y-4"
           >
+            {/* Quick Presets for Live Evaluation & Judging */}
+            <motion.div
+              variants={itemVariants}
+              className="p-3.5 rounded-lg bg-[#181818] border border-[#262626] space-y-2.5"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-semibold text-[#a1a1aa] uppercase tracking-wider">
+                  Quick Presets for Live Evaluation &amp; Judging
+                </span>
+                <span className="text-[10px] text-[#71717a] uppercase font-mono">
+                  Autofill
+                </span>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-2">
+                {EVALUATION_PRESETS.map((preset, index) => (
+                  <button
+                    key={preset.data.username}
+                    type="button"
+                    onClick={() => handleApplyPreset(preset.data)}
+                    className="flex-1 text-left px-3 py-2 rounded-md bg-[#161616] hover:bg-[#202020] border border-[#2a2a2a] hover:border-[#26d464]/60 transition-colors text-xs text-[#ededed] focus:outline-none focus:ring-1 focus:ring-[#26d464] cursor-pointer"
+                  >
+                    <span className="block font-medium text-[#26d464] text-[10px] uppercase tracking-wider mb-0.5">
+                      {`Preset ${index + 1}`}
+                    </span>
+                    <span className="block text-xs text-[#ededed]">
+                      {preset.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Username */}
             <motion.div variants={itemVariants} className="space-y-1.5">
               <label

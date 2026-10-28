@@ -6,6 +6,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { IconToken } from "@/components/ui/Icons";
 
 export default function AuthGuard({
   children,
@@ -35,7 +36,7 @@ export default function AuthGuard({
       <div className="max-w-md mx-auto space-y-4">
         <div className="flex justify-center">
           <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#161616] border border-[#262626] text-2xl">
-            🔒
+            <IconToken className="w-6 h-6 text-[#26d464]" />
           </span>
         </div>
 

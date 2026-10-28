@@ -1,75 +1,109 @@
 import React from "react";
 import Link from "next/link";
 import { EXPLORER_URL, CHAIN_ID } from "shared/constants";
+import { IconSpindle } from "@/components/ui/Icons";
 
 export default function Footer() {
   return (
     <footer
       aria-label="Site footer"
-      className="border-t border-[#262626] bg-[#070707] text-[#a1a1aa]"
+      className="border-t border-[#262626] bg-[#070707] text-[#a1a1aa] relative overflow-hidden"
     >
+      {/* Blueprint grid accent bar */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#26d464]/30 to-transparent" />
+
+      {/* Engineering Header Datum Bar */}
+      <div className="border-b border-[#1c1c1c] bg-[#0a0a0a]/80 py-2 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono text-[#71717a]">
+          <div className="flex items-center gap-3">
+            <span className="text-white/30">+ [00,00] DATUM</span>
+            <span>·</span>
+            <span>REF // ISO-2768-mK</span>
+            <span>·</span>
+            <span>SYS:MST-{CHAIN_ID}</span>
+          </div>
+          <div className="flex items-center gap-2 text-[#26d464]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+            <span>OPERATOR TERMINAL ONLINE · GASLESS CONTRACTS ACTIVE</span>
+          </div>
+        </div>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Info */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+          {/* Brand Info & Mission */}
           <div className="md:col-span-2 space-y-4">
             <Link
               href="/"
-              className="flex items-center gap-2 text-xl font-bold tracking-tight text-[#ededed] font-display hover:text-[#26d464] transition-colors"
+              className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-[#ededed] font-display hover:text-[#26d464] transition-colors"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#161616] border border-[#262626] text-[#26d464]">
-                ⚙️
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#161616] border border-[#262626] text-[#26d464] shadow-inner">
+                <IconSpindle className="w-4 h-4 text-[#26d464]" />
               </span>
               <span>
                 EXPEND<span className="text-[#26d464]">RY</span>
               </span>
             </Link>
-            <p className="text-sm text-[#a1a1aa] max-w-md leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-md leading-relaxed text-pretty">
               Where experience is never retired. Empowering veteran machinists to
-              archive tacit shop-floor knowledge, earn EXPEN rewards on MST
-              testnet, and consult AI-powered tooling intelligence.
+              archive tacit shop-floor wisdom, earn EXPEN rewards on MST
+              testnet, inspect 3D tooling geometries, and consult AI-powered machining intelligence.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161616] border border-[#262626] text-xs text-[#26d464]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#121212] border border-[#262626] text-xs font-mono text-[#26d464]">
               <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-              <span>MST Testnet (Chain ID: {CHAIN_ID})</span>
+              <span>MST Testnet · Chain ID: {CHAIN_ID} · 0x56F0...283a</span>
             </div>
           </div>
 
           {/* Core Routes */}
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#ededed] mb-3 font-display">
-              Ecosystem
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#ededed] mb-3">
+              Ecosystem Telemetry
             </h2>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link
+                  href="/marketplace"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">01 //</span>
+                  <span>Tooling Marketplace</span>
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/community"
-                  className="hover:text-[#26d464] transition-colors"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  Community Feed
+                  <span className="text-white/20 font-mono">02 //</span>
+                  <span>Machinist Knowledge Feed</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/showcase"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">03 //</span>
+                  <span>3D CAD Tooling Inspector</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/agent"
-                  className="hover:text-[#26d464] transition-colors"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  Sarvam AI Agent
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/marketplace"
-                  className="hover:text-[#26d464] transition-colors"
-                >
-                  Tooling & 3D Showcase
+                  <span className="text-white/20 font-mono">04 //</span>
+                  <span>Sarvam AI Machining Assistant</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/onboarding"
-                  className="hover:text-[#26d464] transition-colors"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  Wallet Onboarding
+                  <span className="text-white/20 font-mono">05 //</span>
+                  <span>Wallet Onboarding & KYC-Free</span>
                 </Link>
               </li>
             </ul>
@@ -77,18 +111,18 @@ export default function Footer() {
 
           {/* Resources & Blockchain */}
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-[#ededed] mb-3 font-display">
-              Resources
+            <h2 className="text-xs font-mono uppercase tracking-wider text-[#ededed] mb-3">
+              Network & Verification
             </h2>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-xs">
               <li>
                 <a
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#26d464] transition-colors inline-flex items-center gap-1"
+                  className="hover:text-[#26d464] transition-colors inline-flex items-center gap-1 text-xs"
                 >
-                  MSTScan Explorer
+                  <span>MSTScan Blockchain Explorer</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </li>
@@ -97,26 +131,28 @@ export default function Footer() {
                   href="https://testnetfaucet.mstblockchain.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#26d464] transition-colors inline-flex items-center gap-1"
+                  className="hover:text-[#26d464] transition-colors inline-flex items-center gap-1 text-xs"
                 >
-                  MST Faucet
+                  <span>MST Testnet Faucet</span>
                   <span aria-hidden="true">↗</span>
                 </a>
               </li>
               <li>
-                <span className="text-xs text-[#71717a]">
-                  50 EXPEN Daily Cap / 10 EXPEN per Post
-                </span>
+                <div className="p-2.5 rounded-lg bg-[#121212] border border-[#222222] text-[11px] font-mono text-[#a1a1aa] mt-2 space-y-1">
+                  <div className="text-[#ededed] font-semibold">TOKENOMICS RULE:</div>
+                  <div>10 EXPEN / Valid Post</div>
+                  <div className="text-[#26d464]">50 EXPEN Daily Cap / Wallet</div>
+                </div>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-[#1c1c1c] pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-[#71717a] gap-4">
+        {/* Bottom Bar: Shop-Floor Terminal Signoff */}
+        <div className="border-t border-[#1c1c1c] pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#71717a] gap-4">
           <p>© 2026 Expendry Ecosystem. All rights reserved.</p>
-          <p className="text-xs">
-            Built for veteran machinists and high-precision CNC tooling.
+          <p className="text-center sm:text-right">
+            Engineered for veteran machinists and high-precision CNC tooling. MST Blockchain Testnet Chain ID 91562037.
           </p>
         </div>
       </div>

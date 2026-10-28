@@ -32,3 +32,6 @@ __pycache__/
 *.pem
 *.log
 .turbo
+.gemini/
+.codex/
+.cursor/

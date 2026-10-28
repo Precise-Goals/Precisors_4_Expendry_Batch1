@@ -69,6 +69,68 @@ export const MODELS = [
     productId: "prod-002",
     glbPath: "/models/drill-bit.glb",
   },
+  {
+    id: "end-mill",
+    name: "4-Flute Solid Carbide Square End Mill",
+    shortName: "Carbide End Mill",
+    description:
+      "High-performance solid carbide square end mill with 38° helix angle and AlTiN nano-composite coating for precision slotting and peripheral milling.",
+    geometryType: "Helical Cylinder / 4 Flutes",
+    segments: 48,
+    verticesCount: 2048,
+    materials: {
+      color: "#1a202c",
+      metalness: 0.92,
+      roughness: 0.18,
+    },
+    orbitControls: {
+      minDistance: 1.5,
+      maxDistance: 12.0,
+      maxPolarAngle: Math.PI / 2 + 0.1,
+      enableDamping: true,
+      dampingFactor: 0.05,
+    },
+    specs: {
+      diameter: "12.0 mm",
+      flutes: "4 Flutes",
+      helixAngle: "38°",
+      coating: "AlTiN Nano-composite",
+      shankTolerance: "h6 (±0.004mm)",
+    },
+    productId: "prod-002",
+    glbPath: "/models/end-mill.glb",
+  },
+  {
+    id: "face-mill",
+    name: "Indexable 45° Face Milling Shell Cutter",
+    shortName: "45° Face Mill",
+    description:
+      "Indexable 45-degree face milling shell cutter body with 4 SEET 12T3 insert pockets, through-tool coolant capability, and FMA22 arbor interface.",
+    geometryType: "Shell Mill Body / 4 Inserts",
+    segments: 64,
+    verticesCount: 2560,
+    materials: {
+      color: "#2d3748",
+      metalness: 0.88,
+      roughness: 0.22,
+    },
+    orbitControls: {
+      minDistance: 2.0,
+      maxDistance: 15.0,
+      maxPolarAngle: Math.PI / 2 + 0.1,
+      enableDamping: true,
+      dampingFactor: 0.05,
+    },
+    specs: {
+      cuttingDiameter: "50.0 mm",
+      insertCount: "4 Inserts (SEET 12T3)",
+      leadAngle: "45°",
+      arborMount: "FMA22 (ISO)",
+      bodyMaterial: "42CrMo4 Alloy",
+    },
+    productId: "prod-004",
+    glbPath: "/models/face-mill.glb",
+  },
 ];
 
 /**

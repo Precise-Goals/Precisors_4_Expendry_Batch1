@@ -8,6 +8,7 @@ import ProfileSetupStep from "@/components/onboarding/ProfileSetupStep";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { IconCheck } from "@/components/ui/Icons";
 import { formatAddress } from "@/lib/wallet";
 
 const STEPS = [
@@ -151,8 +152,8 @@ export default function OnboardingPage() {
             >
               <Card className="p-8 bg-[#121212] border-[#262626] text-center shadow-xl space-y-6">
                 <div className="flex justify-center">
-                  <div className="h-16 w-16 rounded-full bg-[#26d464]/10 border-2 border-[#26d464] flex items-center justify-center text-3xl shadow-lg shadow-[#26d464]/20 animate-bounce">
-                    🎉
+                  <div className="h-16 w-16 rounded-full bg-[#26d464]/10 border-2 border-[#26d464] flex items-center justify-center text-3xl shadow-lg shadow-[#26d464]/20 ">
+                    <IconCheck className="w-8 h-8 text-[#26d464]" />
                   </div>
                 </div>
 

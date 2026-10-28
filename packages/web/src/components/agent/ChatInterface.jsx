@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { EXPLORER_URL } from "shared/constants";
+import { IconBrain, IconWrench } from "@/components/ui/Icons";
 
 export default function ChatInterface({
   lang = "en",
@@ -87,7 +89,6 @@ export default function ChatInterface({
       const decoder = new TextDecoder("utf-8");
       let streamBuffer = "";
       let accumulatedContent = "";
-      let responseSources = [];
 
       while (true) {
         const { done, value } = await reader.read();
@@ -113,7 +114,6 @@ export default function ChatInterface({
                 );
               }
               if (data.done && data.sources) {
-                responseSources = data.sources;
                 setActiveSources(data.sources);
                 if (onSourcesUpdated) onSourcesUpdated(data.sources);
                 setMessages((prev) =>
@@ -130,7 +130,7 @@ export default function ChatInterface({
           }
         }
       }
-    } catch (err) {
+    } catch {
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessageId
@@ -152,11 +152,11 @@ export default function ChatInterface({
   };
 
   return (
-    <div className="flex flex-col h-full max-w-4xl mx-auto rounded-xl border border-neutral-800 bg-[#0d0d0d] shadow-2xl overflow-hidden">
-      {/* Header bar */}
-      <div className="px-5 py-3.5 border-b border-neutral-800 flex items-center justify-between bg-neutral-900/60 backdrop-blur">
+    <div className="flex flex-col h-full max-w-4xl mx-auto rounded-2xl border border-[#262626] bg-[#0c0c0c] shadow-2xl overflow-hidden specular-card">
+      {/* Header Bar */}
+      <div className="px-5 py-3.5 border-b border-[#262626] flex items-center justify-between bg-[#121212]/90 backdrop-blur">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#26d464]/10 border border-[#26d464]/30 flex items-center justify-center text-[#26d464]">
+          <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-[#26d464] shadow-inner">
             <svg
               className="w-4 h-4"
               fill="none"
@@ -172,13 +172,13 @@ export default function ChatInterface({
             </svg>
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-neutral-100 flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-[#ededed] flex items-center gap-2">
               Sarvam AI Assistant
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 font-bold">
                 sarvam-105b
               </span>
             </h2>
-            <p className="text-xs text-neutral-400">
+            <p className="text-xs text-[#a1a1aa]">
               {lang === "hi"
                 ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी)"
                 : lang === "mr"
@@ -189,26 +189,14 @@ export default function ChatInterface({
         </div>
 
         {activeSources.length > 0 && (
-          <div className="flex items-center gap-1.5 text-xs text-[#26d464] bg-[#26d464]/10 px-2.5 py-1 rounded-full border border-[#26d464]/20">
-            <svg
-              className="w-3.5 h-3.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>{activeSources.length} Community Source{activeSources.length > 1 ? "s" : ""}</span>
+          <div className="flex items-center gap-1.5 text-xs text-[#26d464] bg-[#26d464]/10 px-2.5 py-1 rounded-full border border-[#26d464]/30 font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#26d464] animate-pulse" />
+            <span>{activeSources.length} Verified Source{activeSources.length > 1 ? "s" : ""}</span>
           </div>
         )}
       </div>
 
-      {/* Messages viewport */}
+      {/* Messages Viewport */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
         <ul
           role="log"
@@ -225,67 +213,65 @@ export default function ChatInterface({
                 className={`flex gap-3 ${isUser ? "justify-end" : "justify-start"}`}
               >
                 {!isUser && (
-                  <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center shrink-0 text-[#26d464]">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
+                  <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center shrink-0 shadow-inner">
+                    <IconBrain className="w-4 h-4 text-[#26d464]" />
                   </div>
                 )}
 
                 <div
-                  className={`max-w-[82%] sm:max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`max-w-[85%] sm:max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     isUser
-                      ? "bg-[#26d464] text-neutral-950 font-medium ml-auto"
-                      : "bg-neutral-900 border border-neutral-800 text-neutral-200"
+                      ? "bg-[#26d464] text-black font-semibold ml-auto shadow-md"
+                      : "bg-[#141414] border border-[#262626] text-[#ededed] shadow-inner specular-card"
                   }`}
                 >
                   <div aria-live="polite" aria-atomic="false">
                     <p className="whitespace-pre-wrap">{msg.content}</p>
                   </div>
 
-                  {/* Sources pills */}
+                  {/* Tactile Blueprint Source Citations */}
                   {msg.sources && msg.sources.length > 0 && (
-                    <div className="mt-3 pt-2.5 border-t border-neutral-800/80 flex flex-wrap gap-1.5">
-                      <span className="text-[11px] text-neutral-400 mr-1">
-                        Knowledge from community:
+                    <div className="mt-4 pt-3 border-t border-[#262626] space-y-2">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#71717a] block">
+                        RAG Grounding Sources (MST Verified):
                       </span>
-                      {msg.sources.map((src) => (
-                        <span
-                          key={src.id}
-                          className="inline-flex items-center text-[10px] px-2 py-0.5 rounded bg-neutral-800 text-[#26d464] border border-neutral-700"
-                        >
-                          {src.title} ({src.type})
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-2">
+                        {msg.sources.map((src) => (
+                          <div
+                            key={src.id}
+                            className="p-2 rounded-lg bg-[#0c0c0c] border border-[#262626] text-xs flex flex-col gap-1 max-w-sm"
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="font-semibold text-[#ededed] truncate">
+                                {src.title}
+                              </span>
+                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1c1c1c] text-[#26d464] shrink-0 border border-[#2a2a2a]">
+                                {src.type}
+                              </span>
+                            </div>
+                            <div className="flex items-center justify-between text-[10px] font-mono text-[#71717a]">
+                              <span>By: {src.authorName || "Veteran"}</span>
+                              {src.txHash && (
+                                <a
+                                  href={`${EXPLORER_URL}/tx/${src.txHash}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[#26d464] hover:underline"
+                                >
+                                  MST Tx ↗
+                                </a>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
 
                 {isUser && (
-                  <div className="w-8 h-8 rounded-full bg-[#26d464]/20 border border-[#26d464]/40 flex items-center justify-center shrink-0 text-[#26d464]">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
+                  <div className="w-8 h-8 rounded-lg bg-[#26d464] flex items-center justify-center shrink-0 shadow-inner">
+                    <IconWrench className="w-4 h-4 text-black" />
                   </div>
                 )}
               </li>
@@ -293,25 +279,25 @@ export default function ChatInterface({
           })}
         </ul>
 
-        {/* Typing indicator */}
+        {/* Typing Indicator */}
         {isLoading && (
-          <div className="flex gap-3 items-center text-neutral-400 text-xs pl-11">
+          <div className="flex gap-3 items-center text-[#a1a1aa] text-xs pl-11">
             <div className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-bounce [animation-delay:-0.3s]"></span>
-              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-bounce [animation-delay:-0.15s]"></span>
-              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-bounce"></span>
+              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-pulse [animation-delay:-0.3s]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-pulse [animation-delay:-0.15s]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#26d464] animate-pulse"></span>
             </div>
-            <span className="italic">Sarvam AI is thinking...</span>
+            <span className="italic font-mono text-[11px]">Sarvam AI is synthesizing shop-floor telemetry...</span>
           </div>
         )}
 
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Composer form */}
+      {/* Input Composer Form */}
       <form
         onSubmit={handleSubmit}
-        className="p-3.5 border-t border-neutral-800 bg-neutral-900/50 flex gap-2 items-center"
+        className="p-3.5 border-t border-[#262626] bg-[#121212]/90 flex gap-2 items-center"
       >
         <label htmlFor="agent-chat-input" className="sr-only">
           Ask machining question
@@ -330,13 +316,13 @@ export default function ChatInterface({
               : "Ask about feeds, lathe chatter, carbide grades, tapping..."
           }
           disabled={isLoading}
-          className="flex-1 bg-neutral-950 border border-neutral-800 rounded-lg px-3.5 py-2.5 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
+          className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-xl px-3.5 py-2.5 text-sm text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
         />
 
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="px-4 py-2.5 rounded-lg bg-[#26d464] text-neutral-950 font-semibold text-sm hover:bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm"
+          className="px-4 py-2.5 rounded-xl bg-[#26d464] text-black font-semibold text-sm hover:bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm active:scale-98"
           aria-label="Send message"
         >
           {isLoading ? (

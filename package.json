@@ -21,5 +21,8 @@
   "trustedDependencies": [
     "sharp",
     "unrs-resolver"
-  ]
+  ],
+  "devDependencies": {
+    "impeccable": "^4.8.0"
+  }
 }

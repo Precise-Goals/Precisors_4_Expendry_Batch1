@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T19:38:00Z",
+  "title": "Design System: Expendry",
+  "extensions": {
+    "colorMeta": {
+      "base": {
+        "role": "neutral",
+        "displayName": "Base Obsidian",
+        "canonical": "#0a0a0a",
+        "tonalRamp": ["#050505", "#0a0a0a", "#121212", "#181818", "#222222", "#2d2d2d", "#3b3b3b", "#4a4a4a"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Toolroom Charcoal Surface",
+        "canonical": "#121212",
+        "tonalRamp": ["#080808", "#0e0e0e", "#121212", "#191919", "#222222", "#303030", "#404040", "#525252"]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "Recessed Chassis Tone",
+        "canonical": "#161616",
+        "tonalRamp": ["#0c0c0c", "#121212", "#161616", "#202020", "#2b2b2b", "#383838", "#484848", "#5a5a5a"]
+      },
+      "surface-hover": {
+        "role": "neutral",
+        "displayName": "Surface Hover",
+        "canonical": "#1c1c1c",
+        "tonalRamp": ["#101010", "#161616", "#1c1c1c", "#282828", "#353535", "#444444", "#555555", "#686868"]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "Precision Machining Green",
+        "canonical": "#26d464",
+        "tonalRamp": ["#042f13", "#085724", "#0e8238", "#17b04e", "#26d464", "#52e084", "#81eba7", "#b7f5ce"]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Machining Green Hover",
+        "canonical": "#21b856",
+        "tonalRamp": ["#03260f", "#074c1f", "#0c702f", "#149841", "#21b856", "#45cc72", "#74e297", "#acf1c3"]
+      },
+      "primary-dim": {
+        "role": "primary",
+        "displayName": "Machining Green Dim",
+        "canonical": "rgba(38, 212, 100, 0.15)",
+        "tonalRamp": ["rgba(38,212,100,0.05)", "rgba(38,212,100,0.1)", "rgba(38,212,100,0.15)", "rgba(38,212,100,0.25)", "rgba(38,212,100,0.4)", "rgba(38,212,100,0.6)", "rgba(38,212,100,0.8)", "#26d464"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Structural Border",
+        "canonical": "#262626",
+        "tonalRamp": ["#141414", "#1b1b1b", "#262626", "#333333", "#424242", "#555555", "#6a6a6a", "#828282"]
+      },
+      "border-bright": {
+        "role": "neutral",
+        "displayName": "Bright Border Highlight",
+        "canonical": "#383838",
+        "tonalRamp": ["#1e1e1e", "#282828", "#383838", "#4a4a4a", "#5e5e5e", "#747474", "#8c8c8c", "#a6a6a6"]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Silver-White Primary Text",
+        "canonical": "#ededed",
+        "tonalRamp": ["#4a4a4a", "#686868", "#888888", "#aaaaaa", "#cccccc", "#dedede", "#ededed", "#fafafa"]
+      },
+      "text-dim": {
+        "role": "neutral",
+        "displayName": "Muted Slate Text",
+        "canonical": "#a1a1aa",
+        "tonalRamp": ["#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8", "#e4e4e7", "#f4f4f5"]
+      },
+      "text-muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate Text",
+        "canonical": "#a1a1aa",
+        "tonalRamp": ["#27272a", "#3f3f46", "#52525b", "#71717a", "#a1a1aa", "#d4d4d8", "#e4e4e7", "#f4f4f5"]
+      },
+      "metal-steel": {
+        "role": "tertiary",
+        "displayName": "Machined Tool Steel",
+        "canonical": "#4a5568",
+        "tonalRamp": ["#1a202c", "#2d3748", "#4a5568", "#718096", "#a0aec0", "#cbd5e0", "#e2e8f0", "#edf2f7"]
+      },
+      "metal-dark": {
+        "role": "tertiary",
+        "displayName": "Cast Iron Dark",
+        "canonical": "#1a202c",
+        "tonalRamp": ["#0d1117", "#161b22", "#1a202c", "#21262d", "#30363d", "#484f58", "#6e7681", "#8b949e"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headlines and main titles with tight tracking and balanced wrapping."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Card headers and tool catalog titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable forum discussions and technical descriptions."
+      },
+      "telemetry": {
+        "displayName": "Telemetry & DRO",
+        "purpose": "Tabular digital readouts, coordinates, and tolerances."
+      }
+    },
+    "shadows": [
+      {
+        "name": "specular-milled",
+        "value": "inset 0 1px 0 0 rgba(255, 255, 255, 0.07), 0 8px 24px -4px rgba(0, 0, 0, 0.6)",
+        "purpose": "Milled hairline edge highlight on top of cards."
+      },
+      {
+        "name": "ambient-glow",
+        "value": "0 8px 30px rgba(0, 0, 0, 0.5)",
+        "purpose": "Restrained hover elevation with emerald highlight."
+      },
+      {
+        "name": "hud-blur",
+        "value": "backdrop-filter: blur(16px)",
+        "purpose": "Glassmorphic blur for floating CAD controls."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-machined",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Crisp hydraulic response for cards and interactive controls."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-contrast primary action button for minting, token claims, and primary form submissions.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><line x1=\"12\" y1=\"2\" x2=\"12\" y2=\"4\"/><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"22\"/></svg>INITIALIZE SPINDLE</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #26d464; color: #0a0a0a; font-family: Montserrat, sans-serif; font-weight: 600; font-size: 14px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; } .ds-btn-primary:hover { background: #21b856; transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid #26d464; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Surface Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Subdued secondary button for view resetting, toggles, and filter selections.",
+      "html": "<button class=\"ds-btn-secondary\">RESET VIEW</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; background: #121212; color: #ededed; font-family: Poppins, sans-serif; font-weight: 500; font-size: 14px; padding: 10px 20px; border-radius: 8px; border: 1px solid #262626; cursor: pointer; transition: background 0.2s, border-color 0.2s; } .ds-btn-secondary:hover { background: #1c1c1c; border-color: #383838; }"
+    },
+    {
+      "name": "Machinist Telemetry Chip",
+      "kind": "chip",
+      "refersTo": "telemetry-chip",
+      "description": "Micro-metric tabular badge displaying real-time sensor and fit tolerances.",
+      "html": "<span class=\"ds-telemetry-chip\">SHANK: 25.00 h6</span>",
+      "css": ".ds-telemetry-chip { display: inline-flex; align-items: center; padding: 2px 8px; background: #161616; border: 1px solid #262626; border-radius: 2px; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #a1a1aa; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Dimensional Caliper Readout Badge",
+      "kind": "custom",
+      "refersTo": "card-container",
+      "description": "Precision floating tolerance indicator for CAD/CAM 3D calipers.",
+      "html": "<div class=\"ds-caliper-badge\">OVERALL LENGTH: 125.00 mm (±0.005)</div>",
+      "css": ".ds-caliper-badge { display: inline-flex; align-items: center; font-family: ui-monospace, monospace; font-size: 10px; font-weight: 700; color: #26d464; background: rgba(12, 12, 12, 0.95); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(38, 212, 100, 0.3); font-variant-numeric: tabular-nums; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }"
+    },
+    {
+      "name": "Tactile Voice Transducer Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Machinist voice consultation trigger with acoustic feedback rings.",
+      "html": "<button class=\"ds-voice-btn\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z\"/><path d=\"M19 10v2a7 7 0 0 1-14 0v-2\"/><line x1=\"12\" y1=\"19\" x2=\"12\" y2=\"23\"/><line x1=\"8\" y1=\"23\" x2=\"16\" y2=\"23\"/></svg></button>",
+      "css": ".ds-voice-btn { width: 44px; height: 44px; border-radius: 9999px; display: inline-flex; align-items: center; justify-content: center; background: #161616; border: 1px solid #262626; color: #26d464; cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-voice-btn:hover { background: #1c1c1c; border-color: rgba(38, 212, 100, 0.5); transform: scale(1.05); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Veteran Toolroom Workstation",
+    "overview": "Expendry evokes the tactile, high-precision aesthetic of heavy CNC machining centers, aerospace inspection granite surface plates, digital readout (DRO) consoles, and technical blueprint drafting. Designed specifically for veteran machinists and tooling engineers, the interface eliminates SaaS visual noise, decorative AI gradients, and whimsical emojis in favor of purposeful contrast, authentic state telemetry, and tactile feedback.\n\nEvery surface is built to withstand real shop-floor operating environments: low-glare obsidian backdrops for ambient factory lighting, crisp hairline divisions simulating precision ground tool steel, high-visibility indicator green inspired by calibrated industrial control panels, and tabular digital readouts that present critical measurements without jitter.",
+    "keyCharacteristics": [
+      "Zero-Emoji Mathematical Vector Iconography: Pure 1.75px stroke geometric SVG glyphs representing machining tools, acoustic sensors, and coordinate geometry.",
+      "CAD/CAM 3D Workstation HUD: Real-time inspection viewport complete with datum crosshairs, dynamic dimensional calipers, and telemetry overlays.",
+      "Machinist Acoustic Spectrum & Multilingual Telemetry: Audio feedback rings, acoustic spectrograms, and live state monitoring for voice consultation in English, Hindi, and Marathi.",
+      "Strict High-Contrast Industrial Palette: Calibrated charcoal and obsidian base layers anchored by #26d464 machining green.",
+      "Fluid Typography with Tabular DRO Numerals: Balanced Montserrat headings, highly legible Poppins body copy, and monospace tabular numerals for zero-jitter readouts."
+    ],
+    "rules": [
+      {
+        "name": "The Indicator Lamp Rule",
+        "body": "The #26d464 green accent must never exceed 10% of any given screen's total visual area. When everything glows green, nothing commands attention.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Faux-White Rule",
+        "body": "Never use pure white (#ffffff) for body text or large background surfaces. #ededed prevents retina fatigue in low-light shop environments while preserving crisp readability.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular DRO Rule",
+        "body": "Any numeric value that changes dynamically (balances, coordinates, tolerances, FPS, countdowns) MUST use font-variant-numeric: tabular-nums. Proportional numbers during live data updates are strictly forbidden.",
+        "section": "typography"
+      },
+      {
+        "name": "The 12px Floor Rule",
+        "body": "No text carrying essential operational information may render below 12px (0.75rem). Interactive touch targets must maintain at least 14px body text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Milled Edge Rule",
+        "body": "Every elevated card must feature a 1px top specular highlight (inset 0 1px 0 0 rgba(255, 255, 255, 0.07)) to define its physical top plane against the dark canvas.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Honest Depth Rule",
+        "body": "Shadows only exist to convey physical spatial layering or direct user interaction. Never apply decorative floating shadows to static inline text.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use uniform 1.75px geometric SVG vector icons for all visual indicators and actions.",
+      "Do enforce font-variant-numeric: tabular-nums on all coordinates, balances, timers, and live gauges.",
+      "Do include real shop-floor tolerances (e.g., ±0.005mm, h6, H7) when displaying machining dimensions.",
+      "Do respect prefers-reduced-motion on all animations, ambient noise shaders, and acoustic pulse rings.",
+      "Do maintain a strict 14:1+ contrast ratio for primary text (#ededed) and 5.8:1+ for muted text (#a1a1aa).",
+      "Do clamp reading copy to 65–75 characters per line (max-w-prose) with text-wrap: pretty.",
+      "Do use text-wrap: balance on all headings and card titles.",
+      "Do clamp 3D Canvas device pixel ratios to [1, 2] to protect mobile GPUs."
+    ],
+    "donts": [
+      "Don't use emojis anywhere in the user interface or code (no 🚀, 🤖, 💡, 🔧 emojis). Use mathematical vector icons.",
+      "Don't use thick colored left borders on cards (border-l-2, border-l-4). All cards use uniform 1px borders.",
+      "Don't use bouncing, elastic, or playful spring animations (animate-bounce). Machining tools move with hydraulic precision.",
+      "Don't use generic SaaS purple or blue gradients. Ground the palette in calibrated obsidian and machining green.",
+      "Don't allow numeric layouts to jitter or jump during real-time data streaming.",
+      "Don't nest cards inside cards or wrap every piece of text in an unnecessary bordered box.",
+      "Don't use pure white (#ffffff) for large text areas or canvas backgrounds."
+    ]
+  }
+}

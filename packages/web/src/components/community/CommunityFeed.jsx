@@ -5,6 +5,7 @@ import { useCommunityFeed } from "@/hooks/useCommunityFeed";
 import PostCard from "@/components/community/PostCard";
 import FilterTabs from "@/components/community/FilterTabs";
 import { Button } from "@/components/ui/Button";
+import { IconThermal } from "@/components/ui/Icons";
 
 export default function CommunityFeed({ initialType = "All" }) {
   const [activeType, setActiveType] = useState(initialType);
@@ -102,7 +103,7 @@ export default function CommunityFeed({ initialType = "All" }) {
       {/* Empty State */}
       {!isLoading && posts.length === 0 && (
         <div className="p-12 text-center rounded-2xl bg-[#121212] border border-[#262626] space-y-3">
-          <span className="text-4xl block">🔍</span>
+          <IconThermal className="w-10 h-10 text-[#26d464] mx-auto block" />
           <h4 className="text-base font-bold text-[#ededed]">
             No posts found in {activeType}
           </h4>

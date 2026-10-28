@@ -9,3 +9,4 @@ export {
   CardFooter,
 } from "./Card";
 export { Divider } from "./Divider";
+export * from "./Icons";

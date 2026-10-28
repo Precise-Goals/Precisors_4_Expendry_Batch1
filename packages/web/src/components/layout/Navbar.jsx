@@ -3,13 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CHAIN_ID } from "shared/constants";
+import { IconSpindle } from "@/components/ui/Icons";
 
 export const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/community", label: "Community" },
-  { href: "/onboarding", label: "Onboarding" },
-  { href: "/agent", label: "AI Agent" },
-  { href: "/marketplace", label: "Marketplace" },
+  { href: "/", label: "Home", num: "00" },
+  { href: "/marketplace", label: "Marketplace", num: "01" },
+  { href: "/community", label: "Community", num: "02" },
+  { href: "/showcase", label: "3D Showcase", num: "03", badge: "3D" },
+  { href: "/agent", label: "AI Agent", num: "04" },
 ];
 
 export default function Navbar() {
@@ -47,30 +49,57 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-200 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#262626] shadow-lg shadow-black/40"
-          : "bg-transparent border-b border-transparent"
+          ? "bg-[#0a0a0a]/92 backdrop-blur-xl border-b border-[#262626] shadow-xl shadow-black/60"
+          : "bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.04]"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-xl font-bold tracking-tight text-[#ededed] hover:text-[#26d464] transition-colors font-display"
-        >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#161616] border border-[#262626] text-[#26d464]">
-            ⚙️
+      {/* Top Telemetry Strip */}
+      <div className="w-full bg-[#080808]/90 border-b border-[#1c1c1c] text-[10px] font-mono text-[#a1a1aa] py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="flex items-center gap-1.5 text-[#26d464]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+            MST-{CHAIN_ID}
           </span>
-          <span>
-            EXPEND<span className="text-[#26d464]">RY</span>
-          </span>
-        </Link>
+          <span className="text-white/20">·</span>
+          <span className="hidden xs:inline">LATHE HUD</span>
+          <span className="hidden xs:inline text-white/20">·</span>
+          <span>EXPEN ERC-20</span>
+          <span className="text-white/20">·</span>
+          <span className="text-[#26d464] font-semibold">ONLINE</span>
+        </div>
+        <div className="hidden sm:flex items-center gap-3 text-[#71717a]">
+          <span>SYS // PRECISION CNC</span>
+          <span className="text-white/10">|</span>
+          <span>[REF: 18.5204°N, 73.8567°E]</span>
+        </div>
+      </div>
 
-        {/* Desktop Navigation */}
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Brand Logo with Chamfered Industrial Box */}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-[#ededed] hover:text-[#26d464] transition-colors font-display"
+          >
+            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#161616] border border-[#262626] text-[#26d464] shadow-inner">
+              <IconSpindle className="w-4 h-4 text-[#26d464]" />
+            </span>
+            <span className="tracking-wider">
+              EXPEND<span className="text-[#26d464]">RY</span>
+            </span>
+          </Link>
+          <span className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] text-[10px] font-mono text-[#a1a1aa] bg-[#121212] border border-[#262626]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
+            MST 91562037
+          </span>
+        </div>
+
+        {/* Desktop Navigation: Segmented CNC Controller Channel Dock */}
         <nav
           aria-label="Main navigation"
-          className="hidden md:flex items-center gap-1 lg:gap-2"
+          className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -83,23 +112,44 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`relative px-3.5 py-2 text-sm font-medium rounded-md transition-colors ${
+                className={`relative px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-lg transition-all duration-150 flex items-center ${
                   isActive
-                    ? "text-[#26d464] bg-[#26d464]/10 font-semibold"
+                    ? "text-[#ededed] bg-[#1c1c1c] border border-white/[0.08] shadow-sm font-semibold"
                     : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616]"
                 }`}
               >
-                {link.label}
+                {link.num && (
+                  <span className="font-mono text-[10px] text-white/30 mr-1.5 group-hover:text-white/60">
+                    {link.num} /
+                  </span>
+                )}
+                <span>{link.label}</span>
+                {link.badge && (
+                  <span className="ml-1.5 px-1.5 py-0.2 text-[10px] font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30 shadow-xs">
+                    {link.badge}
+                  </span>
+                )}
                 {isActive && (
                   <span
                     aria-hidden="true"
-                    className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#26d464] rounded-full"
+                    className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-[#26d464] rounded-full shadow-[0_0_8px_rgba(38,212,100,0.6)]"
                   />
                 )}
               </Link>
             );
           })}
         </nav>
+
+        {/* Right Action: Wallet Connect CTA with live beacon */}
+        <div className="hidden sm:flex items-center gap-3">
+          <Link
+            href="/onboarding"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-98 transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
+          >
+            <span className="h-2 w-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
+            <span>Connect Wallet</span>
+          </Link>
+        </div>
 
         {/* Mobile Hamburger Button */}
         <div className="flex md:hidden">
@@ -152,7 +202,7 @@ export default function Navbar() {
         <nav
           id="mobile-nav-menu"
           aria-label="Mobile navigation"
-          className="md:hidden border-b border-[#262626] bg-[#0a0a0a]/95 backdrop-blur-lg px-4 pt-2 pb-4 space-y-1"
+          className="md:hidden border-b border-[#262626] bg-[#0a0a0a]/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -165,16 +215,37 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive
                     ? "text-[#26d464] bg-[#26d464]/10 font-semibold"
                     : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616]"
                 }`}
               >
-                {link.label}
+                <span className="flex items-center gap-2">
+                  {link.num && (
+                    <span className="font-mono text-xs text-white/30">
+                      {link.num}
+                    </span>
+                  )}
+                  <span>{link.label}</span>
+                </span>
+                {link.badge && (
+                  <span className="px-1.5 py-0.5 text-xs font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
+          <div className="pt-2">
+            <Link
+              href="/onboarding"
+              className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold rounded-lg bg-[#26d464] text-black font-display font-bold shadow-md active:scale-98"
+            >
+              <span className="h-2 w-2 rounded-full bg-black animate-pulse" />
+              <span>Connect Wallet & Onboard</span>
+            </Link>
+          </div>
         </nav>
       )}
     </header>

@@ -13,7 +13,7 @@
   --color-border-bright: #383838;
   --color-text: #ededed;
   --color-text-dim: #a1a1aa;
-  --color-text-muted: #71717a;
+  --color-text-muted: #a1a1aa;
 }
 
 :root {
@@ -29,7 +29,7 @@
   --color-border-bright: #383838;
   --color-text: #ededed;
   --color-text-dim: #a1a1aa;
-  --color-text-muted: #71717a;
+  --color-text-muted: #a1a1aa;
 
   /* Legacy mappings */
   --background: var(--color-base);
@@ -73,11 +73,32 @@ body {
   min-height: 100vh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  caret-color: #26d464;
+  font-variant-numeric: tabular-nums;
+}
+
+a {
+  text-underline-offset: 4px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-montserrat);
   letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: rgba(38, 212, 100, 0.25);
+  color: #ededed;
+}
+
+:focus-visible {
+  outline: 2px solid #26d464;
+  outline-offset: 2px;
 }
 
 /* Grain & Noise Overlay Utility */
@@ -123,4 +144,91 @@ h1, h2, h3, h4, h5, h6 {
   .animation-grain {
     animation: none !important;
   }
+}
+
+/* Impeccable Craft UI Utilities */
+.glow-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-card:hover {
+  border-color: rgba(38, 212, 100, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.glass-panel {
+  background: rgba(18, 18, 18, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+}
+
+/* Hairline Blueprint Grid Pattern */
+.bg-blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Corner Crosshairs for Engineering Workstations */
+.corner-crosshair {
+  position: relative;
+}
+.corner-crosshair::before,
+.corner-crosshair::after {
+  content: "+";
+  position: absolute;
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+.corner-crosshair::before {
+  top: 10px;
+  left: 10px;
+}
+.corner-crosshair::after {
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Specular Card with top milled hairline highlight */
+.specular-card {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.07), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Telemetry Badge & Label */
+.telemetry-chip {
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  background-color: #161616;
+  border: 1px solid #262626;
+  font-family: monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a1a1aa;
+}
+
+/* Precision Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #383838;
 }

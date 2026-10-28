@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
+import { IconToken } from "@/components/ui/Icons";
 import { useWallet } from "@/hooks/useWallet";
 import { CHAIN_ID } from "shared/constants";
 
@@ -46,7 +47,7 @@ export default function WalletConnectStep({ onConnected, initialAddress = null }
         <div className="text-center space-y-4 mb-8">
           <div className="flex justify-center">
             <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#161616] border border-[#262626] text-3xl">
-              🔌
+              <IconToken className="w-8 h-8 text-[#26d464]" />
             </span>
           </div>
           <div>
