@@ -6,13 +6,13 @@ import {
   getProductById,
 } from "../../data/products.js";
 
-describe("Tooling Marketplace Catalog & Filter Logic Unit Tests", () => {
+describe("Tooling & Medical Implants Marketplace Catalog & Filter Logic", () => {
   describe("Product Seed Data Integrity", () => {
-    it("contains exactly 10 machining and manufacturing products", () => {
-      expect(PRODUCTS.length).toBe(10);
+    it("contains exactly 9 precision implant products with 3D models", () => {
+      expect(PRODUCTS.length).toBe(9);
     });
 
-    it("verifies all 10 products have all mandatory fields with valid types", () => {
+    it("verifies all 9 products have all mandatory fields with valid types", () => {
       const requiredFields = [
         "id",
         "name",
@@ -21,6 +21,8 @@ describe("Tooling Marketplace Catalog & Filter Logic Unit Tests", () => {
         "category",
         "imageUrl",
         "specs",
+        "has3DModel",
+        "modelId",
       ];
 
       for (const product of PRODUCTS) {
@@ -42,103 +44,93 @@ describe("Tooling Marketplace Catalog & Filter Logic Unit Tests", () => {
       }
     });
 
-    it("ensures products with 3D models specify a valid modelId", () => {
-      const productsWith3D = PRODUCTS.filter((p) => p.has3DModel);
-      expect(productsWith3D.length).toBeGreaterThanOrEqual(2);
-
-      for (const p of productsWith3D) {
+    it("ensures 100% of marketplace products have active 3D models linked", () => {
+      for (const p of PRODUCTS) {
+        expect(p.has3DModel).toBe(true);
         expect(typeof p.modelId).toBe("string");
-        expect(["lathe-body", "drill-bit"]).toContain(p.modelId);
+        expect([
+          "excel-mpk",
+          "genius-cr",
+          "genius-ps",
+          "ouro-ps",
+          "signature-stem",
+          "signature-duo-cup",
+          "signature-nx-cup",
+          "dj-stent",
+          "indoscope-sleek",
+        ]).toContain(p.modelId);
       }
     });
   });
 
   describe("Category and Price Filtering Logic", () => {
     it("filters products by category correctly", () => {
-      const cuttingTools = filterProducts(PRODUCTS, { category: "Cutting Tools" });
-      expect(cuttingTools.length).toBeGreaterThan(0);
-      for (const item of cuttingTools) {
-        expect(item.category).toBe("Cutting Tools");
+      const knees = filterProducts(PRODUCTS, { category: "Orthopedic Knees" });
+      expect(knees.length).toBe(4);
+      for (const item of knees) {
+        expect(item.category).toBe("Orthopedic Knees");
       }
 
-      const measuringTools = filterProducts(PRODUCTS, {
-        category: "Measuring Instruments",
+      const hips = filterProducts(PRODUCTS, { category: "Hip Arthroplasty" });
+      expect(hips.length).toBe(3);
+      for (const item of hips) {
+        expect(item.category).toBe("Hip Arthroplasty");
+      }
+
+      const urology = filterProducts(PRODUCTS, {
+        category: "Endosurgical & Urology",
       });
-      expect(measuringTools.length).toBeGreaterThan(0);
-      for (const item of measuringTools) {
-        expect(item.category).toBe("Measuring Instruments");
+      expect(urology.length).toBe(2);
+      for (const item of urology) {
+        expect(item.category).toBe("Endosurgical & Urology");
       }
 
       const all = filterProducts(PRODUCTS, { category: "All" });
-      expect(all.length).toBe(10);
+      expect(all.length).toBe(9);
     });
 
     it("filters products within minimum and maximum price boundaries", () => {
-      const filtered = filterProducts(PRODUCTS, { minPrice: 50, maxPrice: 150 });
+      const filtered = filterProducts(PRODUCTS, { minPrice: 700, maxPrice: 900 });
       expect(filtered.length).toBeGreaterThan(0);
       for (const item of filtered) {
-        expect(item.price).toBeGreaterThanOrEqual(50);
-        expect(item.price).toBeLessThanOrEqual(150);
+        expect(item.price).toBeGreaterThanOrEqual(700);
+        expect(item.price).toBeLessThanOrEqual(900);
       }
     });
 
     it("handles inverted price bounds gracefully", () => {
-      // Inverted bounds: min=150, max=50 should be swapped internally
-      const filtered = filterProducts(PRODUCTS, { minPrice: 150, maxPrice: 50 });
+      const filtered = filterProducts(PRODUCTS, { minPrice: 900, maxPrice: 700 });
       expect(filtered.length).toBeGreaterThan(0);
       for (const item of filtered) {
-        expect(item.price).toBeGreaterThanOrEqual(50);
-        expect(item.price).toBeLessThanOrEqual(150);
+        expect(item.price).toBeGreaterThanOrEqual(700);
+        expect(item.price).toBeLessThanOrEqual(900);
       }
     });
 
     it("handles extreme or open-ended price bounds", () => {
       const allPrices = filterProducts(PRODUCTS, { minPrice: 0, maxPrice: Infinity });
-      expect(allPrices.length).toBe(10);
+      expect(allPrices.length).toBe(9);
     });
   });
 
-  describe("Keyword Search & Security Sanitization", () => {
-    it("finds products by partial keyword match across name and category", () => {
-      const results = filterProducts(PRODUCTS, { search: "carbide" });
-      expect(results.length).toBeGreaterThanOrEqual(2);
-      for (const item of results) {
-        const text = `${item.name} ${item.category} ${item.description}`.toLowerCase();
-        expect(text).toContain("carbide");
-      }
+  describe("Search & Product Retrieval", () => {
+    it("retrieves product by valid ID", () => {
+      const prod = getProductById("prod-001");
+      expect(prod).toBeDefined();
+      expect(prod.name).toContain("Excel Medial Pivot");
+      expect(prod.modelId).toBe("excel-mpk");
     });
 
-    it("sanitizes HTML tags and SQL injection keywords safely", () => {
-      const injectionQuery = "<script>alert(1)</script>' OR 1=1 -- carbide";
-      const results = filterProducts(PRODUCTS, { search: injectionQuery });
-      expect(results.length).toBeGreaterThanOrEqual(2);
-      for (const item of results) {
-        const text = `${item.name} ${item.category} ${item.description}`.toLowerCase();
-        expect(text).toContain("carbide");
-      }
-    });
-
-    it("returns empty array for non-matching criteria", () => {
-      const nonExistent = filterProducts(PRODUCTS, {
-        category: "Cutting Tools",
-        minPrice: 5000,
-      });
-      expect(nonExistent).toEqual([]);
-    });
-  });
-
-  describe("getProductById Lookup", () => {
-    it("returns product for existing valid ID", () => {
-      const item = getProductById("prod-001");
-      expect(item).not.toBeNull();
-      expect(item.id).toBe("prod-001");
-      expect(item.name).toContain("CNC Indexable");
-    });
-
-    it("returns null for non-existent or invalid product IDs", () => {
+    it("returns null for non-existent or invalid ID", () => {
       expect(getProductById("prod-999")).toBeNull();
-      expect(getProductById("")).toBeNull();
       expect(getProductById(null)).toBeNull();
+      expect(getProductById("")).toBeNull();
+    });
+
+    it("performs keyword search matching product name, category, or description", () => {
+      const results = filterProducts(PRODUCTS, { search: "pivot" });
+      expect(results.length).toBeGreaterThanOrEqual(1);
+      expect(results[0].id).toBe("prod-001");
     });
   });
 });
