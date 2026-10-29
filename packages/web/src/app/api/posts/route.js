@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import crypto from "crypto";
 import { adminDb } from "@/lib/firebase-admin";
 import { isValidAddress } from "@/lib/wallet";
 import { claimPostReward, DailyCapExceededError } from "@/lib/reward";
@@ -142,7 +143,7 @@ export async function POST(request) {
     const now = new Date().toISOString();
 
     // 4. Write to Firestore: posts collection
-    let postId = `post_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+    let postId = `post_${Date.now()}_${crypto.randomBytes(4).toString("hex")}`;
 
     const db = postDeps.adminDb || adminDb;
     if (db && typeof db.collection === "function") {

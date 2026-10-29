@@ -45,33 +45,6 @@ export function getApiKey() {
   if (typeof process !== "undefined" && process.env?.SARVAM_API_KEY) {
     return process.env.SARVAM_API_KEY;
   }
-  if (typeof window === "undefined") {
-    try {
-      // Dynamic require avoids bundling fs/path in client bundles
-      const fsMod = eval('require("fs")');
-      const pathMod = eval('require("path")');
-      const cwd = process.cwd();
-      const candidates = [
-        pathMod.resolve(cwd, ".env"),
-        pathMod.resolve(cwd, ".env.local"),
-        pathMod.resolve(cwd, "packages/web/.env"),
-        pathMod.resolve(cwd, "packages/web/.env.local"),
-        pathMod.resolve(cwd, "../../.env"),
-        pathMod.resolve(cwd, "../.env"),
-      ];
-      for (const p of candidates) {
-        if (fsMod.existsSync(p)) {
-          const content = fsMod.readFileSync(p, "utf-8");
-          const match = content.match(/^SARVAM_API_KEY\s*=\s*(.+)$/m);
-          if (match) {
-            const val = match[1].trim().replace(/^["']|["']$/g, "");
-            process.env.SARVAM_API_KEY = val;
-            return val;
-          }
-        }
-      }
-    } catch {}
-  }
   return "";
 }
 

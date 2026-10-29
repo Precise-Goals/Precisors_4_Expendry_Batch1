@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { ethers } from "ethers";
 import { adminAuth, adminDb } from "./firebase-admin.js";
 
@@ -16,11 +17,11 @@ export function setAuthDependencies(deps) {
 }
 
 /**
- * Generates and registers a unique authentication challenge nonce.
+ * Generates and registers a unique authentication challenge nonce using CSPRNG.
  */
 export function generateNonce(address = null) {
   const timestamp = Date.now();
-  const randomStr = Math.random().toString(36).substring(2, 15);
+  const randomStr = crypto.randomBytes(8).toString("hex");
   const nonce = `expendry_nonce_${timestamp}_${randomStr}`;
   registerNonce(nonce, address);
   return nonce;
