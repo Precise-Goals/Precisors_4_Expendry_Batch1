@@ -215,7 +215,7 @@ export default function OnboardingPage() {
     stage === "STAGE_1" ? 33 : stage === "STAGE_2" ? 66 : 100;
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-zinc-50 min-h-[calc(100vh-4rem)] selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="flex-1 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-transparent min-h-[calc(100vh-4rem)] selection:bg-emerald-100 selection:text-emerald-900 relative">
       <div className="w-full max-w-xl">
         <AnimatePresence mode="wait">
           {/* ──────────────────────────────────────────────────────────
@@ -229,7 +229,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-3xl space-y-6">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -242,7 +242,7 @@ export default function OnboardingPage() {
                   <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     Welcome to Expendry
                   </h1>
-                  <p className="text-xs sm:text-sm text-zinc-600 font-poppins">
+                  <p className="text-xs sm:text-sm text-zinc-600 font-body">
                     Let's personalize your workspace in the manufacturing knowledge ecosystem.
                   </p>
                 </div>
@@ -371,7 +371,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-3xl space-y-6">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -384,7 +384,7 @@ export default function OnboardingPage() {
                   <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     How can the community reach you?
                   </h1>
-                  <p className="text-xs sm:text-sm text-zinc-600 font-poppins">
+                  <p className="text-xs sm:text-sm text-zinc-600 font-body">
                     Add your work contact for verified manufacturing collaboration and token rewards.
                   </p>
                 </div>
@@ -489,7 +489,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-3xl space-y-6 text-center">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6 text-center">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -508,7 +508,7 @@ export default function OnboardingPage() {
                   <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     Connect BridgeKey
                   </h1>
-                  <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto font-poppins">
+                  <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto font-body">
                     Link your BridgeKey wallet on MST Testnet (Chain ID {CHAIN_ID}) to sign cryptographic proofs and claim your 50 EXPEN onboarding allocation.
                   </p>
                 </div>
@@ -576,7 +576,7 @@ export default function OnboardingPage() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               className="w-full max-w-lg mx-auto"
             >
-              <Card className="p-8 bg-white/95 backdrop-blur-2xl border-zinc-200 text-center shadow-2xl rounded-3xl space-y-6">
+              <Card className="p-8 bg-white/95 backdrop-blur-2xl border-zinc-200 text-center shadow-2xl rounded-4xl space-y-6">
                 <div className="flex justify-center">
                   <div className="h-16 w-16 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center shadow-md">
                     <IconCheck className="w-8 h-8 text-emerald-600" />
