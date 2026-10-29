@@ -10,15 +10,15 @@ export default function Footer() {
       className="border-t border-[#262626] bg-[#070707] text-[#a1a1aa] relative overflow-hidden"
     >
       {/* Blueprint grid accent bar */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#26d464]/30 to-transparent" />
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#26d464]/40 to-transparent" />
 
       {/* Engineering Header Datum Bar */}
-      <div className="border-b border-[#1c1c1c] bg-[#0a0a0a]/80 py-2 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-[#1c1c1c] bg-[#0a0a0a]/90 py-2 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono text-[#a1a1aa]">
           <div className="flex items-center gap-3">
             <span className="text-zinc-500">+ [00,00] DATUM</span>
             <span>·</span>
-            <span className="text-[#38bdf8]">REF // ISO-2768-mK</span>
+            <span className="text-[#f97316]">REF // ISO-2768-mK</span>
             <span>·</span>
             <span>SYS:MST-{CHAIN_ID}</span>
           </div>
@@ -35,7 +35,7 @@ export default function Footer() {
           <div className="md:col-span-2 space-y-4">
             <Link
               href="/"
-              className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-[#ededed] font-montserrat hover:text-[#26d464] transition-colors"
+              className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-white font-montserrat hover:text-[#26d464] transition-colors"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#161616] border border-[#262626] text-[#26d464] shadow-inner">
                 <IconSpindle className="w-4 h-4 text-[#26d464]" />
@@ -50,14 +50,14 @@ export default function Footer() {
               testnet, inspect 3D tooling geometries, and consult AI-powered machining intelligence.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#121212] border border-[#262626] text-xs font-mono text-[#26d464]">
-              <span className="h-2 w-2 rounded-full bg-[#38bdf8] animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-[#f97316] animate-pulse" />
               <span>MST Testnet · Chain ID: {CHAIN_ID} · 0x56F0...283a</span>
             </div>
           </div>
 
           {/* Core Routes */}
           <div>
-            <h2 className="text-xs font-mono uppercase tracking-wider text-[#ededed] mb-3">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-white mb-3">
               Ecosystem Navigation
             </h2>
             <ul className="space-y-2 text-xs">
@@ -129,7 +129,7 @@ export default function Footer() {
 
           {/* Resources & Blockchain */}
           <div>
-            <h2 className="text-xs font-mono uppercase tracking-wider text-[#ededed] mb-3">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-white mb-3">
               Network & Verification
             </h2>
             <ul className="space-y-2 text-xs">
@@ -157,7 +157,7 @@ export default function Footer() {
               </li>
               <li>
                 <div className="p-2.5 rounded-lg bg-[#121212] border border-[#222222] text-[11px] font-mono text-[#a1a1aa] mt-2 space-y-1">
-                  <div className="text-[#ededed] font-semibold">TOKENOMICS RULE:</div>
+                  <div className="text-white font-semibold">TOKENOMICS RULE:</div>
                   <div>{REWARD_PER_POST} EXPEN / Valid Post</div>
                   <div className="text-[#26d464]">{DAILY_CAP} EXPEN Daily Cap / Wallet</div>
                 </div>

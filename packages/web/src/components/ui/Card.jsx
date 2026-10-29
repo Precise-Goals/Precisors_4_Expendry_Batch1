@@ -35,9 +35,9 @@ export const Card = React.forwardRef(function Card(
       tabIndex={isClickable ? (tabIndex ?? 0) : tabIndex}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      className={`rounded-xl border border-[#262626] bg-[#121212] text-[#ededed] transition-all ${
+      className={`rounded-xl border border-[#262626] bg-[#121212] text-white transition-all ${
         hoverable || isClickable
-          ? "hover:border-[#383838] hover:bg-[#161616] cursor-pointer"
+          ? "hover:border-[#3f3f46] hover:bg-[#161616] cursor-pointer"
           : ""
       } ${
         isClickable
@@ -73,7 +73,7 @@ export const CardTitle = React.forwardRef(function CardTitle(
   return (
     <Component
       ref={ref}
-      className={`font-semibold tracking-tight text-[#ededed] font-display text-lg ${className}`.trim()}
+      className={`font-semibold tracking-tight text-white font-display text-lg ${className}`.trim()}
       {...props}
     >
       {children}

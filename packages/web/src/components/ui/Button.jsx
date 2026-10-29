@@ -24,11 +24,15 @@ export const Button = React.forwardRef(function Button(
     primary:
       "bg-[#26d464] text-black font-semibold hover:bg-[#21b856] active:bg-[#1fa34c] shadow-md shadow-[#26d464]/10 hover:shadow-[#26d464]/20",
     secondary:
-      "bg-[#161616] text-[#ededed] border border-[#262626] hover:bg-[#202020] hover:border-[#383838] hover:text-white active:bg-[#121212] shadow-sm",
+      "bg-[#161616] text-white border border-[#262626] hover:bg-[#202020] hover:border-[#383838] hover:text-white active:bg-[#121212] shadow-sm",
     ghost:
-      "bg-transparent text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616] active:bg-[#121212]",
+      "bg-transparent text-[#a1a1aa] hover:text-white hover:bg-[#161616] active:bg-[#121212]",
     tech:
-      "bg-[#091522] text-[#38bdf8] border border-[#0284c7]/40 hover:bg-[#0c1e33] hover:border-[#38bdf8]/60 shadow-sm shadow-[#38bdf8]/10 active:bg-[#060e18]",
+      "bg-[#1c1208] text-[#f97316] border border-[#ea580c]/40 hover:bg-[#291a0c] hover:border-[#f97316]/70 shadow-sm shadow-[#f97316]/10 active:bg-[#120b04]",
+    orange:
+      "bg-[#f97316] text-black font-semibold hover:bg-[#ea580c] active:bg-[#c2410c] shadow-md shadow-[#f97316]/20",
+    contrast:
+      "bg-white text-black font-semibold hover:bg-zinc-200 active:bg-zinc-300 shadow-md",
     danger:
       "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 active:bg-red-500/30",
   };

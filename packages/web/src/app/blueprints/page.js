@@ -377,8 +377,8 @@ END-ISO-10303-21;`;
             </div>
 
             {/* Wireframe CAD Blueprint Drawing simulation */}
-            <div className="w-full rounded-xl bg-[#080d14] border border-[#1e2a3a] p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
-              <div className="flex justify-between text-[#38bdf8]/70 border-b border-[#1e2a3a]/60 pb-2">
+            <div className="w-full rounded-xl bg-[#0e0e0e] border border-[#262626] p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
+              <div className="flex justify-between text-[#f97316]/80 border-b border-[#262626] pb-2">
                 <span>DATUM A: [{selectedBlueprint.datumA}]</span>
                 <span>TOL: {selectedBlueprint.tolerance}</span>
                 <button
@@ -391,15 +391,15 @@ END-ISO-10303-21;`;
               </div>
 
               <div className="py-6 flex items-center justify-center transition-transform duration-300" style={{ transform: `scale(${zoomLevel})` }}>
-                <div className="border border-[#38bdf8]/50 border-dashed w-56 h-28 rounded flex flex-col items-center justify-center relative bg-[#38bdf8]/5">
-                  <span className="text-[#38bdf8] font-bold tracking-wider text-xs">
+                <div className="border border-[#f97316]/40 border-dashed w-56 h-28 rounded flex flex-col items-center justify-center relative bg-[#f97316]/5">
+                  <span className="text-[#f97316] font-bold tracking-wider text-xs">
                     {selectedBlueprint.category.toUpperCase()}
                   </span>
                   <span className="text-[10px] text-zinc-400 mt-0.5">{selectedBlueprint.material}</span>
-                  <div className="absolute -top-3 text-[#38bdf8]/90 bg-[#080d14] px-1.5 border border-[#38bdf8]/40 rounded">
+                  <div className="absolute -top-3 text-[#f97316] bg-[#0a0a0a] px-1.5 border border-[#f97316]/40 rounded">
                     ◄── 120.00 ±0.005 ──►
                   </div>
-                  <div className="absolute -left-5 -rotate-90 text-[#38bdf8]/90 bg-[#080d14] px-1 border border-[#38bdf8]/40 rounded">
+                  <div className="absolute -left-5 -rotate-90 text-[#f97316] bg-[#0a0a0a] px-1 border border-[#f97316]/40 rounded">
                     65.0 ±0.005
                   </div>
                   <div className="absolute -bottom-3 text-[#26d464] bg-[#080d14] px-1.5 border border-[#26d464]/40 rounded">
@@ -408,7 +408,7 @@ END-ISO-10303-21;`;
                 </div>
               </div>
 
-              <div className="flex justify-between text-[#38bdf8]/70 border-t border-[#1e2a3a]/60 pt-2">
+              <div className="flex justify-between text-[#f97316]/80 border-t border-[#262626] pt-2">
                 <span>DATUM B: [{selectedBlueprint.datumB}]</span>
                 <span>DATUM C: [{selectedBlueprint.datumC}]</span>
               </div>

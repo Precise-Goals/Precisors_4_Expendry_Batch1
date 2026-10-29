@@ -179,10 +179,10 @@ export default function Home() {
                   5-Axis CNC Precision Workstation
                 </span>
                 <span className="text-zinc-600">|</span>
-                <span className="text-[#38bdf8] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
+                <span className="text-[#f97316] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
               </div>
               <div className="flex items-center gap-3 text-[#a1a1aa]">
-                <span className="text-[#38bdf8] font-bold">LASER: 532nm CALIBRATED</span>
+                <span className="text-[#f97316] font-bold">LASER: 532nm CALIBRATED</span>
                 <span className="text-zinc-600">·</span>
                 <span className="text-[#26d464] font-semibold">TOL: ±0.005mm</span>
               </div>
@@ -200,7 +200,7 @@ export default function Home() {
               />
               {/* Engineering Blueprint Reticle Crosshairs */}
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                <div className="w-24 h-24 border border-[#38bdf8]/30 rounded-full border-dashed flex items-center justify-center">
+                <div className="w-24 h-24 border border-[#f97316]/40 rounded-full border-dashed flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464]" />
                 </div>
               </div>
@@ -220,7 +220,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-zinc-500">ON-CHAIN PROVENANCE:</span>
-                <span className="text-[#38bdf8] font-semibold">MST-91562037</span>
+                <span className="text-[#f97316] font-semibold">MST-91562037</span>
               </div>
             </div>
           </motion.div>
@@ -284,7 +284,7 @@ export default function Home() {
                   onClick={() => setAnalyzingFlutter(!analyzingFlutter)}
                   className={`px-3 py-1 rounded text-xs font-mono font-bold transition flex items-center gap-1.5 ${
                     analyzingFlutter
-                      ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
+                      ? "bg-[#f97316]/20 text-[#f97316] border border-[#f97316]/40"
                       : "bg-[#181818] text-[#a1a1aa] border border-[#2e2e2e] hover:border-[#26d464]/40 hover:text-[#ededed]"
                   }`}
                 >
@@ -323,7 +323,7 @@ export default function Home() {
                     }}
                     className={`w-full rounded-t-sm transition-colors duration-300 ${
                       analyzingFlutter
-                        ? i > 11 && i < 16 ? "bg-amber-400" : "bg-[#26d464]/60"
+                        ? i > 11 && i < 16 ? "bg-[#f97316]" : "bg-[#26d464]/60"
                         : "bg-[#26d464]"
                     }`}
                     style={{ height: `${height * 0.65}%` }}
@@ -350,7 +350,7 @@ export default function Home() {
               </div>
               <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#222222]">
                 <span className="text-[#a1a1aa] block text-[10px] tracking-wider uppercase">RESONANCE STATUS</span>
-                <span className={`text-sm font-bold ${analyzingFlutter ? "text-amber-400" : "text-[#26d464]"}`}>
+                <span className={`text-sm font-bold ${analyzingFlutter ? "text-[#f97316]" : "text-[#26d464]"}`}>
                   {analyzingFlutter ? "Harmonic Flutter Warning" : "Calibrated (98.6%)"}
                 </span>
               </div>
@@ -863,7 +863,7 @@ export default function Home() {
 
               {/* Safety Notice */}
               <div className="p-4 rounded-xl bg-[#141414] border border-[#262626] flex items-start gap-3 text-xs text-[#a1a1aa]">
-                <IconAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <IconAlert className="w-4 h-4 text-[#f97316] shrink-0 mt-0.5" />
                 <span>
                   MST Testnet Protocol Notice: EXPEN is an educational utility token built for the MST Blockchain Buildathon to demonstrate shop-floor knowledge tokenization.
                 </span>
@@ -877,7 +877,7 @@ export default function Home() {
                   <span className="text-xs uppercase tracking-wider font-mono text-[#a1a1aa]">
                     ERC-20 Token
                   </span>
-                  <Badge variant="accent" size="sm">
+                  <Badge variant="orange" size="sm">
                     MST Network
                   </Badge>
                 </div>

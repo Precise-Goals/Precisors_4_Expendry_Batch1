@@ -10,16 +10,22 @@ module.exports = {
       colors: {
         base: {
           DEFAULT: "#0a0a0a",
-          dark: "#050505",
-          light: "#121212",
+          dark: "#000000",
+          light: "#141414",
         },
         accent: {
           DEFAULT: "#26d464",
           hover: "#21b856",
           dim: "rgba(38, 212, 100, 0.15)",
         },
+        orange: {
+          DEFAULT: "#f97316",
+          hover: "#ea580c",
+          dim: "rgba(249, 115, 22, 0.15)",
+          light: "#fb923c",
+        },
         secondary: {
-          DEFAULT: "#161616",
+          DEFAULT: "#141414",
           hover: "#1f1f1f",
         },
         surface: {
@@ -29,7 +35,7 @@ module.exports = {
         },
         border: {
           DEFAULT: "#262626",
-          bright: "#383838",
+          bright: "#3f3f46",
         },
       },
       fontFamily: {

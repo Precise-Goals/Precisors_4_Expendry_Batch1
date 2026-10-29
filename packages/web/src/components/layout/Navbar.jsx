@@ -56,26 +56,26 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "bg-[#0a0a0a]/92 backdrop-blur-xl border-b border-[#262626] shadow-xl shadow-black/60"
-          : "bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/[0.04]"
+          ? "bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-[#262626] shadow-xl shadow-black/70"
+          : "bg-[#0a0a0a]/85 backdrop-blur-md border-b border-white/[0.08]"
       }`}
     >
       {/* Top Telemetry Strip */}
-      <div className="w-full bg-[#080808]/90 border-b border-[#1c1c1c] text-[10px] font-mono text-[#a1a1aa] py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="w-full bg-[#050505] border-b border-[#1c1c1c] text-[10px] font-mono text-[#a1a1aa] py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-2 sm:gap-3">
           <span className="flex items-center gap-1.5 text-[#26d464]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
             MST-{CHAIN_ID}
           </span>
           <span className="text-zinc-600">·</span>
-          <span className="text-[#38bdf8] hidden xs:inline font-mono">LATHE HUD</span>
+          <span className="text-[#f97316] hidden xs:inline font-mono">LATHE HUD</span>
           <span className="text-zinc-600 hidden xs:inline">·</span>
           <span>EXPEN ERC-20</span>
           <span className="text-zinc-600">·</span>
           <span className="text-[#26d464] font-semibold">ONLINE</span>
         </div>
-        <div className="hidden sm:flex items-center gap-3 text-zinc-500">
-          <span className="text-[#38bdf8]/80">SYS // PRECISION CNC</span>
+        <div className="hidden sm:flex items-center gap-3 text-zinc-400">
+          <span className="text-[#f97316]/90">SYS // PRECISION CNC</span>
           <span className="text-zinc-700">|</span>
           <span>[REF: 18.5204°N, 73.8567°E]</span>
         </div>
@@ -86,7 +86,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-[#ededed] hover:text-[#26d464] transition-colors font-montserrat"
+            className="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-white hover:text-[#26d464] transition-colors font-montserrat"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#161616] border border-[#262626] text-[#26d464] shadow-inner">
               <IconSpindle className="w-4 h-4 text-[#26d464]" />
@@ -96,7 +96,7 @@ export default function Navbar() {
             </span>
           </Link>
           <span className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] text-[10px] font-mono text-[#a1a1aa] bg-[#121212] border border-[#262626]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#f97316] animate-pulse" />
             MST 91562037
           </span>
         </div>
@@ -104,7 +104,7 @@ export default function Navbar() {
         {/* Desktop Navigation: Segmented CNC Controller Channel Dock with Fluid Spring Morphing */}
         <nav
           aria-label="Main navigation"
-          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner relative"
+          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/95 border border-[#262626] shadow-inner relative"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -119,8 +119,8 @@ export default function Navbar() {
                 aria-current={isActive ? "page" : undefined}
                 className={`relative px-2.5 py-1 text-xs font-medium rounded-lg transition-colors duration-150 flex items-center z-10 ${
                   isActive
-                    ? "text-[#ededed] font-semibold"
-                    : "text-[#a1a1aa] hover:text-[#ededed]"
+                    ? "text-white font-semibold"
+                    : "text-[#a1a1aa] hover:text-white"
                 }`}
               >
                 {isActive && (
@@ -131,7 +131,7 @@ export default function Navbar() {
                       stiffness: 380,
                       damping: 30,
                     }}
-                    className="absolute inset-0 bg-[#1c1c1c] border border-white/[0.09] rounded-lg shadow-sm -z-10"
+                    className="absolute inset-0 bg-[#1c1c1c] border border-white/[0.12] rounded-lg shadow-sm -z-10"
                   />
                 )}
                 {link.num && (
@@ -155,7 +155,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/onboarding"
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-[0.97] transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-white border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-[0.97] transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)] group"
           >
             <span className="h-2 w-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
             <span>Connect Wallet</span>
@@ -170,7 +170,7 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav-menu"
             aria-label="Toggle navigation menu"
-            className="inline-flex items-center justify-center rounded-md p-2 text-[#a1a1aa] hover:bg-[#161616] hover:text-[#ededed] focus:outline-none focus:ring-2 focus:ring-[#26d464]"
+            className="inline-flex items-center justify-center rounded-md p-2 text-[#a1a1aa] hover:bg-[#161616] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#26d464]"
           >
             <span className="sr-only">Toggle navigation menu</span>
             {isMenuOpen ? (
@@ -229,7 +229,7 @@ export default function Navbar() {
                 className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                   isActive
                     ? "text-[#26d464] bg-[#26d464]/10 font-semibold"
-                    : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616]"
+                    : "text-[#a1a1aa] hover:text-white hover:bg-[#161616]"
                 }`}
               >
                 <span className="flex items-center gap-2">

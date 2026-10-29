@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ChatInterface from "@/components/agent/ChatInterface";
 import VoiceButton from "@/components/agent/VoiceButton";
-import LanguageSelector from "@/components/agent/LanguageSelector";
 
 const QUICK_PROMPTS = [
   "Chatter on Inconel 718 at 1800 RPM",
@@ -41,10 +40,10 @@ export default function AgentPage() {
                 Sarvam AI Operator Terminal · v1.4
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               Machining Tacit Assistant
             </h1>
-            <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1 max-w-xl font-poppins">
               Multilingual shop-floor consultation powered by Sarvam AI and
               Expendry community knowledge retrieval.
             </p>
@@ -70,17 +69,17 @@ export default function AgentPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
               SARVAM-105B-CONVERSATIONS
             </span>
-            <span className="text-white/20">·</span>
+            <span className="text-zinc-600">·</span>
             <span>MODEL STATUS: ACTIVE</span>
-            <span className="text-white/20">·</span>
-            <span className="text-[#ededed]">LATENCY: ~240ms</span>
-            <span className="text-white/20">·</span>
+            <span className="text-zinc-600">·</span>
+            <span className="text-[#38bdf8]">LATENCY: ~240ms</span>
+            <span className="text-zinc-600">·</span>
             <span className="text-[#26d464]">AUTO-DETECT: ACTIVE</span>
           </div>
 
           <div className="flex items-center gap-2 text-xs text-[#a1a1aa]">
             <span>BM25 INDEX: 10 SEED POSTS · 5 BLUEPRINTS</span>
-            <span className="text-white/20">·</span>
+            <span className="text-zinc-600">·</span>
             <span className="text-[#26d464] font-semibold">RETRIEVAL: OK</span>
           </div>
         </div>
@@ -109,7 +108,7 @@ export default function AgentPage() {
         {/* Chat Interface Container */}
         <div className="flex-1 min-h-[580px] flex flex-col">
           <ChatInterface
-            lang={lang}
+            lang="auto"
             externalInput={voiceText}
             onClearExternalInput={() => setVoiceText("")}
             onSourcesUpdated={(sources) => setActiveSources(sources)}

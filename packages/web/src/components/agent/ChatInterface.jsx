@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { EXPLORER_URL } from "shared/constants";
-import { IconBrain, IconWrench } from "@/components/ui/Icons";
+import { IconBrain, IconWrench, IconBolt, IconExternal, IconSend } from "@/components/ui/Icons";
 
 export default function ChatInterface({
   lang = "auto",
