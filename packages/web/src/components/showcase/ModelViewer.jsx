@@ -1,6 +1,7 @@
 "use client";
 
-import React, { Suspense, useState, useRef, useEffect } from "react";
+import React, { Suspense, useState, useRef, useEffect, useMemo } from "react";
+import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center } from "@react-three/drei";
 import { getModelById, generateFallbackGeometry } from "@/data/models";
@@ -14,32 +15,53 @@ function GLBMesh({ url, wireframe, autoRotate }) {
   const { scene } = useGLTF(url);
   const meshRef = useRef();
 
+  // Clone scene so mutations / wireframes don't corrupt cached GLTF tree
+  const clonedScene = useMemo(() => {
+    if (!scene) return null;
+    return scene.clone(true);
+  }, [scene]);
+
+  // Compute bounding box and normalize scale so ALL models are zoomed-in and prominent
+  const scale = useMemo(() => {
+    if (!clonedScene) return 1;
+    const box = new THREE.Box3().setFromObject(clonedScene);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z);
+    return maxDim > 0 ? 3.0 / maxDim : 1;
+  }, [clonedScene]);
+
   useFrame((_, delta) => {
     if (autoRotate && meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.6;
+      meshRef.current.rotation.y += delta * 0.5;
     }
   });
 
   useEffect(() => {
-    if (scene) {
-      scene.traverse((child) => {
+    if (clonedScene) {
+      clonedScene.traverse((child) => {
         if (child.isMesh && child.material) {
-          if (Array.isArray(child.material)) {
-            child.material.forEach((mat) => {
-              mat.wireframe = wireframe;
-            });
-          } else {
-            child.material.wireframe = wireframe;
-          }
+          child.castShadow = true;
+          child.receiveShadow = true;
+          const materials = Array.isArray(child.material) ? child.material : [child.material];
+          materials.forEach((mat) => {
+            mat.wireframe = wireframe;
+            if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
+              if (mat.roughness === undefined || mat.roughness > 0.4) mat.roughness = 0.22;
+              if (mat.metalness === undefined || mat.metalness < 0.6) mat.metalness = 0.9;
+            }
+          });
         }
       });
     }
-  }, [scene, wireframe]);
+  }, [clonedScene, wireframe]);
+
+  if (!clonedScene) return null;
 
   return (
-    <group ref={meshRef}>
-      <Center>
-        <primitive object={scene} />
+    <group ref={meshRef} scale={[scale, scale, scale]}>
+      <Center top={false}>
+        <primitive object={clonedScene} />
       </Center>
     </group>
   );
@@ -206,8 +228,8 @@ export default function ModelViewer({
         <Canvas
           key={cameraKey}
           camera={{
-            position: [0, 0, 4.5],
-            fov: 50,
+            position: [0, 0.2, 2.5],
+            fov: 42,
           }}
           className="cursor-grab active:cursor-grabbing w-full h-full"
         >
@@ -256,11 +278,11 @@ export default function ModelViewer({
 
           {/* Interactive Inspection Orbit Controls */}
           <OrbitControls
-            enableDamping={controls.enableDamping}
-            dampingFactor={controls.dampingFactor}
-            minDistance={controls.minDistance}
-            maxDistance={controls.maxDistance}
-            maxPolarAngle={controls.maxPolarAngle}
+            enableDamping={true}
+            dampingFactor={0.05}
+            minDistance={0.8}
+            maxDistance={6.0}
+            maxPolarAngle={Math.PI / 2 + 0.2}
           />
         </Canvas>
       </Suspense>

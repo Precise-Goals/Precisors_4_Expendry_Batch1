@@ -10,9 +10,9 @@ const ModelViewer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-full min-h-[460px] rounded-2xl bg-[#0e0e0e] border border-[#262626] flex flex-col items-center justify-center gap-3 animate-pulse text-[#a1a1aa]">
-        <div className="w-8 h-8 rounded-full border-2 border-[#26d464] border-t-transparent animate-spin" />
-        <span className="text-xs font-mono">Initializing CAD Viewport...</span>
+      <div className="w-full h-full min-h-[580px] rounded-3xl bg-[#09090b] border border-zinc-800 flex flex-col items-center justify-center gap-3 animate-pulse text-zinc-400">
+        <div className="w-10 h-10 rounded-full border-2 border-[#16a34a] border-t-transparent animate-spin" />
+        <span className="text-xs font-mono tracking-wider text-emerald-400">Initializing CAD Viewport...</span>
       </div>
     ),
   }
@@ -27,23 +27,19 @@ export default function ShowcasePage() {
         return modelParam;
       }
     }
-    return "lathe-body";
+    return MODELS[0]?.id || "excel-mpk";
   });
+
   const activeModel =
     MODELS.find((m) => m.id === activeModelId) || MODELS[0];
 
-  // Turret preset keyboard shortcuts: [1], [2], [3], [4]
+  // Turret preset keyboard shortcuts: [1] through [9]
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-      if (e.key === "1") {
-        setActiveModelId("lathe-body");
-      } else if (e.key === "2") {
-        setActiveModelId("drill-bit");
-      } else if (e.key === "3") {
-        setActiveModelId("end-mill");
-      } else if (e.key === "4") {
-        setActiveModelId("face-mill");
+      const num = parseInt(e.key, 10);
+      if (num >= 1 && num <= MODELS.length) {
+        setActiveModelId(MODELS[num - 1].id);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -51,207 +47,236 @@ export default function ShowcasePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] pt-16 bg-blueprint-grid">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-white text-zinc-900 pt-16 bg-blueprint-grid selection:bg-emerald-100 selection:text-emerald-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Showcase Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#262626]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-200">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none" />
-              <span className="text-xs font-mono uppercase tracking-widest text-[#26d464]">
-                CAD/CAM Workstation Viewport
+              <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] animate-pulse motion-reduce:animate-none" />
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold">
+                Biorad Medisys · Precision CAD Viewport
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-montserrat">
-              3D Tooling Inspection Showcase
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+              Interactive 3D Tooling & Implant Inspection
             </h1>
-            <p className="text-sm text-[#a1a1aa] mt-1 max-w-2xl">
-              Inspect critical tooling geometries, insert seats, flutes, and
-              relief angles with real-time CAD orbit controls and telemetry.
+            <p className="text-sm sm:text-base text-zinc-600 mt-2 max-w-3xl font-poppins">
+              Centrally calibrated Three.js CAD inspection of Biorad Medisys Pune knee joints, hip stems, ureteral stents, and endoscopy tooling with real-time caliper telemetry.
             </p>
           </div>
 
           <Link
             href="/marketplace"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#161616] border border-[#262626] hover:border-[#26d464]/60 text-[#ededed] hover:text-white transition text-sm font-semibold self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white transition text-xs font-bold font-mono self-start md:self-auto shadow-sm active:scale-95"
           >
-            <span>Browse Full Tooling Catalog</span>
+            <span>Browse 3D Catalog</span>
             <span aria-hidden="true">→</span>
           </Link>
         </div>
 
-        {/* CNC Tool Turret Preset Selector */}
-        <div className="py-6 flex flex-wrap items-center gap-3">
-          <span className="text-xs font-mono uppercase tracking-wider text-[#71717a] mr-2">
-            Tool Turret:
+        {/* Implant & Tooling Turret Selector */}
+        <div className="flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-zinc-50 border border-zinc-200 shadow-xs">
+          <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold px-2">
+            Implant Selection:
           </span>
-          {MODELS.map((model, idx) => {
-            const isSelected = activeModelId === model.id;
-            const turretCode = `T-0${idx + 1}`;
-            return (
-              <button
-                key={model.id}
-                type="button"
-                onClick={() => setActiveModelId(model.id)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold font-mono transition-all duration-150 flex items-center gap-2.5 ${
-                  isSelected
-                    ? "bg-[#26d464] text-black shadow-lg shadow-[#26d464]/20 border border-[#26d464]"
-                    : "bg-[#141414] border border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#1c1c1c]"
-                }`}
-              >
-                <span
-                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                    isSelected ? "bg-black/20 text-black" : "bg-[#222222] text-[#ededed]"
+          <div className="flex flex-wrap gap-2">
+            {MODELS.map((model, idx) => {
+              const isSelected = activeModelId === model.id;
+              const turretCode = `M-0${idx + 1}`;
+              return (
+                <button
+                  key={model.id}
+                  type="button"
+                  onClick={() => setActiveModelId(model.id)}
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold font-mono transition-all duration-150 flex items-center gap-2 cursor-pointer ${
+                    isSelected
+                      ? "bg-zinc-900 text-white shadow-md border border-zinc-900"
+                      : "bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 hover:border-zinc-300"
                   }`}
                 >
-                  [{idx + 1}]
-                </span>
-                <span>
-                  {turretCode}: {model.shortName || model.name}
-                </span>
-              </button>
-            );
-          })}
+                  <span
+                    className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                      isSelected ? "bg-emerald-500 text-white" : "bg-zinc-100 text-zinc-600"
+                    }`}
+                  >
+                    [{idx + 1}]
+                  </span>
+                  <span>
+                    {turretCode}: {model.shortName || model.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* 3D Showcase Panel Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Interactive 3D Canvas Viewport */}
-          <div className="lg:col-span-7 h-[480px] sm:h-[560px] rounded-2xl border border-[#262626] bg-[#0c0c0c] overflow-hidden shadow-2xl relative specular-card">
-            <ModelViewer modelId={activeModelId} autoRotate={true} />
+        {/* ──────────────────────────────────────────────────────────
+            CENTERED BIG-SCREEN 3D VIEWPORT
+           ────────────────────────────────────────────────────────── */}
+        <div className="w-full h-[580px] sm:h-[680px] lg:h-[760px] rounded-3xl border border-zinc-800 bg-[#09090b] overflow-hidden shadow-2xl relative">
+          <ModelViewer modelId={activeModelId} autoRotate={true} />
+        </div>
+
+        {/* Technical Specification Matrix & Calibration Parameters */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
+          {/* Left Column: Calibration & Geometry Matrix */}
+          <div className="lg:col-span-8 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm">
+            <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-200">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-900 font-bold">
+                  Biorad Medisys CAD Calibration Specification
+                </span>
+              </div>
+              <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 font-bold">
+                ISO 13485:2016 Certified
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
+                {activeModel.geometryType}
+              </span>
+              <span className="text-xs font-mono text-zinc-500">
+                Mesh Density: {activeModel.segments || 64} Segments
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight font-montserrat">
+              {activeModel.name}
+            </h2>
+
+            <p className="text-sm text-zinc-600 mt-3 leading-relaxed font-poppins">
+              {activeModel.description}
+            </p>
+
+            <div className="mt-8 pt-6 border-t border-zinc-200">
+              <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold mb-4">
+                Dimensional Tolerances & Material Metrics
+              </h3>
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+                {activeModel.specs &&
+                  Object.entries(activeModel.specs).map(([label, val]) => (
+                    <div
+                      key={label}
+                      className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center"
+                    >
+                      <dt className="text-zinc-600 capitalize">
+                        {label.replace(/([A-Z])/g, " $1")}
+                      </dt>
+                      <dd className="text-zinc-900 font-bold">{val}</dd>
+                    </div>
+                  ))}
+                <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center">
+                  <dt className="text-zinc-600">Manufacturing Standard</dt>
+                  <dd className="text-emerald-700 font-bold">ISO 5832 / ASTM F75</dd>
+                </div>
+                <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center">
+                  <dt className="text-zinc-600">Surface Finish (Ra)</dt>
+                  <dd className="text-emerald-700 font-bold">Ra ≤ 0.02 µm (Mirror Polish)</dd>
+                </div>
+              </dl>
+            </div>
           </div>
 
-          {/* Model Specification: Formal CNC Tool Inspection Sheet */}
-          <div className="lg:col-span-5 rounded-2xl border border-[#262626] bg-[#121212] p-6 sm:p-8 flex flex-col justify-between min-h-[480px] sm:min-h-[560px] specular-card shadow-2xl">
+          {/* Right Column: Marketplace Integration & Action */}
+          <div className="lg:col-span-4 rounded-2xl border border-zinc-200 bg-zinc-50/70 p-6 sm:p-8 flex flex-col justify-between shadow-sm space-y-6">
             <div>
-              {/* Inspection Sheet Header */}
-              <div className="flex items-center justify-between pb-3 mb-4 border-b border-[#222222]">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#26d464]" />
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#ededed] font-bold">
-                    CNC Tool Inspection Sheet
-                  </span>
-                </div>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161616] border border-[#262626] text-[#a1a1aa]">
-                  ISO 2768-mK
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-[#161616] border border-[#262626] text-[#ededed]">
-                  {activeModel.geometryType}
-                </span>
-                <span className="text-xs font-mono text-[#26d464]">
-                  {activeModel.segments} Radial Segments
-                </span>
-              </div>
-
-              <h2 className="text-2xl font-bold text-[#ededed] tracking-tight font-montserrat">
-                {activeModel.name}
-              </h2>
-
-              <p className="text-xs sm:text-sm text-[#a1a1aa] mt-3 leading-relaxed">
-                {activeModel.description}
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold block mb-2">
+                Production Unit
+              </span>
+              <h3 className="text-xl font-bold text-zinc-900 font-montserrat">
+                Procure or Inspect
+              </h3>
+              <p className="text-xs text-zinc-600 mt-2 font-poppins leading-relaxed">
+                Directly referenced from Biorad Medisys Pune manufacturing plant. Backed by verified MST blockchain telemetry records.
               </p>
 
-              {/* Technical Specifications Matrix */}
-              <div className="mt-6 pt-5 border-t border-[#222222]">
-                <h3 className="text-[10px] font-mono uppercase tracking-wider text-[#71717a] mb-3">
-                  Calibration & Geometry Parameters
-                </h3>
-                <dl className="space-y-2 text-xs">
-                  {activeModel.specs &&
-                    Object.entries(activeModel.specs).map(([label, val]) => (
-                      <div
-                        key={label}
-                        className="flex justify-between items-center py-1 border-b border-[#1a1a1a]"
-                      >
-                        <dt className="text-[#a1a1aa] capitalize">
-                          {label.replace(/([A-Z])/g, " $1")}
-                        </dt>
-                        <dd className="font-mono text-[#ededed] font-medium">{val}</dd>
-                      </div>
-                    ))}
-                  <div className="flex justify-between items-center py-1 border-b border-[#1a1a1a]">
-                    <dt className="text-[#a1a1aa]">Tolerance Class</dt>
-                    <dd className="font-mono text-[#26d464] font-bold">±0.005 mm (Precision Ground)</dd>
-                  </div>
-                  <div className="flex justify-between items-center py-1 border-b border-[#1a1a1a]">
-                    <dt className="text-[#a1a1aa]">Spindle Interface</dt>
-                    <dd className="font-mono text-[#ededed]">BT40 / CAT40 / HSK63</dd>
-                  </div>
-                  <div className="flex justify-between items-center py-1">
-                    <dt className="text-[#a1a1aa]">PBR Metallic / Roughness</dt>
-                    <dd className="font-mono text-[#26d464]">
-                      {activeModel.materials.metalness.toFixed(2)} /{" "}
-                      {activeModel.materials.roughness.toFixed(2)}
-                    </dd>
-                  </div>
-                </dl>
+              <div className="mt-6 p-4 rounded-xl bg-white border border-zinc-200 space-y-2">
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-zinc-500">Implant Model ID:</span>
+                  <span className="font-bold text-zinc-900">{activeModel.id}</span>
+                </div>
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-zinc-500">Asset File:</span>
+                  <span className="text-emerald-700 font-bold">{activeModel.glbPath?.replace('/3d-models-products/', '') || 'GLB'}</span>
+                </div>
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-zinc-500">Ecosystem Reward:</span>
+                  <span className="text-orange-600 font-bold">10 EXPEN / Post</span>
+                </div>
               </div>
             </div>
 
-            {/* View in Marketplace CTA */}
-            <div className="mt-8 pt-5 border-t border-[#222222] flex flex-col gap-3">
-              <div className="flex items-center justify-between text-xs font-mono">
-                <span className="text-[#a1a1aa]">Estimated Tooling Cost:</span>
-                <span className="text-[#26d464] font-bold">$149.00 // 298 EXPEN</span>
-              </div>
+            <div className="space-y-3 pt-4 border-t border-zinc-200">
               <Link
                 href={`/marketplace/${activeModel.productId}`}
-                className="w-full py-3 rounded-xl bg-[#26d464] text-black font-bold text-sm hover:bg-[#20b855] transition text-center shadow-lg shadow-[#26d464]/10 flex items-center justify-center gap-2 active:scale-98"
+                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition text-center shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
               >
-                <span>Acquire in Tooling Marketplace</span>
+                <span>View in Marketplace Catalog</span>
                 <span aria-hidden="true">→</span>
+              </Link>
+              <Link
+                href="/heritage"
+                className="w-full py-3 px-4 rounded-xl bg-white border border-zinc-200 hover:bg-zinc-100 text-zinc-800 font-semibold text-xs transition text-center flex items-center justify-center gap-2"
+              >
+                <span>Read Biorad Medisys Evolution Story</span>
               </Link>
             </div>
           </div>
         </div>
 
         {/* Dual Panel Comparison Grid */}
-        <div className="mt-16 pt-12 border-t border-[#262626]">
-          <h2 className="text-xl font-bold text-[#ededed] mb-6 font-display">
-            Compare Top Machining Geometries
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="pt-10 border-t border-zinc-200">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 font-montserrat">
+              Compare 3D Implants & Tooling
+            </h2>
+            <span className="text-xs font-mono text-zinc-500">
+              9 Active Surgical Models
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {MODELS.map((item, idx) => (
               <div
                 key={item.id}
-                className="rounded-xl border border-[#262626] bg-[#121212] p-6 hover:border-[#383838] transition flex flex-col justify-between specular-card"
+                className="rounded-2xl border border-zinc-200 bg-white p-5 hover:border-emerald-500/50 hover:shadow-md transition flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono text-[#26d464] font-semibold">
-                      T-0{idx + 1} {"//"} {item.geometryType}
+                    <span className="text-xs font-mono text-emerald-700 font-bold">
+                      M-0{idx + 1} // {item.geometryType}
                     </span>
-                    <span className="text-[11px] text-[#71717a] font-mono">
-                      REF: {item.id}
+                    <span className="text-[11px] text-zinc-400 font-mono">
+                      {item.id}
                     </span>
                   </div>
-                  <h3 className="text-base font-semibold text-[#ededed]">
+                  <h3 className="text-sm font-bold text-zinc-900 font-montserrat">
                     {item.name}
                   </h3>
-                  <p className="text-xs text-[#a1a1aa] mt-2 leading-relaxed line-clamp-2">
+                  <p className="text-xs text-zinc-600 mt-2 leading-relaxed line-clamp-2 font-poppins">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#1c1c1c] flex items-center justify-between">
+                <div className="mt-5 pt-3 border-t border-zinc-100 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => {
                       setActiveModelId(item.id);
                       window.scrollTo({ top: 120, behavior: "smooth" });
                     }}
-                    className="text-xs font-semibold text-[#26d464] hover:underline font-mono"
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 font-mono cursor-pointer"
                   >
                     Inspect in CAD HUD ↑
                   </button>
                   <Link
                     href={`/marketplace/${item.productId}`}
-                    className="text-xs text-[#a1a1aa] hover:text-[#ededed] underline"
+                    className="text-xs text-zinc-500 hover:text-zinc-900 font-medium"
                   >
-                    Marketplace Record ↗
+                    Details ↗
                   </Link>
                 </div>
               </div>
