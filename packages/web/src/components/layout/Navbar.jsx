@@ -4,18 +4,17 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { CHAIN_ID } from "shared/constants";
 import { IconSpindle } from "@/components/ui/Icons";
 
 export const NAV_LINKS = [
-  { href: "/", label: "Home", num: "00" },
-  { href: "/about", label: "About", num: "01" },
-  { href: "/agent", label: "Agent", num: "02" },
-  { href: "/marketplace", label: "Marketplace", num: "03" },
-  { href: "/experience", label: "Experience", num: "04" },
-  { href: "/blueprints", label: "Blueprints", num: "05" },
-  { href: "/patent", label: "Patent", num: "06" },
-  { href: "/partners", label: "Partners", num: "07" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/agent", label: "Agent" },
+  { href: "/marketplace", label: "Marketplace" },
+  { href: "/experience", label: "Experience" },
+  { href: "/blueprints", label: "Blueprints" },
+  { href: "/patent", label: "Patent" },
+  { href: "/partners", label: "Partners" },
 ];
 
 export default function Navbar() {
@@ -60,29 +59,8 @@ export default function Navbar() {
           : "bg-[#0a0a0a]/85 backdrop-blur-md border-b border-white/[0.08]"
       }`}
     >
-      {/* Top Telemetry Strip */}
-      <div className="w-full bg-[#050505] border-b border-[#1c1c1c] text-[10px] font-mono text-[#a1a1aa] py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <span className="flex items-center gap-1.5 text-[#26d464]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
-            MST-{CHAIN_ID}
-          </span>
-          <span className="text-zinc-600">·</span>
-          <span className="text-[#f97316] hidden xs:inline font-mono">LATHE HUD</span>
-          <span className="text-zinc-600 hidden xs:inline">·</span>
-          <span>EXPEN ERC-20</span>
-          <span className="text-zinc-600">·</span>
-          <span className="text-[#26d464] font-semibold">ONLINE</span>
-        </div>
-        <div className="hidden sm:flex items-center gap-3 text-zinc-400">
-          <span className="text-[#f97316]/90">SYS // PRECISION CNC</span>
-          <span className="text-zinc-700">|</span>
-          <span>[REF: 18.5204°N, 73.8567°E]</span>
-        </div>
-      </div>
-
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Logo with Chamfered Industrial Box */}
+        {/* Brand Logo */}
         <div className="flex items-center gap-3">
           <Link
             href="/"
@@ -95,16 +73,12 @@ export default function Navbar() {
               EXPEND<span className="text-[#26d464]">RY</span>
             </span>
           </Link>
-          <span className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] text-[10px] font-mono text-[#a1a1aa] bg-[#121212] border border-[#262626]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#f97316] animate-pulse" />
-            MST 91562037
-          </span>
         </div>
 
-        {/* Desktop Navigation: Segmented CNC Controller Channel Dock with Fluid Spring Morphing */}
+        {/* Desktop Navigation Links */}
         <nav
           aria-label="Main navigation"
-          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/95 border border-[#262626] shadow-inner relative"
+          className="hidden xl:flex items-center gap-1 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner relative"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -117,7 +91,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`relative px-2.5 py-1 text-xs font-medium rounded-lg transition-colors duration-150 flex items-center z-10 ${
+                className={`relative px-3 py-1.5 text-xs font-medium rounded-lg transition-colors duration-150 flex items-center z-10 ${
                   isActive
                     ? "text-white font-semibold"
                     : "text-[#a1a1aa] hover:text-white"
@@ -134,31 +108,20 @@ export default function Navbar() {
                     className="absolute inset-0 bg-[#1c1c1c] border border-white/[0.12] rounded-lg shadow-sm -z-10"
                   />
                 )}
-                {link.num && (
-                  <span className="font-mono text-[9px] text-zinc-500 mr-1">
-                    {link.num}
-                  </span>
-                )}
                 <span>{link.label}</span>
-                {isActive && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute -bottom-1 left-2 right-2 h-0.5 bg-[#26d464] rounded-full shadow-[0_0_8px_rgba(38,212,100,0.6)]"
-                  />
-                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* Right Action: Wallet Connect CTA with live beacon */}
+        {/* Action Button: Connect Wallet */}
         <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/onboarding"
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-white border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-[0.97] transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)] group"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#26d464] hover:bg-[#21b856] text-black text-xs font-montserrat font-bold transition-all shadow-md active:scale-95 cursor-pointer"
           >
-            <span className="h-2 w-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
-            <span>Connect Wallet</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-black animate-pulse" />
+            <span>Connect Wallet & Onboard</span>
           </Link>
         </div>
 
@@ -232,14 +195,7 @@ export default function Navbar() {
                     : "text-[#a1a1aa] hover:text-white hover:bg-[#161616]"
                 }`}
               >
-                <span className="flex items-center gap-2">
-                  {link.num && (
-                    <span className="font-mono text-xs text-zinc-500">
-                      {link.num}
-                    </span>
-                  )}
-                  <span>{link.label}</span>
-                </span>
+                <span>{link.label}</span>
                 {isActive && (
                   <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
                 )}
