@@ -4,9 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { IconSpindle, IconToken, IconExternal } from "@/components/ui/Icons";
-import { EXPLORER_URL } from "shared/constants";
-import { EXPEN_ADDRESS } from "shared/contracts";
+import { IconSpindle } from "@/components/ui/Icons";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -25,7 +23,6 @@ export default function Navbar() {
   const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [copiedContract, setCopiedContract] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,16 +51,6 @@ export default function Navbar() {
     setPrevPathname(pathname);
     setIsMenuOpen(false);
   }
-
-  const handleCopyContract = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(EXPEN_ADDRESS);
-      setCopiedContract(true);
-      setTimeout(() => setCopiedContract(false), 1800);
-    }
-  };
 
   return (
     <header className="fixed top-3 sm:top-4 inset-x-0 z-50 mx-auto w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] max-w-5xl transition-all duration-300">
@@ -129,29 +116,8 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Actions: MSTScan Token Badge & Sign In */}
-        <div className="hidden sm:flex items-center gap-2">
-          {/* Verified MSTScan Contract Badge */}
-          <a
-            href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="View EXPEN Token Contract on MSTScan Explorer"
-            className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-50 hover:bg-emerald-50 border border-zinc-200/90 hover:border-emerald-300 text-[11px] font-mono text-zinc-700 hover:text-emerald-800 transition shadow-2xs"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-            </span>
-            <span className="font-bold">MST</span>
-            <span className="text-zinc-400 font-sans">·</span>
-            <span className="text-[10px] text-zinc-500 group-hover:text-emerald-700">
-              {EXPEN_ADDRESS.slice(0, 6)}...{EXPEN_ADDRESS.slice(-4)}
-            </span>
-            <IconExternal className="w-3 h-3 text-zinc-400 group-hover:text-emerald-600" />
-          </a>
-
-          {/* Sign In CTA */}
+        {/* Right Actions: Sign In Only */}
+        <div className="hidden sm:flex items-center">
           <Link
             href="/login"
             className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-montserrat font-bold transition shadow-md shadow-emerald-950/20 active:scale-95 cursor-pointer"
@@ -217,25 +183,6 @@ export default function Navbar() {
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="xl:hidden mt-2 p-4 rounded-3xl liquid-glass border border-zinc-200/90 shadow-2xl space-y-1"
           >
-            {/* Mobile MSTScan Token Contract Chip */}
-            <div className="pb-2 mb-1 border-b border-zinc-100">
-              <a
-                href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between px-3 py-2 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs font-mono text-zinc-700"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-emerald-600" />
-                  <span className="font-bold text-zinc-900">EXPEN Contract:</span>
-                  <span className="text-zinc-500">
-                    {EXPEN_ADDRESS.slice(0, 6)}...{EXPEN_ADDRESS.slice(-4)}
-                  </span>
-                </div>
-                <IconExternal className="w-3.5 h-3.5 text-emerald-700" />
-              </a>
-            </div>
-
             {NAV_LINKS.map((link) => {
               const isActive =
                 link.href === "/"
