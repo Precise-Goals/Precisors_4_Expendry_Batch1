@@ -216,22 +216,30 @@ export default function ChatInterface({
     setActiveSources([]);
   };
 
+  const isConversationActive = messages.length > 0;
+
   return (
-    <div className="flex flex-col h-full w-full rounded-[2.5rem] bg-[#f4f4f6] border border-zinc-200/90 shadow-xl overflow-hidden relative selection:bg-purple-100 selection:text-purple-900 transition-all">
+    <div
+      className={`flex flex-col w-full rounded-2xl sm:rounded-3xl bg-zinc-50/90 border border-zinc-200/90 shadow-md overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-950 transition-all ${
+        isConversationActive
+          ? "h-[74vh] min-h-[520px] max-h-[720px]"
+          : "min-h-[380px] sm:min-h-[420px]"
+      }`}
+    >
       {/* ──────────────────────────────────────────────────────────
           UPPER APP BAR (Active in conversation mode)
          ────────────────────────────────────────────────────────── */}
-      {messages.length > 0 && (
-        <div className="px-6 py-3.5 border-b border-zinc-200/80 flex items-center justify-between bg-white/70 backdrop-blur-md shrink-0">
+      {isConversationActive && (
+        <div className="px-5 sm:px-6 py-3 border-b border-zinc-200/80 flex items-center justify-between bg-white/80 backdrop-blur-md shrink-0">
           <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={handleResetChat}
-              className="text-lg font-black tracking-tight font-montserrat text-zinc-900 hover:text-purple-700 transition cursor-pointer"
+              className="text-base sm:text-lg font-black tracking-tight font-montserrat text-zinc-950 hover:text-emerald-700 transition cursor-pointer"
             >
               Expendry AI
             </button>
-            <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200 font-bold">
+            <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
               105B Tacit RAG
             </span>
           </div>
@@ -244,7 +252,7 @@ export default function ChatInterface({
             <button
               type="button"
               onClick={handleResetChat}
-              className="text-xs font-medium text-zinc-600 hover:text-zinc-950 px-3 py-1 rounded-full border border-zinc-300 hover:border-zinc-400 bg-white transition active:scale-95 shadow-2xs cursor-pointer"
+              className="text-xs font-poppins font-medium text-zinc-600 hover:text-emerald-800 px-3 py-1 rounded-full border border-zinc-300 hover:border-emerald-300 bg-white transition active:scale-95 shadow-2xs cursor-pointer"
             >
               + New Chat
             </button>
@@ -256,36 +264,34 @@ export default function ChatInterface({
           MAIN VIEWPORT: EMPTY STATE (CIVIC AI PULSE REFERENCE)
           OR CONVERSATIONAL STREAM VIEW
          ────────────────────────────────────────────────────────── */}
-      {messages.length === 0 ? (
-        <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 text-center relative">
-          <div className="max-w-2xl w-full flex flex-col items-center gap-6 my-auto">
-            {/* Monumental Centered Brand Heading (Civic AI style) */}
-            <div className="flex flex-col items-center gap-2">
-              <h1 className="text-5xl sm:text-7xl font-black tracking-tight font-montserrat text-zinc-950">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2e1065] via-[#4c1d95] to-[#1e1b4b]">
-                  Expendry AI
-                </span>
+      {!isConversationActive ? (
+        <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-8 py-7 sm:py-9 text-center relative">
+          <div className="max-w-3xl w-full flex flex-col items-center gap-4">
+            {/* Monumental Centered Brand Heading */}
+            <div className="flex flex-col items-center gap-1.5">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight font-montserrat text-[#09090b]">
+                Expendry AI
               </h1>
-              <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-zinc-500 font-bold mt-1">
+              <p className="text-xs sm:text-sm font-poppins text-zinc-500 font-medium tracking-wide">
                 Precision Manufacturing &amp; Volunteering Intelligence
               </p>
             </div>
 
             {/* Pill Suggestions Cluster (Civic AI Pulse Reference Layout) */}
-            <div className="flex flex-col items-center gap-3 w-full max-w-xl mx-auto pt-2">
+            <div className="flex flex-col items-center gap-2.5 w-full max-w-2xl mx-auto pt-1">
               {/* Row 1: Two pills */}
-              <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+              <div className="flex flex-wrap items-center justify-center gap-2.5">
                 <button
                   type="button"
                   onClick={() => handleSendMessage(SUGGESTED_PILLS[0].prompt)}
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                  className="px-5 py-2 sm:py-2.5 rounded-full border border-zinc-300/80 bg-white hover:bg-emerald-50/70 hover:border-emerald-400 text-zinc-800 hover:text-emerald-900 text-xs sm:text-sm font-poppins font-medium transition shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
                 >
                   {SUGGESTED_PILLS[0].label}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSendMessage(SUGGESTED_PILLS[1].prompt)}
-                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                  className="px-5 py-2 sm:py-2.5 rounded-full border border-zinc-300/80 bg-white hover:bg-emerald-50/70 hover:border-emerald-400 text-zinc-800 hover:text-emerald-900 text-xs sm:text-sm font-poppins font-medium transition shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
                 >
                   {SUGGESTED_PILLS[1].label}
                 </button>
@@ -296,25 +302,25 @@ export default function ChatInterface({
                 <button
                   type="button"
                   onClick={() => handleSendMessage(SUGGESTED_PILLS[2].prompt)}
-                  className="px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                  className="px-6 py-2 sm:py-2.5 rounded-full border border-zinc-300/80 bg-white hover:bg-emerald-50/70 hover:border-emerald-400 text-zinc-800 hover:text-emerald-900 text-xs sm:text-sm font-poppins font-medium transition shadow-2xs hover:shadow-xs active:scale-95 cursor-pointer"
                 >
                   {SUGGESTED_PILLS[2].label}
                 </button>
               </div>
 
               {/* Multilingual Tacit Badges */}
-              <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
                 <button
                   type="button"
                   onClick={() => handleSendMessage(SUGGESTED_PILLS[3].prompt)}
-                  className="px-4 py-1.5 rounded-full border border-zinc-200 bg-white/50 hover:bg-white text-zinc-600 hover:text-zinc-900 text-xs transition active:scale-95 cursor-pointer"
+                  className="px-3.5 py-1 rounded-full border border-zinc-200 bg-white/70 hover:bg-emerald-50 hover:border-emerald-300 text-zinc-600 hover:text-emerald-800 text-xs font-poppins transition active:scale-95 cursor-pointer"
                 >
                   {SUGGESTED_PILLS[3].label}
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSendMessage(SUGGESTED_PILLS[4].prompt)}
-                  className="px-4 py-1.5 rounded-full border border-zinc-200 bg-white/50 hover:bg-white text-zinc-600 hover:text-zinc-900 text-xs transition active:scale-95 cursor-pointer"
+                  className="px-3.5 py-1 rounded-full border border-zinc-200 bg-white/70 hover:bg-emerald-50 hover:border-emerald-300 text-zinc-600 hover:text-emerald-800 text-xs font-poppins transition active:scale-95 cursor-pointer"
                 >
                   {SUGGESTED_PILLS[4].label}
                 </button>
@@ -344,7 +350,7 @@ export default function ChatInterface({
                   className={`flex gap-3.5 ${isUser ? "justify-end" : "justify-start"}`}
                 >
                   {!isUser && (
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#2e1065] to-[#6d28d9] flex items-center justify-center text-white shrink-0 shadow-sm mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white shrink-0 shadow-sm mt-0.5">
                       <IconBolt className="w-4 h-4 text-white" />
                     </div>
                   )}
@@ -353,8 +359,8 @@ export default function ChatInterface({
                     <div
                       className={`px-5 py-3.5 rounded-2xl text-sm sm:text-base leading-relaxed ${
                         isUser
-                          ? "bg-[#6d28d9] text-white rounded-br-xs shadow-sm font-medium"
-                          : "bg-white border border-zinc-200/90 text-zinc-900 rounded-bl-xs shadow-xs"
+                          ? "bg-[#16a34a] text-white rounded-br-xs shadow-xs font-poppins font-medium"
+                          : "bg-white border border-zinc-200/90 text-zinc-900 rounded-bl-xs shadow-2xs font-poppins"
                       }`}
                     >
                       <p className="whitespace-pre-wrap">{msg.content || (isLoading ? "Thinking..." : "")}</p>
@@ -366,10 +372,10 @@ export default function ChatInterface({
                           type="button"
                           onClick={() => speakText(msg.content, msg.detectedLang, msg.id)}
                           disabled={speakingMsgId === msg.id}
-                          className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-purple-700 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-zinc-200 shadow-2xs transition active:scale-95 cursor-pointer font-mono"
+                          className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-emerald-700 bg-white/80 hover:bg-emerald-50/50 px-2.5 py-1 rounded-full border border-zinc-200 shadow-2xs transition active:scale-95 cursor-pointer font-mono"
                           aria-label="Read response aloud"
                         >
-                          <IconVolume className={`w-3.5 h-3.5 ${speakingMsgId === msg.id ? "text-purple-600 animate-pulse" : ""}`} />
+                          <IconVolume className={`w-3.5 h-3.5 ${speakingMsgId === msg.id ? "text-emerald-600 animate-pulse" : ""}`} />
                           <span>{speakingMsgId === msg.id ? "Speaking..." : "Read Voice"}</span>
                         </button>
 
@@ -396,9 +402,9 @@ export default function ChatInterface({
           {isLoading && (
             <div className="flex gap-3 items-center text-zinc-500 text-xs max-w-4xl mx-auto pl-11 font-mono">
               <div className="flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse [animation-delay:-0.3s]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse [animation-delay:-0.15s]"></span>
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse [animation-delay:-0.3s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse [animation-delay:-0.15s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
               </div>
               <span>Sarvam 105B Tacit Retrieval...</span>
             </div>
@@ -408,12 +414,12 @@ export default function ChatInterface({
 
       {/* ──────────────────────────────────────────────────────────
           BOTTOM COMPOSER DOCK (MATCHING REF.PNG EXACTLY)
-          Rounded-full capsule, "Ask me anything", purple Send, & Voice button
+          Rounded-full capsule, "Ask me anything", Emerald Send, & Voice button
          ────────────────────────────────────────────────────────── */}
-      <div className="p-4 sm:p-6 bg-transparent shrink-0">
+      <div className="p-3 sm:p-4 bg-transparent shrink-0">
         <form
           onSubmit={handleFormSubmit}
-          className="max-w-4xl w-full mx-auto rounded-full bg-zinc-200/70 hover:bg-zinc-200/90 focus-within:bg-white focus-within:ring-4 focus-within:ring-purple-600/10 focus-within:border-purple-600 border border-zinc-300/80 p-2 pl-6 flex items-center gap-2.5 transition-all shadow-sm"
+          className="max-w-3xl sm:max-w-4xl w-full mx-auto rounded-full bg-zinc-200/70 hover:bg-zinc-200/90 focus-within:bg-white focus-within:ring-2 focus-within:ring-emerald-500/25 focus-within:border-emerald-600 border border-zinc-300/80 p-1.5 pl-5 sm:pl-6 flex items-center gap-2 transition-all shadow-xs"
         >
           <label htmlFor="expendry-chat-input" className="sr-only">
             Ask me anything
@@ -426,14 +432,14 @@ export default function ChatInterface({
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything"
             disabled={isLoading}
-            className="flex-1 bg-transparent border-none text-zinc-900 placeholder:text-zinc-500 text-sm sm:text-base focus:outline-none disabled:opacity-50"
+            className="flex-1 bg-transparent border-none text-zinc-900 placeholder:text-zinc-500 text-sm sm:text-base font-poppins focus:outline-none disabled:opacity-50"
           />
 
-          {/* Purple Send Action Button (matching ref.png) */}
+          {/* Emerald Send Action Button */}
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="rounded-full bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-40 disabled:hover:bg-[#7c3aed] text-white px-5 sm:px-6 py-2.5 font-medium text-sm flex items-center justify-center gap-1.5 shadow-xs active:scale-95 transition-all cursor-pointer shrink-0"
+            className="rounded-full bg-[#16a34a] hover:bg-[#15803d] disabled:opacity-40 disabled:hover:bg-[#16a34a] text-white px-5 sm:px-6 py-2.5 font-poppins font-medium text-sm flex items-center justify-center gap-1.5 shadow-xs active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Send message"
           >
             {isLoading ? (
@@ -461,7 +467,7 @@ export default function ChatInterface({
             )}
           </button>
 
-          {/* Dedicated Voice Button (matching pencil-annotated Voice button in ref.png!) */}
+          {/* Dedicated Voice Button */}
           <VoiceButton
             variant="pill"
             lang={lang}

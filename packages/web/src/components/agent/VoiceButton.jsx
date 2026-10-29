@@ -166,7 +166,7 @@ export default function VoiceButton({
                   ? "bg-rose-500 text-white border-rose-600 scale-105 animate-pulse shadow-md"
                   : isProcessing
                   ? "bg-zinc-100 text-zinc-500 border-zinc-300 cursor-wait"
-                  : "bg-white text-zinc-800 border-zinc-300 hover:bg-zinc-50 hover:border-zinc-400"
+                  : "bg-white text-zinc-800 border-zinc-300 hover:bg-emerald-50/70 hover:border-emerald-400 hover:text-emerald-800"
               } disabled:opacity-40 disabled:cursor-not-allowed`
             : `relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-[0.93] shadow-xs cursor-pointer ${
                 isRecording
@@ -180,7 +180,7 @@ export default function VoiceButton({
         {isProcessing ? (
           <>
             <svg
-              className="w-4 h-4 animate-spin motion-reduce:animate-none text-violet-600"
+              className="w-4 h-4 animate-spin motion-reduce:animate-none text-emerald-600"
               fill="none"
               viewBox="0 0 24 24"
             >
@@ -207,7 +207,7 @@ export default function VoiceButton({
           </>
         ) : (
           <>
-            <IconMic className="w-4 h-4 text-violet-700" />
+            <IconMic className="w-4 h-4 text-emerald-600" />
             {variant === "pill" && <span className="text-zinc-800 font-medium">Voice</span>}
           </>
         )}

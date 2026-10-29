@@ -41,6 +41,9 @@ module.exports = {
       fontFamily: {
         display: ["var(--font-montserrat)", "Montserrat", "sans-serif"],
         body: ["var(--font-poppins)", "Poppins", "sans-serif"],
+        sans: ["var(--font-poppins)", "Poppins", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "Montserrat", "sans-serif"],
+        poppins: ["var(--font-poppins)", "Poppins", "sans-serif"],
       },
       animation: {
         grain: "grain 8s steps(10) infinite",

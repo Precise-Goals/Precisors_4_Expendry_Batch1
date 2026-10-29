@@ -17,6 +17,12 @@
   --color-text: #09090b;
   --color-text-dim: #3f3f46;
   --color-text-muted: #71717a;
+
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  --font-body: "Poppins", sans-serif;
+  --font-sans: "Poppins", sans-serif;
 }
 
 :root {
@@ -70,10 +76,10 @@
   --font-size-hero: clamp(2.5rem, 2.1rem + 2vw, 3.75rem);
 }
 
-body {
+html, body {
   background: #ffffff;
   color: #09090b;
-  font-family: var(--font-poppins);
+  font-family: var(--font-poppins), "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -88,11 +94,23 @@ a {
 }
 
 /* Headings inherit colors cleanly so dark containers display white text and light containers display ink */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-montserrat);
+h1, h2, h3, h4, h5, h6,
+.font-montserrat,
+.font-display {
+  font-family: var(--font-montserrat), "Montserrat", sans-serif !important;
   letter-spacing: -0.02em;
   text-wrap: balance;
   color: inherit;
+}
+
+p, span, a, button, input, textarea, select, label,
+.font-poppins,
+.font-body {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+}
+
+code, kbd, samp, pre, .font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
 
 p {

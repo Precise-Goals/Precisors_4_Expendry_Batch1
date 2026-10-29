@@ -4,8 +4,8 @@ import ChatInterface from "@/components/agent/ChatInterface";
 
 export default function AgentPage() {
   return (
-    <div className="agent-terminal-page min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center p-3 sm:p-6 lg:p-8 bg-transparent">
-      <div className="w-full max-w-5xl h-[85vh] min-h-[640px] flex flex-col">
+    <div className="agent-terminal-page flex flex-col items-center justify-start py-4 sm:py-6 px-3 sm:px-6 lg:px-8 bg-transparent">
+      <div className="w-full max-w-5xl xl:max-w-6xl flex flex-col">
         <ChatInterface />
       </div>
     </div>
