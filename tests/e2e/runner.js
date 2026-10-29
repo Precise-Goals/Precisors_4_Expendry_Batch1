@@ -17,6 +17,7 @@ import { tier1Tests } from './tier1_features.test.js';
 import { tier2Tests } from './tier2_boundaries.test.js';
 import { tier3Tests } from './tier3_cross_feature.test.js';
 import { tier4Tests } from './tier4_scenarios.test.js';
+import { tier5Tests } from './tier5_ui_breakpoints.test.js';
 
 const ANSI = {
   reset: '\x1b[0m',
@@ -77,7 +78,8 @@ async function runSuite() {
     ...tier1Tests,
     ...tier2Tests,
     ...tier3Tests,
-    ...tier4Tests
+    ...tier4Tests,
+    ...tier5Tests
   ];
 
   let selectedTests = allTests;
@@ -108,7 +110,8 @@ async function runSuite() {
       1: { name: 'Tier 1 — Feature Coverage (>=5 tests per feature)', passed: 0, total: 0 },
       2: { name: 'Tier 2 — Boundary & Corner Cases (>=5 tests per feature)', passed: 0, total: 0 },
       3: { name: 'Tier 3 — Cross-Feature Interactions', passed: 0, total: 0 },
-      4: { name: 'Tier 4 — Real-World Application Scenarios', passed: 0, total: 0 }
+      4: { name: 'Tier 4 — Real-World Application Scenarios', passed: 0, total: 0 },
+      5: { name: 'Tier 5 — UI Breakpoints & Responsive Visual Integrity', passed: 0, total: 0 }
     }
   };
 
