@@ -81,7 +81,7 @@ export default async function ProductDetailPage({ params }) {
         {/* Product Hero Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Visual Showcase Panel */}
-          <div className="lg:col-span-6 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 flex flex-col items-center justify-between min-h-[460px] relative overflow-hidden shadow-sm">
+          <div className="lg:col-span-6 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 flex flex-col items-center justify-between min-h-[460px] relative overflow-hidden shadow-sm">
             {/* Top metadata tags inside visual viewport */}
             <div className="w-full flex items-center justify-between mb-4">
               <span className="telemetry-chip">
@@ -127,7 +127,7 @@ export default async function ProductDetailPage({ params }) {
           </div>
 
           {/* Product Meta & Purchase Panel */}
-          <div className="lg:col-span-6 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 flex flex-col justify-between min-h-[460px] shadow-sm space-y-6">
+          <div className="lg:col-span-6 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 flex flex-col justify-between min-h-[460px] shadow-sm space-y-6">
             <div>
               {/* Category & Stock Status */}
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
@@ -205,7 +205,7 @@ export default async function ProductDetailPage({ params }) {
 
         {/* Metallurgical Matrix Card */}
         <section aria-labelledby="metallurgical-matrix-title">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-zinc-200">
               <div>
                 <h2
