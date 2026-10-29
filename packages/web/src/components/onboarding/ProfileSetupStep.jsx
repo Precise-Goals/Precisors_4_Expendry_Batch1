@@ -7,23 +7,23 @@ import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 export const EVALUATION_PRESETS = [
   {
-    label: "Rameshwar Kulkarni (Medical Implant CNC Turning • Pune)",
+    label: "Rameshwar Kulkarni (Aerospace Turning Specialist • Pune)",
     data: {
       username: "rameshwar-k",
-      email: "rameshwar@kulkarni-precision.in",
+      email: "rameshwar@kulkarni-aerospace.in",
       phone: "+91 98230 11452",
       designation: "Chief CNC Turning Specialist (34 Yrs)",
-      company: "Biorad Precision Engineering Cluster Pune",
+      company: "Kulkarni Aerospace Components Ltd.",
     },
   },
   {
-    label: "Devendra Patil (5-Axis Orthopedic Milling Master • Pune)",
+    label: "Devendra Patil (Tool & Die Master • Kolhapur)",
     data: {
       username: "devendra-patil",
       email: "devendra@patil-tooling.in",
       phone: "+91 94220 55198",
-      designation: "Master 5-Axis VMC Toolmaker (29 Yrs)",
-      company: "Patil Precision Implants & Tooling",
+      designation: "Master Tool & Die Maker (29 Yrs)",
+      company: "Patil Precision Forging & Dies",
     },
   },
 ];
@@ -97,7 +97,7 @@ export default function ProfileSetupStep({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      onSubmit(formData);
+      if (onSubmit) onSubmit(formData);
     }
   };
 
@@ -125,18 +125,23 @@ export default function ProfileSetupStep({
 
         {/* Quick evaluation fill presets */}
         <div className="mb-6 p-4 rounded-2xl bg-zinc-50 border border-zinc-200">
-          <span className="text-[11px] font-mono uppercase text-zinc-500 font-bold block mb-2">
-            Quick Fill Demo Presets:
-          </span>
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-mono uppercase text-zinc-600 font-bold">
+              {"Quick Presets for Live Evaluation & Judging:"}
+            </span>
+          </div>
           <div className="flex flex-col gap-2">
             {EVALUATION_PRESETS.map((preset, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => handleApplyPreset(preset.data)}
-                className="text-left px-3 py-2 rounded-xl text-xs bg-white border border-zinc-200 hover:border-emerald-500 hover:text-emerald-700 font-mono transition text-zinc-700 shadow-2xs cursor-pointer"
+                className="text-left px-3 py-2 rounded-xl text-xs bg-white border border-zinc-200 hover:border-emerald-500 hover:text-emerald-700 font-mono transition text-zinc-700 shadow-2xs cursor-pointer flex items-center justify-between"
               >
-                + {preset.label}
+                <span>{`+ ${preset.label}`}</span>
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                  {`Preset ${idx + 1}`}
+                </span>
               </button>
             ))}
           </div>
@@ -264,22 +269,20 @@ export default function ProfileSetupStep({
           </div>
 
           <div className="pt-4 flex items-center justify-between gap-4">
-            {onBack && (
-              <button
-                type="button"
-                onClick={onBack}
-                className="px-4 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 text-xs font-bold font-montserrat hover:bg-zinc-50 transition cursor-pointer"
-              >
-                ← Back
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={onBack || (() => {})}
+              className="px-4 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 text-xs font-bold font-montserrat hover:bg-zinc-50 transition cursor-pointer"
+            >
+              Back
+            </button>
 
             <button
               type="submit"
               disabled={isLoading}
               className="ml-auto px-6 py-3 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold font-montserrat transition shadow-md active:scale-95 disabled:opacity-50 cursor-pointer"
             >
-              {isLoading ? "Saving Profile..." : "Proceed to BridgeKey Wallet →"}
+              {isLoading ? "Saving Profile..." : "Complete Registration & Sign In"}
             </button>
           </div>
         </form>

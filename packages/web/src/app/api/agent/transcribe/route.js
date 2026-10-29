@@ -43,14 +43,21 @@ export async function POST(request) {
     }
 
     const resolvedLang = normalizeLanguage(lang, "auto");
-    const transcribeFn = transcribeDeps.transcribe || transcribe;
-
-    let transcript = "";
     const apiKey = process.env.SARVAM_API_KEY || getApiKey();
 
-    if (apiKey && !apiKey.startsWith("test-")) {
+    let transcript = "";
+
+    // 1. Check for injected test dependency
+    if (transcribeDeps.transcribe) {
       try {
-        const result = await transcribeFn(audioFile, resolvedLang);
+        const result = await transcribeDeps.transcribe(audioFile, resolvedLang);
+        transcript = result?.transcript || "";
+      } catch (err) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+      }
+    } else if (apiKey && !apiKey.startsWith("test-")) {
+      try {
+        const result = await transcribe(audioFile, resolvedLang);
         transcript = result.transcript;
       } catch (err) {
         if (process.env.NODE_ENV !== "test") {
