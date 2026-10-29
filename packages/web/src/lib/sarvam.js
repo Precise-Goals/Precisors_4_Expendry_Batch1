@@ -1,7 +1,7 @@
 /**
  * Sarvam AI Client SDK Wrapper
  *
- * Implements chat, STT (transcribe), and TTS (synthesise) wrappers for Sarvam AI.
+ * Implements chat, STT (transcribe with saaras), and TTS (synthesise with bulbul:v3 & shubh).
  * Enforces exponential backoff on 429 rate limits (<=3 retries),
  * redacts API keys from all error messages and logs, and defaults to 'en'.
  */
@@ -99,7 +99,7 @@ export function redactSensitive(input) {
     .replace(/(Bearer\s+)[A-Za-z0-9_\-\.]{10,}/gi, "$1[REDACTED_API_KEY]");
 }
 
-async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 200) {
+async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250) {
   const fetchFn = getFetch();
   let attempt = 0;
 
@@ -201,7 +201,7 @@ export async function chat(messages, lang = DEFAULT_LANGUAGE, options = {}) {
 }
 
 /**
- * Transcribes audio blob using Sarvam Speech-to-Text.
+ * Transcribes audio blob using Sarvam Speech-to-Text (Saaras model).
  */
 export async function transcribe(audioBlob, lang = DEFAULT_LANGUAGE) {
   if (!audioBlob) {
@@ -237,7 +237,7 @@ export async function transcribe(audioBlob, lang = DEFAULT_LANGUAGE) {
 }
 
 /**
- * Synthesises text into audio using Sarvam Text-to-Speech.
+ * Synthesises text into audio using Sarvam Text-to-Speech (Bulbul v3 model with Shubh voice).
  */
 export async function synthesise(text, lang = DEFAULT_LANGUAGE) {
   if (!text || typeof text !== "string" || !text.trim()) {
@@ -256,10 +256,10 @@ export async function synthesise(text, lang = DEFAULT_LANGUAGE) {
   };
 
   const payload = {
-    inputs: [text],
+    inputs: [text.slice(0, 1000)], // Cap to 1000 chars for optimal audio latency
     target_language_code: langCode,
-    speaker: "meera",
-    model: "bulbul:v1",
+    speaker: "shubh",
+    model: "bulbul:v3",
   };
 
   const response = await fetchWithRetry(`${baseUrl}/text-to-speech`, {
