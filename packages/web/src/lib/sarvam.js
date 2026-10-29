@@ -233,7 +233,7 @@ export async function transcribe(audioBlob, lang = DEFAULT_LANGUAGE) {
 
   const formData = new FormData();
   formData.append("file", audioBlob, "audio.webm");
-  formData.append("model", "saaras:v1");
+  formData.append("model", "saaras:v3");
   formData.append("language_code", langCode);
 
   const headers = {
