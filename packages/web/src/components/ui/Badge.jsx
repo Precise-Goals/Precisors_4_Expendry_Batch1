@@ -9,41 +9,41 @@ export const Badge = React.forwardRef(function Badge(
   if (type) {
     switch (type) {
       case "Experience":
-        typeStyles = "bg-[#f97316]/15 text-[#f97316] border-[#f97316]/35";
+        typeStyles = "bg-orange-50 text-orange-800 border-orange-200";
         break;
       case "Blueprint":
-        typeStyles = "bg-white/10 text-white border-white/20";
+        typeStyles = "bg-zinc-100 text-zinc-900 border-zinc-300 font-bold";
         break;
       case "Idea":
-        typeStyles = "bg-[#26d464]/15 text-[#26d464] border-[#26d464]/40";
+        typeStyles = "bg-emerald-50 text-emerald-800 border-emerald-200 font-bold";
         break;
       case "Setup Tip":
-        typeStyles = "bg-[#26d464]/10 text-[#26d464] border-[#26d464]/30";
+        typeStyles = "bg-emerald-50 text-emerald-800 border-emerald-200";
         break;
       case "Video Note":
-        typeStyles = "bg-[#161616] text-white border-[#262626]";
+        typeStyles = "bg-zinc-900 text-white border-zinc-700";
         break;
       default:
-        typeStyles = "bg-[#161616] text-[#a1a1aa] border-[#262626]";
+        typeStyles = "bg-zinc-100 text-zinc-700 border-zinc-200";
     }
   }
 
   const variants = {
-    default: "bg-[#161616] text-[#a1a1aa] border-[#262626]",
-    accent: "bg-[#26d464]/10 text-[#26d464] border-[#26d464]/30",
-    success: "bg-[#26d464]/10 text-[#26d464] border-[#26d464]/30",
-    tech: "bg-[#f97316]/15 text-[#f97316] border-[#f97316]/35",
-    orange: "bg-[#f97316]/15 text-[#f97316] border-[#f97316]/35",
-    warning: "bg-[#f97316]/15 text-[#f97316] border-[#f97316]/35",
-    contrast: "bg-white text-black font-semibold border-white",
-    danger: "bg-red-500/10 text-red-400 border-red-500/30",
-    outline: "bg-transparent text-white border-[#383838]",
+    default: "bg-zinc-100 text-zinc-800 border-zinc-200",
+    accent: "bg-emerald-50 text-emerald-800 border-emerald-200 font-semibold",
+    success: "bg-emerald-50 text-emerald-800 border-emerald-200 font-semibold",
+    tech: "bg-orange-50 text-orange-800 border-orange-200 font-semibold",
+    orange: "bg-orange-50 text-orange-800 border-orange-200 font-semibold",
+    warning: "bg-amber-50 text-amber-800 border-amber-200 font-semibold",
+    contrast: "bg-zinc-900 text-white font-bold border-zinc-800",
+    danger: "bg-red-50 text-red-800 border-red-200 font-semibold",
+    outline: "bg-transparent text-zinc-800 border-zinc-300",
   };
 
   const sizes = {
-    sm: "px-2 py-0.5 text-[11px]",
-    md: "px-2.5 py-1 text-xs",
-    lg: "px-3 py-1.5 text-sm",
+    sm: "px-2 py-0.5 text-[10px] font-mono",
+    md: "px-2.5 py-1 text-xs font-mono",
+    lg: "px-3 py-1.5 text-sm font-mono",
   };
 
   const selectedVariant = typeStyles || variants[variant] || variants.default;
@@ -52,7 +52,7 @@ export const Badge = React.forwardRef(function Badge(
   return (
     <span
       ref={ref}
-      className={`inline-flex items-center gap-1.5 font-medium rounded-full border ${selectedVariant} ${selectedSize} ${className}`.trim()}
+      className={`inline-flex items-center gap-1.5 rounded-full border ${selectedVariant} ${selectedSize} ${className}`.trim()}
       {...props}
     >
       {children}
