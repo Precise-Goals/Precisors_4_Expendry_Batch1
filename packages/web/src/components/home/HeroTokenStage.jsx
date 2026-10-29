@@ -45,31 +45,48 @@ function Coin({ position, rotation, scale = 1, index = 0 }) {
         />
       </mesh>
 
-      {/* Embossed '$' / EXPEN Emblem Front */}
+      {/* Embossed EXPEN 'E' Token Emblem Front */}
       <group position={[0, 0.07, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         {/* Vertical Spine Bar */}
-        <mesh>
-          <boxGeometry args={[0.1, 0.9, 0.03]} />
+        <mesh position={[-0.2, 0, 0]}>
+          <boxGeometry args={[0.12, 0.8, 0.03]} />
           <meshStandardMaterial
-            color="#ffffff"
+            color="#26d464"
+            emissive="#26d464"
+            emissiveIntensity={0.25}
             metalness={0.95}
             roughness={0.15}
           />
         </mesh>
-        {/* Upper S-Curve Loop */}
-        <mesh position={[-0.1, 0.22, 0]}>
-          <torusGeometry args={[0.22, 0.06, 12, 24, Math.PI * 1.5]} />
+        {/* Top Arm */}
+        <mesh position={[0.02, 0.34, 0]}>
+          <boxGeometry args={[0.34, 0.12, 0.03]} />
           <meshStandardMaterial
-            color="#ffffff"
+            color="#26d464"
+            emissive="#26d464"
+            emissiveIntensity={0.25}
             metalness={0.95}
             roughness={0.15}
           />
         </mesh>
-        {/* Lower S-Curve Loop */}
-        <mesh position={[0.1, -0.22, 0]} rotation={[0, 0, Math.PI]}>
-          <torusGeometry args={[0.22, 0.06, 12, 24, Math.PI * 1.5]} />
+        {/* Mid Arm */}
+        <mesh position={[-0.03, 0, 0]}>
+          <boxGeometry args={[0.24, 0.1, 0.03]} />
           <meshStandardMaterial
-            color="#ffffff"
+            color="#26d464"
+            emissive="#26d464"
+            emissiveIntensity={0.25}
+            metalness={0.95}
+            roughness={0.15}
+          />
+        </mesh>
+        {/* Bottom Arm */}
+        <mesh position={[0.02, -0.34, 0]}>
+          <boxGeometry args={[0.34, 0.12, 0.03]} />
+          <meshStandardMaterial
+            color="#26d464"
+            emissive="#26d464"
+            emissiveIntensity={0.25}
             metalness={0.95}
             roughness={0.15}
           />

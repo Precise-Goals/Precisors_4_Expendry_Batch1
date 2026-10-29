@@ -34,8 +34,8 @@ module.exports = {
           elevated: "#ffffff",
         },
         border: {
-          DEFAULT: "#e4e4e7",
-          bright: "#d4d4d8",
+          DEFAULT: "#16a34a",
+          bright: "#22c55e",
         },
       },
       fontFamily: {

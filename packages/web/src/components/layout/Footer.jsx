@@ -7,13 +7,13 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site footer"
-      className="border-t border-[#e4e4e7] bg-white text-zinc-600 relative overflow-hidden"
+      className="border-t-2 border-[#16a34a] bg-white text-zinc-600 relative overflow-hidden"
     >
       {/* Blueprint grid accent bar */}
-      <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-[#16a34a]/50 to-transparent" />
+      <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-[#16a34a] to-transparent" />
 
       {/* Engineering Header Datum Bar */}
-      <div className="border-b border-[#e4e4e7] bg-[#f8fafc] py-2 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-[#16a34a]/30 bg-[#f8fafc] py-2 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-zinc-500">
           <div className="flex items-center gap-3">
             <span className="text-zinc-400">+ [00,00] DATUM</span>
@@ -37,7 +37,7 @@ export default function Footer() {
               href="/"
               className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-[#09090b] font-montserrat hover:text-[#16a34a] transition-colors"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] shadow-inner">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] shadow-inner">
                 <IconSpindle className="w-4 h-4 text-[#16a34a]" />
               </span>
               <span>
@@ -49,7 +49,7 @@ export default function Footer() {
               archive tacit shop-floor wisdom, earn EXPEN rewards on MST
               testnet, inspect 3D tooling geometries, and consult AI-powered machining intelligence.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#f8fafc] border border-[#e4e4e7] text-xs font-mono text-[#16a34a]">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#f8fafc] border border-[#16a34a] text-xs font-mono text-[#16a34a]">
               <span className="h-2 w-2 rounded-full bg-[#16a34a]" />
               <span>MST Testnet · Chain ID: {CHAIN_ID} · 0x56F0...283a</span>
             </div>
@@ -156,7 +156,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#e4e4e7] text-[11px] font-mono text-zinc-600 mt-2 space-y-1">
+                <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#16a34a] text-[11px] font-mono text-zinc-600 mt-2 space-y-1">
                   <div className="text-[#09090b] font-semibold">TOKENOMICS RULE:</div>
                   <div>{REWARD_PER_POST} EXPEN / Valid Post</div>
                   <div className="text-[#16a34a] font-medium">{DAILY_CAP} EXPEN Daily Cap / Wallet</div>
@@ -167,7 +167,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar: Shop-Floor Terminal Signoff */}
-        <div className="border-t border-[#e4e4e7] pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-zinc-500 gap-4">
+        <div className="border-t border-[#16a34a]/20 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-zinc-500 gap-4">
           <p>© 2026 Expendry Ecosystem. All rights reserved.</p>
           <p className="text-center sm:text-right">
             Engineered for veteran machinists and high-precision CNC tooling. MST Blockchain Testnet Chain ID {CHAIN_ID}.
