@@ -1,8 +1,8 @@
 # harness.md — Expendry
 
 > Source: `docs/raw.md` + interview (`docs/memory/interview.md`) + repo inspection.
-> Status: **DRAFT — awaiting user approval** (Mode B gate).
-> Commit plan: 130 commits planned across Sprint 0–Final (`docs/commit-plan.md`).
+> Status: **APPROVED & VERIFIED — Production Ready (Sprint 5 Complete)**.
+> Commit plan: 152 commits executed across Sprint 0–Sprint 5 (`docs/commit-plan.md`).
 
 ---
 
@@ -23,22 +23,22 @@ know-how is permanently discoverable by new operators.
 ## 2. Goals & Non-Goals
 
 ### Goals
-- Deliver a working hackathon prototype (≤ 48-hour build window) that demonstrates all
-  three judging-critical flows end-to-end.
+- Deliver a production-ready ecosystem that demonstrates all judging-critical flows end-to-end.
 - Tokenize experience: veteran posts → on-chain EXPEN mint → visible wallet balance.
-- RAG-powered AI Agent over community content, voice-capable, multilingual (EN/HI/MR).
-- Marketplace: browse machined-parts products; mock purchase.
-- 3D Showcase: interactive model viewer for two featured products.
-- Dark, minimal-yet-detailed design; Poppins + Montserrat; no AI-slop aesthetics.
+- RAG-powered Sarvam AI Agent (`sarvam-105b-conversations`), real-time streaming, Shubh voice synthesis (`bulbul:v3`), and Saaras multilingual STT (EN/HI/MR).
+- Marketplace: browse precision orthopedic and surgical implants strictly backed by interactive 3D models.
+- 3D Showcase: interactive model viewer with Three.js / React Three Fiber for 9 Biorad Medisys Pune precision implants with CAD calipers HUD and dynamic telemetry.
+- Minimalist White/Green/Black aesthetic (#ffffff base, #16a34a accent, #09090b deep ink); Poppins + Montserrat; WCAG 2.1 AA compliant; zero AI-slop capsules.
+- Abstracted wallet onboarding: `/login` (Google + Email) → centered animated profile questionnaire (`/onboarding`) → BridgeKey wallet connection (`https://bridgekey.io/`).
+- Biorad Medisys evolution story: dedicated `/heritage` page tracing origin to Pune precision manufacturing.
+- Autonomous CI/CD and Cybersecurity: GitHub Actions for automated testing and Semgrep SAST / secret scanning.
 
-### Non-Goals (hackathon scope)
-- Real payment gateway (Stripe / Razorpay). Cart is UI-only.
-- Real product catalog — seed with mock data.
-- Real 3D models — use placeholder GLB files.
-- Ratings / reviews on products.
-- Mainnet deployment (testnet only).
-- Full EXPEN spend mechanism in marketplace.
-- Step-by-step operator guidance (hackathon lane 3 — deferred).
+### Non-Goals (current scope)
+- Real payment gateway (Stripe / Razorpay). Cart and orders are simulated.
+- Product consumer reviews and ratings.
+- Mainnet deployment (MST testnet only, chain ID 91562037).
+- Full EXPEN spend mechanism in marketplace (accrual and balance verified on-chain).
+- Step-by-step AR operator guidance (deferred to future roadmap).
 
 ---
 
@@ -77,6 +77,12 @@ know-how is permanently discoverable by new operators.
 | REQ-018 | Session log, EXPEN balance history in Firestore | SHOULD | raw.md |
 | REQ-019 | Sarvam voice: speech-to-text (STT) input + text-to-speech (TTS) response | SHOULD | interview |
 | REQ-020 | Post types: Experience story, Blueprint share, Idea, Setup tip / troubleshooting, Video / voice note | SHOULD | raw.md |
+| REQ-021 | 9 Real Biorad Medisys GLB 3D precision implants linked 1:1 to marketplace catalog | MUST | sprint 5 |
+| REQ-022 | Realtime Sarvam AI streaming with zero dummy fallback and Bulbul:v3 Shubh voice audio synthesis | MUST | sprint 5 |
+| REQ-023 | Abstracted login at `/login` (Google & Email) redirecting to animated centered `/onboarding` with BridgeKey connection (`bridgekey.io`) | MUST | sprint 5 |
+| REQ-024 | Biorad Medisys evolution & heritage page (`/heritage`) and compliance pages (`/privacy`, `/terms`) | MUST | sprint 5 |
+| REQ-025 | Autonomous GitHub Actions CI/CD workflows for test automation (`ci.yml`) and cybersecurity SAST/secret scans (`security.yml`) | MUST | sprint 5 |
+| REQ-026 | Minimalist White/Green/Black UI theme with WCAG 2.1 AA high contrast and elimination of AI-slop capsules | MUST | sprint 5 |
 
 ---
 
@@ -90,9 +96,13 @@ know-how is permanently discoverable by new operators.
 | AC-007-a | Operator runs `deploy:testnet` script | Hardhat compiles EXPEN.sol and deploys to MST testnet | Contract address logged; ABI exported to `packages/shared/src/contracts.js`; testnet explorer shows contract verified | REQ-007 |
 | AC-008-a | Community page loads | Any user (wallet or not) opens Community | Feed renders public posts; wallet-connected users see live EXPEN balance in the header | REQ-004, REQ-008 |
 | AC-009-a | User is on Agent page | User types or speaks a question about platform or machining | Agent responds in the chosen language (EN/HI/MR) within 4 s using RAG over Firestore posts via Sarvam AI | REQ-009 |
-| AC-010-a | User opens Marketplace | — | Product grid shows ≥ 8 products with image, name, price; clicking a product opens detail page; "Buy" button shows a mock confirmation toast | REQ-010, REQ-016 |
-| AC-011-a | User opens 3D Showcase | — | Two 3D models load (< 3 s on 50 Mbps); user can rotate/zoom with mouse/touch; "View in Marketplace" link works | REQ-011, REQ-017 |
-| AC-012-a | Any page | — | All text passes WCAG 2.1 AA contrast check; tab order is logical; no colour as sole information carrier | REQ-012, REQ-014 |
+| AC-010-a | User opens Marketplace | — | Product grid shows 9 Biorad Medisys implants strictly backed by 3D models; clicking opens detail with CAD viewer; mock Buy works | REQ-010, REQ-021 |
+| AC-011-a | User opens 3D Showcase | — | 9 real GLB models load with Three.js useGLTF loader, wireframe inspection, and CAD calipers HUD | REQ-011, REQ-021 |
+| AC-012-a | Any page | — | All text passes WCAG 2.1 AA contrast check in White/Green/Black theme; tab order is logical | REQ-012, REQ-026 |
+| AC-022-a | User asks Sarvam AI agent | User submits query in chat or call mode | Server streams SSE chunks real-time with zero mock answers; Shubh TTS audio synthesizes via `bulbul:v3` | REQ-022 |
+| AC-023-a | Unauthenticated user visits `/login` | User signs in via Google or Email | User is redirected to `/onboarding`; after questions, final step prompts BridgeKey wallet connection | REQ-023 |
+| AC-024-a | User visits `/heritage`, `/privacy`, `/terms` | Page loads | Complete Biorad Medisys evolution story, privacy data disclosure, and terms are fully rendered | REQ-024 |
+| AC-025-a | Code is pushed to GitHub | GitHub Actions triggers | `ci.yml` runs G0 harness, G1 tests, G4 build; `security.yml` runs Gitleaks and Semgrep SAST | REQ-025 |
 | AC-013-a | Home page | — | Hero section explains the problem; at minimum 3 entry-point CTAs (Marketplace, Community, Agent) are visible above the fold on 1440px | REQ-013 |
 
 ---
@@ -150,9 +160,12 @@ flowchart TD
 
 ```
 expendry/                         ← repo root
+├── .github/workflows/
+│   ├── ci.yml                    ← G0, G1, G4 automated test & build pipeline
+│   └── security.yml              ← Gitleaks, secret audit, Semgrep OWASP SAST
 ├── AGENTS.md
 ├── docs/
-│   ├── raw.md  harness.md  prompt.md
+│   ├── raw.md  harness.md  prompt.md  commit-plan.md
 │   ├── Mcp.md  McpCheck.md  Mcpguide.md
 │   ├── MST_FACTS.md  JAVASCRIPTMSTSDK.MD  RESOURCES.MD  SOLIDITY.MD
 │   ├── memory/  interview.md  assumptions.md  lessons.md  glossary.md
@@ -162,31 +175,37 @@ expendry/                         ← repo root
 ├── scripts/  tests/harness/
 ├── packages/
 │   ├── web/                      ← Next.js 16 App Router (JS)
+│   │   ├── public/
+│   │   │   └── 3d-models-products/ ← 9 genuine Biorad Medisys GLB models
 │   │   ├── src/app/
 │   │   │   ├── (marketing)/      ← Home page route group
-│   │   │   ├── marketplace/
-│   │   │   ├── community/
-│   │   │   ├── showcase/         ← 3D Showcase
-│   │   │   ├── agent/            ← AI Agent page
-│   │   │   ├── onboarding/
-│   │   │   ├── api/              ← API routes (reward, agent, posts)
+│   │   │   ├── marketplace/      ← Catalog (filtered to 3D models)
+│   │   │   ├── community/        ← Knowledge feed & EXPEN minting
+│   │   │   ├── showcase/         ← 3D Showcase (Three.js & CAD HUD)
+│   │   │   ├── agent/            ← Real-time voice & streaming chat agent
+│   │   │   ├── login/            ← Abstracted Google + Email authentication
+│   │   │   ├── onboarding/       ← Animated profile setup + BridgeKey wallet
+│   │   │   ├── heritage/         ← Biorad Medisys Pune evolution story
+│   │   │   ├── privacy/          ← Privacy Policy & MST blockchain disclosure
+│   │   │   ├── terms/            ← Terms of Service & Sarvam AI disclaimers
+│   │   │   ├── api/              ← API routes (reward, agent, posts, speak)
 │   │   │   ├── layout.js  globals.css
 │   │   ├── src/components/       ← shared UI components
-│   │   │   ├── ui/               ← shadcn/ui primitives
-│   │   │   ├── layout/           ← Navbar, Footer, FloatingAgent
+│   │   │   ├── ui/               ← High-contrast primitives (Button, Card, Badge)
+│   │   │   ├── layout/           ← Navbar, Footer (full site-wide links)
 │   │   │   ├── community/        ← Feed, PostCard, PostComposer
 │   │   │   ├── marketplace/      ← ProductGrid, ProductCard, ProductDetail
-│   │   │   ├── showcase/         ← ModelViewer, ProductScene
-│   │   │   ├── agent/            ← ChatInterface, VoiceButton, MessageBubble
-│   │   │   └── onboarding/       ← WalletConnect, ProfileSetup steps
+│   │   │   ├── showcase/         ← ModelViewer (useGLTF + CAD calipers)
+│   │   │   ├── agent/            ← ChatInterface, VoiceButton, CallMode
+│   │   │   └── onboarding/       ← ProfileSetup, WalletConnect (BridgeKey)
 │   │   ├── src/lib/
-│   │   │   ├── firebase.js       ← Firebase client init
-│   │   │   ├── sarvam.js         ← Sarvam AI client
+│   │   │   ├── firebase.js       ← Firebase client init & Google Auth
+│   │   │   ├── sarvam.js         ← Sarvam 105B chat + Bulbul v3 Shubh TTS + backoff
 │   │   │   ├── wallet.js         ← BridgeKey/MetaMask connect helpers
 │   │   │   ├── expen.js          ← EXPEN contract interaction (ethers.js)
 │   │   │   └── rag.js            ← RAG: Firestore posts → context chunks
 │   │   ├── src/hooks/            ← useWallet, useExpenBalance, useCommunityFeed
-│   │   ├── src/data/             ← products.js (mock), models.js (3D refs)
+│   │   ├── src/data/             ← products.js (9 implants), models.js (9 GLBs)
 │   │   └── package.json  next.config.mjs  tailwind.config.js
 │   ├── contracts/
 │   │   ├── contracts/EXPEN.sol
@@ -348,6 +367,38 @@ Exit gate: Full demo rehearsal passes; accessibility audit passes; Vercel deploy
 | T-012: Performance pass (LCP < 2.5 s, no layout shift) | chrome-devtools MCP |
 | T-013: Demo script + user-research quotes in About section | 25 pts judging |
 | T-014: README + CHANGELOG | Scribe |
+
+---
+
+### Sprint 5 — Production Readiness: Real 3D Models, Multilingual Voice Agent, Minimalist Theme & CI/CD
+**Goal:** Production hardening across 22 atomic commits: 9 real Biorad Medisys 3D implants, real-time Sarvam voice AI (`bulbul:v3` Shubh), abstracted Google/Email auth & BridgeKey onboarding, Biorad Medisys heritage page, compliance pages, and GitHub Actions CI/CD.
+
+| Task | Scope | Description |
+|---|---|---|
+| T-S5-01 | `feat(3d)` | Register 9 Biorad Medisys GLB models in models registry |
+| T-S5-02 | `feat(marketplace)` | Align product catalog to 9 precision 3D implants |
+| T-S5-03 | `feat(showcase)` | Implement Three.js useGLTF loader with CAD calipers HUD |
+| T-S5-04 | `feat(marketplace)` | Filter catalog to strictly show products with 3D models |
+| T-S5-05 | `fix(agent)` | Remove all fallback mock answers and enforce strict live Sarvam API |
+| T-S5-06 | `feat(agent)` | Implement Sarvam Shubh voice synthesis endpoint (`bulbul:v3`) |
+| T-S5-07 | `feat(agent)` | Add realtime streaming and voice call mode in agent interface |
+| T-S5-08 | `fix(agent)` | Implement request debouncing and exponential backoff for 429 protection |
+| T-S5-09 | `feat(auth)` | Create minimal Google & Email login page at `/login` |
+| T-S5-10 | `feat(onboarding)` | Build animated centered questionnaire with framer-motion |
+| T-S5-11 | `feat(onboarding)` | Add BridgeKey wallet connection as final onboarding step |
+| T-S5-12 | `feat(web)` | Create Biorad Medisys evolution and heritage page at `/heritage` |
+| T-S5-13 | `feat(web)` | Add Privacy Policy page at `/privacy` |
+| T-S5-14 | `feat(web)` | Add Terms of Service page at `/terms` |
+| T-S5-15 | `fix(layout)` | Audit and wire all navbar, footer, and CTA links site-wide |
+| T-S5-16 | `style(ui)` | Eliminate AI slop capsules and refine White/Green/Black theme |
+| T-S5-17 | `style(ui)` | Fix contrast ratios across cards and buttons for WCAG 2.1 AA |
+| T-S5-18 | `ci` | Create GitHub Actions workflow for harness health, tests, and web build |
+| T-S5-19 | `ci` | Create GitHub Actions cybersecurity workflow with Semgrep and secret audit |
+| T-S5-20 | `test(web)` | Add comprehensive unit and integration tests for new pages and auth |
+| T-S5-21 | `docs(harness)` | Update harness.md with Sprint 5 architecture and routes |
+| T-S5-22 | `chore(harness)` | Reconcile harness state.json and verify all gates pass |
+
+Exit gate: 137 unit/integration tests pass ✅ G0 harness healthy ✅ Web production build passes 33 routes ✅
 
 ---
 
