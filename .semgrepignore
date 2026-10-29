@@ -14,8 +14,9 @@ node_modules/
 dist/
 build/
 
-# Tooling and harness scripts
+# Tooling, CI, and harness scripts
 scripts/
 .agents/
 .claude/
+.github/
 harness/
