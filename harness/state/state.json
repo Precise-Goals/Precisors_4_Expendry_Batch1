@@ -3,7 +3,7 @@
   "profile": "fullstack-web+blockchain",
   "derived_from": {
     "raw_md_sha": "9e53a17cc81bbe1cb4a8c9280ac32ac32f260dcacc6eb3b09c7c5ace5738589c",
-    "harness_md_sha": "ac47fc99591e9185b959582851d726d41748bb5a4561c76d9c193c436e58623d"
+    "harness_md_sha": "c06aab32be8cfdc48a4ab598b15d240a186cf940b4d08c564bb45966cbf16fad"
   },
   "mode": "RETRO",
   "sprint": 6,

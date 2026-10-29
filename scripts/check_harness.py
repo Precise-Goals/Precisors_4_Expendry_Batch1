@@ -143,8 +143,12 @@ def check_stale(root=ROOT):
     errs = []
     for key, rel in (("raw_md_sha", "docs/raw.md"), ("harness_md_sha", "docs/harness.md")):
         f = root / rel
-        if key in d and f.exists() and d[key] != hashlib.sha256(f.read_bytes()).hexdigest():
-            errs.append(f"stale: {rel} changed since harness was generated (re-run reconcile)")
+        if key in d and f.exists():
+            content = f.read_bytes()
+            h_raw = hashlib.sha256(content).hexdigest()
+            h_norm = hashlib.sha256(content.replace(b"\r\n", b"\n")).hexdigest()
+            if d[key] not in (h_raw, h_norm):
+                errs.append(f"stale: {rel} changed since harness was generated (re-run reconcile)")
     return errs
 
 CHECKS = [check_required_files, check_harness_md, check_agents_and_roles, check_agents_md,
