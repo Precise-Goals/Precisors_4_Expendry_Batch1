@@ -135,13 +135,13 @@ export default function VoiceButton({
       {/* Visual audio pulse rings */}
       {isRecording && (
         <span
-          className="absolute -inset-1.5 rounded-full bg-[#26d464]/30 animate-ping motion-reduce:animate-none pointer-events-none"
+          className="absolute -inset-1.5 rounded-full bg-emerald-500/30 animate-ping motion-reduce:animate-none pointer-events-none"
           aria-hidden="true"
         />
       )}
       {isRecording && (
         <span
-          className="absolute -inset-1 rounded-full border border-[#f97316]/60 animate-pulse motion-reduce:animate-none pointer-events-none"
+          className="absolute -inset-1 rounded-full border border-emerald-600/50 animate-pulse motion-reduce:animate-none pointer-events-none"
           aria-hidden="true"
         />
       )}
@@ -196,7 +196,7 @@ export default function VoiceButton({
       {errorMsg && (
         <span
           role="alert"
-          className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs bg-red-950/90 text-red-300 border border-red-800/60 px-2 py-0.5 rounded shadow"
+          className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs bg-rose-50 text-rose-800 border border-rose-200 px-2.5 py-1 rounded-xl shadow-xs font-semibold"
         >
           {errorMsg}
         </span>
