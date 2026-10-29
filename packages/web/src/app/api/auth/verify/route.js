@@ -21,7 +21,6 @@ export async function POST(request) {
       );
     }
     const { address, signature, message } = body;
-    const providedNonce = body.nonce || extractNonceFromMessage(message);
 
     if (!address || !signature || !message) {
       return NextResponse.json(
@@ -30,8 +29,21 @@ export async function POST(request) {
       );
     }
 
+    const extractedNonce = extractNonceFromMessage(message);
+    const providedNonce = body.nonce;
+
+    // Strict nonce binding: body.nonce cannot conflict with nonce in signed challenge message
+    if (providedNonce && extractedNonce && providedNonce !== extractedNonce) {
+      return NextResponse.json(
+        { error: "Authentication failed: Nonce mismatch between payload and challenge message." },
+        { status: 401 }
+      );
+    }
+
+    const nonceToValidate = extractedNonce || providedNonce;
+
     // 1. Nonce validation & replay protection
-    if (!providedNonce || !validateAndConsumeNonce(providedNonce, address)) {
+    if (!nonceToValidate || !validateAndConsumeNonce(nonceToValidate, address)) {
       return NextResponse.json(
         { error: "Authentication failed: Invalid, expired, or replayed nonce." },
         { status: 401 }
