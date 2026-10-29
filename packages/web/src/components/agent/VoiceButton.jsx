@@ -158,17 +158,17 @@ export default function VoiceButton({
             ? "Transcribing voice audio..."
             : "Voice input: press to speak in English, Hindi, or Marathi"
         }
-        className={`relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 active:scale-[0.93] shadow-sm ${
+        className={`relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-[0.93] shadow-xs cursor-pointer ${
           isRecording
-            ? "bg-red-500 text-white shadow-red-500/20 scale-105"
+            ? "bg-rose-500 text-white shadow-rose-500/30 scale-105 animate-pulse"
             : isProcessing
-            ? "bg-[#161616] text-[#a1a1aa] cursor-wait"
-            : "bg-[#121212] border border-[#262626] text-[#26d464] hover:bg-[#181818] hover:border-[#26d464]/60 hover:text-white"
-        } disabled:opacity-50 disabled:cursor-not-allowed`}
+            ? "bg-zinc-100 text-zinc-400 cursor-wait"
+            : "bg-zinc-100 border border-zinc-200 text-zinc-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700"
+        } disabled:opacity-40 disabled:cursor-not-allowed`}
       >
         {isProcessing ? (
           <svg
-            className="w-4 h-4 animate-spin motion-reduce:animate-none text-[#26d464]"
+            className="w-4 h-4 animate-spin motion-reduce:animate-none text-emerald-600"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -189,7 +189,7 @@ export default function VoiceButton({
         ) : isRecording ? (
           <div className="w-3 h-3 rounded-xs bg-white" />
         ) : (
-          <IconMic className="w-4 h-4 text-[#26d464]" />
+          <IconMic className="w-4 h-4 text-zinc-700 hover:text-emerald-700" />
         )}
       </button>
 
