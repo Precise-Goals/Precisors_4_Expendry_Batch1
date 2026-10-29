@@ -172,16 +172,28 @@ export default function Home() {
               {/* Tactile Magnetic CTAs with Emil Kowalski Spring Physics */}
               <motion.div
                 variants={itemVariants}
-                className="flex flex-wrap items-center gap-4 pt-2"
+                className="flex flex-wrap items-center gap-3 pt-2"
               >
                 <MagneticTrack strength={0.2} specular={true}>
                   <Link href="/community">
                     <button
                       type="button"
-                      className="px-8 py-4 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold text-sm sm:text-base shadow-xl shadow-emerald-950/20 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2.5 group"
+                      className="px-7 py-3.5 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm sm:text-base shadow-xl shadow-emerald-950/20 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 group"
                     >
                       <span>Explore Community Knowledge</span>
                       <span className="group-hover:translate-x-1 transition-transform font-mono">→</span>
+                    </button>
+                  </Link>
+                </MagneticTrack>
+
+                <MagneticTrack strength={0.15} specular={true}>
+                  <Link href="/showcase">
+                    <button
+                      type="button"
+                      className="px-6 py-3.5 rounded-full liquid-glass-pill text-zinc-900 hover:text-emerald-800 font-bold text-sm sm:text-base transition-all select-none cursor-pointer flex items-center gap-2"
+                    >
+                      <IconCube3D className="w-4 h-4 text-emerald-700" />
+                      <span>Inspect 3D Implants</span>
                     </button>
                   </Link>
                 </MagneticTrack>
@@ -248,7 +260,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section className="py-12 sm:py-16 bg-white border-b border-[#e4e4e7] relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto rounded-2xl bg-white border border-[#e4e4e7] p-5 sm:p-7 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
+          <div className="max-w-4xl mx-auto rounded-3xl bg-white border border-zinc-200/90 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
             {/* Header Telemetry Row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
               <div className="flex items-center gap-3">
@@ -435,7 +447,7 @@ export default function Home() {
             {/* 01: Experience Hub */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/experience" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -465,7 +477,7 @@ export default function Home() {
             {/* 02: Blueprints CAD/CAM */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/blueprints" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -495,7 +507,7 @@ export default function Home() {
             {/* 03: Sarvam AI Assistant */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/agent" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -525,7 +537,7 @@ export default function Home() {
             {/* 04: 3D CAD Tooling Inspector */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/showcase" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -555,7 +567,7 @@ export default function Home() {
             {/* 05: Prior Art Patent Ledger */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/patent" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -585,7 +597,7 @@ export default function Home() {
             {/* 06: Partners & Investors */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/partners" className="group block h-full">
-                <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/60 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -638,10 +650,10 @@ export default function Home() {
             {/* Step 1: Archive */}
             <div
               onClick={() => setActiveLoopStep(0)}
-              className={`p-6 rounded-2xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
+              className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 0
                   ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
-                  : "bg-[#f8fafc] border-[#e4e4e7] hover:border-zinc-300"
+                  : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
@@ -668,10 +680,10 @@ export default function Home() {
             {/* Step 2: Mint */}
             <div
               onClick={() => setActiveLoopStep(1)}
-              className={`p-6 rounded-2xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
+              className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 1
                   ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
-                  : "bg-[#f8fafc] border-[#e4e4e7] hover:border-zinc-300"
+                  : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
@@ -696,10 +708,10 @@ export default function Home() {
             {/* Step 3: Consult */}
             <div
               onClick={() => setActiveLoopStep(2)}
-              className={`p-6 rounded-2xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
+              className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 2
                   ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
-                  : "bg-[#f8fafc] border-[#e4e4e7] hover:border-zinc-300"
+                  : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
@@ -863,7 +875,7 @@ export default function Home() {
               </div>
 
               {/* DRO Console Box */}
-              <div className="p-6 rounded-2xl bg-[#f8fafc] border border-[#e4e4e7] space-y-6 shadow-sm">
+              <div className="p-7 rounded-3xl bg-white border border-zinc-200/90 space-y-6 shadow-md">
                 <div className="flex items-center justify-between border-b border-[#e4e4e7] pb-3 text-xs font-mono">
                   <span className="text-zinc-700 font-semibold">DAILY VALID CONTRIBUTIONS</span>
                   <div className="flex items-center gap-2">
@@ -935,7 +947,7 @@ export default function Home() {
 
             {/* Right: Milled Token Card */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm rounded-2xl bg-white p-6 border border-[#e4e4e7] shadow-lg shadow-black/5 space-y-6 relative overflow-hidden">
+              <div className="w-full max-w-sm rounded-3xl bg-white p-7 border border-zinc-200/90 shadow-xl shadow-black/5 space-y-6 relative overflow-hidden">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider font-mono text-zinc-600 font-bold">
                     ERC-20 Token
@@ -946,8 +958,8 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col items-center justify-center py-2">
-                  <div className="h-20 w-20 rounded-full bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center shadow-md">
-                    <IconToken className="w-10 h-10 text-[#16a34a]" />
+                  <div className="h-20 w-20 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center shadow-md">
+                    <IconToken className="w-10 h-10 text-emerald-600" />
                   </div>
                   <span className="mt-3 text-2xl font-black tracking-wider text-[#09090b] font-display">
                     EXPEN
@@ -957,7 +969,7 @@ export default function Home() {
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs border-t border-[#e4e4e7] pt-4 font-mono">
+                <div className="space-y-2 text-xs border-t border-zinc-200 pt-4 font-mono">
                   <div className="flex justify-between text-zinc-600 font-medium">
                     <span>Chain ID</span>
                     <span className="text-[#09090b] font-bold">{CHAIN_ID}</span>
@@ -968,23 +980,33 @@ export default function Home() {
                   </div>
                   <div className="flex justify-between text-zinc-600 font-medium">
                     <span>Daily Cap / Wallet</span>
-                    <span className="text-[#16a34a] font-bold">{DAILY_CAP} EXPEN</span>
+                    <span className="text-emerald-700 font-bold">{DAILY_CAP} EXPEN</span>
                   </div>
-                  <div className="flex flex-col gap-1.5 pt-2 border-t border-[#e4e4e7]">
-                    <span className="text-zinc-500 text-[11px] font-semibold">CONTRACT ADDRESS:</span>
-                    <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-[#f8fafc] border border-[#e4e4e7]">
+                  <div className="flex flex-col gap-1.5 pt-2 border-t border-zinc-200">
+                    <div className="flex justify-between items-center text-[11px] font-semibold text-zinc-500">
+                      <span>VERIFIED CONTRACT:</span>
                       <a
                         href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-[#16a34a] hover:underline truncate font-mono font-bold"
+                        className="text-emerald-700 hover:text-emerald-900 font-bold inline-flex items-center gap-1"
+                      >
+                        <span>MSTScan ↗</span>
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-zinc-50 border border-zinc-200">
+                      <a
+                        href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-emerald-800 hover:underline truncate font-mono font-bold"
                       >
                         {EXPEN_ADDRESS.slice(0, 10)}...{EXPEN_ADDRESS.slice(-8)}
                       </a>
                       <button
                         type="button"
                         onClick={handleCopyAddress}
-                        className="px-2.5 py-1 text-[11px] rounded-md bg-white border border-[#e4e4e7] text-zinc-800 hover:bg-[#f4f4f5] transition shrink-0 font-semibold shadow-sm active:scale-95"
+                        className="px-2.5 py-1 text-[11px] rounded-lg bg-white border border-zinc-200 text-zinc-800 hover:bg-zinc-100 transition shrink-0 font-bold shadow-2xs active:scale-95 cursor-pointer"
                       >
                         {copied ? "Copied!" : "Copy"}
                       </button>
