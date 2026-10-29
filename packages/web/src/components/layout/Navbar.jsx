@@ -9,6 +9,7 @@ import { IconSpindle } from "@/components/ui/Icons";
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/heritage", label: "Heritage" },
   { href: "/agent", label: "Agent" },
   { href: "/marketplace", label: "Marketplace" },
   { href: "/experience", label: "Experience" },
@@ -114,14 +115,14 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Action Button: Connect Wallet */}
+        {/* Action Button: Sign In */}
         <div className="hidden sm:flex items-center gap-3">
           <Link
-            href="/onboarding"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#26d464] hover:bg-[#21b856] text-black text-xs font-montserrat font-bold transition-all shadow-md active:scale-95 cursor-pointer"
+            href="/login"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#26d464] hover:bg-[#21b856] text-black text-xs font-montserrat font-bold transition-all shadow-md active:scale-95 cursor-pointer"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-black animate-pulse" />
-            <span>Connect Wallet & Onboard</span>
+            <span>Sign In</span>
           </Link>
         </div>
 
@@ -204,11 +205,11 @@ export default function Navbar() {
           })}
           <div className="pt-2">
             <Link
-              href="/onboarding"
+              href="/login"
               className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold rounded-lg bg-[#26d464] text-black font-montserrat font-bold shadow-md active:scale-98"
             >
               <span className="h-2 w-2 rounded-full bg-black animate-pulse" />
-              <span>Connect Wallet & Onboard</span>
+              <span>Sign In</span>
             </Link>
           </div>
         </nav>
