@@ -14,6 +14,139 @@ const SUGGESTED_PILLS = [
   { label: "लेथवर टूल रनआउट नियंत्रण (मराठी)", prompt: "लेथवर टूल रनआउट कसा कमी करावा आणि सरफेस फिनिश कशी सुधारावी?" },
 ];
 
+function parseInlineFormatting(text) {
+  if (!text) return "";
+
+  // Split by inline code `...`
+  const codeParts = text.split(/(`[^`]+`)/g);
+
+  return codeParts.map((part, pIdx) => {
+    if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+      return (
+        <code
+          key={pIdx}
+          className="px-1.5 py-0.5 rounded-md bg-zinc-100 border border-zinc-200 text-emerald-800 font-mono text-xs font-semibold"
+        >
+          {part.slice(1, -1)}
+        </code>
+      );
+    }
+
+    // Split by bold **...**
+    const boldParts = part.split(/(\*\*[^*]+\*\*)/g);
+    return boldParts.map((bPart, bIdx) => {
+      if (bPart.startsWith("**") && bPart.endsWith("**") && bPart.length > 4) {
+        return (
+          <strong key={bIdx} className="font-bold text-zinc-950 font-poppins">
+            {bPart.slice(2, -2)}
+          </strong>
+        );
+      }
+      return bPart;
+    });
+  });
+}
+
+function renderFormattedMessage(rawText) {
+  if (!rawText) return null;
+
+  // Split text by code blocks (```)
+  const segments = rawText.split(/(```[\s\S]*?```)/g);
+
+  return segments.map((seg, idx) => {
+    if (seg.startsWith("```") && seg.endsWith("```")) {
+      const codeLines = seg.slice(3, -3).trim().split("\n");
+      const firstLine = codeLines[0].trim();
+      const hasLang = firstLine && !firstLine.includes(" ") && codeLines.length > 1;
+      const langTag = hasLang ? firstLine : "";
+      const codeBody = (hasLang ? codeLines.slice(1) : codeLines).join("\n");
+
+      return (
+        <div
+          key={idx}
+          className="my-3 rounded-xl bg-[#09090b] border border-zinc-800 text-zinc-100 overflow-hidden shadow-sm"
+        >
+          {langTag && (
+            <div className="px-3.5 py-1.5 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-400 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center">
+              <span>{langTag}</span>
+              <span className="text-zinc-500 text-[10px]">Snippet</span>
+            </div>
+          )}
+          <pre className="p-3.5 text-xs font-mono leading-relaxed overflow-x-auto text-zinc-200">
+            <code>{codeBody}</code>
+          </pre>
+        </div>
+      );
+    }
+
+    // Process normal text lines
+    const lines = seg.split("\n");
+    return (
+      <div key={idx} className="space-y-1.5 text-zinc-800 text-sm sm:text-base leading-relaxed">
+        {lines.map((line, lineIdx) => {
+          const trimmed = line.trim();
+          if (!trimmed) {
+            return <div key={lineIdx} className="h-1.5" />;
+          }
+
+          // Headers
+          if (trimmed.startsWith("### ")) {
+            return (
+              <h4 key={lineIdx} className="font-montserrat font-bold text-base sm:text-lg text-zinc-950 mt-3 mb-1">
+                {parseInlineFormatting(trimmed.slice(4))}
+              </h4>
+            );
+          }
+          if (trimmed.startsWith("## ")) {
+            return (
+              <h3 key={lineIdx} className="font-montserrat font-extrabold text-lg sm:text-xl text-zinc-950 mt-3.5 mb-1.5">
+                {parseInlineFormatting(trimmed.slice(3))}
+              </h3>
+            );
+          }
+          if (trimmed.startsWith("# ")) {
+            return (
+              <h2 key={lineIdx} className="font-montserrat font-black text-xl sm:text-2xl text-zinc-950 mt-4 mb-2">
+                {parseInlineFormatting(trimmed.slice(2))}
+              </h2>
+            );
+          }
+
+          // Bullet points
+          if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+            return (
+              <div key={lineIdx} className="flex items-start gap-2.5 my-1 pl-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-2 shrink-0" />
+                <span className="text-zinc-800">{parseInlineFormatting(trimmed.slice(2))}</span>
+              </div>
+            );
+          }
+
+          // Numbered lists
+          const numMatch = trimmed.match(/^(\d+)\.\s+(.*)/);
+          if (numMatch) {
+            return (
+              <div key={lineIdx} className="flex items-start gap-2.5 my-1 pl-1">
+                <span className="font-mono text-xs font-bold text-emerald-700 mt-0.5 shrink-0">
+                  {numMatch[1]}.
+                </span>
+                <span className="text-zinc-800">{parseInlineFormatting(numMatch[2])}</span>
+              </div>
+            );
+          }
+
+          // Standard paragraph
+          return (
+            <p key={lineIdx} className="text-zinc-800 leading-relaxed font-poppins">
+              {parseInlineFormatting(line)}
+            </p>
+          );
+        })}
+      </div>
+    );
+  });
+}
+
 export default function ChatInterface({
   lang = "auto",
   onSourcesUpdated,
@@ -220,7 +353,7 @@ export default function ChatInterface({
 
   return (
     <div
-      className={`flex flex-col w-full rounded-2xl sm:rounded-3xl bg-zinc-50/90 border border-zinc-200/90 shadow-md overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-950 transition-all ${
+      className={`flex flex-col w-full rounded-2xl sm:rounded-3xl liquid-glass border border-zinc-200/90 shadow-md overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-950 transition-all ${
         isConversationActive
           ? "h-[74vh] min-h-[520px] max-h-[720px]"
           : "min-h-[380px] sm:min-h-[420px]"
@@ -270,10 +403,10 @@ export default function ChatInterface({
             {/* Monumental Centered Brand Heading */}
             <div className="flex flex-col items-center gap-1.5">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight font-montserrat text-[#09090b]">
-                Expendry AI
+                Expendry
               </h1>
-              <p className="text-xs sm:text-sm font-poppins text-zinc-500 font-medium tracking-wide">
-                Precision Manufacturing &amp; Volunteering Intelligence
+              <p className="text-xs sm:text-sm font-poppins text-zinc-600 font-semibold tracking-wide">
+                Precision Machining &amp; Volunteering Work
               </p>
             </div>
 
@@ -363,7 +496,13 @@ export default function ChatInterface({
                           : "bg-white border border-zinc-200/90 text-zinc-900 rounded-bl-xs shadow-2xs font-poppins"
                       }`}
                     >
-                      <p className="whitespace-pre-wrap">{msg.content || (isLoading ? "Thinking..." : "")}</p>
+                      {isUser ? (
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      ) : (
+                        <div className="text-zinc-800">
+                          {renderFormattedMessage(msg.content || (isLoading ? "Thinking..." : ""))}
+                        </div>
+                      )}
                     </div>
 
                     {!isUser && msg.content && (

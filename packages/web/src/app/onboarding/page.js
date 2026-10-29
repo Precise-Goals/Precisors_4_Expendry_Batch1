@@ -229,7 +229,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 text-zinc-900 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -371,7 +371,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 text-zinc-900 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -489,7 +489,7 @@ export default function OnboardingPage() {
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
-              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6 text-center">
+              <Card className="relative overflow-hidden p-7 sm:p-9 bg-white/95 text-zinc-900 backdrop-blur-2xl border-zinc-200/90 shadow-2xl rounded-4xl space-y-6 text-center">
                 {/* Hairline Progress Indicator */}
                 <div className="absolute top-0 inset-x-0 h-1 bg-zinc-100">
                   <div
@@ -576,7 +576,7 @@ export default function OnboardingPage() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               className="w-full max-w-lg mx-auto"
             >
-              <Card className="p-8 bg-white/95 backdrop-blur-2xl border-zinc-200 text-center shadow-2xl rounded-4xl space-y-6">
+              <Card className="p-8 bg-white/95 text-zinc-900 backdrop-blur-2xl border-zinc-200 text-center shadow-2xl rounded-4xl space-y-6">
                 <div className="flex justify-center">
                   <div className="h-16 w-16 rounded-2xl bg-emerald-50 border-2 border-emerald-500 flex items-center justify-center shadow-md">
                     <IconCheck className="w-8 h-8 text-emerald-600" />

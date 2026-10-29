@@ -1,6 +1,9 @@
 import { describe, it, expect, mock } from "bun:test";
 mock.module("three", () => ({}));
-mock.module("@react-three/fiber", () => ({}));
+mock.module("@react-three/fiber", () => ({
+  useFrame: () => {},
+}));
+mock.module("@react-three/drei", () => ({}));
 import React from "react";
 import { renderToString } from "react-dom/server";
 import {

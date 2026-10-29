@@ -88,7 +88,12 @@ export function detectLanguage(text) {
     "kaise", "kare", "karen", "karein", "karna", "karo", "karega", "karegi",
     "hota", "hoti", "hote", "hai", "hain", "nahin", "kyun", "kyu", "batao",
     "bataye", "batayein", "chahiye", "raha", "rahi", "rahe", "mujhe", "aapko",
-    "apko", "mera", "meri", "mere", "iska", "iski", "iske", "lekin", "kripya"
+    "apko", "mera", "meri", "mere", "iska", "iski", "iske", "lekin", "kripya",
+    "kya", "karu", "karoon", "karege", "kiya", "kiye", "karte", "karta", "karti",
+    "nahi", "kab", "kahan", "kaha", "kidhar", "kaun", "kitna", "kitne", "kitni",
+    "bataiye", "bata", "bolo", "mujhko", "uska", "uski", "uske", "magar",
+    "bhai", "yaar", "namaste", "shukriya", "dhanyawad", "theek", "thik",
+    "kaam", "madad", "chalao", "chalana", "milta", "milega", "samjhao", "sikhao"
   ];
 
   let marathiLatinScore = 0;
