@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/Icons";
 import { CHAIN_ID, EXPLORER_URL, DAILY_CAP, REWARD_PER_POST } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
+import MagneticTrack from "@/components/ui/MagneticTrack";
 
 const SPINDLE_PRESETS = [
   { name: "Inconel 718", rpm: 1800, feed: "0.12 mm/rev", temp: "420°C", load: "78%" },
@@ -145,17 +146,21 @@ export default function Home() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3"
             >
-              <Link href="/community">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto shadow-lg shadow-[#26d464]/15 hover:scale-[1.02] active:scale-[0.98] transition-all">
-                  <span>Explore Community Knowledge</span>
-                  <span className="ml-2 font-mono">→</span>
-                </Button>
-              </Link>
-              <Link href="/onboarding">
-                <Button size="lg" className="w-full sm:w-auto bg-[#161616] text-[#ededed] hover:bg-[#202020] active:scale-[0.98] font-semibold border border-[#2e2e2e] shadow-lg hover:border-[#26d464]/50 transition-all">
-                  <span>Connect Wallet & Onboard</span>
-                </Button>
-              </Link>
+              <MagneticTrack strength={0.25} specular={false}>
+                <Link href="/community">
+                  <Button variant="primary" size="lg" className="w-full sm:w-auto shadow-lg shadow-[#26d464]/20 hover:shadow-[#26d464]/35 font-montserrat uppercase tracking-wider font-semibold">
+                    <span>Explore Community Knowledge</span>
+                    <span className="ml-2 font-mono">→</span>
+                  </Button>
+                </Link>
+              </MagneticTrack>
+              <MagneticTrack strength={0.25} specular={false}>
+                <Link href="/onboarding">
+                  <Button size="lg" variant="secondary" className="w-full sm:w-auto hover:border-[#26d464]/50">
+                    <span>Connect Wallet & Onboard</span>
+                  </Button>
+                </Link>
+              </MagneticTrack>
             </motion.div>
           </div>
 
@@ -164,22 +169,22 @@ export default function Home() {
              ────────────────────────────────────────────────────────── */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 max-w-5xl mx-auto rounded-2xl specular-card bg-[#121212] border border-[#262626] overflow-hidden relative shadow-2xl group"
+            className="mt-12 max-w-5xl mx-auto rounded-2xl specular-card laser-indicator bg-[#121212] border border-[#262626] overflow-hidden relative shadow-2xl group"
           >
             {/* Top Telemetry Overlay */}
             <div className="absolute top-0 left-0 right-0 z-20 px-4 py-3 bg-gradient-to-b from-[#0a0a0a]/90 via-[#0a0a0a]/50 to-transparent flex items-center justify-between text-xs font-mono">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-                <span className="text-[#ededed] font-semibold tracking-wider uppercase">
+                <span className="text-[#ededed] font-semibold tracking-wider uppercase font-montserrat">
                   5-Axis CNC Precision Workstation
                 </span>
-                <span className="text-white/20">|</span>
-                <span className="text-[#a1a1aa] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
+                <span className="text-zinc-600">|</span>
+                <span className="text-[#38bdf8] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
               </div>
               <div className="flex items-center gap-3 text-[#a1a1aa]">
-                <span className="text-[#26d464] font-bold">LASER: 532nm CALIBRATED</span>
-                <span className="text-white/20">·</span>
-                <span>TOL: ±0.005mm</span>
+                <span className="text-[#38bdf8] font-bold">LASER: 532nm CALIBRATED</span>
+                <span className="text-zinc-600">·</span>
+                <span className="text-[#26d464] font-semibold">TOL: ±0.005mm</span>
               </div>
             </div>
 
@@ -195,7 +200,7 @@ export default function Home() {
               />
               {/* Engineering Blueprint Reticle Crosshairs */}
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                <div className="w-24 h-24 border border-[#26d464]/30 rounded-full border-dashed flex items-center justify-center">
+                <div className="w-24 h-24 border border-[#38bdf8]/30 rounded-full border-dashed flex items-center justify-center">
                   <div className="w-2 h-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464]" />
                 </div>
               </div>
@@ -208,14 +213,14 @@ export default function Home() {
             <div className="relative z-20 px-4 py-2.5 bg-[#0e0e0e] border-t border-[#222222] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#a1a1aa]">
               <div className="flex items-center gap-3">
                 <span className="text-[#ededed] font-bold">WORKPIECE: AEROSPACE SHAFT</span>
-                <span className="text-white/20">/</span>
+                <span className="text-zinc-600">/</span>
                 <span>SPINDLE: 1,800 RPM</span>
-                <span className="text-white/20">/</span>
+                <span className="text-zinc-600">/</span>
                 <span className="text-[#26d464]">COOLANT: 70 BAR DUAL JET</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#71717a]">ON-CHAIN PROVENANCE:</span>
-                <span className="text-[#26d464] font-semibold">MST-91562037</span>
+                <span className="text-zinc-500">ON-CHAIN PROVENANCE:</span>
+                <span className="text-[#38bdf8] font-semibold">MST-91562037</span>
               </div>
             </div>
           </motion.div>
@@ -408,7 +413,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* 01: Experience Hub */}
             <Link href="/experience" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -419,10 +424,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       Machinist Experience Hub
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       Harmonic vibration and chatter dampening simulator, audio recordings from master turners, and setup tricks.
                     </p>
                   </div>
@@ -436,7 +441,7 @@ export default function Home() {
 
             {/* 02: Blueprints CAD/CAM */}
             <Link href="/blueprints" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -447,10 +452,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       Engineering Blueprints & CAD
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       STEP, DXF, and SolidWorks drawings for damped boring bars, soft pie jaws, and 5-axis tombstone fixtures.
                     </p>
                   </div>
@@ -464,7 +469,7 @@ export default function Home() {
 
             {/* 03: Sarvam AI Assistant */}
             <Link href="/agent" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -475,10 +480,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       Sarvam AI Machining Assistant
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       Voice-enabled operator consultation in English, Hindi, and Marathi with instant shop-floor BM25 RAG citations.
                     </p>
                   </div>
@@ -492,7 +497,7 @@ export default function Home() {
 
             {/* 04: 3D CAD Tooling Inspector */}
             <Link href="/showcase" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -503,10 +508,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       3D CAD Tooling Inspector
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       Inspect 4-station CNC turret geometries, dimensional calipers (±0.005mm), and lighting environments in Three.js.
                     </p>
                   </div>
@@ -520,7 +525,7 @@ export default function Home() {
 
             {/* 05: Prior Art Patent Ledger */}
             <Link href="/patent" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -531,10 +536,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       Prior Art Patent Ledger
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       Timestamp novel tooling jigs and setup geometries onto MST testnet to establish tamper-proof legal prior art.
                     </p>
                   </div>
@@ -548,7 +553,7 @@ export default function Home() {
 
             {/* 06: Partners & Investors */}
             <Link href="/partners" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 group-hover:shadow-lg group-hover:shadow-[#26d464]/10 transition-all duration-300 relative overflow-hidden specular-card specular-interactive flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="p-2.5 rounded-lg bg-[#181818] border border-[#262626] text-[#26d464] group-hover:scale-105 transition-transform flex items-center justify-center">
@@ -559,10 +564,10 @@ export default function Home() {
                     </Badge>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    <h3 className="text-lg font-bold text-[#ededed] font-montserrat group-hover:text-[#26d464] transition-colors">
                       Manufacturer & Investor Portal
                     </h3>
-                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5">
+                    <p className="text-xs text-[#a1a1aa] leading-relaxed mt-1.5 font-poppins">
                       Toolroom digitization for machine tool OEMs (Mazak, Haas) and industrial Web3 tokenomics for institutional funds.
                     </p>
                   </div>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "framer-motion";
 import { CHAIN_ID } from "shared/constants";
 import { IconSpindle } from "@/components/ui/Icons";
 
@@ -19,6 +20,7 @@ export const NAV_LINKS = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -65,16 +67,16 @@ export default function Navbar() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
             MST-{CHAIN_ID}
           </span>
-          <span className="text-white/20">·</span>
-          <span className="hidden xs:inline">LATHE HUD</span>
-          <span className="hidden xs:inline text-white/20">·</span>
+          <span className="text-zinc-600">·</span>
+          <span className="text-[#38bdf8] hidden xs:inline font-mono">LATHE HUD</span>
+          <span className="text-zinc-600 hidden xs:inline">·</span>
           <span>EXPEN ERC-20</span>
-          <span className="text-white/20">·</span>
+          <span className="text-zinc-600">·</span>
           <span className="text-[#26d464] font-semibold">ONLINE</span>
         </div>
-        <div className="hidden sm:flex items-center gap-3 text-[#71717a]">
-          <span>SYS // PRECISION CNC</span>
-          <span className="text-white/10">|</span>
+        <div className="hidden sm:flex items-center gap-3 text-zinc-500">
+          <span className="text-[#38bdf8]/80">SYS // PRECISION CNC</span>
+          <span className="text-zinc-700">|</span>
           <span>[REF: 18.5204°N, 73.8567°E]</span>
         </div>
       </div>
@@ -84,7 +86,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-[#ededed] hover:text-[#26d464] transition-colors font-display"
+            className="flex items-center gap-2.5 text-lg sm:text-xl font-bold tracking-tight text-[#ededed] hover:text-[#26d464] transition-colors font-montserrat"
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#161616] border border-[#262626] text-[#26d464] shadow-inner">
               <IconSpindle className="w-4 h-4 text-[#26d464]" />
@@ -94,15 +96,15 @@ export default function Navbar() {
             </span>
           </Link>
           <span className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] text-[10px] font-mono text-[#a1a1aa] bg-[#121212] border border-[#262626]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
             MST 91562037
           </span>
         </div>
 
-        {/* Desktop Navigation: Segmented CNC Controller Channel Dock */}
+        {/* Desktop Navigation: Segmented CNC Controller Channel Dock with Fluid Spring Morphing */}
         <nav
           aria-label="Main navigation"
-          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner"
+          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner relative"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -115,23 +117,29 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`relative px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center ${
+                className={`relative px-2.5 py-1 text-xs font-medium rounded-lg transition-colors duration-150 flex items-center z-10 ${
                   isActive
-                    ? "text-[#ededed] bg-[#1c1c1c] border border-white/[0.08] shadow-sm font-semibold"
-                    : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616]"
+                    ? "text-[#ededed] font-semibold"
+                    : "text-[#a1a1aa] hover:text-[#ededed]"
                 }`}
               >
+                {isActive && (
+                  <motion.div
+                    layoutId={shouldReduceMotion ? undefined : "activeNavPill"}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
+                    className="absolute inset-0 bg-[#1c1c1c] border border-white/[0.09] rounded-lg shadow-sm -z-10"
+                  />
+                )}
                 {link.num && (
-                  <span className="font-mono text-[9px] text-white/30 mr-1 group-hover:text-white/60">
+                  <span className="font-mono text-[9px] text-zinc-500 mr-1">
                     {link.num}
                   </span>
                 )}
                 <span>{link.label}</span>
-                {link.badge && (
-                  <span className="ml-1 px-1 py-0.2 text-[9px] font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30 shadow-xs">
-                    {link.badge}
-                  </span>
-                )}
                 {isActive && (
                   <span
                     aria-hidden="true"
@@ -147,7 +155,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/onboarding"
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-98 transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-[0.97] transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
           >
             <span className="h-2 w-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
             <span>Connect Wallet</span>
@@ -205,7 +213,7 @@ export default function Navbar() {
         <nav
           id="mobile-nav-menu"
           aria-label="Mobile navigation"
-          className="md:hidden border-b border-[#262626] bg-[#0a0a0a]/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1"
+          className="xl:hidden border-b border-[#262626] bg-[#0a0a0a]/95 backdrop-blur-xl px-4 pt-2 pb-4 space-y-1"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -226,16 +234,14 @@ export default function Navbar() {
               >
                 <span className="flex items-center gap-2">
                   {link.num && (
-                    <span className="font-mono text-xs text-white/30">
+                    <span className="font-mono text-xs text-zinc-500">
                       {link.num}
                     </span>
                   )}
                   <span>{link.label}</span>
                 </span>
-                {link.badge && (
-                  <span className="px-1.5 py-0.5 text-xs font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30">
-                    {link.badge}
-                  </span>
+                {isActive && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
                 )}
               </Link>
             );
@@ -243,7 +249,7 @@ export default function Navbar() {
           <div className="pt-2">
             <Link
               href="/onboarding"
-              className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold rounded-lg bg-[#26d464] text-black font-display font-bold shadow-md active:scale-98"
+              className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold rounded-lg bg-[#26d464] text-black font-montserrat font-bold shadow-md active:scale-98"
             >
               <span className="h-2 w-2 rounded-full bg-black animate-pulse" />
               <span>Connect Wallet & Onboard</span>

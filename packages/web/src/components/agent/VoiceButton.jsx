@@ -141,7 +141,7 @@ export default function VoiceButton({
       )}
       {isRecording && (
         <span
-          className="absolute -inset-1 rounded-full border border-[#26d464]/50 animate-pulse motion-reduce:animate-none pointer-events-none"
+          className="absolute -inset-1 rounded-full border border-[#38bdf8]/50 animate-pulse motion-reduce:animate-none pointer-events-none"
           aria-hidden="true"
         />
       )}
@@ -158,12 +158,12 @@ export default function VoiceButton({
             ? "Transcribing voice audio..."
             : "Voice input: press to speak in English, Hindi, or Marathi"
         }
-        className={`relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 shadow-sm ${
+        className={`relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 active:scale-[0.93] shadow-sm ${
           isRecording
             ? "bg-red-500 text-white shadow-red-500/20 scale-105"
             : isProcessing
             ? "bg-[#161616] text-[#a1a1aa] cursor-wait"
-            : "bg-[#121212] border border-[#262626] text-[#26d464] hover:bg-[#181818] hover:border-[#26d464]/50"
+            : "bg-[#121212] border border-[#262626] text-[#26d464] hover:bg-[#181818] hover:border-[#26d464]/60 hover:text-white"
         } disabled:opacity-50 disabled:cursor-not-allowed`}
       >
         {isProcessing ? (

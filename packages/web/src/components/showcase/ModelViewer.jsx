@@ -37,7 +37,7 @@ export default function ModelViewer({
   const [isRotating, setIsRotating] = useState(autoRotate);
   const [isWireframe, setIsWireframe] = useState(false);
   const [showCalipers, setShowCalipers] = useState(true);
-  const [lightingPreset, setLightingPreset] = useState("toolroom"); // toolroom, studio, laser
+  const [lightingPreset, setLightingPreset] = useState("cyan-laser"); // toolroom, studio, cyan-laser
   const [cameraKey, setCameraKey] = useState(0);
 
   const STEP = (15 * Math.PI) / 180; // 15 degrees in radians
@@ -74,20 +74,20 @@ export default function ModelViewer({
     <div
       tabIndex={0}
       onKeyDown={handleKeyDown}
-      className={`relative w-full h-full min-h-[420px] bg-[#080808] rounded-2xl overflow-hidden select-none focus:outline-none focus:ring-2 focus:ring-[#26d464] border border-[#262626] ${className}`}
+      className={`relative w-full h-full min-h-[420px] bg-[#080808] rounded-2xl overflow-hidden select-none focus:outline-none focus:ring-2 focus:ring-[#26d464] border border-[#262626] specular-card ${className}`}
       aria-label="3D model viewer CAD workstation"
       aria-roledescription="3D model viewer"
       role="region"
     >
       {/* Top Viewport Telemetry Overlay */}
-      <div className="absolute top-0 left-0 right-0 z-10 px-4 py-2.5 bg-gradient-to-b from-[#0a0a0a]/90 to-transparent flex items-center justify-between text-[11px] font-mono pointer-events-none">
+      <div className="absolute top-0 left-0 right-0 z-10 px-4 py-2.5 bg-gradient-to-b from-[#0a0a0a]/95 to-transparent flex items-center justify-between text-[11px] font-mono pointer-events-none border-b border-white/[0.04]">
         <div className="flex items-center gap-2">
           <span className="text-[#26d464] font-bold">
             {model.id === "lathe-body" ? "T-01" : "T-02"}: {model.name.toUpperCase()}
           </span>
-          <span className="text-white/20">|</span>
-          <span className="text-[#a1a1aa] hidden sm:inline">
-            SEGMENTS: {model.segments || 32} {"//"} {model.geometryType?.toUpperCase()}
+          <span className="text-zinc-600">|</span>
+          <span className="text-[#38bdf8] hidden sm:inline font-mono">
+            DRACO COMPRESSED {"//"} {model.geometryType?.toUpperCase()}
           </span>
         </div>
         <div className="flex items-center gap-2.5 text-[#a1a1aa]">
@@ -95,37 +95,37 @@ export default function ModelViewer({
             <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
             60 FPS
           </span>
-          <span className="text-white/20">·</span>
-          <span>PBR METALLIC: {model.materials?.metalness ?? 0.85}</span>
+          <span className="text-zinc-600">·</span>
+          <span>PBR: {model.materials?.metalness ?? 0.85}</span>
         </div>
       </div>
 
       {/* CAD Coordinate Ticks & Crosshair Markers */}
-      <div aria-hidden="true" className="pointer-events-none select-none text-[10px] font-mono text-white/20">
-        <span className="absolute top-8 left-3">+ [00,00]</span>
-        <span className="absolute top-8 right-3">+ [100,00]</span>
-        <span className="absolute bottom-12 left-3">+ [00,100]</span>
-        <span className="absolute bottom-12 right-3">+ [100,100]</span>
+      <div aria-hidden="true" className="pointer-events-none select-none text-[10px] font-mono text-zinc-600">
+        <span className="absolute top-10 left-3">+ [X: 00.00]</span>
+        <span className="absolute top-10 right-3">+ [Y: 00.00]</span>
+        <span className="absolute bottom-14 left-3">+ [Z: 00.00]</span>
+        <span className="absolute bottom-14 right-3 text-[#38bdf8]/60">+ [DATUM A]</span>
       </div>
 
       {/* Dimensional Caliper Dynamic HUD Lines Overlay */}
       {showCalipers && (
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none select-none z-10">
-          <div className="absolute top-12 left-1/4 right-1/4 flex flex-col items-center">
-            <div className="w-full h-px bg-[#26d464]/40 relative">
+          <div className="absolute top-14 left-1/4 right-1/4 flex flex-col items-center">
+            <div className="w-full h-px bg-[#26d464]/50 relative">
               <span className="absolute -left-1 -top-1.5 h-3 w-px bg-[#26d464]" />
               <span className="absolute -right-1 -top-1.5 h-3 w-px bg-[#26d464]" />
             </div>
-            <span className="text-[10px] font-mono font-bold text-[#26d464] bg-[#0c0c0c]/90 px-2 py-0.5 rounded border border-[#26d464]/30 -mt-2.5 shadow-sm">
+            <span className="text-[10px] font-mono font-bold text-[#26d464] bg-[#0c0c0c]/90 px-2 py-0.5 rounded border border-[#26d464]/40 -mt-2.5 shadow-sm">
               OVERALL LENGTH: 125.00 mm (±0.005)
             </span>
           </div>
 
           <div className="absolute top-1/3 bottom-1/3 right-8 flex items-center">
-            <div className="h-full w-px bg-[#26d464]/40 relative flex items-center">
-              <span className="absolute -top-1 -left-1.5 w-3 h-px bg-[#26d464]" />
-              <span className="absolute -bottom-1 -left-1.5 w-3 h-px bg-[#26d464]" />
-              <span className="text-[9px] font-mono text-[#a1a1aa] bg-[#0c0c0c]/90 px-1 py-0.5 rounded border border-white/10 -rotate-90 -translate-x-5 whitespace-nowrap shadow-sm">
+            <div className="h-full w-px bg-[#38bdf8]/50 relative flex items-center">
+              <span className="absolute -top-1 -left-1.5 w-3 h-px bg-[#38bdf8]" />
+              <span className="absolute -bottom-1 -left-1.5 w-3 h-px bg-[#38bdf8]" />
+              <span className="text-[9px] font-mono text-[#38bdf8] bg-[#0c0c0c]/90 px-1.5 py-0.5 rounded border border-[#38bdf8]/30 -rotate-90 -translate-x-6 whitespace-nowrap shadow-sm">
                 SHANK: 25.00 h6
               </span>
             </div>
@@ -155,30 +155,31 @@ export default function ModelViewer({
                 d="M4 12a8 8 0 018-8v8H4z"
               ></path>
             </svg>
-            <span className="text-xs font-mono">Loading CAD Workstation...</span>
+            <span className="text-xs font-mono">Loading Draco CAD Workstation...</span>
           </div>
         }
       >
         <Canvas
           key={cameraKey}
           camera={{ position: [3, 2.5, 4.5], fov: 42 }}
-          dpr={[1, 2]} // Clamp high-DPI display density to prevent GPU memory exhaustion
+          dpr={[1, 2]}
           shadows
           className="w-full h-full cursor-grab active:cursor-grabbing"
         >
-          {/* Three-point HDR lighting for industrial steel tooling */}
-          <ambientLight intensity={lightingPreset === "laser" ? 0.3 : lightingPreset === "studio" ? 0.85 : 0.65} />
+          {/* Multi-point HDR lighting with technical cyan rim-accent */}
+          <ambientLight intensity={lightingPreset === "cyan-laser" ? 0.4 : lightingPreset === "studio" ? 0.85 : 0.65} />
           <directionalLight
             position={[8, 12, 6]}
-            intensity={lightingPreset === "laser" ? 0.6 : lightingPreset === "studio" ? 2.5 : 1.8}
+            intensity={lightingPreset === "cyan-laser" ? 1.6 : lightingPreset === "studio" ? 2.5 : 1.8}
             castShadow
             shadow-mapSize={[1024, 1024]}
           />
-          <directionalLight position={[-8, -6, -6]} intensity={0.5} />
+          {/* Blue rim-light */}
+          <directionalLight position={[-8, -6, -6]} intensity={0.8} color="#38bdf8" />
           <pointLight
             position={[0, 4, 2]}
-            intensity={lightingPreset === "laser" ? 2.8 : 0.9}
-            color={lightingPreset === "laser" ? "#26d464" : lightingPreset === "studio" ? "#f1f5f9" : "#26d464"}
+            intensity={lightingPreset === "cyan-laser" ? 2.2 : 0.9}
+            color={lightingPreset === "cyan-laser" ? "#26d464" : lightingPreset === "studio" ? "#f1f5f9" : "#38bdf8"}
           />
 
           {/* 3D Tool Model Geometry with Keyboard Rotation Wrapper */}
@@ -234,7 +235,7 @@ export default function ModelViewer({
             onClick={() => setShowCalipers((prev) => !prev)}
             className={`px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${
               showCalipers
-                ? "bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/40"
+                ? "bg-[#38bdf8]/20 text-[#38bdf8] border border-[#38bdf8]/40"
                 : "text-[#a1a1aa] hover:text-[#ededed] bg-[#1a1a1a]"
             }`}
           >
@@ -245,7 +246,7 @@ export default function ModelViewer({
             type="button"
             onClick={() =>
               setLightingPreset((prev) =>
-                prev === "toolroom" ? "studio" : prev === "studio" ? "laser" : "toolroom"
+                prev === "cyan-laser" ? "studio" : prev === "studio" ? "toolroom" : "cyan-laser"
               )
             }
             className="px-2 py-1 rounded text-[11px] font-mono font-medium text-[#ededed] bg-[#1a1a1a] border border-[#333333] hover:border-[#26d464]/40 transition-all capitalize"
@@ -258,14 +259,14 @@ export default function ModelViewer({
             onClick={handleResetView}
             className="px-2 py-1 rounded text-[11px] font-mono font-medium text-[#a1a1aa] hover:text-[#ededed] bg-[#1a1a1a] transition-all"
           >
-            Reset View
+            Reset
           </button>
         </div>
 
         {/* Right Hint */}
-        <div className="hidden md:flex items-center gap-2 text-[10px] font-mono text-[#71717a] bg-[#121212]/90 backdrop-blur px-2.5 py-1 rounded-lg border border-[#262626]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#26d464]"></span>
-          <span>Left-click drag: Rotate · Scroll: Zoom · Arrow keys: ±15°</span>
+        <div className="hidden md:flex items-center gap-2 text-[10px] font-mono text-[#a1a1aa] bg-[#121212]/90 backdrop-blur px-2.5 py-1 rounded-lg border border-[#262626]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></span>
+          <span>Left-click: Rotate · Scroll: Zoom · Arrow keys: ±15°</span>
         </div>
       </div>
     </div>
