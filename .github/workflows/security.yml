@@ -74,11 +74,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Setup Node.js Runtime
-        uses: actions/setup-node@1d43b558a28a475868693a5581bf06cb059d64d1 # v4.2.0
-        with:
-          node-version: "20"
-
       - name: Audit NPM Dependencies
         run: |
+          node -v
+          npm -v
           cd packages/contracts && npm audit --audit-level=high || true
