@@ -167,7 +167,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex flex-col justify-center py-16 sm:px-6 lg:px-8 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-transparent flex flex-col justify-center py-16 sm:px-6 lg:px-8 selection:bg-emerald-100 selection:text-emerald-900 relative">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -178,13 +178,13 @@ export default function LoginPage() {
         <div className="text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 text-xl font-bold tracking-tight text-zinc-900 hover:text-emerald-600 transition font-montserrat"
+            className="inline-flex items-center gap-2.5 text-xl font-bold tracking-tight text-zinc-900 hover:text-emerald-700 transition font-montserrat"
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 text-emerald-400 shadow-md">
+            <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-900 text-emerald-400 shadow-md">
               <IconSpindle className="w-5 h-5 text-emerald-400" />
             </span>
             <span className="tracking-wider text-2xl font-black">
-              EXPEND<span className="text-emerald-600">RY</span>
+              EXPEND<span className="text-emerald-700">RY</span>
             </span>
           </Link>
 
@@ -197,11 +197,11 @@ export default function LoginPage() {
         </div>
 
         {/* Card Box */}
-        <div className="mt-8 bg-white py-8 px-6 sm:px-10 shadow-xl rounded-3xl border border-zinc-200">
+        <div className="mt-8 bg-white/95 backdrop-blur-2xl py-8 px-6 sm:px-10 shadow-2xl rounded-4xl border border-zinc-200/90">
           {error && (
             <div
               role="alert"
-              className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2.5"
+              className="mb-6 p-4 rounded-2xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2.5 font-body"
             >
               <span className="text-base leading-none">⚠️</span>
               <span>{error}</span>
@@ -213,7 +213,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleSignIn}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 rounded-xl border border-zinc-300 bg-white hover:bg-zinc-50 text-zinc-800 text-xs sm:text-sm font-semibold font-montserrat transition shadow-xs active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3.5 rounded-2xl border border-zinc-300/80 bg-white hover:bg-zinc-50 text-zinc-900 text-xs sm:text-sm font-bold font-montserrat transition shadow-xs active:scale-[0.98] disabled:opacity-50 cursor-pointer"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -242,7 +242,7 @@ export default function LoginPage() {
               <div className="w-full border-t border-zinc-200" />
             </div>
             <div className="relative flex justify-center text-xs uppercase font-mono">
-              <span className="bg-white px-3 text-zinc-500">or continue with email</span>
+              <span className="bg-white px-3 text-zinc-500 font-medium">or continue with email</span>
             </div>
           </div>
 
@@ -251,7 +251,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="email-input"
-                className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1"
+                className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
               >
                 Work Email Address
               </label>
@@ -262,14 +262,14 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="machinist@precision-pune.com"
                 required
-                className="w-full px-4 py-2.5 rounded-xl border border-zinc-300 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition"
+                className="w-full px-4 py-3 rounded-2xl border border-zinc-300/80 bg-zinc-50 focus:bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 transition"
               />
             </div>
 
             <div>
               <label
                 htmlFor="password-input"
-                className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1"
+                className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
               >
                 Password
               </label>
@@ -280,7 +280,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-2.5 rounded-xl border border-zinc-300 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition"
+                className="w-full px-4 py-3 rounded-2xl border border-zinc-300/80 bg-zinc-50 focus:bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 transition"
               />
             </div>
 
@@ -288,7 +288,7 @@ export default function LoginPage() {
               <div>
                 <label
                   htmlFor="confirm-password-input"
-                  className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1"
+                  className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider mb-1.5"
                 >
                   Confirm Password
                 </label>
@@ -299,7 +299,7 @@ export default function LoginPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-zinc-300 text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600/20 transition"
+                  className="w-full px-4 py-3 rounded-2xl border border-zinc-300/80 bg-zinc-50 focus:bg-white text-xs sm:text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 transition"
                 />
               </div>
             )}
@@ -307,7 +307,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-2 py-3 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white text-xs sm:text-sm font-bold font-montserrat transition shadow-md active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+              className="w-full mt-2 py-3.5 rounded-2xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs sm:text-sm font-bold font-montserrat transition shadow-lg shadow-emerald-950/20 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
             >
               {isLoading
                 ? "Verifying Credentials..."
@@ -328,7 +328,7 @@ export default function LoginPage() {
                     setIsSignUp(false);
                     setError("");
                   }}
-                  className="font-bold text-emerald-600 hover:underline cursor-pointer"
+                  className="font-bold text-emerald-700 hover:underline cursor-pointer"
                 >
                   Sign in
                 </button>
@@ -342,7 +342,7 @@ export default function LoginPage() {
                     setIsSignUp(true);
                     setError("");
                   }}
-                  className="font-bold text-emerald-600 hover:underline cursor-pointer"
+                  className="font-bold text-emerald-700 hover:underline cursor-pointer"
                 >
                   Create an account
                 </button>
