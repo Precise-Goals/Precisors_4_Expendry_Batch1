@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import {
   IconBlueprint,
   IconCaliper,
@@ -14,8 +13,10 @@ import {
   IconFileCode,
   IconLayers,
   IconCube3D,
+  IconToken,
+  IconShield,
 } from "@/components/ui/Icons";
-import { CHAIN_ID } from "shared/constants";
+import { CHAIN_ID, OPERATOR_ADDRESS } from "shared/constants";
 
 const BLUEPRINTS = [
   {
@@ -38,6 +39,9 @@ const BLUEPRINTS = [
       { key: "Fastener Spec", value: "M8 Grade 12.9 SHCS" },
       { key: "Machine Class", value: "3/4/5-Axis Milling Centers" },
     ],
+    datumA: "Flatness 0.004 mm",
+    datumB: "Perpendicularity 0.006 mm | A",
+    datumC: "Parallelism 0.005 mm | A-B",
   },
   {
     id: "BP-02",
@@ -59,6 +63,9 @@ const BLUEPRINTS = [
       { key: "Concentricity", value: "0.003 mm TIR" },
       { key: "Insert Pocket", value: "ISO CNMG 120408" },
     ],
+    datumA: "Total Runout 0.003 mm",
+    datumB: "Cylindricity 0.005 mm",
+    datumC: "True Position 0.008 mm | A-B",
   },
   {
     id: "BP-03",
@@ -80,6 +87,9 @@ const BLUEPRINTS = [
       { key: "Port Thread", value: "G 1/4\" BSPP" },
       { key: "Weight", value: "185 grams" },
     ],
+    datumA: "Concentricity 0.015 mm",
+    datumB: "Perpendicularity 0.020 mm | A",
+    datumC: "Surface Profile 0.030 mm",
   },
   {
     id: "BP-04",
@@ -101,6 +111,9 @@ const BLUEPRINTS = [
       { key: "Max RPM", value: "3,500 RPM" },
       { key: "Bore Distortion", value: "< 0.004 mm at 15 kN" },
     ],
+    datumA: "Roundness 0.004 mm",
+    datumB: "Concentricity 0.006 mm | A",
+    datumC: "Parallelism 0.008 mm",
   },
   {
     id: "BP-05",
@@ -122,15 +135,19 @@ const BLUEPRINTS = [
       { key: "Squareness", value: "0.005 mm per 300 mm" },
       { key: "Weight", value: "34 kg" },
     ],
+    datumA: "Flatness 0.003 mm",
+    datumB: "Perpendicularity 0.005 mm | A",
+    datumC: "True Position 0.004 mm | A-B",
   },
 ];
 
 export default function BlueprintsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedBlueprint, setSelectedBlueprint] = useState(null);
-  const [unlockedIds, setUnlockedIds] = useState([]);
+  const [unlockedIds, setUnlockedIds] = useState(["BP-01"]);
   const [isUnlocking, setIsUnlocking] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const categories = ["All", "Workholding", "Tooling Fixtures", "Coolant Systems"];
 
@@ -151,6 +168,33 @@ export default function BlueprintsPage() {
     }, 1200);
   };
 
+  const handleDownloadPayload = (bp) => {
+    const dummyCadData = `ISO-10303-21;
+HEADER;
+FILE_DESCRIPTION(('Expendry Precision CAD Model - ${bp.title}'),'2;1');
+FILE_NAME('${bp.id}_spec.step','2026-10-29T12:00:00',('${bp.author}'),('Expendry Decentralized Tooling'),'OpenCASCADE 7.6','MST-Testnet-${CHAIN_ID}','');
+FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
+ENDSEC;
+DATA;
+#1=CARTESIAN_POINT('',(0.,0.,0.));
+#2=DIRECTION('',(0.,0.,1.));
+#3=AXIS2_PLACEMENT_3D('',#1,#2,#2);
+#4=TOLERANCE_ZONE('${bp.tolerance}',#3);
+#5=EXPEN_OPERATOR_ANCHOR('${OPERATOR_ADDRESS}');
+ENDSEC;
+END-ISO-10303-21;`;
+
+    const blob = new Blob([dummyCadData], { type: "application/step" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${bp.id}_${bp.title.replace(/[^a-zA-Z0-9]/g, "_")}.step`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#26d464]/30 selection:text-[#ededed] bg-blueprint-grid">
       {/* ──────────────────────────────────────────────────────────
@@ -158,26 +202,26 @@ export default function BlueprintsPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Blueprints Header"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#1f1f1f]"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#262626]"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-white/20">+ [CAD/CAM // GD&T]</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-white/20">+ [ISO-2768-mK]</div>
+          <div className="absolute top-4 left-4 text-[10px] font-mono text-zinc-500">+ [CAD/CAM // GD&T]</div>
+          <div className="absolute top-4 right-4 text-[10px] font-mono text-zinc-500">+ [ISO-2768-mK]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626]">
             <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
             <span className="text-xs font-mono font-medium text-[#ededed]">Engineering Blueprints & GD&T CAD Crib</span>
-            <span className="text-white/20">•</span>
-            <span className="text-xs font-mono text-[#26d464]">MST-91562037</span>
+            <span className="text-zinc-600">•</span>
+            <span className="text-xs font-mono text-[#26d464]">MST-{CHAIN_ID}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-display leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-montserrat leading-[1.15]">
             Machinist CAD/CAM Blueprints & Tooling Specs
           </h1>
 
-          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins">
             Precision engineering files, custom soft-jaw drawings, chatter-damped boring sleeves, and 5-axis workholding fixtures contributed by veteran toolmakers. Every print features verifiable GD&T tolerances and cryptographic provenance.
           </p>
 
@@ -191,8 +235,8 @@ export default function BlueprintsPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 py-1.5 rounded-lg border transition ${
                     selectedCategory === cat
-                      ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold"
-                      : "bg-[#121212] border-[#262626] text-[#71717a] hover:text-[#ededed]"
+                      ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold shadow-sm shadow-[#26d464]/20"
+                      : "bg-[#121212] border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838]"
                   }`}
                 >
                   {cat}
@@ -206,7 +250,7 @@ export default function BlueprintsPage() {
                 placeholder="Search drawings by alloy or fixture..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg bg-[#121212] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464]"
+                className="w-full px-3 py-1.5 rounded-lg bg-[#121212] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-zinc-500 focus:outline-none focus:border-[#26d464]"
               />
             </div>
           </div>
@@ -227,7 +271,7 @@ export default function BlueprintsPage() {
               return (
                 <div
                   key={bp.id}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-4 hover:border-[#383838] transition flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-4 hover:border-[#383838] transition flex flex-col justify-between"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono">
@@ -237,29 +281,29 @@ export default function BlueprintsPage() {
                       </span>
                     </div>
 
-                    <h2 className="text-lg font-bold text-[#ededed] font-display">
+                    <h2 className="text-lg font-bold text-[#ededed] font-montserrat">
                       {bp.title}
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
                       {bp.description}
                     </p>
 
                     <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#0e0e0e] border border-[#222222] text-xs font-mono text-[#a1a1aa]">
                       <div>
-                        <span className="text-[#71717a] block text-[10px]">TOLERANCE:</span>
+                        <span className="text-zinc-500 block text-[10px]">TOLERANCE:</span>
                         <span className="text-[#ededed]">{bp.tolerance}</span>
                       </div>
                       <div>
-                        <span className="text-[#71717a] block text-[10px]">MATERIAL:</span>
+                        <span className="text-zinc-500 block text-[10px]">MATERIAL:</span>
                         <span className="text-[#ededed] truncate block">{bp.material}</span>
                       </div>
                       <div>
-                        <span className="text-[#71717a] block text-[10px]">SURFACE:</span>
+                        <span className="text-zinc-500 block text-[10px]">SURFACE:</span>
                         <span className="text-[#26d464]">{bp.surfaceFinish}</span>
                       </div>
                       <div>
-                        <span className="text-[#71717a] block text-[10px]">CAD FORMAT:</span>
+                        <span className="text-zinc-500 block text-[10px]">CAD FORMAT:</span>
                         <span className="text-[#ededed] truncate block">{bp.format}</span>
                       </div>
                     </div>
@@ -279,11 +323,11 @@ export default function BlueprintsPage() {
                     {isUnlocked ? (
                       <button
                         type="button"
-                        onClick={() => alert(`Starting download for ${bp.title} (${bp.format})`)}
+                        onClick={() => handleDownloadPayload(bp)}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#26d464]/20 border border-[#26d464]/40 text-[#26d464] text-xs font-mono font-bold hover:bg-[#26d464]/30 transition"
                       >
                         <IconDownload className="w-4 h-4" />
-                        <span>Download CAD</span>
+                        <span>Download STEP</span>
                       </button>
                     ) : (
                       <button
@@ -311,45 +355,62 @@ export default function BlueprintsPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
         >
-          <div className="w-full max-w-2xl rounded-2xl bg-[#121212] border border-[#2e2e2e] shadow-2xl p-6 space-y-6 max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-2xl rounded-2xl bg-[#121212] border border-[#262626] specular-card shadow-2xl p-6 space-y-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-[#262626] pb-4">
               <div>
                 <span className="text-xs font-mono text-[#26d464] font-bold">
-                  [{selectedBlueprint.id}] // GD&T INSPECTION VIEW
+                  [{selectedBlueprint.id}] // GD&T INSPECTION SCHEMATIC
                 </span>
-                <h3 className="text-xl font-bold text-[#ededed] font-display mt-1">
+                <h3 className="text-xl font-bold text-[#ededed] font-montserrat mt-1">
                   {selectedBlueprint.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedBlueprint(null)}
-                className="text-[#71717a] hover:text-[#ededed] text-sm font-mono px-2 py-1 rounded bg-[#181818] border border-[#262626]"
+                className="text-[#a1a1aa] hover:text-[#ededed] text-sm font-mono px-2 py-1 rounded bg-[#181818] border border-[#262626]"
               >
                 ✕ Close
               </button>
             </div>
 
             {/* Wireframe CAD Blueprint Drawing simulation */}
-            <div className="w-full h-48 rounded-xl bg-[#070b12] border border-[#1e2a3a] p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
-              <div className="flex justify-between text-[#38bdf8]/60">
-                <span>DATUM A: [FLATNESS 0.005 | A]</span>
-                <span>ISO 2768-mK</span>
+            <div className="w-full rounded-xl bg-[#080d14] border border-[#1e2a3a] p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
+              <div className="flex justify-between text-[#38bdf8]/70 border-b border-[#1e2a3a]/60 pb-2">
+                <span>DATUM A: [{selectedBlueprint.datumA}]</span>
+                <span>TOL: {selectedBlueprint.tolerance}</span>
+                <button
+                  type="button"
+                  onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.25 : 1))}
+                  className="text-xs text-[#26d464] hover:underline"
+                >
+                  Zoom {zoomLevel}x
+                </button>
               </div>
-              <div className="flex items-center justify-center">
-                <div className="border border-[#38bdf8]/40 border-dashed w-48 h-24 rounded flex items-center justify-center relative">
-                  <span className="text-[#38bdf8] font-bold tracking-wider">
+
+              <div className="py-6 flex items-center justify-center transition-transform duration-300" style={{ transform: `scale(${zoomLevel})` }}>
+                <div className="border border-[#38bdf8]/50 border-dashed w-56 h-28 rounded flex flex-col items-center justify-center relative bg-[#38bdf8]/5">
+                  <span className="text-[#38bdf8] font-bold tracking-wider text-xs">
                     {selectedBlueprint.category.toUpperCase()}
                   </span>
-                  <div className="absolute -top-3 text-[#38bdf8]/80">◄── 120.00 ±0.01 ──►</div>
-                  <div className="absolute -left-4 rotate-90 text-[#38bdf8]/80">65.0 ±0.02</div>
+                  <span className="text-[10px] text-zinc-400 mt-0.5">{selectedBlueprint.material}</span>
+                  <div className="absolute -top-3 text-[#38bdf8]/90 bg-[#080d14] px-1.5 border border-[#38bdf8]/40 rounded">
+                    ◄── 120.00 ±0.005 ──►
+                  </div>
+                  <div className="absolute -left-5 -rotate-90 text-[#38bdf8]/90 bg-[#080d14] px-1 border border-[#38bdf8]/40 rounded">
+                    65.0 ±0.005
+                  </div>
+                  <div className="absolute -bottom-3 text-[#26d464] bg-[#080d14] px-1.5 border border-[#26d464]/40 rounded">
+                    {selectedBlueprint.surfaceFinish}
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-between text-[#38bdf8]/60">
-                <span>AUTHOR: {selectedBlueprint.author}</span>
-                <span>FILE: {selectedBlueprint.fileSize}</span>
+
+              <div className="flex justify-between text-[#38bdf8]/70 border-t border-[#1e2a3a]/60 pt-2">
+                <span>DATUM B: [{selectedBlueprint.datumB}]</span>
+                <span>DATUM C: [{selectedBlueprint.datumC}]</span>
               </div>
             </div>
 
@@ -364,7 +425,7 @@ export default function BlueprintsPage() {
                     key={idx}
                     className="p-2.5 rounded bg-[#181818] border border-[#262626] flex justify-between"
                   >
-                    <span className="text-[#71717a]">{s.key}:</span>
+                    <span className="text-zinc-500">{s.key}:</span>
                     <span className="text-[#ededed] font-semibold">{s.value}</span>
                   </div>
                 ))}
@@ -384,10 +445,10 @@ export default function BlueprintsPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => alert(`Downloading CAD package for ${selectedBlueprint.id}`)}
+                  onClick={() => handleDownloadPayload(selectedBlueprint)}
                 >
                   <IconDownload className="w-4 h-4 mr-1.5" />
-                  <span>Download Blueprint Package</span>
+                  <span>Download STEP CAD Package</span>
                 </Button>
               ) : (
                 <Button
@@ -397,7 +458,7 @@ export default function BlueprintsPage() {
                   disabled={isUnlocking}
                 >
                   <IconLock className="w-4 h-4 mr-1.5" />
-                  <span>Unlock for {selectedBlueprint.costExpen} EXPEN</span>
+                  <span>{isUnlocking ? "Verifying..." : `Unlock for ${selectedBlueprint.costExpen} EXPEN`}</span>
                 </Button>
               )}
             </div>

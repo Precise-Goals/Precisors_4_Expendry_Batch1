@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
 import {
   IconCertificate,
   IconShield,
@@ -14,8 +13,9 @@ import {
   IconExternal,
   IconFileCode,
   IconAlert,
+  IconDownload,
 } from "@/components/ui/Icons";
-import { CHAIN_ID, EXPLORER_URL } from "shared/constants";
+import { CHAIN_ID, EXPLORER_URL, OPERATOR_ADDRESS } from "shared/constants";
 
 const ACTIVE_PATENTS = [
   {
@@ -65,21 +65,34 @@ export default function PatentPage() {
   const [isStamping, setIsStamping] = useState(false);
   const [stampedCert, setStampedCert] = useState(null);
 
-  const handleRegister = (e) => {
+  const computeRealSha256 = async (str) => {
+    try {
+      const buffer = new TextEncoder().encode(str);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return "0x" + hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+    } catch {
+      return "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
+    }
+  };
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (!title || !inventor || !description) return;
 
     setIsStamping(true);
+    const payloadString = `${title}|${inventor}|${category}|${description}|${Date.now()}`;
+    const realHash = await computeRealSha256(payloadString);
+    const pseudoBlock = (4900000 + Math.floor(Math.random() * 50000)).toLocaleString();
+
     setTimeout(() => {
-      const pseudoHash = "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
-      const pseudoBlock = (4900000 + Math.floor(Math.random() * 50000)).toLocaleString();
       const newPat = {
         id: `EXP-PAT-00${inventions.length + 1}`,
         title,
         inventor,
         mstBlock: pseudoBlock,
         timestamp: new Date().toISOString().replace("T", " ").substring(0, 16) + " UTC",
-        sha256Hash: pseudoHash,
+        sha256Hash: realHash,
         status: "Immutable Prior Art",
         royaltyTier: "40 EXPEN / Production License",
         description,
@@ -91,7 +104,33 @@ export default function PatentPage() {
       setTitle("");
       setInventor("");
       setDescription("");
-    }, 1500);
+    }, 1200);
+  };
+
+  const handleDownloadProof = (cert) => {
+    const proofJson = {
+      standard: "35 U.S.C. § 102 Cryptographic Prior Art Record",
+      network: `MST Testnet (Chain ID: ${CHAIN_ID})`,
+      operator: OPERATOR_ADDRESS,
+      patentId: cert.id,
+      title: cert.title,
+      inventor: cert.inventor,
+      timestampUtc: cert.timestamp,
+      blockHeight: cert.mstBlock,
+      sha256Digest: cert.sha256Hash,
+      claimSummary: cert.description,
+      verificationNotice: "Cryptographically immutable prior art timestamped to prevent subsequent predatory patent claims.",
+    };
+
+    const blob = new Blob([JSON.stringify(proofJson, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${cert.id}_PriorArt_Certificate.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -101,42 +140,42 @@ export default function PatentPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Patent Header"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#1f1f1f]"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#262626]"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-white/20">+ [PATENT // PRIOR ART]</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-white/20">+ [35-USC-102]</div>
+          <div className="absolute top-4 left-4 text-[10px] font-mono text-zinc-500">+ [PATENT // PRIOR ART]</div>
+          <div className="absolute top-4 right-4 text-[10px] font-mono text-zinc-500">+ [35-USC-102]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626]">
             <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
             <span className="text-xs font-mono font-medium text-[#ededed]">Decentralized Tooling IP & Prior Art Protocol</span>
-            <span className="text-white/20">•</span>
-            <span className="text-xs font-mono text-[#26d464]">MST Blockchain Testnet</span>
+            <span className="text-zinc-600">•</span>
+            <span className="text-xs font-mono text-[#26d464]">MST Blockchain (Chain {CHAIN_ID})</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-display leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-montserrat leading-[1.15]">
             Cryptographic Manufacturing Patents & Prior Art Ledger
           </h1>
 
-          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins">
             Protect novel tooling jigs, custom boring bars, and fixturing innovations against predatory patent trolls.
             By timestamping your designs cryptographically onto MST testnet, you establish legally provable prior art
             while enabling peer-to-peer EXPEN licensing.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono">
-            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626]">
-              <span className="text-[#71717a] block text-[10px]">LEGAL RECOGNITION:</span>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <span className="text-zinc-500 block text-[10px]">LEGAL RECOGNITION:</span>
               <span className="text-[#ededed] font-bold">35 U.S.C. § 102 Proof</span>
             </div>
-            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626]">
-              <span className="text-[#71717a] block text-[10px]">TIMESTAMP ENGINE:</span>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <span className="text-zinc-500 block text-[10px]">TIMESTAMP ENGINE:</span>
               <span className="text-[#26d464] font-bold">MST Testnet Block Height</span>
             </div>
-            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626]">
-              <span className="text-[#71717a] block text-[10px]">ROYALTY ROUTING:</span>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <span className="text-zinc-500 block text-[10px]">ROYALTY ROUTING:</span>
               <span className="text-[#ededed] font-bold">Automated EXPEN Smart Contracts</span>
             </div>
           </div>
@@ -148,7 +187,7 @@ export default function PatentPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Timestamp Engine"
-        className="py-14 sm:py-20 border-b border-[#1f1f1f] bg-[#0c0c0c]/80"
+        className="py-14 sm:py-20 border-b border-[#262626] bg-[#0c0c0c]/90"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="space-y-2">
@@ -158,17 +197,17 @@ export default function PatentPage() {
                 On-Chain Prior Art Generator
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               Register Shop-Floor Invention on MST Testnet
             </h2>
-            <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-2xl">
+            <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-2xl font-poppins">
               Enter your mechanical concept, CAD specification, or fixture description. Our system computes a SHA-256 digest and records the immutable proof on the blockchain.
             </p>
           </div>
 
           <form
             onSubmit={handleRegister}
-            className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-[#262626] space-y-6"
+            className="p-6 sm:p-8 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-6"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -181,7 +220,7 @@ export default function PatentPage() {
                   placeholder="e.g. Self-Equalizing Twin Pin Collet System"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] focus:outline-none focus:border-[#26d464]"
+                  className="w-full px-3.5 py-2 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-zinc-500 focus:outline-none focus:border-[#26d464]"
                 />
               </div>
 
@@ -195,7 +234,7 @@ export default function PatentPage() {
                   placeholder="e.g. Rameshwar Patil (Apex Machining)"
                   value={inventor}
                   onChange={(e) => setInventor(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] focus:outline-none focus:border-[#26d464]"
+                  className="w-full px-3.5 py-2 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-zinc-500 focus:outline-none focus:border-[#26d464]"
                 />
               </div>
             </div>
@@ -222,9 +261,9 @@ export default function PatentPage() {
                 <label className="text-xs font-mono uppercase text-[#a1a1aa] block mb-1.5">
                   Simulated CAD File Attachment
                 </label>
-                <div className="px-3 py-2 rounded-lg bg-[#181818] border border-dashed border-[#383838] text-xs font-mono text-[#71717a] flex items-center justify-between">
+                <div className="px-3 py-2 rounded-lg bg-[#181818] border border-dashed border-[#383838] text-xs font-mono text-zinc-400 flex items-center justify-between">
                   <span>fixture_blueprint_rev2.step</span>
-                  <span className="text-[#26d464]">Ready</span>
+                  <span className="text-[#26d464] font-semibold">Ready for Hash</span>
                 </div>
               </div>
             </div>
@@ -239,12 +278,12 @@ export default function PatentPage() {
                 placeholder="Describe the mechanical operation, critical dimensions, dampening mechanism, and why this design improves on conventional setups..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] focus:outline-none focus:border-[#26d464]"
+                className="w-full px-3.5 py-2.5 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-zinc-500 focus:outline-none focus:border-[#26d464]"
               />
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-              <div className="text-[11px] font-mono text-[#71717a]">
+              <div className="text-[11px] font-mono text-[#a1a1aa]">
                 <span>Zero Gas Fee · Gasless Operator Stamping on MST Chain ID {CHAIN_ID}</span>
               </div>
 
@@ -266,7 +305,7 @@ export default function PatentPage() {
 
           {/* Stamped Certificate Preview */}
           {stampedCert && (
-            <div className="p-6 rounded-2xl bg-[#0d1610] border border-[#26d464]/40 space-y-4">
+            <div className="p-6 rounded-2xl bg-[#0d1610] border border-[#26d464]/40 specular-card space-y-4">
               <div className="flex items-center justify-between border-b border-[#26d464]/20 pb-3">
                 <div className="flex items-center gap-2">
                   <IconShield className="w-5 h-5 text-[#26d464]" />
@@ -280,7 +319,7 @@ export default function PatentPage() {
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-lg font-bold text-[#ededed] font-display">
+                <h3 className="text-lg font-bold text-[#ededed] font-montserrat">
                   {stampedCert.title}
                 </h3>
                 <p className="text-xs font-mono text-[#a1a1aa]">
@@ -288,15 +327,26 @@ export default function PatentPage() {
                 </p>
               </div>
 
-              <div className="p-3 rounded-lg bg-[#0a0a0a] border border-[#262626] text-xs font-mono space-y-1">
-                <div className="flex justify-between text-[#71717a]">
+              <div className="p-3 rounded-lg bg-[#0a0a0a] border border-[#262626] text-xs font-mono space-y-1.5">
+                <div className="flex justify-between text-zinc-400">
                   <span>MST BLOCK HEIGHT:</span>
                   <span className="text-[#ededed]">#{stampedCert.mstBlock}</span>
                 </div>
-                <div className="flex justify-between text-[#71717a] gap-2">
+                <div className="flex justify-between text-zinc-400 gap-2">
                   <span>SHA-256 DIGEST:</span>
                   <span className="text-[#26d464] truncate">{stampedCert.sha256Hash}</span>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => handleDownloadProof(stampedCert)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181818] border border-[#262626] text-xs font-mono text-[#ededed] hover:text-[#26d464] hover:border-[#26d464] transition"
+                >
+                  <IconDownload className="w-4 h-4 text-[#26d464]" />
+                  <span>Download Legal Certificate JSON</span>
+                </button>
               </div>
             </div>
           )}
@@ -313,10 +363,10 @@ export default function PatentPage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#262626] pb-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
                 Active Community Prior Art Registry
               </h2>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1">
+              <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1 font-poppins">
                 Verified records anchoring machinist innovations to MST testnet blocks.
               </p>
             </div>
@@ -329,7 +379,7 @@ export default function PatentPage() {
             {inventions.map((pat) => (
               <div
                 key={pat.id}
-                className="p-6 rounded-2xl bg-[#121212] border border-[#262626] hover:border-[#383838] transition space-y-4"
+                className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card hover:border-[#383838] transition space-y-4"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1f1f1f] pb-3">
                   <div className="flex items-center gap-2">
@@ -340,27 +390,36 @@ export default function PatentPage() {
                       {pat.status}
                     </span>
                   </div>
-                  <div className="text-xs font-mono text-[#71717a]">
+                  <div className="text-xs font-mono text-[#a1a1aa]">
                     MST Block #{pat.mstBlock} · {pat.timestamp}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-base font-bold text-[#ededed] font-display">
+                  <h3 className="text-base font-bold text-[#ededed] font-montserrat">
                     {pat.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1.5 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1.5 leading-relaxed font-poppins">
                     {pat.description}
                   </p>
                 </div>
 
                 <div className="p-3 rounded-xl bg-[#0a0a0a] border border-[#222222] flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
                   <div className="flex items-center gap-2 truncate">
-                    <span className="text-[#71717a] shrink-0">DIGEST:</span>
+                    <span className="text-zinc-500 shrink-0">DIGEST:</span>
                     <span className="text-[#ededed] truncate">{pat.sha256Hash}</span>
                   </div>
-                  <div className="text-[#26d464] shrink-0 font-semibold">
-                    {pat.royaltyTier}
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-[#26d464] font-semibold">
+                      {pat.royaltyTier}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleDownloadProof(pat)}
+                      className="text-xs text-[#a1a1aa] hover:text-[#26d464] underline"
+                    >
+                      Export Proof
+                    </button>
                   </div>
                 </div>
               </div>

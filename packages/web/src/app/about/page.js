@@ -104,11 +104,11 @@ export default function AboutPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="About Hero"
-        className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-[#1f1f1f]"
+        className="relative overflow-hidden pt-12 pb-20 sm:pt-20 sm:pb-28 border-b border-[#262626]"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-white/20">+ [MANIFESTO // 01]</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-white/20">+ [MST-{CHAIN_ID}]</div>
+          <div className="absolute top-4 left-4 text-[10px] font-mono text-zinc-500">+ [MANIFESTO // 01]</div>
+          <div className="absolute top-4 right-4 text-[10px] font-mono text-zinc-500">+ [MST-{CHAIN_ID}]</div>
         </div>
 
         <motion.div
@@ -120,20 +120,20 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626]">
             <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
             <span className="text-xs font-mono font-medium text-[#ededed]">Expendry Protocol Manifesto</span>
-            <span className="text-white/20">•</span>
+            <span className="text-zinc-600">•</span>
             <span className="text-xs font-mono text-[#26d464]">Where Experience Never Retires</span>
           </motion.div>
 
           <motion.h1
             variants={itemVariants}
-            className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-display leading-[1.15]"
+            className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-montserrat leading-[1.15]"
           >
             Preserving the Tacit Soul of the Machine Shop
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl"
+            className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins"
           >
             Across CNC machine shops, toolrooms, and aerospace fabrication facilities worldwide,
             a quiet crisis is underway. An estimated 2.7 million veteran machinists will retire
@@ -143,7 +143,7 @@ export default function AboutPage() {
 
           <motion.p
             variants={itemVariants}
-            className="text-sm sm:text-base text-[#ededed] leading-relaxed max-w-3xl font-medium"
+            className="text-sm sm:text-base text-[#ededed] leading-relaxed max-w-3xl font-poppins font-medium"
           >
             Expendry is built on a single uncompromising thesis: <span className="text-[#26d464]">shop-floor experience is a high-value economic asset.</span> By combining gasless on-chain rewards on MST testnet with multilingual Sarvam AI intelligence, we ensure veteran knowledge is permanently preserved, properly compensated, and immediately actionable for the next generation.
           </motion.p>
@@ -153,23 +153,23 @@ export default function AboutPage() {
             variants={itemVariants}
             className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono"
           >
-            <div className="p-3 rounded-xl bg-[#121212] border border-[#262626]">
-              <div className="text-[#a1a1aa] text-[10px] uppercase">Retirement Wave</div>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <div className="text-zinc-500 text-[10px] uppercase">Retirement Wave</div>
               <div className="text-lg font-bold text-[#ededed] mt-0.5">2.7M Operators</div>
               <div className="text-[10px] text-amber-400 mt-0.5">Global Attrition</div>
             </div>
-            <div className="p-3 rounded-xl bg-[#121212] border border-[#262626]">
-              <div className="text-[#a1a1aa] text-[10px] uppercase">Reward / Valid Post</div>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <div className="text-zinc-500 text-[10px] uppercase">Reward / Valid Post</div>
               <div className="text-lg font-bold text-[#26d464] mt-0.5">{REWARD_PER_POST} EXPEN</div>
               <div className="text-[10px] text-[#a1a1aa] mt-0.5">Instant On-Chain Mint</div>
             </div>
-            <div className="p-3 rounded-xl bg-[#121212] border border-[#262626]">
-              <div className="text-[#a1a1aa] text-[10px] uppercase">Daily Wallet Cap</div>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <div className="text-zinc-500 text-[10px] uppercase">Daily Wallet Cap</div>
               <div className="text-lg font-bold text-[#ededed] mt-0.5">{DAILY_CAP} EXPEN</div>
               <div className="text-[10px] text-[#a1a1aa] mt-0.5">Sybil-Resistant Limit</div>
             </div>
-            <div className="p-3 rounded-xl bg-[#121212] border border-[#262626]">
-              <div className="text-[#a1a1aa] text-[10px] uppercase">AI Model</div>
+            <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
+              <div className="text-zinc-500 text-[10px] uppercase">AI Model</div>
               <div className="text-lg font-bold text-[#ededed] mt-0.5">Sarvam 105B</div>
               <div className="text-[10px] text-[#26d464] mt-0.5">EN · HI · MR Multilingual</div>
             </div>
@@ -182,51 +182,51 @@ export default function AboutPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="The Problem"
-        className="py-16 sm:py-24 border-b border-[#1f1f1f] bg-[#0c0c0c]/60"
+        className="py-16 sm:py-24 border-b border-[#262626] bg-[#0c0c0c]/90"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-4 max-w-3xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               Why Corporate Wikis and ERPs Failed the Shop Floor
             </h2>
-            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed font-poppins">
               Standard software companies attempt to document manufacturing with sterile SOPs and keyboard-heavy form fields. But real machine shops do not run on typing behind desks.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-3">
+            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-3">
               <div className="h-10 w-10 rounded-lg bg-[#181818] border border-[#2e2e2e] flex items-center justify-center text-[#26d464]">
                 <IconAcoustics className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#ededed] font-display">
+              <h3 className="text-base font-bold text-[#ededed] font-montserrat">
                 Tacit Intuition Cannot Be Typed
               </h3>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
                 A machinist knows a cutter is dull not by measuring hours, but by the pitch of the spindle screech and the blue tint of curling chips. Expendry incorporates audio-first logs and spectrogram diagnostics.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-3">
+            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-3">
               <div className="h-10 w-10 rounded-lg bg-[#181818] border border-[#2e2e2e] flex items-center justify-center text-[#26d464]">
                 <IconFactory className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#ededed] font-display">
+              <h3 className="text-base font-bold text-[#ededed] font-montserrat">
                 Zero Incentive to Share Secrets
               </h3>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
                 In traditional factories, veteran tricks are guarded for job security. Expendry flips this game theory: contributors earn liquid EXPEN tokens and permanent on-chain credit for every validated setup shared.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-3">
+            <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-3">
               <div className="h-10 w-10 rounded-lg bg-[#181818] border border-[#2e2e2e] flex items-center justify-center text-[#26d464]">
                 <IconBrain className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#ededed] font-display">
+              <h3 className="text-base font-bold text-[#ededed] font-montserrat">
                 The Language Barrier
               </h3>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
                 Global manufacturing clusters operate in native mother tongues. In India, toolmakers converse in Hindi and Marathi vernacular. Sarvam AI provides native acoustic understanding without translating out the nuances.
               </p>
             </div>
@@ -239,21 +239,21 @@ export default function AboutPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Architecture"
-        className="py-16 sm:py-24 border-b border-[#1f1f1f]"
+        className="py-16 sm:py-24 border-b border-[#262626]"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="space-y-4 max-w-3xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               The Dual-Engine Technology Stack
             </h2>
-            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed font-poppins">
               Expendry is engineered as a high-reliability bridge between blockchain immutability and cutting-edge industrial language intelligence.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Engine 1: MST Blockchain */}
-            <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] space-y-6">
+            <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#26d464] font-semibold">
                   Core Engine 01
@@ -264,10 +264,10 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-[#ededed] font-display">
+                <h3 className="text-xl font-bold text-[#ededed] font-montserrat">
                   MST Blockchain & EXPEN Tokenomics
                 </h3>
-                <p className="text-xs sm:text-sm text-[#a1a1aa] mt-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#a1a1aa] mt-2 leading-relaxed font-poppins">
                   Every knowledge contribution, blueprint release, and patent registration is verified cryptographically via EIP-191 signatures and stamped onto MST Testnet.
                 </p>
               </div>
@@ -293,7 +293,7 @@ export default function AboutPage() {
             </div>
 
             {/* Engine 2: Sarvam AI Multilingual RAG */}
-            <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] space-y-6">
+            <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-6">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono uppercase tracking-wider text-[#26d464] font-semibold">
                   Core Engine 02
@@ -304,10 +304,10 @@ export default function AboutPage() {
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-[#ededed] font-display">
+                <h3 className="text-xl font-bold text-[#ededed] font-montserrat">
                   Sarvam AI Multilingual Grounding
                 </h3>
-                <p className="text-xs sm:text-sm text-[#a1a1aa] mt-2 leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#a1a1aa] mt-2 leading-relaxed font-poppins">
                   Real-time Retrieval-Augmented Generation that searches only verified machinist posts and blueprint archives to answer tough tooling challenges.
                 </p>
               </div>
@@ -340,14 +340,14 @@ export default function AboutPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Timeline"
-        className="py-16 sm:py-24 border-b border-[#1f1f1f] bg-[#0c0c0c]/60"
+        className="py-16 sm:py-24 border-b border-[#262626] bg-[#0c0c0c]/90"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="space-y-3 max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               Four Decades of Toolroom Evolution
             </h2>
-            <p className="text-sm text-[#a1a1aa]">
+            <p className="text-sm text-[#a1a1aa] font-poppins">
               Click across the milestones to see how machinist craft transitioned from manual lead-screws to on-chain tacit intelligence.
             </p>
           </div>
@@ -360,11 +360,11 @@ export default function AboutPage() {
                 onClick={() => setActiveEra(idx)}
                 className={`text-left p-3 rounded-xl border transition text-xs font-mono ${
                   activeEra === idx
-                    ? "bg-[#181818] border-[#26d464] text-[#ededed] shadow-sm"
-                    : "bg-[#121212] border-[#262626] text-[#71717a] hover:text-[#a1a1aa]"
+                    ? "bg-[#181818] border-[#26d464] text-[#ededed] shadow-sm shadow-[#26d464]/20"
+                    : "bg-[#121212] border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838]"
                 }`}
               >
-                <div className="text-base font-bold font-display text-[#26d464]">
+                <div className="text-base font-bold font-montserrat text-[#26d464]">
                   {event.year}
                 </div>
                 <div className="font-semibold truncate mt-0.5">{event.title}</div>
@@ -373,7 +373,7 @@ export default function AboutPage() {
           </div>
 
           {/* Active Era Spotlight Card */}
-          <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] space-y-4">
+          <div className="p-8 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono text-[#26d464] font-bold">
                 [ERA {TIMELINE_EVENTS[activeEra].year} {"//"} {TIMELINE_EVENTS[activeEra].tag}]
@@ -382,10 +382,10 @@ export default function AboutPage() {
                 Milestone 0{activeEra + 1} of 04
               </span>
             </div>
-            <h3 className="text-2xl font-bold text-[#ededed] font-display">
+            <h3 className="text-2xl font-bold text-[#ededed] font-montserrat">
               {TIMELINE_EVENTS[activeEra].title}
             </h3>
-            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed max-w-3xl">
+            <p className="text-sm sm:text-base text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins">
               {TIMELINE_EVENTS[activeEra].description}
             </p>
           </div>
@@ -397,14 +397,14 @@ export default function AboutPage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Core Pillars"
-        className="py-16 sm:py-24 border-b border-[#1f1f1f]"
+        className="py-16 sm:py-24 border-b border-[#262626]"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="space-y-3 max-w-2xl">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               The Four Pillars of Expendry
             </h2>
-            <p className="text-sm text-[#a1a1aa]">
+            <p className="text-sm text-[#a1a1aa] font-poppins">
               Every line of code and smart contract rule in our ecosystem reinforces these commitments.
             </p>
           </div>
@@ -415,15 +415,15 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-3"
+                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-3"
                 >
                   <div className="h-10 w-10 rounded-lg bg-[#181818] border border-[#2e2e2e] flex items-center justify-center text-[#26d464]">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-[#ededed] font-display">
+                  <h3 className="text-base font-bold text-[#ededed] font-montserrat">
                     {pillar.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
                     {pillar.desc}
                   </p>
                 </div>
@@ -441,10 +441,10 @@ export default function AboutPage() {
         className="py-16 sm:py-24 bg-[#080808]"
       >
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#ededed] font-display">
+          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
             Join the Toolroom Renaissance
           </h2>
-          <p className="text-sm sm:text-base text-[#a1a1aa] max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-[#a1a1aa] max-w-xl mx-auto leading-relaxed font-poppins">
             Whether you are a 30-year veteran operator with blueprints in your head, or a manufacturer looking to safeguard your factory intuition, Expendry welcomes you.
           </p>
 
@@ -461,7 +461,7 @@ export default function AboutPage() {
               </Button>
             </Link>
             <Link href="/partners">
-              <Button variant="ghost" size="lg" className="w-full sm:w-auto text-[#26d464]">
+              <Button variant="ghost" size="lg" className="w-full sm:w-auto text-[#26d464] border border-[#262626] hover:border-[#26d464]">
                 <span>Partner Program</span>
               </Button>
             </Link>
