@@ -6,6 +6,14 @@ import { IconBrain, IconWrench, IconBolt, IconExternal, IconSend, IconVolume } f
 import { detectLanguage } from "@/lib/language";
 import VoiceButton from "./VoiceButton";
 
+const SUGGESTED_PILLS = [
+  { label: "Machinist Volunteering & Mentorship", prompt: "How can veteran machinists volunteer their tacit knowledge and mentor apprentices on Expendry?" },
+  { label: "CNC Feeds, Speeds & Chatter", prompt: "How do I suppress chatter on Inconel 718 at 1800 RPM on a CNC lathe?" },
+  { label: "MST Testnet & EXPEN Token Rewards", prompt: "How do community post rewards and EXPEN token minting work on the MST testnet?" },
+  { label: "खराद मशीन टूल चयन (हिंदी)", prompt: "खराद मशीन पर सही कटिंग टूल और फीड रेट कैसे चुनें?" },
+  { label: "लेथवर टूल रनआउट नियंत्रण (मराठी)", prompt: "लेथवर टूल रनआउट कसा कमी करावा आणि सरफेस फिनिश कशी सुधारावी?" },
+];
+
 export default function ChatInterface({
   lang = "auto",
   onSourcesUpdated,
@@ -13,15 +21,7 @@ export default function ChatInterface({
   onClearExternalInput,
 }) {
   const [detectedLang, setDetectedLang] = useState("en");
-  const [messages, setMessages] = useState([
-    {
-      id: "welcome",
-      role: "assistant",
-      content:
-        "Welcome to the Expendry Machining Tacit Assistant. I am grounded in veteran machinist troubleshooting notes, ISO 13485 implant parameters, and Sarvam AI multilingual reasoning.\n\nAsk me anything in English, हिंदी, or मराठी about CNC feed rates, chatter suppression, implant surface finishes, or carbide grades.",
-      sources: [],
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [activeSources, setActiveSources] = useState([]);
@@ -32,15 +32,15 @@ export default function ChatInterface({
   const audioRef = useRef(null);
   const shouldAutoScrollRef = useRef(true);
 
-  // Sync external prompt clicks
+  // Sync external prompt clicks from parent page if provided
   useEffect(() => {
     if (externalInput) {
-      setInput(externalInput);
+      handleSendMessage(externalInput);
       if (onClearExternalInput) onClearExternalInput();
     }
   }, [externalInput, onClearExternalInput]);
 
-  // Track if user is scrolling up to disable aggressive auto-scrolling
+  // Track manual scrolling to avoid disrupting user reading
   const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
@@ -48,7 +48,7 @@ export default function ChatInterface({
     shouldAutoScrollRef.current = isAtBottom;
   }, []);
 
-  // Smooth & glitch-free auto-scrolling during streaming
+  // Smooth auto-scroll during token streaming
   useEffect(() => {
     if (shouldAutoScrollRef.current && scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
@@ -88,9 +88,8 @@ export default function ChatInterface({
     }
   };
 
-  const handleSubmit = async (e) => {
-    if (e) e.preventDefault();
-    const query = input.trim();
+  const handleSendMessage = async (queryText) => {
+    const query = (queryText || input).trim();
     if (!query || isLoading) return;
 
     const userMessageId = `msg_${Date.now()}`;
@@ -206,197 +205,235 @@ export default function ChatInterface({
     }
   };
 
+  const handleFormSubmit = (e) => {
+    if (e) e.preventDefault();
+    handleSendMessage(input);
+  };
+
+  const handleResetChat = () => {
+    setMessages([]);
+    setInput("");
+    setActiveSources([]);
+  };
+
   return (
-    <div className="flex flex-col h-full rounded-3xl border border-zinc-200/90 bg-white/95 backdrop-blur-2xl shadow-2xl overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-900">
-      {/* Clean Glassmorphic Header */}
-      <div className="px-6 py-4 border-b border-zinc-200/80 flex items-center justify-between bg-zinc-50/70 backdrop-blur-md">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-800 flex items-center justify-center text-emerald-200 shadow-md">
-            <IconBolt className="w-5 h-5 text-white" />
+    <div className="flex flex-col h-full w-full rounded-[2.5rem] bg-[#f4f4f6] border border-zinc-200/90 shadow-xl overflow-hidden relative selection:bg-purple-100 selection:text-purple-900 transition-all">
+      {/* ──────────────────────────────────────────────────────────
+          UPPER APP BAR (Active in conversation mode)
+         ────────────────────────────────────────────────────────── */}
+      {messages.length > 0 && (
+        <div className="px-6 py-3.5 border-b border-zinc-200/80 flex items-center justify-between bg-white/70 backdrop-blur-md shrink-0">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={handleResetChat}
+              className="text-lg font-black tracking-tight font-montserrat text-zinc-900 hover:text-purple-700 transition cursor-pointer"
+            >
+              Expendry AI
+            </button>
+            <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200 font-bold">
+              105B Tacit RAG
+            </span>
           </div>
-          <div>
-            <h2 className="text-sm font-extrabold text-zinc-900 flex items-center gap-2 font-montserrat tracking-tight">
-              Sarvam AI Assistant
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
-                105B Reasoning
-              </span>
-            </h2>
-            <p className="text-xs text-zinc-500 font-body">
-              {detectedLang === "hi"
-                ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी) · भाषा स्वतः शोधली जाते"
-                : detectedLang === "mr"
-                ? "दुकान-मजला मशीनिंग ज्ञानकोश (मराठी) · भाषा आपोआप ओळखली जाते"
-                : "Shop-floor machining knowledge engine · English / हिंदी / मराठी"}
-            </p>
+
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-zinc-500 bg-zinc-100 px-3 py-1 rounded-full border border-zinc-200">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span>English · हिंदी · मराठी</span>
+            </div>
+            <button
+              type="button"
+              onClick={handleResetChat}
+              className="text-xs font-medium text-zinc-600 hover:text-zinc-950 px-3 py-1 rounded-full border border-zinc-300 hover:border-zinc-400 bg-white transition active:scale-95 shadow-2xs cursor-pointer"
+            >
+              + New Chat
+            </button>
           </div>
         </div>
-
-        {activeSources.length > 0 && (
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-            <span>{activeSources.length} Grounded Source{activeSources.length > 1 ? "s" : ""}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Messages Scroll Viewport */}
-      <div
-        ref={scrollContainerRef}
-        onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-gradient-to-b from-white via-zinc-50/20 to-white"
-      >
-        <ul
-          role="log"
-          aria-label="Conversation history"
-          aria-live="polite"
-          aria-atomic="false"
-          className="space-y-6 max-w-4xl mx-auto"
-        >
-          {messages.map((msg) => {
-            const isUser = msg.role === "user";
-            return (
-              <li
-                key={msg.id}
-                className={`flex gap-3.5 ${isUser ? "justify-end" : "justify-start"}`}
-              >
-                {!isUser && (
-                  <div className="w-9 h-9 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <IconBrain className="w-4 h-4 text-emerald-700" />
-                  </div>
-                )}
-
-                <div
-                  className={`max-w-[85%] sm:max-w-[80%] rounded-3xl px-5 sm:px-6 py-4 text-sm sm:text-base leading-relaxed ${
-                    isUser
-                      ? "bg-emerald-800 text-white font-medium ml-auto shadow-md rounded-br-xs"
-                      : "bg-white border border-zinc-200/90 text-zinc-900 shadow-sm rounded-bl-xs"
-                  }`}
-                >
-                  {!isUser && msg.id !== "welcome" && (
-                    <div className="mb-3 flex items-center justify-between gap-2 border-b border-zinc-100 pb-2">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                        {msg.detectedLang === "hi"
-                          ? "हिंदी (HI)"
-                          : msg.detectedLang === "mr"
-                          ? "मराठी (MR)"
-                          : "English (EN)"}
-                      </span>
-
-                      {/* Native Sarvam Shubh Audio Playback */}
-                      <button
-                        type="button"
-                        onClick={() => speakText(msg.content, msg.detectedLang, msg.id)}
-                        disabled={speakingMsgId === msg.id}
-                        className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-700 hover:text-emerald-800 hover:underline cursor-pointer"
-                        title="Listen with Sarvam Shubh Voice"
-                      >
-                        <IconVolume className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>{speakingMsgId === msg.id ? "Speaking..." : "Listen (Shubh)"}</span>
-                      </button>
-                    </div>
-                  )}
-
-                  <div aria-live="polite" aria-atomic="false">
-                    <p className="whitespace-pre-wrap leading-relaxed text-pretty font-body">{msg.content}</p>
-                    {/* Active streaming cursor indicator */}
-                    {isLoading && !isUser && msg.content && (
-                      <span className="inline-block w-2 h-4 ml-1.5 bg-emerald-600 animate-pulse align-middle" />
-                    )}
-                  </div>
-
-                  {/* Grounded Tacit Sources Matrix */}
-                  {msg.sources && msg.sources.length > 0 && (
-                    <div className="mt-4 pt-3 border-t border-zinc-100 space-y-2">
-                      <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 block font-bold">
-                        Verified Tacit Sources (MST Blockchain):
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        {msg.sources.map((src) => (
-                          <div
-                            key={src.id}
-                            className="p-3 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs flex flex-col gap-1 max-w-sm shadow-xs"
-                          >
-                            <div className="flex items-center justify-between gap-2">
-                              <span className="font-bold text-zinc-900 truncate">
-                                {src.title}
-                              </span>
-                              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold shrink-0">
-                                {src.type}
-                              </span>
-                            </div>
-                            <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-1">
-                              <span>Author: {src.authorName || "Veteran Operator"}</span>
-                              {src.txHash && (
-                                <a
-                                  href={`${EXPLORER_URL}/tx/${src.txHash}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="text-emerald-700 hover:underline inline-flex items-center gap-1 font-bold"
-                                >
-                                  <span>View Tx</span>
-                                  <IconExternal className="w-3 h-3 text-emerald-600" />
-                                </a>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {isUser && (
-                  <div className="w-9 h-9 rounded-2xl bg-zinc-900 flex items-center justify-center shrink-0 mt-0.5 shadow-md">
-                    <IconWrench className="w-4 h-4 text-emerald-400" />
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-
-        {/* Thought / Synthesis Indicator */}
-        {isLoading && (
-          <div className="flex gap-3 items-center text-zinc-600 text-xs max-w-4xl mx-auto pl-12 font-mono">
-            <div className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse [animation-delay:-0.3s]"></span>
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse [animation-delay:-0.15s]"></span>
-              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-            </div>
-            <span>Sarvam 105B reasoning &amp; knowledge retrieval...</span>
-          </div>
-        )}
-      </div>
+      )}
 
       {/* ──────────────────────────────────────────────────────────
-          CHATGPT-STYLE BOTTOM INPUT COMPOSER
-          Input box with Send button + Voice Mic button right beside it!
+          MAIN VIEWPORT: EMPTY STATE (CIVIC AI PULSE REFERENCE)
+          OR CONVERSATIONAL STREAM VIEW
          ────────────────────────────────────────────────────────── */}
-      <div className="p-3.5 sm:p-4 bg-white/95 backdrop-blur-2xl border-t border-zinc-200/90">
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-4xl mx-auto flex items-center gap-2.5 bg-zinc-50 border border-zinc-300 rounded-2xl p-1.5 sm:p-2 focus-within:border-emerald-600 focus-within:ring-4 focus-within:ring-emerald-600/10 focus-within:bg-white transition-all shadow-xs"
+      {messages.length === 0 ? (
+        <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-8 text-center relative">
+          <div className="max-w-2xl w-full flex flex-col items-center gap-6 my-auto">
+            {/* Monumental Centered Brand Heading (Civic AI style) */}
+            <div className="flex flex-col items-center gap-2">
+              <h1 className="text-5xl sm:text-7xl font-black tracking-tight font-montserrat text-zinc-950">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#2e1065] via-[#4c1d95] to-[#1e1b4b]">
+                  Expendry AI
+                </span>
+              </h1>
+              <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-zinc-500 font-bold mt-1">
+                Precision Manufacturing &amp; Volunteering Intelligence
+              </p>
+            </div>
+
+            {/* Pill Suggestions Cluster (Civic AI Pulse Reference Layout) */}
+            <div className="flex flex-col items-center gap-3 w-full max-w-xl mx-auto pt-2">
+              {/* Row 1: Two pills */}
+              <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleSendMessage(SUGGESTED_PILLS[0].prompt)}
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                >
+                  {SUGGESTED_PILLS[0].label}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSendMessage(SUGGESTED_PILLS[1].prompt)}
+                  className="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                >
+                  {SUGGESTED_PILLS[1].label}
+                </button>
+              </div>
+
+              {/* Row 2: One centered pill */}
+              <div className="flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => handleSendMessage(SUGGESTED_PILLS[2].prompt)}
+                  className="px-6 py-2.5 sm:py-3 rounded-full border border-zinc-300/90 bg-white/80 hover:bg-white text-zinc-800 text-xs sm:text-sm font-medium transition shadow-xs hover:border-zinc-400 hover:shadow-sm active:scale-95 cursor-pointer"
+                >
+                  {SUGGESTED_PILLS[2].label}
+                </button>
+              </div>
+
+              {/* Multilingual Tacit Badges */}
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => handleSendMessage(SUGGESTED_PILLS[3].prompt)}
+                  className="px-4 py-1.5 rounded-full border border-zinc-200 bg-white/50 hover:bg-white text-zinc-600 hover:text-zinc-900 text-xs transition active:scale-95 cursor-pointer"
+                >
+                  {SUGGESTED_PILLS[3].label}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSendMessage(SUGGESTED_PILLS[4].prompt)}
+                  className="px-4 py-1.5 rounded-full border border-zinc-200 bg-white/50 hover:bg-white text-zinc-600 hover:text-zinc-900 text-xs transition active:scale-95 cursor-pointer"
+                >
+                  {SUGGESTED_PILLS[4].label}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* Conversation Feed Viewport */
+        <div
+          ref={scrollContainerRef}
+          onScroll={handleScroll}
+          className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6"
         >
-          <label htmlFor="agent-chat-input" className="sr-only">
-            Ask machining question
+          <ul
+            role="log"
+            aria-label="Conversation history"
+            aria-live="polite"
+            aria-atomic="false"
+            className="space-y-6 max-w-4xl mx-auto"
+          >
+            {messages.map((msg) => {
+              const isUser = msg.role === "user";
+              return (
+                <li
+                  key={msg.id}
+                  className={`flex gap-3.5 ${isUser ? "justify-end" : "justify-start"}`}
+                >
+                  {!isUser && (
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#2e1065] to-[#6d28d9] flex items-center justify-center text-white shrink-0 shadow-sm mt-0.5">
+                      <IconBolt className="w-4 h-4 text-white" />
+                    </div>
+                  )}
+
+                  <div className={`flex flex-col gap-1.5 max-w-[85%] sm:max-w-[75%] ${isUser ? "items-end" : "items-start"}`}>
+                    <div
+                      className={`px-5 py-3.5 rounded-2xl text-sm sm:text-base leading-relaxed ${
+                        isUser
+                          ? "bg-[#6d28d9] text-white rounded-br-xs shadow-sm font-medium"
+                          : "bg-white border border-zinc-200/90 text-zinc-900 rounded-bl-xs shadow-xs"
+                      }`}
+                    >
+                      <p className="whitespace-pre-wrap">{msg.content || (isLoading ? "Thinking..." : "")}</p>
+                    </div>
+
+                    {!isUser && msg.content && (
+                      <div className="flex flex-wrap items-center gap-2 pl-1 pt-0.5">
+                        <button
+                          type="button"
+                          onClick={() => speakText(msg.content, msg.detectedLang, msg.id)}
+                          disabled={speakingMsgId === msg.id}
+                          className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-purple-700 bg-white/80 hover:bg-white px-2.5 py-1 rounded-full border border-zinc-200 shadow-2xs transition active:scale-95 cursor-pointer font-mono"
+                          aria-label="Read response aloud"
+                        >
+                          <IconVolume className={`w-3.5 h-3.5 ${speakingMsgId === msg.id ? "text-purple-600 animate-pulse" : ""}`} />
+                          <span>{speakingMsgId === msg.id ? "Speaking..." : "Read Voice"}</span>
+                        </button>
+
+                        {msg.sources && msg.sources.length > 0 && (
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            {msg.sources.map((src) => (
+                              <span
+                                key={src.id}
+                                className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold"
+                              >
+                                {src.title || src.type}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {isLoading && (
+            <div className="flex gap-3 items-center text-zinc-500 text-xs max-w-4xl mx-auto pl-11 font-mono">
+              <div className="flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse [animation-delay:-0.3s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse [animation-delay:-0.15s]"></span>
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse"></span>
+              </div>
+              <span>Sarvam 105B Tacit Retrieval...</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ──────────────────────────────────────────────────────────
+          BOTTOM COMPOSER DOCK (MATCHING REF.PNG EXACTLY)
+          Rounded-full capsule, "Ask me anything", purple Send, & Voice button
+         ────────────────────────────────────────────────────────── */}
+      <div className="p-4 sm:p-6 bg-transparent shrink-0">
+        <form
+          onSubmit={handleFormSubmit}
+          className="max-w-4xl w-full mx-auto rounded-full bg-zinc-200/70 hover:bg-zinc-200/90 focus-within:bg-white focus-within:ring-4 focus-within:ring-purple-600/10 focus-within:border-purple-600 border border-zinc-300/80 p-2 pl-6 flex items-center gap-2.5 transition-all shadow-sm"
+        >
+          <label htmlFor="expendry-chat-input" className="sr-only">
+            Ask me anything
           </label>
           <input
-            id="agent-chat-input"
+            id="expendry-chat-input"
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask anything in English, हिंदी, or मराठी (e.g. Inconel 718 feeds, lathe chatter, knee implant tolerances)..."
+            placeholder="Ask me anything"
             disabled={isLoading}
-            className="flex-1 bg-transparent px-3 py-2 text-sm sm:text-base text-zinc-900 placeholder:text-zinc-400 focus:outline-none disabled:opacity-50"
+            className="flex-1 bg-transparent border-none text-zinc-900 placeholder:text-zinc-500 text-sm sm:text-base focus:outline-none disabled:opacity-50"
           />
 
-          {/* Send Action Button */}
+          {/* Purple Send Action Button (matching ref.png) */}
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white transition disabled:opacity-30 disabled:hover:bg-zinc-800 flex items-center justify-center shrink-0 cursor-pointer active:scale-95 shadow-xs"
+            className="rounded-full bg-[#7c3aed] hover:bg-[#6d28d9] disabled:opacity-40 disabled:hover:bg-[#7c3aed] text-white px-5 sm:px-6 py-2.5 font-medium text-sm flex items-center justify-center gap-1.5 shadow-xs active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Send message"
           >
             {isLoading ? (
@@ -420,16 +457,18 @@ export default function ChatInterface({
                 ></path>
               </svg>
             ) : (
-              <IconSend className="w-4 h-4 text-white" />
+              <span>Send</span>
             )}
           </button>
 
-          {/* Voice Mic Button — Right Next to Send Button (ChatGPT style!) */}
+          {/* Dedicated Voice Button (matching pencil-annotated Voice button in ref.png!) */}
           <VoiceButton
+            variant="pill"
             lang={lang}
             onTranscript={(transcript) => {
               if (transcript) {
                 setInput(transcript);
+                handleSendMessage(transcript);
               }
             }}
             isStreaming={isLoading}

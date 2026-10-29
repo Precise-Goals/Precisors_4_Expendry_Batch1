@@ -68,10 +68,10 @@ export default function Footer() {
               </div>
               <div>
                 <Link
-                  href="/agent"
+                  href="/chat"
                   className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
-                  Sarvam AI Agent
+                  Expendry AI Pulse
                 </Link>
               </div>
             </nav>

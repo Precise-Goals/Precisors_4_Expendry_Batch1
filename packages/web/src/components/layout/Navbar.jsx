@@ -10,7 +10,7 @@ export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/heritage", label: "Heritage" },
-  { href: "/agent", label: "Agent" },
+  { href: "/chat", label: "Chat" },
   { href: "/marketplace", label: "Marketplace" },
   { href: "/experience", label: "Experience" },
   { href: "/blueprints", label: "Blueprints" },

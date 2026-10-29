@@ -8,6 +8,7 @@ export default function VoiceButton({
   onTranscript,
   isStreaming = false,
   className = "",
+  variant = "default",
 }) {
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -158,38 +159,57 @@ export default function VoiceButton({
             ? "Transcribing voice audio..."
             : "Voice input: press to speak in English, Hindi, or Marathi"
         }
-        className={`relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-[0.93] shadow-xs cursor-pointer ${
-          isRecording
-            ? "bg-rose-500 text-white shadow-rose-500/30 scale-105 animate-pulse"
-            : isProcessing
-            ? "bg-zinc-100 text-zinc-400 cursor-wait"
-            : "bg-zinc-100 border border-zinc-200 text-zinc-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700"
-        } disabled:opacity-40 disabled:cursor-not-allowed`}
+        className={
+          variant === "pill"
+            ? `relative z-10 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full flex items-center gap-2 text-sm font-medium transition-all duration-150 active:scale-95 shadow-xs cursor-pointer border ${
+                isRecording
+                  ? "bg-rose-500 text-white border-rose-600 scale-105 animate-pulse shadow-md"
+                  : isProcessing
+                  ? "bg-zinc-100 text-zinc-500 border-zinc-300 cursor-wait"
+                  : "bg-white text-zinc-800 border-zinc-300 hover:bg-zinc-50 hover:border-zinc-400"
+              } disabled:opacity-40 disabled:cursor-not-allowed`
+            : `relative z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-150 active:scale-[0.93] shadow-xs cursor-pointer ${
+                isRecording
+                  ? "bg-rose-500 text-white shadow-rose-500/30 scale-105 animate-pulse"
+                  : isProcessing
+                  ? "bg-zinc-100 text-zinc-400 cursor-wait"
+                  : "bg-zinc-100 border border-zinc-200 text-zinc-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700"
+              } disabled:opacity-40 disabled:cursor-not-allowed`
+        }
       >
         {isProcessing ? (
-          <svg
-            className="w-4 h-4 animate-spin motion-reduce:animate-none text-emerald-600"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            ></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v8H4z"
-            ></path>
-          </svg>
+          <>
+            <svg
+              className="w-4 h-4 animate-spin motion-reduce:animate-none text-violet-600"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+            {variant === "pill" && <span className="text-xs">Transcribing...</span>}
+          </>
         ) : isRecording ? (
-          <div className="w-3 h-3 rounded-xs bg-white" />
+          <>
+            <div className="w-2.5 h-2.5 rounded-xs bg-white" />
+            {variant === "pill" && <span className="text-xs font-semibold">Listening...</span>}
+          </>
         ) : (
-          <IconMic className="w-4 h-4 text-zinc-700 hover:text-emerald-700" />
+          <>
+            <IconMic className="w-4 h-4 text-violet-700" />
+            {variant === "pill" && <span className="text-zinc-800 font-medium">Voice</span>}
+          </>
         )}
       </button>
 
