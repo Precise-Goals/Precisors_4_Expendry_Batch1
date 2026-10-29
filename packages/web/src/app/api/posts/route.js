@@ -94,9 +94,23 @@ export async function POST(request) {
       );
     }
 
+    if (sanitizedTitle.length > 200) {
+      return NextResponse.json(
+        { error: "Validation error: Title must not exceed 200 characters." },
+        { status: 400 }
+      );
+    }
+
     if (!sanitizedContent || sanitizedContent.length < 10) {
       return NextResponse.json(
         { error: "Validation error: Content is required and must be at least 10 characters." },
+        { status: 400 }
+      );
+    }
+
+    if (sanitizedContent.length > 10000) {
+      return NextResponse.json(
+        { error: "Validation error: Content must not exceed 10000 characters." },
         { status: 400 }
       );
     }

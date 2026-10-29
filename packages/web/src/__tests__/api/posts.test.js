@@ -268,4 +268,61 @@ describe("POST /api/posts Integration Tests", () => {
     const data = await res.json();
     expect(data.error).toContain("Title is required");
   });
+
+  it("rejects payload attempting prototype pollution", async () => {
+    const pollutionPayload = JSON.parse(
+      '{"title": "Valid Title", "content": "Valid content length for machining", "type": "Setup Tip", "authorWallet": "' +
+        authorWallet +
+        '", "__proto__": {"polluted": true}}'
+    );
+
+    const req = new Request("http://localhost:3000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(pollutionPayload),
+    });
+
+    const res = await createPost(req);
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(data.error).toContain("Prototype pollution");
+  });
+
+  it("rejects post with oversized title exceeding 200 characters", async () => {
+    const longTitle = "A".repeat(201);
+    const req = new Request("http://localhost:3000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: longTitle,
+        content: "Valid machining instruction content with proper length.",
+        type: "Setup Tip",
+        authorWallet,
+      }),
+    });
+
+    const res = await createPost(req);
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(data.error).toContain("Title must not exceed 200 characters");
+  });
+
+  it("rejects post with oversized content exceeding 10000 characters", async () => {
+    const longContent = "B".repeat(10001);
+    const req = new Request("http://localhost:3000/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: "Valid Title",
+        content: longContent,
+        type: "Setup Tip",
+        authorWallet,
+      }),
+    });
+
+    const res = await createPost(req);
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(data.error).toContain("Content must not exceed 10000 characters");
+  });
 });
