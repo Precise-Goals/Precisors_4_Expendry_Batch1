@@ -28,25 +28,21 @@ describe("Marketplace Product Detail Page [id]", () => {
     });
     const html = ReactDOMServer.renderToStaticMarkup(pageJsx);
 
-    // 1. Color and container checks
-    expect(html).toContain("bg-[#0a0a0a]");
-    expect(html).toContain("bg-[#121212]");
-    expect(html).toContain("specular-card");
-    expect(html).toContain("#26d464");
-    expect(html).toContain("border-[#262626]");
-    expect(html).toContain("text-[#ededed]");
-    expect(html).toContain("text-[#a1a1aa]");
+    // 1. Color and container checks (White/Green/Black high-contrast theme)
+    expect(html).toContain("bg-white");
+    expect(html).toContain("text-zinc-900");
+    expect(html).toContain("telemetry-chip");
     expect(html).toContain("font-montserrat");
     expect(html).toContain("font-mono");
 
     // 2. 3D inspection icon check
     expect(html).toContain("Inspect in Interactive 3D Viewer");
-    expect(html).toContain("text-[#26d464]");
+    expect(html).toContain("text-emerald-700");
 
     // 3. Metallurgical Matrix card checks
     expect(html).toContain("Metallurgical Matrix");
     expect(html).toContain("Substrate Chemistry");
-    expect(html).toContain("WC-Co Sub-micron Grain (0.6 μm)");
+    expect(html).toContain("CoCrMo Cast Alloy (ASTM F75)");
     expect(html).toContain("Hardness");
   });
 });
