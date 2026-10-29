@@ -53,43 +53,43 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full bg-[#050505] transition-colors duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
         isScrolled
-          ? "bg-[#050505]/98 backdrop-blur-xl shadow-2xl shadow-black/80"
-          : "bg-[#050505]"
+          ? "bg-white/95 backdrop-blur-xl shadow-md shadow-zinc-200/50"
+          : "bg-white"
       }`}
     >
       {/* Top Telemetry Strip */}
-      <div className="w-full bg-[#020202] border-b border-[#181818] text-[10px] font-mono text-[#a1a1aa] py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between select-none">
+      <div className="w-full bg-[#f8fafc] border-b border-[#e4e4e7] text-[10px] font-mono text-zinc-500 py-1 px-4 sm:px-6 lg:px-8 flex items-center justify-between select-none">
         <div className="flex items-center gap-2 sm:gap-3">
-          <span className="flex items-center gap-1.5 text-[#26d464]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+          <span className="flex items-center gap-1.5 text-[#16a34a] font-semibold">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a] animate-pulse" />
             MST-{CHAIN_ID}
           </span>
-          <span className="text-zinc-600">·</span>
-          <span className="text-[#38bdf8] hidden xs:inline font-mono">LATHE HUD</span>
-          <span className="text-zinc-600 hidden xs:inline">·</span>
-          <span>EXPEN ERC-20</span>
-          <span className="text-zinc-600">·</span>
-          <span className="text-[#26d464] font-semibold">ONLINE</span>
+          <span className="text-zinc-300">·</span>
+          <span className="text-[#0284c7] hidden xs:inline font-mono font-medium">LATHE HUD</span>
+          <span className="text-zinc-300 hidden xs:inline">·</span>
+          <span className="text-zinc-700">EXPEN ERC-20</span>
+          <span className="text-zinc-300">·</span>
+          <span className="text-[#16a34a] font-bold">ONLINE</span>
         </div>
         <div className="hidden sm:flex items-center gap-3 text-zinc-500">
-          <span className="text-[#38bdf8]/80">SYS // PRECISION INDUSTRIAL</span>
-          <span className="text-zinc-700">|</span>
-          <span>[REF: 18.5204°N, 73.8567°E]</span>
+          <span className="text-[#0284c7] font-medium">SYS // PRECISION INDUSTRIAL</span>
+          <span className="text-zinc-300">|</span>
+          <span className="text-zinc-500">[REF: 18.5204°N, 73.8567°E]</span>
         </div>
       </div>
 
       {/* Main Architectural Grid Navbar Bar */}
-      <div className="relative border-b border-[#222222] h-18 flex items-stretch justify-between">
+      <div className="relative border-b border-[#e4e4e7] h-18 flex items-stretch justify-between bg-white">
         {/* ──────────────────────────────────────────────────────────
             1. BRAND SECTION (Framed with vertical hairlines + crosshair ticks)
            ────────────────────────────────────────────────────────── */}
-        <div className="relative border-r border-[#222222] px-6 sm:px-8 flex items-center shrink-0">
+        <div className="relative border-r border-[#e4e4e7] px-6 sm:px-8 flex items-center shrink-0">
           {/* Left Border Crosshair (+) */}
           <span
             aria-hidden="true"
-            className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-500 pointer-events-none select-none z-20"
+            className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-400 pointer-events-none select-none z-20"
           >
             +
           </span>
@@ -97,14 +97,14 @@ export default function Navbar() {
           {/* Right Border Crosshair (+) */}
           <span
             aria-hidden="true"
-            className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-500 pointer-events-none select-none z-20"
+            className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-400 pointer-events-none select-none z-20"
           >
             +
           </span>
 
           <Link
             href="/"
-            className="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#26d464]"
+            className="flex items-center gap-3.5 group focus:outline-none focus-visible:ring-1 focus-visible:ring-[#16a34a]"
             aria-label="Expendry Home"
           >
             {/* Geometric Multi-Faceted Woven Emblem matching reference architecture */}
@@ -116,17 +116,17 @@ export default function Navbar() {
                 aria-hidden="true"
               >
                 {/* 4 Precision Faceted Geometric Polygons */}
-                <path d="M5 12L13 4H21L13 12H5Z" fill="#ededed" />
-                <path d="M21 4L27 10V18L21 12V4Z" fill="#ededed" />
-                <path d="M27 20L19 28H11L19 20H27Z" fill="#ededed" />
-                <path d="M11 28L5 22V14L11 20V28Z" fill="#26d464" />
+                <path d="M5 12L13 4H21L13 12H5Z" fill="#18181b" />
+                <path d="M21 4L27 10V18L21 12V4Z" fill="#18181b" />
+                <path d="M27 20L19 28H11L19 20H27Z" fill="#18181b" />
+                <path d="M11 28L5 22V14L11 20V28Z" fill="#16a34a" />
               </svg>
             </div>
 
             {/* Stacked Two-Line Brand Name */}
-            <div className="flex flex-col font-montserrat font-black text-[13px] tracking-[0.18em] leading-[1.05] text-white">
-              <span className="group-hover:text-white transition-colors">EXPEND</span>
-              <span className="text-[#26d464] group-hover:text-[#21b856] transition-colors">RY</span>
+            <div className="flex flex-col font-montserrat font-black text-[13px] tracking-[0.18em] leading-[1.05] text-[#09090b]">
+              <span className="group-hover:text-black transition-colors">EXPEND</span>
+              <span className="text-[#16a34a] group-hover:text-[#15803d] transition-colors">RY</span>
             </div>
           </Link>
         </div>
@@ -151,8 +151,8 @@ export default function Navbar() {
                 aria-current={isActive ? "page" : undefined}
                 className={`relative py-2 text-xs font-montserrat font-bold uppercase tracking-[0.18em] transition-colors duration-200 ${
                   isActive
-                    ? "text-white"
-                    : "text-[#8e8e93] hover:text-white"
+                    ? "text-[#09090b] font-black"
+                    : "text-zinc-600 hover:text-[#09090b]"
                 }`}
               >
                 <span>{link.label}</span>
@@ -165,7 +165,7 @@ export default function Navbar() {
                       damping: 32,
                     }}
                     aria-hidden="true"
-                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464]"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#16a34a] shadow-[0_0_6px_rgba(22,163,74,0.6)]"
                   />
                 )}
               </Link>
@@ -176,11 +176,11 @@ export default function Navbar() {
         {/* ──────────────────────────────────────────────────────────
             3. RIGHT CTA SECTION (Flanked by vertical hairlines + crosshair ticks)
            ────────────────────────────────────────────────────────── */}
-        <div className="relative border-l border-r border-[#222222] px-6 sm:px-8 lg:px-10 flex items-center shrink-0">
+        <div className="relative border-l border-r border-[#e4e4e7] px-6 sm:px-8 lg:px-10 flex items-center shrink-0">
           {/* Left Border Crosshair (+) */}
           <span
             aria-hidden="true"
-            className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-500 pointer-events-none select-none z-20"
+            className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-400 pointer-events-none select-none z-20"
           >
             +
           </span>
@@ -188,36 +188,36 @@ export default function Navbar() {
           {/* Right Border Crosshair (+) */}
           <span
             aria-hidden="true"
-            className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-500 pointer-events-none select-none z-20"
+            className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 font-mono text-[11px] leading-none text-zinc-400 pointer-events-none select-none z-20"
           >
             +
           </span>
 
           <Link
             href="/onboarding"
-            className="group flex items-center justify-between gap-8 sm:gap-12 lg:gap-14 text-xs font-montserrat font-bold uppercase tracking-[0.18em] text-white hover:text-[#26d464] transition-colors duration-200 select-none py-2"
+            className="group flex items-center justify-between gap-8 sm:gap-12 lg:gap-14 text-xs font-montserrat font-bold uppercase tracking-[0.18em] text-[#09090b] hover:text-[#16a34a] transition-colors duration-200 select-none py-2"
           >
             <div className="flex items-center gap-2.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a] shadow-[0_0_6px_rgba(22,163,74,0.6)] animate-pulse" />
               <span>CONNECT WALLET</span>
             </div>
             <span
               aria-hidden="true"
-              className="font-mono text-sm text-[#ededed] group-hover:text-[#26d464] group-hover:translate-x-1.5 transition-all duration-200"
+              className="font-mono text-sm text-zinc-800 group-hover:text-[#16a34a] group-hover:translate-x-1.5 transition-all duration-200"
             >
               →
             </span>
           </Link>
 
           {/* Mobile Hamburger Toggle */}
-          <div className="flex xl:hidden ml-4 pl-3 border-l border-[#222222]">
+          <div className="flex xl:hidden ml-4 pl-3 border-l border-[#e4e4e7]">
             <button
               type="button"
               onClick={() => setIsMenuOpen((prev) => !prev)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-nav-menu"
               aria-label="Toggle navigation menu"
-              className="inline-flex items-center justify-center p-2 text-[#a1a1aa] hover:text-white focus:outline-none"
+              className="inline-flex items-center justify-center p-2 text-zinc-600 hover:text-[#09090b] focus:outline-none"
             >
               <span className="sr-only">Toggle navigation menu</span>
               {isMenuOpen ? (
@@ -263,9 +263,9 @@ export default function Navbar() {
         <nav
           id="mobile-nav-menu"
           aria-label="Mobile navigation"
-          className="xl:hidden border-b border-[#222222] bg-[#050505] px-6 py-6 space-y-3"
+          className="xl:hidden border-b border-[#e4e4e7] bg-white px-6 py-6 space-y-3"
         >
-          <div className="grid grid-cols-2 gap-2 pb-4 border-b border-[#1c1c1c]">
+          <div className="grid grid-cols-2 gap-2 pb-4 border-b border-[#f4f4f5]">
             {NAV_LINKS.map((link, idx) => {
               const isActive =
                 link.href === "/"
@@ -279,12 +279,12 @@ export default function Navbar() {
                   aria-current={isActive ? "page" : undefined}
                   className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-montserrat font-bold tracking-[0.14em] transition-colors ${
                     isActive
-                      ? "text-[#26d464] bg-[#26d464]/10 border border-[#26d464]/30"
-                      : "text-[#a1a1aa] hover:text-white bg-[#0e0e0e] border border-[#222222]"
+                      ? "text-[#16a34a] bg-[#16a34a]/10 border border-[#16a34a]/30"
+                      : "text-zinc-700 hover:text-black bg-[#f8fafc] border border-[#e4e4e7]"
                   }`}
                 >
                   <span>{link.label}</span>
-                  <span className="font-mono text-[10px] text-zinc-600">0{idx}</span>
+                  <span className="font-mono text-[10px] text-zinc-400">0{idx}</span>
                 </Link>
               );
             })}
@@ -293,13 +293,13 @@ export default function Navbar() {
           <div className="pt-2">
             <Link
               href="/onboarding"
-              className="flex items-center justify-between w-full py-3 px-5 rounded-lg bg-[#121212] border border-[#262626] hover:border-[#26d464] text-xs font-montserrat font-bold tracking-[0.16em] text-white group transition-all"
+              className="flex items-center justify-between w-full py-3 px-5 rounded-lg bg-[#09090b] hover:bg-zinc-800 text-xs font-montserrat font-bold tracking-[0.16em] text-white group transition-all shadow-sm"
             >
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
                 <span>CONNECT WALLET</span>
               </div>
-              <span className="font-mono text-sm text-[#26d464] group-hover:translate-x-1 transition-transform">
+              <span className="font-mono text-sm text-[#16a34a] group-hover:translate-x-1 transition-transform">
                 →
               </span>
             </Link>
