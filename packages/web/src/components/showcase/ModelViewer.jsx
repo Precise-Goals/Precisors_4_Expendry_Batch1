@@ -287,17 +287,17 @@ export default function ModelViewer({
         </Canvas>
       </Suspense>
 
-      {/* Tactile CAD Controls Bar (Bottom) */}
-      <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-auto">
+      {/* Tactile CAD Controls Bar (Liquid Glass Capsule HUD) */}
+      <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 pointer-events-auto select-none">
         {/* Left Toggles */}
-        <div className="flex items-center gap-1.5 bg-[#18181b]/95 backdrop-blur px-2 py-1 rounded-lg border border-[#27272a]">
+        <div className="flex flex-wrap items-center gap-1.5 liquid-glass-pill p-1.5 rounded-full border border-zinc-200/90 shadow-xl">
           <button
             type="button"
             onClick={() => setIsRotating((prev) => !prev)}
-            className={`px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               isRotating
-                ? "bg-[#16a34a]/20 text-[#16a34a] border border-[#16a34a]/40"
-                : "text-[#a1a1aa] hover:text-white bg-[#27272a]"
+                ? "bg-emerald-800 text-white shadow-sm"
+                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
             }`}
           >
             Auto-Rotate: {isRotating ? "ON" : "OFF"}
@@ -306,10 +306,10 @@ export default function ModelViewer({
           <button
             type="button"
             onClick={() => setIsWireframe((prev) => !prev)}
-            className={`px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               isWireframe
-                ? "bg-[#16a34a]/20 text-[#16a34a] border border-[#16a34a]/40"
-                : "text-[#a1a1aa] hover:text-white bg-[#27272a]"
+                ? "bg-emerald-800 text-white shadow-sm"
+                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
             }`}
           >
             Wireframe: {isWireframe ? "ON" : "OFF"}
@@ -318,10 +318,10 @@ export default function ModelViewer({
           <button
             type="button"
             onClick={() => setShowCalipers((prev) => !prev)}
-            className={`px-2 py-1 rounded text-[11px] font-mono font-medium transition-all ${
+            className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               showCalipers
-                ? "bg-[#ea580c]/20 text-[#ea580c] border border-[#ea580c]/40"
-                : "text-[#a1a1aa] hover:text-white bg-[#27272a]"
+                ? "bg-emerald-800 text-white shadow-sm"
+                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
             }`}
           >
             Calipers: {showCalipers ? "ON" : "OFF"}
@@ -334,7 +334,7 @@ export default function ModelViewer({
                 prev === "laser" ? "studio" : prev === "studio" ? "toolroom" : "laser"
               )
             }
-            className="px-2 py-1 rounded text-[11px] font-mono font-medium text-white bg-[#27272a] border border-[#3f3f46] hover:border-[#16a34a]/40 transition-all capitalize"
+            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-800 bg-white/70 hover:bg-white border border-zinc-200/70 transition-all capitalize cursor-pointer"
           >
             Light: {lightingPreset}
           </button>
@@ -342,16 +342,16 @@ export default function ModelViewer({
           <button
             type="button"
             onClick={handleResetView}
-            className="px-2 py-1 rounded text-[11px] font-mono font-medium text-[#a1a1aa] hover:text-white bg-[#27272a] transition-all"
+            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-600 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70 transition-all cursor-pointer"
           >
             Reset
           </button>
         </div>
 
         {/* Right Hint */}
-        <div className="hidden md:flex items-center gap-2 text-[10px] font-mono text-[#a1a1aa] bg-[#18181b]/95 backdrop-blur px-2.5 py-1 rounded-lg border border-[#27272a]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#ea580c] animate-pulse"></span>
-          <span>Left-click: Rotate · Scroll: Zoom · Arrow keys: ±15°</span>
+        <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-zinc-600 liquid-glass-pill px-4 py-2 rounded-full border border-zinc-200/90 shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+          <span>Drag to Orbit · Scroll to Zoom · Arrows: ±15°</span>
         </div>
       </div>
     </div>

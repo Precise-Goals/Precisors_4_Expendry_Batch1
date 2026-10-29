@@ -76,7 +76,7 @@ export default function ShowcasePage() {
         </div>
 
         {/* Implant & Tooling Turret Selector */}
-        <div className="flex flex-wrap items-center gap-2 p-3 rounded-2xl bg-zinc-50 border border-zinc-200 shadow-xs">
+        <div className="flex flex-wrap items-center gap-2 p-3 sm:p-4 rounded-3xl bg-zinc-50/90 border border-zinc-200/90 shadow-xs">
           <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold px-2">
             Implant Selection:
           </span>
@@ -91,13 +91,13 @@ export default function ShowcasePage() {
                   onClick={() => setActiveModelId(model.id)}
                   className={`px-3.5 py-2 rounded-xl text-xs font-semibold font-mono transition-all duration-150 flex items-center gap-2 cursor-pointer ${
                     isSelected
-                      ? "bg-zinc-900 text-white shadow-md border border-zinc-900"
+                      ? "bg-emerald-800 text-white shadow-md border border-emerald-900"
                       : "bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 hover:border-zinc-300"
                   }`}
                 >
                   <span
                     className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                      isSelected ? "bg-emerald-500 text-white" : "bg-zinc-100 text-zinc-600"
+                      isSelected ? "bg-emerald-600 text-white" : "bg-zinc-100 text-zinc-600"
                     }`}
                   >
                     [{idx + 1}]
@@ -114,14 +114,14 @@ export default function ShowcasePage() {
         {/* ──────────────────────────────────────────────────────────
             CENTERED BIG-SCREEN 3D VIEWPORT
            ────────────────────────────────────────────────────────── */}
-        <div className="w-full h-[580px] sm:h-[680px] lg:h-[760px] rounded-3xl border border-zinc-800 bg-[#09090b] overflow-hidden shadow-2xl relative">
+        <div className="w-full h-[580px] sm:h-[680px] lg:h-[760px] rounded-4xl border border-zinc-200/90 bg-white/95 overflow-hidden shadow-2xl relative ring-1 ring-zinc-900/5">
           <ModelViewer modelId={activeModelId} autoRotate={true} />
         </div>
 
         {/* Technical Specification Matrix & Calibration Parameters */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-4">
           {/* Left Column: Calibration & Geometry Matrix */}
-          <div className="lg:col-span-8 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm">
+          <div className="lg:col-span-8 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 shadow-sm">
             <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-200">
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-600" />
@@ -181,7 +181,7 @@ export default function ShowcasePage() {
           </div>
 
           {/* Right Column: Marketplace Integration & Action */}
-          <div className="lg:col-span-4 rounded-2xl border border-zinc-200 bg-zinc-50/70 p-6 sm:p-8 flex flex-col justify-between shadow-sm space-y-6">
+          <div className="lg:col-span-4 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-sm space-y-6">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold block mb-2">
                 Production Unit
