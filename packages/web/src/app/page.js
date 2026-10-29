@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -157,6 +158,67 @@ export default function Home() {
               </Link>
             </motion.div>
           </div>
+
+          {/* ──────────────────────────────────────────────────────────
+              Cinematic CNC Optical Workstation Viewport (Hero Image)
+             ────────────────────────────────────────────────────────── */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 max-w-5xl mx-auto rounded-2xl specular-card bg-[#121212] border border-[#262626] overflow-hidden relative shadow-2xl group"
+          >
+            {/* Top Telemetry Overlay */}
+            <div className="absolute top-0 left-0 right-0 z-20 px-4 py-3 bg-gradient-to-b from-[#0a0a0a]/90 via-[#0a0a0a]/50 to-transparent flex items-center justify-between text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                <span className="text-[#ededed] font-semibold tracking-wider uppercase">
+                  5-Axis CNC Precision Workstation
+                </span>
+                <span className="text-white/20">|</span>
+                <span className="text-[#a1a1aa] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
+              </div>
+              <div className="flex items-center gap-3 text-[#a1a1aa]">
+                <span className="text-[#26d464] font-bold">LASER: 532nm CALIBRATED</span>
+                <span className="text-white/20">·</span>
+                <span>TOL: ±0.005mm</span>
+              </div>
+            </div>
+
+            {/* Hero Image Container */}
+            <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] max-h-[440px] overflow-hidden">
+              <Image
+                src="/images/hero-cnc-lathe.jpg"
+                alt="5-Axis CNC Spindle and Lathe Tool Carving Precision Titanium Component with Green Telemetry Laser"
+                width={1600}
+                height={900}
+                priority
+                className="w-full h-full object-cover object-center brightness-95 contrast-105 group-hover:scale-[1.01] transition-transform duration-700 ease-out"
+              />
+              {/* Engineering Blueprint Reticle Crosshairs */}
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                <div className="w-24 h-24 border border-[#26d464]/30 rounded-full border-dashed flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464]" />
+                </div>
+              </div>
+
+              {/* Bottom Gradient Fade */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#121212] via-[#121212]/60 to-transparent pointer-events-none" />
+            </div>
+
+            {/* Bottom HUD Metadata Bar */}
+            <div className="relative z-20 px-4 py-2.5 bg-[#0e0e0e] border-t border-[#222222] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#a1a1aa]">
+              <div className="flex items-center gap-3">
+                <span className="text-[#ededed] font-bold">WORKPIECE: AEROSPACE SHAFT</span>
+                <span className="text-white/20">/</span>
+                <span>SPINDLE: 1,800 RPM</span>
+                <span className="text-white/20">/</span>
+                <span className="text-[#26d464]">COOLANT: 70 BAR DUAL JET</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#71717a]">ON-CHAIN PROVENANCE:</span>
+                <span className="text-[#26d464] font-semibold">MST-91562037</span>
+              </div>
+            </div>
+          </motion.div>
 
           {/* ──────────────────────────────────────────────────────────
               Interactive DRO Machining Control Deck (Acoustic Spectrogram)
