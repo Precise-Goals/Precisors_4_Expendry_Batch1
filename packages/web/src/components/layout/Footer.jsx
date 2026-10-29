@@ -16,25 +16,25 @@ export default function Footer() {
       aria-label="Site footer"
       className="footer-container bg-[#000000] text-white relative overflow-hidden select-none"
     >
-      {/* 1. Top Gray Accent Strip (matches reference image) */}
+      {/* 1. Top Gray Accent Strip */}
       <div
-        className="footer-top-strip w-full h-3 sm:h-3.5 bg-zinc-300"
+        className="footer-top-strip w-full h-2 bg-zinc-300"
         aria-hidden="true"
       />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-12 sm:pt-16 pb-8">
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-8 sm:pt-10 pb-6">
         {/* 2. Upper 3-Column Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 items-start">
           {/* Column 1: LINKS */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-5 space-y-3">
             <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
               LINKS
             </h2>
-            <nav aria-label="Footer Navigation Links" className="space-y-1.5">
+            <nav aria-label="Footer Navigation Links" className="space-y-1">
               <div>
                 <Link
                   href="/"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Home
                 </Link>
@@ -42,7 +42,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/about"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   About
                 </Link>
@@ -50,7 +50,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/marketplace"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Marketplace
                 </Link>
@@ -58,7 +58,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/experience"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Experience
                 </Link>
@@ -66,7 +66,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/blueprints"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Blueprints
                 </Link>
@@ -74,7 +74,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/patent"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Patents
                 </Link>
@@ -83,17 +83,17 @@ export default function Footer() {
           </div>
 
           {/* Column 2: CONNECT */}
-          <div className="md:col-span-4 space-y-4">
+          <div className="md:col-span-4 space-y-3">
             <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
               CONNECT
             </h2>
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div>
                 <a
                   href="https://x.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   X
                 </a>
@@ -103,7 +103,7 @@ export default function Footer() {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Linked In
                 </a>
@@ -113,7 +113,7 @@ export default function Footer() {
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   MSTScan
                 </a>
@@ -123,7 +123,7 @@ export default function Footer() {
                   href="https://discord.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
                   Discord
                 </a>
@@ -132,14 +132,14 @@ export default function Footer() {
           </div>
 
           {/* Column 3: CONTACT */}
-          <div className="md:col-span-3 space-y-4 md:text-right">
+          <div className="md:col-span-3 space-y-3 md:text-right">
             <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
               CONTACT
             </h2>
             <div>
               <a
                 href="mailto:info@expendry.io"
-                className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                className="footer-nav-link text-sm sm:text-lg font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
               >
                 info[at]expendry.io
               </a>
@@ -147,35 +147,29 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 3. Hairline Dotted Divider Line (matches reference image) */}
+        {/* 3. Hairline Dotted Divider Line (reduced height) */}
         <div
-          className="footer-dotted-divider w-full border-b border-dotted border-zinc-700/60 my-10 sm:my-14"
+          className="footer-dotted-divider w-full border-b border-dotted border-zinc-700/60 my-6 sm:my-8"
           aria-hidden="true"
         />
 
-        {/* 4. Massive Panoramic Wordmark Statement */}
-        <div className="w-full overflow-hidden select-none py-2 my-2 flex items-center justify-center">
-          <div className="footer-hero-wordmark font-montserrat font-extrabold tracking-tighter text-zinc-300 leading-none whitespace-nowrap text-[12vw] sm:text-[13vw] flex items-baseline justify-center">
-            <span className="opacity-90 hover:opacity-100 transition-opacity">
-              expendry
-            </span>
-            <span className="mx-2 sm:mx-4 opacity-90 hover:opacity-100 transition-opacity relative">
+        {/* 4. Single Clean Wordmark (No cut-off side letters, reduced height, Precision Machining Green) */}
+        <div className="w-full overflow-hidden select-none py-1 my-1 flex items-center justify-center">
+          <div className="footer-hero-wordmark font-montserrat font-extrabold tracking-tighter text-[#26d464] leading-none whitespace-nowrap text-5xl sm:text-6xl md:text-7xl lg:text-[7vw] flex items-baseline justify-center">
+            <span className="opacity-95 hover:opacity-100 transition-opacity relative">
               expendry
               <sup
-                className="text-[0.22em] font-normal text-zinc-400 align-super ml-0.5 sm:ml-1"
+                className="text-[0.25em] font-normal text-zinc-400 align-super ml-1"
                 aria-label="Registered trademark"
               >
                 ®
               </sup>
             </span>
-            <span className="opacity-90 hover:opacity-100 transition-opacity">
-              expendry<span className="text-[#26d464]">.</span>
-            </span>
           </div>
         </div>
 
-        {/* 5. Authentic Industrial / Garment Care Label Stamp */}
-        <div className="footer-care-stamp my-10 sm:my-12 flex flex-col items-center justify-center text-center space-y-1.5">
+        {/* 5. Authentic Industrial / Garment Care Label Stamp (reduced spacing) */}
+        <div className="footer-care-stamp my-6 sm:my-8 flex flex-col items-center justify-center text-center space-y-1.5">
           <p className="footer-care-heading text-xs sm:text-sm font-normal text-zinc-400 tracking-wide font-sans">
             Handled with
           </p>
@@ -304,9 +298,9 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* 6. Bottom Signoff Bar (matches reference image) */}
-        <div className="footer-bottom-bar pt-8 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-[13px] text-zinc-400 font-sans gap-4">
-          {/* Left: Location with subtle active green/orange status */}
+        {/* 6. Bottom Signoff Bar */}
+        <div className="footer-bottom-bar pt-6 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-[13px] text-zinc-400 font-sans gap-4">
+          {/* Left: Location */}
           <div className="flex items-center gap-2">
             <span
               className="h-1.5 w-1.5 rounded-full bg-[#26d464]"
