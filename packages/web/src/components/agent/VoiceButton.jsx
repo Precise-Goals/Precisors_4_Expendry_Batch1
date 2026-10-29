@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { IconMic } from "@/components/ui/Icons";
 
 export default function VoiceButton({
-  lang = "en",
+  lang = "auto",
   onTranscript,
   isStreaming = false,
   className = "",

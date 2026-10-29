@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { assembleContext } from "@/lib/rag";
 import {
   normalizeLanguage,
+  detectLanguage,
   chat,
   SarvamError,
   SARVAM_MODEL,
@@ -88,7 +89,17 @@ export async function POST(request) {
     );
   }
 
-  const resolvedLang = normalizeLanguage(lang);
+  let resolvedLang;
+  if (!lang || lang === "auto") {
+    resolvedLang = detectLanguage(message);
+  } else {
+    const norm = normalizeLanguage(lang);
+    if (norm === "en") {
+      resolvedLang = detectLanguage(message);
+    } else {
+      resolvedLang = norm;
+    }
+  }
 
   // 1. Assemble RAG Context
   const contextAssembler = agentDeps.assembleContext || assembleContext;
@@ -111,6 +122,7 @@ export async function POST(request) {
 
   const systemPrompt = `You are Sarvam AI, an expert manufacturing and machining assistant for Expendry.
 Answer the user's questions with practical, shop-floor actionable advice in ${langName}.
+CRITICAL INSTRUCTION: Automatically detect the language and script of the user's query and respond in that EXACT SAME language (${langName}).
 ${
   contextText
     ? `\nRelevant shop-floor knowledge from the Expendry community:\n${contextText}\n\nSynthesize this tacit knowledge in your response and cite relevant community insights.`

@@ -23,7 +23,7 @@ export async function POST(request) {
     }
 
     const audioFile = formData.get("audio") || formData.get("file");
-    const lang = formData.get("lang") || "en";
+    const lang = formData.get("lang") || "auto";
 
     if (!audioFile) {
       return NextResponse.json(
@@ -42,7 +42,7 @@ export async function POST(request) {
       );
     }
 
-    const resolvedLang = normalizeLanguage(lang);
+    const resolvedLang = normalizeLanguage(lang, "auto");
     const transcribeFn = transcribeDeps.transcribe || transcribe;
 
     let transcript = "";

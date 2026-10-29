@@ -6,6 +6,7 @@ import {
   setSarvamFetch,
   SarvamError,
   normalizeLanguage,
+  detectLanguage,
   redactSensitive,
   SARVAM_MODEL,
 } from "../../lib/sarvam.js";
@@ -39,6 +40,26 @@ describe("Sarvam AI Client SDK Unit Tests", () => {
       expect(normalizeLanguage("")).toBe("en");
       expect(normalizeLanguage(null)).toBe("en");
     });
+
+    it("detects English queries automatically", () => {
+      expect(detectLanguage("How do I reduce lathe chatter on Inconel 718?")).toBe("en");
+      expect(detectLanguage("Carbide insert notch wear prevention tips")).toBe("en");
+      expect(detectLanguage("")).toBe("en");
+      expect(detectLanguage(null)).toBe("en");
+    });
+
+    it("detects Hindi Devanagari and Hinglish queries automatically", () => {
+      expect(detectLanguage("खराद मशीन पर टूल चयन कैसे करें?")).toBe("hi");
+      expect(detectLanguage("इनकोनेल 718 पर कटिंग स्पीड क्या होनी चाहिए?")).toBe("hi");
+      expect(detectLanguage("lathe machine par cutting speed kaise set kare?")).toBe("hi");
+    });
+
+    it("detects Marathi Devanagari and Romanized Marathi queries automatically", () => {
+      expect(detectLanguage("खराद मशीनवर टूल रनआउट कसा तपासायचा?")).toBe("mr");
+      expect(detectLanguage("व्हीएमसी मिलिंग करताना व्हायब्रेशन कसे कमी करावे?")).toBe("mr");
+      expect(detectLanguage("वेगळा कटर वापरा")).toBe("mr");
+      expect(detectLanguage("lathe machine var tool runout kasa check karaycha?")).toBe("mr");
+    });
   });
 
   describe("Chat Wrapper & Exponential Backoff on 429", () => {
@@ -70,6 +91,25 @@ describe("Sarvam AI Client SDK Unit Tests", () => {
       const body = JSON.parse(capturedOptions.body);
       expect(body.model).toBe(SARVAM_MODEL);
       expect(body.language).toBe("hi");
+    });
+
+    it("chat auto-detects language from user message when lang is auto", async () => {
+      let capturedBody = null;
+      setSarvamFetch(async (url, options) => {
+        capturedBody = JSON.parse(options.body);
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({ choices: [{ message: { content: "मशीनिंग उत्तर" } }] }),
+        };
+      });
+
+      const res = await chat(
+        [{ role: "user", content: "खराद मशीनवर टूल रनआउट कसा तपासायचा?" }],
+        "auto"
+      );
+      expect(res.resolvedLang).toBe("mr");
+      expect(capturedBody.language).toBe("mr");
     });
 
     it("retries on 429 and succeeds if rate limit clears within 3 attempts", async () => {

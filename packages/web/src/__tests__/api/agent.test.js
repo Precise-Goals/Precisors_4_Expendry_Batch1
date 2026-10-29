@@ -143,6 +143,65 @@ describe("Agent API Routes Integration Tests", () => {
       expect(streamText).toContain('"resolvedLang":"en"');
     });
 
+    it("automatically detects Hindi and responds in Hindi when lang is omitted", async () => {
+      const request = new Request("http://localhost:3000/api/agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-forwarded-for": "192.168.1.104",
+        },
+        body: JSON.stringify({
+          message: "खराद मशीन पर टूल चयन कैसे करें?",
+        }),
+      });
+
+      const response = await agentHandler(request);
+      expect(response.status).toBe(200);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let streamText = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        streamText += decoder.decode(value);
+      }
+
+      expect(streamText).toContain('"resolvedLang":"hi"');
+      expect(streamText).toContain("नमस्ते!");
+    });
+
+    it("automatically detects Marathi and responds in Marathi when lang is auto", async () => {
+      const request = new Request("http://localhost:3000/api/agent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-forwarded-for": "192.168.1.105",
+        },
+        body: JSON.stringify({
+          message: "खराद मशीनवर टूल रनआउट कसा तपासायचा?",
+          lang: "auto",
+        }),
+      });
+
+      const response = await agentHandler(request);
+      expect(response.status).toBe(200);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let streamText = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        streamText += decoder.decode(value);
+      }
+
+      expect(streamText).toContain('"resolvedLang":"mr"');
+      expect(streamText).toContain("नमस्कार!");
+    });
+
     it("returns 400 Bad Request for empty message payload", async () => {
       const request = new Request("http://localhost:3000/api/agent", {
         method: "POST",

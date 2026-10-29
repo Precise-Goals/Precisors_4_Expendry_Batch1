@@ -2,24 +2,21 @@
 
 import { useState, useRef, useEffect } from "react";
 import { EXPLORER_URL } from "shared/constants";
-import { IconBrain, IconWrench, IconSend, IconExternal, IconBolt } from "@/components/ui/Icons";
+import { IconBrain, IconWrench } from "@/components/ui/Icons";
 
 export default function ChatInterface({
-  lang = "en",
+  lang = "auto",
   onSourcesUpdated,
   externalInput = "",
   onClearExternalInput,
 }) {
+  const [detectedLang, setDetectedLang] = useState("en");
   const [messages, setMessages] = useState([
     {
       id: "welcome",
       role: "assistant",
       content:
-        lang === "hi"
-          ? "नमस्ते! मैं सर्वम एआई (Sarvam AI) असिस्टेंट हूँ। खराद, वीएमसी, टूलींग या कटिंग पैरामीटर्स के बारे में आप कोई भी प्रश्न पूछ सकते हैं।"
-          : lang === "mr"
-          ? "नमस्कार! मी सर्वम एआय (Sarvam AI) असिस्टंट आहे. लेथ, व्हीएमसी, टूलिंग किंवा कटिंग पॅरामीटर्सबद्दल तुम्ही कोणताही प्रश्न विचारू शकता."
-          : "Hello! I am your Sarvam AI machining assistant. Ask me anything about lathe operations, VMC milling, tooling selection, or shop-floor setup tips.",
+        "Hello! I am your Sarvam AI machining assistant. Ask me anything about lathe operations, VMC milling, tooling selection, or shop-floor setup tips. You can ask in English, हिंदी, or मराठी — I will automatically detect your language and respond in the same language.",
       sources: [],
     },
   ]);
@@ -73,7 +70,7 @@ export default function ChatInterface({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: query,
-          lang,
+          lang: "auto",
           history: newMessages.slice(-6).map((m) => ({
             role: m.role,
             content: m.content,
@@ -113,13 +110,22 @@ export default function ChatInterface({
                   )
                 );
               }
-              if (data.done && data.sources) {
-                setActiveSources(data.sources);
-                if (onSourcesUpdated) onSourcesUpdated(data.sources);
+              if (data.done) {
+                if (data.sources) {
+                  setActiveSources(data.sources);
+                  if (onSourcesUpdated) onSourcesUpdated(data.sources);
+                }
+                if (data.resolvedLang) {
+                  setDetectedLang(data.resolvedLang);
+                }
                 setMessages((prev) =>
                   prev.map((msg) =>
                     msg.id === assistantMessageId
-                      ? { ...msg, sources: data.sources }
+                      ? {
+                          ...msg,
+                          sources: data.sources || msg.sources,
+                          detectedLang: data.resolvedLang,
+                        }
                       : msg
                   )
                 );
@@ -131,15 +137,16 @@ export default function ChatInterface({
         }
       }
     } catch {
+      const detectedQueryLang = detectLanguage(query);
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === assistantMessageId
             ? {
                 ...msg,
                 content:
-                  lang === "hi"
+                  detectedQueryLang === "hi"
                     ? "क्षमा करें, प्रतिक्रिया उत्पन्न करते समय एक त्रुटि हुई। कृपया पुनः प्रयास करें।"
-                    : lang === "mr"
+                    : detectedQueryLang === "mr"
                     ? "क्षमस्व, प्रतिसाद तयार करताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
                     : "Sorry, an error occurred while streaming the response. Please try again.",
               }
@@ -165,13 +172,16 @@ export default function ChatInterface({
               <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 font-bold">
                 sarvam-105b
               </span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-900 text-[#26d464] border border-neutral-800">
+                auto-detect active
+              </span>
             </h2>
             <p className="text-xs text-[#a1a1aa]">
-              {lang === "hi"
-                ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी)"
-                : lang === "mr"
-                ? "दुकान-मजला मशीनिंग ज्ञानकोश (मराठी)"
-                : "Shop-floor machining knowledge engine"}
+              {detectedLang === "hi"
+                ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी) · भाषा स्वतः शोधली जाते"
+                : detectedLang === "mr"
+                ? "दुकान-मजला मशीनिंग ज्ञानकोश (मराठी) · भाषा आपोआप ओळखली जाते"
+                : "Shop-floor machining knowledge engine · Auto-detects EN / HI / MR"}
             </p>
           </div>
         </div>
@@ -213,6 +223,19 @@ export default function ChatInterface({
                       : "bg-[#141414] border border-[#262626] text-[#ededed] shadow-inner specular-card"
                   }`}
                 >
+                  {!isUser && msg.detectedLang && msg.id !== "welcome" && (
+                    <div className="mb-2">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#26d464]" />
+                        {msg.detectedLang === "hi"
+                          ? "हिंदी (HI)"
+                          : msg.detectedLang === "mr"
+                          ? "मराठी (MR)"
+                          : "English (EN)"}
+                      </span>
+                    </div>
+                  )}
+
                   <div aria-live="polite" aria-atomic="false">
                     <p className="whitespace-pre-wrap">{msg.content}</p>
                     {/* Active streaming cursor */}
@@ -301,13 +324,7 @@ export default function ChatInterface({
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={
-            lang === "hi"
-              ? "खराद, मिलिंग, टूलिंग या कटिंग स्पीड के बारे में पूछें..."
-              : lang === "mr"
-              ? "लेथ, मिलिंग, टूलिंग किंवा कटिंग स्पीडबद्दल विचारा..."
-              : "Ask about feeds, lathe chatter, carbide grades, tapping..."
-          }
+          placeholder="Ask in English, हिंदी, or मराठी (e.g. feeds, lathe chatter, carbide grades)..."
           disabled={isLoading}
           className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-md px-3.5 py-2.5 text-xs sm:text-sm text-[#ededed] placeholder-[#a1a1aa]/70 focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
         />
