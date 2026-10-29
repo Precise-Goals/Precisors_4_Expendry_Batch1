@@ -21,6 +21,8 @@ __pycache__/
 
 # Teamwork agent metadata & temporary data
 .agents/
+.agents.zip
+.playwright-mcp/
 
 # Environment variables
 .env

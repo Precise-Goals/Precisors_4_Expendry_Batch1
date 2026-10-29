@@ -6,11 +6,34 @@ import {
   generateFallbackGeometry,
 } from "../../data/models.js";
 
-describe("3D Tooling Showcase Models Registry", () => {
-  it("contains all 4 tooling models", () => {
-    expect(MODELS.length).toBe(4);
+describe("3D Showcase Models Registry", () => {
+  it("contains all registered models including 9 real Biorad Medisys GLBs", () => {
+    expect(MODELS.length).toBeGreaterThanOrEqual(9);
     const modelIds = MODELS.map((m) => m.id);
-    expect(modelIds).toEqual(["lathe-body", "drill-bit", "end-mill", "face-mill"]);
+    expect(modelIds).toContain("excel-mpk");
+    expect(modelIds).toContain("genius-cr");
+    expect(modelIds).toContain("genius-ps");
+    expect(modelIds).toContain("ouro-ps");
+    expect(modelIds).toContain("signature-stem");
+    expect(modelIds).toContain("signature-duo-cup");
+    expect(modelIds).toContain("signature-nx-cup");
+    expect(modelIds).toContain("dj-stent");
+    expect(modelIds).toContain("indoscope-sleek");
+  });
+
+  it("verifies excel-mpk GLB model path and specifications", () => {
+    const excel = getModelById("excel-mpk");
+    expect(excel).toBeDefined();
+    expect(excel.glbPath).toBe("/3d-models-products/EXCEL-MPK.glb");
+    expect(excel.specs.material).toContain("CoCrMo Alloy");
+    expect(excel.materials.metalness).toBe(0.95);
+  });
+
+  it("verifies signature-nx-cup GLB model path and materials", () => {
+    const nxCup = getModelById("signature-nx-cup");
+    expect(nxCup).toBeDefined();
+    expect(nxCup.glbPath).toBe("/3d-models-products/Signature-NX-cup-with-ceramic-head.glb");
+    expect(nxCup.specs.headMaterial).toContain("BIOLOX delta");
   });
 
   it("verifies end-mill specifications and materials", () => {
