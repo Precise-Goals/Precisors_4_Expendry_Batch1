@@ -23,19 +23,7 @@ import {
 } from "@/components/ui/Icons";
 import { CHAIN_ID, EXPLORER_URL, DAILY_CAP, REWARD_PER_POST } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
-
-const HeroTokenStage = dynamic(
-  () => import("@/components/home/HeroTokenStage"),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full min-h-[460px] lg:min-h-[620px] rounded-2xl bg-[#0a0a0a] border border-[#262626] flex flex-col items-center justify-center gap-3 animate-pulse text-zinc-500">
-        <div className="w-10 h-10 rounded-full border-2 border-[#ff5a1f] border-t-transparent animate-spin" />
-        <span className="font-mono text-xs text-zinc-400">Mounting 3D Hardware Stage...</span>
-      </div>
-    ),
-  }
-);
+import HeroPicture from "@/components/home/HeroPicture";
 
 const SPINDLE_PRESETS = [
   { name: "Inconel 718", rpm: 1800, feed: "0.12 mm/rev", temp: "420°C", load: "78%", optimalHz: "1,800 Hz" },
@@ -111,19 +99,16 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full min-h-screen bg-white text-[#09090b] relative selection:bg-[#16a34a]/20 selection:text-black">
       {/* ──────────────────────────────────────────────────────────
-          1. HERO SECTION (Luxury Industrial Layout)
+          1. HERO SECTION (High-Fidelity Architectural Layout)
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Hero Section"
-        className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-24 border-b border-[#222226]"
-        style={{
-          background: "radial-gradient(circle at 72% 44%, #1a1b24 0%, #0d0e13 46%, #050608 100%)",
-        }}
+        className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-24 border-b border-[#e4e4e7] bg-gradient-to-b from-white via-[#fbfcfd] to-[#f4f7f5]"
       >
-        {/* Ambient Warm Edge Specular Reflection */}
+        {/* Ambient Precision Green Specular Reflection */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-0 right-1/4 w-[480px] h-[300px] bg-orange-500/10 blur-[140px] rounded-full"
+          className="pointer-events-none absolute top-1/4 right-1/4 w-[500px] h-[350px] bg-emerald-500/[0.07] blur-[140px] rounded-full"
         />
 
         <motion.div
@@ -132,20 +117,20 @@ export default function Home() {
           animate="visible"
           className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center min-h-[500px] lg:min-h-[580px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
             {/* Left Column: Bold Headline & CTAs */}
             <div className="lg:col-span-6 space-y-6 sm:space-y-7 z-10 text-left">
               {/* Protocol Status Beacon */}
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center gap-2.5 px-3.5 py-1 rounded-full bg-white/[0.07] border border-white/10 backdrop-blur-md shadow-sm"
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#f4f4f5] border border-[#e4e4e7] shadow-sm"
               >
-                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-                <span className="text-xs font-mono font-medium text-white/90">
+                <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
+                <span className="text-xs font-mono font-medium text-zinc-800">
                   MST Testnet Protocol Online
                 </span>
-                <span className="text-white/20">•</span>
-                <span className="text-xs font-mono font-bold text-[#26d464]">
+                <span className="text-zinc-300">•</span>
+                <span className="text-xs font-mono font-bold text-[#16a34a]">
                   Chain ID {CHAIN_ID}
                 </span>
               </motion.div>
@@ -153,18 +138,17 @@ export default function Home() {
               {/* Massive Confident Display Headline */}
               <motion.h1
                 variants={itemVariants}
-                className="text-4xl sm:text-6xl lg:text-[66px] xl:text-[72px] font-bold tracking-tight text-white leading-[1.08] text-balance font-montserrat"
-                style={{ color: "#ffffff" }}
+                className="text-4xl sm:text-6xl lg:text-[64px] xl:text-[70px] font-extrabold tracking-tight text-[#09090b] leading-[1.08] text-balance font-montserrat"
               >
                 Where Decades of <br />
                 Machining Wisdom <br />
-                <span className="text-[#26d464]">Never Retires</span>
+                <span className="text-[#16a34a]">Never Retires</span>
               </motion.h1>
 
               {/* Subtitle with Genuine Product Mission */}
               <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg text-[#94a3b8] leading-relaxed max-w-lg font-poppins font-normal text-pretty"
+                className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-lg font-poppins font-normal text-pretty"
               >
                 Decades of shop-floor knowledge, CNC chatter dampening, and custom
                 fixturing vanish when veteran machinists retire. Expendry captures
@@ -181,7 +165,7 @@ export default function Home() {
                   <Link href="/community">
                     <button
                       type="button"
-                      className="px-7 py-3.5 rounded-xl bg-[#ff5a1f] hover:bg-[#ea4e14] text-white font-semibold text-sm shadow-xl shadow-orange-500/25 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 group"
+                      className="px-7 py-3.5 rounded-xl bg-[#ff5a1f] hover:bg-[#ea4e14] text-white font-semibold text-sm shadow-xl shadow-orange-500/20 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 group"
                     >
                       <span>Explore Community Knowledge</span>
                       <span className="group-hover:translate-x-1 transition-transform font-mono">→</span>
@@ -193,9 +177,9 @@ export default function Home() {
                   <Link href="/onboarding">
                     <button
                       type="button"
-                      className="px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm border border-white/15 transition-all duration-150 backdrop-blur-md active:scale-[0.97] select-none cursor-pointer flex items-center gap-2"
+                      className="px-7 py-3.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 font-medium text-sm border-2 border-[#16a34a] transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 shadow-sm"
                     >
-                      <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                      <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
                       <span>Connect Wallet & Onboard</span>
                     </button>
                   </Link>
@@ -205,25 +189,25 @@ export default function Home() {
               {/* Micro-telemetry proof points */}
               <motion.div
                 variants={itemVariants}
-                className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-400"
+                className="pt-2 flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-600"
               >
                 <span className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
                   <span>{REWARD_PER_POST} EXPEN / Verified Post</span>
                 </span>
-                <span className="text-zinc-600">·</span>
+                <span className="text-zinc-300">·</span>
                 <span>Daily Cap: {DAILY_CAP} EXPEN</span>
-                <span className="text-zinc-600">·</span>
+                <span className="text-zinc-300">·</span>
                 <span className="text-[#ea580c] font-semibold">Gasless MST</span>
               </motion.div>
             </div>
 
-            {/* Right Column: 3D Stage with Chamfered Nut & Cascading EXPEN Coins */}
+            {/* Right Column: High-Fidelity Hero Picture Showcase */}
             <motion.div
               variants={itemVariants}
               className="lg:col-span-6 relative w-full h-full flex items-center justify-center lg:justify-end"
             >
-              <HeroTokenStage />
+              <HeroPicture />
             </motion.div>
           </div>
         </motion.div>
