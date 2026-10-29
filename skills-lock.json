@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "skills": {
+    "break-ui": {
+      "source": "craftwork.design",
+      "sourceUrl": "https://craftwork.design/skills/break-ui",
+      "sourceType": "well-known",
+      "computedHash": "d46e03a934aa78bda6d8e7ed3fdcd253d69334ce3d29087a1612740dfb023d67",
+      "wellKnownDigest": "sha256:50f848e0d81d5732a680baa30d5dd83f8598f10a9bd7a69e0303370498b8608a"
+    }
+  }
+}

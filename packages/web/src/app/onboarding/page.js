@@ -9,30 +9,14 @@ import { formatAddress } from "@/lib/wallet";
 import { useWallet } from "@/hooks/useWallet";
 import { CHAIN_ID } from "shared/constants";
 
-export const EVALUATION_PRESETS = [
-  {
-    label: "Rameshwar Kulkarni (Aerospace Specialist)",
-    data: {
-      username: "rameshwar-k",
-      name: "Rameshwar Kulkarni",
-      designation: "Chief CNC Turning Specialist",
-      company: "Kulkarni Aerospace Components Ltd.",
-      email: "rameshwar@kulkarni-aerospace.in",
-      phone: "+91 98230 11452",
-    },
-  },
-  {
-    label: "Devendra Patil (Tool & Die Master)",
-    data: {
-      username: "devendra-patil",
-      name: "Devendra Patil",
-      designation: "Master Tool & Die Maker",
-      company: "Patil Precision Forging & Dies",
-      email: "devendra@patil-tooling.in",
-      phone: "+91 94220 55198",
-    },
-  },
-];
+// Adversarial worst-case dataset for break-ui stress testing (Dev-only)
+export const WORST_CASE_DATA = {
+  name: "Christopher Alexander Montgomery III",
+  designation: "Senior Precision 5-Axis CNC Milling & Turning Specialist, Platform Lead",
+  company: "Biorad Medisys & Precision Implant Manufacturing Facilities Pvt. Ltd.",
+  email: "bartholomew.fitzgerald@northwind-industries-holdings.example.com",
+  phone: "+91 98230 11452",
+};
 
 export default function OnboardingPage() {
   const router = useRouter();
@@ -43,9 +27,9 @@ export default function OnboardingPage() {
   const [walletAddr, setWalletAddr] = useState(null);
   const [walletMsg, setWalletMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isWorstCaseActive, setIsWorstCaseActive] = useState(false);
 
   const [formData, setFormData] = useState({
-    username: "",
     name: "",
     designation: "",
     company: "",
@@ -59,6 +43,13 @@ export default function OnboardingPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("data") === "worst") {
+          setIsWorstCaseActive(true);
+          setFormData({ ...WORST_CASE_DATA });
+          return;
+        }
+
         const rawSession = sessionStorage.getItem("expendry_user_session");
         if (rawSession) {
           const session = JSON.parse(rawSession);
@@ -67,7 +58,6 @@ export default function OnboardingPage() {
               ...prev,
               email: prev.email || session.email || "",
               name: prev.name || session.displayName || "",
-              username: prev.username || (session.displayName ? session.displayName.toLowerCase().replace(/\s+/g, "-") : ""),
             }));
           }
         }
@@ -85,24 +75,46 @@ export default function OnboardingPage() {
     }
   };
 
-  const handleApplyPreset = (presetData) => {
-    setFormData({ ...presetData });
-    setErrors({});
+  const toggleWorstCase = () => {
+    if (!isWorstCaseActive) {
+      setFormData({ ...WORST_CASE_DATA });
+      setIsWorstCaseActive(true);
+      setErrors({});
+    } else {
+      setFormData({
+        name: "",
+        designation: "",
+        company: "",
+        email: "",
+        phone: "",
+      });
+      setIsWorstCaseActive(false);
+      setErrors({});
+    }
   };
 
   // Validate Stage 1: Name, Designation, Company
   const validateStage1 = () => {
     const errs = {};
-    const displayName = (formData.name || formData.username || "").trim();
+    const displayName = (formData.name || "").trim();
     if (!displayName) {
       errs.name = "Please enter your name.";
+    } else if (displayName.length > 80) {
+      errs.name = "Name cannot exceed 80 characters.";
     }
+
     if (!formData.designation.trim()) {
       errs.designation = "Please enter your role or designation.";
+    } else if (formData.designation.trim().length > 100) {
+      errs.designation = "Designation cannot exceed 100 characters.";
     }
+
     if (!formData.company.trim()) {
       errs.company = "Please enter your company or workshop.";
+    } else if (formData.company.trim().length > 100) {
+      errs.company = "Company cannot exceed 100 characters.";
     }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -110,16 +122,24 @@ export default function OnboardingPage() {
   // Validate Stage 2: Email, Phone
   const validateStage2 = () => {
     const errs = {};
-    if (!formData.email.trim()) {
+    const emailVal = formData.email.trim();
+    if (!emailVal) {
       errs.email = "Work email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    } else if (emailVal.length > 120) {
+      errs.email = "Email cannot exceed 120 characters.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
       errs.email = "Please enter a valid work email address.";
     }
-    if (!formData.phone.trim()) {
+
+    const phoneVal = formData.phone.trim();
+    if (!phoneVal) {
       errs.phone = "Phone or WhatsApp number is required.";
-    } else if (!/^\+?[0-9\s-]{7,16}$/.test(formData.phone.trim())) {
+    } else if (phoneVal.length > 25) {
+      errs.phone = "Phone number cannot exceed 25 characters.";
+    } else if (!/^\+?[0-9\s-]{7,25}$/.test(phoneVal)) {
       errs.phone = "Please enter a valid phone number (e.g. +91 98230 11452).";
     }
+
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -219,7 +239,7 @@ export default function OnboardingPage() {
                 </div>
 
                 <div className="space-y-1.5 text-left">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     Welcome to Expendry
                   </h1>
                   <p className="text-xs sm:text-sm text-zinc-600 font-poppins">
@@ -227,42 +247,30 @@ export default function OnboardingPage() {
                   </p>
                 </div>
 
-                {/* Quick Presets for Evaluators */}
-                <div className="p-3 rounded-2xl bg-zinc-50 border border-zinc-200 text-left space-y-2">
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-bold block">
-                    Quick Preset (Demo &amp; Testing):
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {EVALUATION_PRESETS.map((preset) => (
-                      <button
-                        key={preset.label}
-                        type="button"
-                        onClick={() => handleApplyPreset(preset.data)}
-                        className="px-3 py-1.5 rounded-xl bg-white border border-zinc-200 hover:border-emerald-500 hover:text-emerald-700 text-xs font-mono font-medium transition cursor-pointer text-zinc-700 shadow-2xs"
-                      >
-                        {preset.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
                 <form onSubmit={handleStage1Next} className="space-y-4 text-left">
                   {/* Full Name */}
                   <div>
-                    <label
-                      htmlFor="onboard-name"
-                      className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold mb-1.5"
-                    >
-                      Full Name
-                    </label>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <label
+                        htmlFor="onboard-name"
+                        className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold"
+                      >
+                        Full Name
+                      </label>
+                      <span className="text-[10px] font-mono text-zinc-400">
+                        {formData.name.length}/80
+                      </span>
+                    </div>
                     <input
                       id="onboard-name"
                       name="name"
                       type="text"
                       autoFocus
-                      value={formData.name || formData.username}
+                      maxLength={80}
+                      autoComplete="name"
+                      value={formData.name}
                       onChange={handleChange}
-                      placeholder="e.g. Rameshwar Kulkarni"
+                      placeholder="e.g. Vikramaditya Salunkhe"
                       className={`w-full px-4 py-3 rounded-xl bg-zinc-50 border text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 transition ${
                         errors.name
                           ? "border-red-400 focus:ring-red-400/20"
@@ -276,16 +284,22 @@ export default function OnboardingPage() {
 
                   {/* Designation / Role */}
                   <div>
-                    <label
-                      htmlFor="onboard-designation"
-                      className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold mb-1.5"
-                    >
-                      Designation / Role
-                    </label>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <label
+                        htmlFor="onboard-designation"
+                        className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold"
+                      >
+                        Designation / Role
+                      </label>
+                      <span className="text-[10px] font-mono text-zinc-400">
+                        {formData.designation.length}/100
+                      </span>
+                    </div>
                     <input
                       id="onboard-designation"
                       name="designation"
                       type="text"
+                      maxLength={100}
                       value={formData.designation}
                       onChange={handleChange}
                       placeholder="e.g. 5-Axis CNC Milling Specialist"
@@ -302,16 +316,22 @@ export default function OnboardingPage() {
 
                   {/* Company / Workshop */}
                   <div>
-                    <label
-                      htmlFor="onboard-company"
-                      className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold mb-1.5"
-                    >
-                      Company / Workshop
-                    </label>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <label
+                        htmlFor="onboard-company"
+                        className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold"
+                      >
+                        Company / Workshop
+                      </label>
+                      <span className="text-[10px] font-mono text-zinc-400">
+                        {formData.company.length}/100
+                      </span>
+                    </div>
                     <input
                       id="onboard-company"
                       name="company"
                       type="text"
+                      maxLength={100}
                       value={formData.company}
                       onChange={handleChange}
                       placeholder="e.g. Biorad Medisys Pune"
@@ -361,7 +381,7 @@ export default function OnboardingPage() {
                 </div>
 
                 <div className="space-y-1.5 text-left">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     How can the community reach you?
                   </h1>
                   <p className="text-xs sm:text-sm text-zinc-600 font-poppins">
@@ -372,20 +392,27 @@ export default function OnboardingPage() {
                 <form onSubmit={handleStage2Next} className="space-y-4 text-left">
                   {/* Work Email */}
                   <div>
-                    <label
-                      htmlFor="onboard-email"
-                      className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold mb-1.5"
-                    >
-                      Work Email
-                    </label>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <label
+                        htmlFor="onboard-email"
+                        className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold"
+                      >
+                        Work Email
+                      </label>
+                      <span className="text-[10px] font-mono text-zinc-400">
+                        {formData.email.length}/120
+                      </span>
+                    </div>
                     <input
                       id="onboard-email"
                       name="email"
                       type="email"
                       autoFocus
+                      maxLength={120}
+                      autoComplete="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="e.g. rameshwar@kulkarni-aerospace.in"
+                      placeholder="work.email@company.com"
                       className={`w-full px-4 py-3 rounded-xl bg-zinc-50 border text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 transition ${
                         errors.email
                           ? "border-red-400 focus:ring-red-400/20"
@@ -399,19 +426,26 @@ export default function OnboardingPage() {
 
                   {/* Phone / WhatsApp */}
                   <div>
-                    <label
-                      htmlFor="onboard-phone"
-                      className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold mb-1.5"
-                    >
-                      Phone / WhatsApp Number
-                    </label>
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <label
+                        htmlFor="onboard-phone"
+                        className="block text-xs font-mono uppercase tracking-wider text-zinc-700 font-bold"
+                      >
+                        Phone / WhatsApp Number
+                      </label>
+                      <span className="text-[10px] font-mono text-zinc-400">
+                        {formData.phone.length}/25
+                      </span>
+                    </div>
                     <input
                       id="onboard-phone"
                       name="phone"
                       type="tel"
+                      maxLength={25}
+                      autoComplete="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="e.g. +91 98230 11452"
+                      placeholder="+91 98230 11452"
                       className={`w-full px-4 py-3 rounded-xl bg-zinc-50 border text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:ring-2 transition ${
                         errors.phone
                           ? "border-red-400 focus:ring-red-400/20"
@@ -423,17 +457,17 @@ export default function OnboardingPage() {
                     )}
                   </div>
 
-                  <div className="pt-3 flex items-center gap-3">
+                  <div className="pt-3 flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-3">
                     <button
                       type="button"
                       onClick={() => setStage("STAGE_1")}
-                      className="py-3.5 px-5 rounded-xl border border-zinc-200 hover:bg-zinc-100 text-zinc-700 font-semibold text-sm transition active:scale-[0.98] cursor-pointer"
+                      className="w-full sm:w-auto py-3.5 px-5 rounded-xl border border-zinc-200 hover:bg-zinc-100 text-zinc-700 font-semibold text-sm transition active:scale-[0.98] cursor-pointer text-center"
                     >
                       ← Back
                     </button>
                     <button
                       type="submit"
-                      className="flex-1 py-3.5 px-6 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm tracking-wide transition shadow-lg shadow-emerald-950/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+                      className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm tracking-wide transition shadow-lg shadow-emerald-950/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
                     >
                       <span>Next: Connect BridgeKey</span>
                       <span aria-hidden="true">→</span>
@@ -471,7 +505,7 @@ export default function OnboardingPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
                     Connect BridgeKey
                   </h1>
                   <p className="text-xs sm:text-sm text-zinc-600 max-w-md mx-auto font-poppins">
@@ -482,7 +516,7 @@ export default function OnboardingPage() {
                 {walletMsg && (
                   <div
                     role="alert"
-                    className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 text-left font-mono"
+                    className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800 text-left font-mono break-words"
                   >
                     {walletMsg}
                   </div>
@@ -496,8 +530,8 @@ export default function OnboardingPage() {
                     disabled={isConnecting || isSubmitting}
                     className="w-full py-4 px-6 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-sm tracking-wide transition shadow-xl shadow-emerald-950/20 active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2.5 disabled:opacity-50"
                   >
-                    <IconToken className="w-5 h-5 text-emerald-400" />
-                    <span>{isConnecting ? "Connecting BridgeKey..." : "Connect BridgeKey Wallet"}</span>
+                    <IconToken className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <span className="truncate">{isConnecting ? "Connecting BridgeKey..." : "Connect BridgeKey Wallet"}</span>
                   </button>
 
                   {/* Direct Download Link for BridgeKey */}
@@ -512,20 +546,20 @@ export default function OnboardingPage() {
                       className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-emerald-800 hover:text-emerald-900 hover:underline"
                     >
                       <span>Get BridgeKey Wallet at bridgekey.io</span>
-                      <IconExternal className="w-3.5 h-3.5 text-emerald-700" />
+                      <IconExternal className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0" />
                     </a>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                <div className="pt-3 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] font-mono text-zinc-500">
                   <button
                     type="button"
                     onClick={() => setStage("STAGE_2")}
-                    className="hover:text-zinc-800 underline cursor-pointer"
+                    className="hover:text-zinc-900 underline cursor-pointer"
                   >
                     ← Edit Contact Details
                   </button>
-                  <span className="text-emerald-700 font-bold">Zero Gas · MST #91562037</span>
+                  <span className="text-emerald-700 font-bold tracking-tight">Zero Gas · MST #91562037</span>
                 </div>
               </Card>
             </motion.div>
@@ -553,8 +587,8 @@ export default function OnboardingPage() {
                   <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
                     Verification Complete
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
-                    Welcome, {formData.name || formData.username || "Machinist"}!
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat break-words">
+                    Welcome, {formData.name || "Machinist"}!
                   </h2>
                   <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
                     Your profile is linked to your BridgeKey wallet on MST Testnet.
@@ -562,24 +596,38 @@ export default function OnboardingPage() {
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 text-left text-xs space-y-2 font-mono">
-                  <div className="flex justify-between">
-                    <span className="text-zinc-500">Wallet:</span>
-                    <span className="text-zinc-900 font-bold">
+                <div className="p-5 rounded-2xl bg-zinc-50 border border-zinc-200 text-left text-xs space-y-3 font-mono">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-zinc-500 flex-shrink-0">Wallet:</span>
+                    <span className="text-zinc-900 font-bold text-right min-w-0 break-all">
                       {walletAddr ? formatAddress(walletAddr) : "Connected"}
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-zinc-500">Designation:</span>
-                    <span className="text-emerald-700 font-bold">{formData.designation}</span>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-zinc-500 flex-shrink-0">Designation:</span>
+                    <span className="text-emerald-700 font-bold text-right min-w-0 break-words">
+                      {formData.designation}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-zinc-500">Company:</span>
-                    <span className="text-zinc-900">{formData.company}</span>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-zinc-500 flex-shrink-0">Company:</span>
+                    <span className="text-zinc-900 text-right min-w-0 break-words">
+                      {formData.company}
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-zinc-500">Onboarding Grant:</span>
-                    <span className="text-emerald-700 font-bold">50 EXPEN Allocated</span>
+                  {formData.email && (
+                    <div className="flex items-start justify-between gap-4">
+                      <span className="text-zinc-500 flex-shrink-0">Email:</span>
+                      <span className="text-zinc-700 text-right min-w-0 break-all">
+                        {formData.email}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-start justify-between gap-4 pt-1 border-t border-zinc-200/60">
+                    <span className="text-zinc-500 flex-shrink-0">Onboarding Grant:</span>
+                    <span className="text-emerald-700 font-bold text-right">
+                      50 EXPEN Allocated
+                    </span>
                   </div>
                 </div>
 
@@ -604,6 +652,26 @@ export default function OnboardingPage() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Dev-Only Adversarial Stress Test Toggle (Per break-ui Specification) */}
+      {process.env.NODE_ENV !== "production" && (
+        <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 text-white border border-zinc-700 shadow-2xl backdrop-blur-md text-[11px] font-mono">
+            <span className="text-zinc-400 font-semibold">Stress Test:</span>
+            <button
+              type="button"
+              onClick={toggleWorstCase}
+              className={`px-2.5 py-0.5 rounded-full font-bold transition cursor-pointer ${
+                isWorstCaseActive
+                  ? "bg-amber-400 text-zinc-950 shadow-sm"
+                  : "bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+              }`}
+            >
+              {isWorstCaseActive ? "Worst Case Active" : "Worst Case Data"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
