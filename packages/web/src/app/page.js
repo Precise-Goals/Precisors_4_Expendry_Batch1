@@ -57,21 +57,23 @@ export default function Home() {
 
   // Simulated audio playback progress bar
   useEffect(() => {
-    let timer;
-    if (playingAudioSnippet) {
-      timer = setInterval(() => {
-        setAudioProgress((prev) => {
-          if (prev >= 100) {
-            setPlayingAudioSnippet(false);
-            return 0;
-          }
-          return prev + 1.25;
-        });
-      }, 100);
-    } else {
-      setAudioProgress(0);
+    if (!playingAudioSnippet) {
+      return;
     }
-    return () => clearInterval(timer);
+    const timer = setInterval(() => {
+      setAudioProgress((prev) => {
+        if (prev >= 100) {
+          setPlayingAudioSnippet(false);
+          return 0;
+        }
+        return prev + 1.25;
+      });
+    }, 100);
+
+    return () => {
+      clearInterval(timer);
+      setAudioProgress(0);
+    };
   }, [playingAudioSnippet]);
 
   const containerVariants = {

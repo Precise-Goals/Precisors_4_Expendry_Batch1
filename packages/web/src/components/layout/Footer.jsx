@@ -147,19 +147,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 3. Hairline Dotted Divider Line (reduced height) */}
+        {/* 3. Hairline Dotted Divider Line */}
         <div
           className="footer-dotted-divider w-full border-b border-dotted border-zinc-700/60 my-6 sm:my-8"
           aria-hidden="true"
         />
 
-        {/* 4. Single Clean Wordmark (No cut-off side letters, reduced height, Precision Machining Green) */}
-        <div className="w-full overflow-hidden select-none py-1 my-1 flex items-center justify-center">
-          <div className="footer-hero-wordmark font-montserrat font-extrabold tracking-tighter text-[#26d464] leading-none whitespace-nowrap text-5xl sm:text-6xl md:text-7xl lg:text-[7vw] flex items-baseline justify-center">
+        {/* 4. Zoomed-In Hero Wordmark Statement (High-Impact Machining Green) */}
+        <div className="w-full overflow-hidden select-none py-3 sm:py-6 flex items-center justify-center">
+          <div className="footer-hero-wordmark font-montserrat font-black tracking-tighter text-[#26d464] leading-none whitespace-nowrap text-6xl sm:text-8xl md:text-9xl lg:text-[12vw] xl:text-[13vw] flex items-baseline justify-center hover:scale-[1.01] transition-transform duration-300">
             <span className="opacity-95 hover:opacity-100 transition-opacity relative">
               expendry
               <sup
-                className="text-[0.25em] font-normal text-zinc-400 align-super ml-1"
+                className="text-[0.22em] font-normal text-zinc-500 align-super ml-1 sm:ml-2"
                 aria-label="Registered trademark"
               >
                 ®
@@ -168,138 +168,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 5. Authentic Industrial / Garment Care Label Stamp (reduced spacing) */}
-        <div className="footer-care-stamp my-6 sm:my-8 flex flex-col items-center justify-center text-center space-y-1.5">
-          <p className="footer-care-heading text-xs sm:text-sm font-normal text-zinc-400 tracking-wide font-sans">
-            Handled with
-          </p>
-          <p className="footer-care-title text-sm sm:text-base font-bold text-white tracking-[0.16em] uppercase font-sans">
-            100% TACIT WISDOM
-          </p>
-
-          {/* Care Symbol Glyphs Row */}
-          <div
-            className="footer-care-icons-row flex items-center justify-center gap-3 sm:gap-4 my-2 text-zinc-300"
-            aria-label="Manufacturing Care Symbols"
-          >
-            {/* (A) Circle A */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 17l4-10 4 10" />
-              <path d="M9.5 13.5h5" />
-            </svg>
-
-            {/* Crossed square / tumble dry care icon */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <circle cx="12" cy="12" r="6" />
-              <line x1="4" y1="4" x2="20" y2="20" />
-              <line x1="20" y1="4" x2="4" y2="20" />
-            </svg>
-
-            {/* Wash tub with 30 */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M3 8h18l-2 11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L3 8z" />
-              <path d="M3 11c2-1 4-1 6 0s4 1 6 0 4-1 6 0" />
-              <text
-                x="12"
-                y="17.2"
-                textAnchor="middle"
-                fontSize="6"
-                fontWeight="bold"
-                fill="currentColor"
-                stroke="none"
-              >
-                30
-              </text>
-            </svg>
-
-            {/* Iron / Care press symbol */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M4 17h16a2 2 0 0 0 2-2c0-4-3-7-7-7H8l-4 9z" />
-              <line x1="4" y1="17" x2="22" y2="17" />
-            </svg>
-
-            {/* T-Shirt Garment Outline */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M7 4L3 8l3 3 2-2v11h8V9l2 2 3-3-4-4c-1.5 2-4.5 2-6 0z" />
-            </svg>
-
-            {/* (A) Circle A */}
-            <svg
-              className="w-5 h-5 sm:w-6 sm:h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <path d="M8 17l4-10 4 10" />
-              <path d="M9.5 13.5h5" />
-            </svg>
-          </div>
-
-          <p className="footer-care-heading text-xs sm:text-sm font-normal text-zinc-400 tracking-wide font-sans">
-            Designed and
-          </p>
-          <p className="footer-care-title text-sm sm:text-base font-bold text-white tracking-[0.16em] uppercase font-sans">
-            MANUFACTURED IN
-          </p>
-          <p className="footer-care-footer text-xs sm:text-sm font-medium text-zinc-400 tracking-[0.18em] uppercase font-sans">
-            PUNE & MIDC BHOSARI, INDIA
-          </p>
-        </div>
-
-        {/* 6. Bottom Signoff Bar */}
-        <div className="footer-bottom-bar pt-6 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-[13px] text-zinc-400 font-sans gap-4">
+        {/* 5. Bottom Signoff Bar */}
+        <div className="footer-bottom-bar border-t border-zinc-900 pt-6 mt-2 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-[13px] text-zinc-400 font-sans gap-4">
           {/* Left: Location */}
           <div className="flex items-center gap-2">
             <span
