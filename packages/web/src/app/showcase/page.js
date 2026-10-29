@@ -10,9 +10,9 @@ const ModelViewer = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="w-full h-full min-h-[580px] rounded-3xl bg-[#09090b] border border-zinc-800 flex flex-col items-center justify-center gap-3 animate-pulse text-zinc-400">
-        <div className="w-10 h-10 rounded-full border-2 border-[#16a34a] border-t-transparent animate-spin" />
-        <span className="text-xs font-mono tracking-wider text-emerald-400">Initializing CAD Viewport...</span>
+      <div className="w-full h-full min-h-[580px] rounded-3xl bg-zinc-50 border border-zinc-200 flex flex-col items-center justify-center gap-3 animate-pulse text-zinc-500">
+        <div className="w-10 h-10 rounded-full border-2 border-emerald-600 border-t-transparent animate-spin" />
+        <span className="text-xs font-mono tracking-wider font-bold text-emerald-700">Initializing CAD Viewport...</span>
       </div>
     ),
   }
