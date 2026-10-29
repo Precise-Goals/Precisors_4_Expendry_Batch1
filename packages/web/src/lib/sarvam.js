@@ -2,7 +2,7 @@
  * Sarvam AI Client SDK Wrapper
  *
  * Implements chat, STT (transcribe with saaras), and TTS (synthesise with bulbul:v3 & shubh).
- * Enforces exponential backoff on 429 rate limits (<=3 retries),
+ * Enforces serialised request pacing, exponential backoff with jitter on 429 rate limits (<=3 retries),
  * redacts API keys from all error messages and logs, and defaults to 'en'.
  */
 
@@ -99,12 +99,27 @@ export function redactSensitive(input) {
     .replace(/(Bearer\s+)[A-Za-z0-9_\-\.]{10,}/gi, "$1[REDACTED_API_KEY]");
 }
 
+// Global client-side throttle to avoid Sarvam 429 burst overloads
+let lastSarvamCallTimestamp = 0;
+const SARVAM_RATE_SPACING_MS = 250;
+
+async function throttleSarvamCall() {
+  const now = Date.now();
+  const elapsed = now - lastSarvamCallTimestamp;
+  if (elapsed < SARVAM_RATE_SPACING_MS) {
+    const waitMs = SARVAM_RATE_SPACING_MS - elapsed;
+    await new Promise((res) => setTimeout(res, waitMs));
+  }
+  lastSarvamCallTimestamp = Date.now();
+}
+
 async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250) {
   const fetchFn = getFetch();
   let attempt = 0;
 
   while (attempt <= maxRetries) {
     try {
+      await throttleSarvamCall();
       const response = await fetchFn(url, options);
 
       if (response.status === 429) {
@@ -114,7 +129,9 @@ async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250
             429
           );
         }
-        const delay = initialDelayMs * Math.pow(2, attempt);
+        // Jittered exponential backoff
+        const jitter = Math.floor(Math.random() * 150);
+        const delay = initialDelayMs * Math.pow(2, attempt) + jitter;
         await new Promise((resolve) => setTimeout(resolve, delay));
         attempt++;
         continue;
@@ -144,7 +161,8 @@ async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250
           500
         );
       }
-      const delay = initialDelayMs * Math.pow(2, attempt);
+      const jitter = Math.floor(Math.random() * 150);
+      const delay = initialDelayMs * Math.pow(2, attempt) + jitter;
       await new Promise((resolve) => setTimeout(resolve, delay));
       attempt++;
     }
