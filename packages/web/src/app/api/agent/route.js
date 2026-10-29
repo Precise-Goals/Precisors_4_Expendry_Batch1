@@ -4,6 +4,7 @@ import {
   normalizeLanguage,
   detectLanguage,
   chat,
+  getApiKey,
   SarvamError,
   SARVAM_MODEL,
 } from "@/lib/sarvam";
@@ -129,9 +130,13 @@ ${
     : ""
 }`;
 
+  const historyFiltered = Array.isArray(history)
+    ? history.filter((h) => h && h.content && h.content !== message)
+    : [];
+
   const formattedMessages = [
     { role: "system", content: systemPrompt },
-    ...history.slice(-6).map((h) => ({ role: h.role, content: h.content })),
+    ...historyFiltered.slice(-6).map((h) => ({ role: h.role, content: h.content })),
     { role: "user", content: message },
   ];
 
@@ -140,7 +145,7 @@ ${
 
   const stream = new ReadableStream({
     async start(controller) {
-      const apiKey = process.env.SARVAM_API_KEY;
+      const apiKey = process.env.SARVAM_API_KEY || getApiKey();
       const chatFn = agentDeps.chat || chat;
 
       // Check if we should call external Sarvam streaming or use local generator
@@ -154,6 +159,7 @@ ${
             const reader = sarvamRes.body.getReader();
             const decoder = new TextDecoder();
             let buffer = "";
+            let chunkReceived = false;
             while (true) {
               const { done, value } = await reader.read();
               if (done) break;
@@ -170,6 +176,7 @@ ${
                     const deltaContent =
                       parsed.choices?.[0]?.delta?.content || "";
                     if (deltaContent) {
+                      chunkReceived = true;
                       const sse = `data: ${JSON.stringify({
                         delta: deltaContent,
                         done: false,
@@ -182,17 +189,20 @@ ${
                 }
               }
             }
-            // Stream complete from external Sarvam, emit done event
-            const finalEvent = `data: ${JSON.stringify({
-              delta: "",
-              done: true,
-              sources,
-              resolvedLang,
-            })}\n\n`;
-            controller.enqueue(encoder.encode(finalEvent));
-            usedExternal = true;
+            if (chunkReceived) {
+              // Stream complete from external Sarvam, emit done event
+              const finalEvent = `data: ${JSON.stringify({
+                delta: "",
+                done: true,
+                sources,
+                resolvedLang,
+              })}\n\n`;
+              controller.enqueue(encoder.encode(finalEvent));
+              usedExternal = true;
+            }
           }
-        } catch {
+        } catch (err) {
+          console.error("Sarvam AI streaming error:", err);
           // Fallback to local response generator
         }
       }

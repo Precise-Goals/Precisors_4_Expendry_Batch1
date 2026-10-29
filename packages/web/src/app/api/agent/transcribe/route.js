@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { transcribe, normalizeLanguage } from "@/lib/sarvam";
+import { transcribe, normalizeLanguage, getApiKey } from "@/lib/sarvam";
 
 // Maximum 60 seconds audio file size allowance (~10MB limit for webm/wav)
 const MAX_AUDIO_BYTES = 10 * 1024 * 1024;
@@ -46,7 +46,7 @@ export async function POST(request) {
     const transcribeFn = transcribeDeps.transcribe || transcribe;
 
     let transcript = "";
-    const apiKey = process.env.SARVAM_API_KEY;
+    const apiKey = process.env.SARVAM_API_KEY || getApiKey();
 
     if (apiKey && !apiKey.startsWith("test-")) {
       try {
