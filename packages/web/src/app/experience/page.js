@@ -8,16 +8,10 @@ import {
   IconAcoustics,
   IconPlay,
   IconPause,
-  IconToken,
-  IconBrain,
   IconCheck,
   IconAlert,
   IconVolume,
   IconVolumeMute,
-  IconShield,
-  IconCaliper,
-  IconThermal,
-  IconArrowRight,
 } from "@/components/ui/Icons";
 import { CHAIN_ID, REWARD_PER_POST, DAILY_CAP } from "shared/constants";
 
@@ -104,7 +98,6 @@ export default function ExperiencePage() {
 
   const audioCtxRef = useRef(null);
   const oscRef = useRef(null);
-  const gainRef = useRef(null);
 
   const currentMat = MATERIALS[selectedMaterial];
   const calculatedResonance = Math.round(
@@ -149,7 +142,6 @@ export default function ExperiencePage() {
       const osc = audioCtxRef.current.createOscillator();
       const gain = audioCtxRef.current.createGain();
 
-      // Soft industrial triangle/sine tone
       osc.type = dampened ? "sine" : "triangle";
       osc.frequency.setValueAtTime(frequency, audioCtxRef.current.currentTime);
 
@@ -159,40 +151,29 @@ export default function ExperiencePage() {
 
       osc.connect(gain);
       gain.connect(audioCtxRef.current.destination);
-
       osc.start();
       oscRef.current = osc;
-      gainRef.current = gain;
     } catch {
-      // AudioContext unavailable or restricted
+      // Audio autoplay restrictions gracefully handled
+    }
+  };
+
+  // Handle playing simulated veteran audio log
+  const togglePlay = (storyId) => {
+    if (activeStoryId === storyId && isPlayingAudio) {
+      setIsPlayingAudio(false);
+      stopTone();
+    } else {
+      setActiveStoryId(storyId);
+      setIsPlayingAudio(true);
+      setAudioProgress(0);
+      const story = VETERAN_STORIES.find((s) => s.id === storyId);
+      playTone(story?.frequencyHz || 1800, true);
     }
   };
 
   useEffect(() => {
-    return () => {
-      stopTone();
-      if (audioCtxRef.current) {
-        audioCtxRef.current.close().catch(() => {});
-      }
-    };
-  }, []);
-
-  // Update tone frequency dynamically if playing in simulator
-  useEffect(() => {
-    if (isPlayingAudio && oscRef.current && gainRef.current && audioCtxRef.current) {
-      try {
-        const story = VETERAN_STORIES.find((s) => s.id === activeStoryId);
-        const freq = story ? story.frequencyHz : calculatedResonance;
-        oscRef.current.frequency.setTargetAtTime(freq, audioCtxRef.current.currentTime, 0.05);
-      } catch {
-        // Ignored
-      }
-    }
-  }, [calculatedResonance, isPlayingAudio, activeStoryId]);
-
-  // Audio simulation progress ticker
-  useEffect(() => {
-    let interval;
+    let interval = null;
     if (isPlayingAudio) {
       interval = setInterval(() => {
         setAudioProgress((prev) => {
@@ -201,57 +182,45 @@ export default function ExperiencePage() {
             stopTone();
             return 0;
           }
-          return prev + 1.25;
+          return prev + 2.5;
         });
-      }, 200);
+      }, 150);
     } else {
-      stopTone();
+      clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      stopTone();
+    };
   }, [isPlayingAudio]);
 
-  const togglePlay = (id) => {
-    if (activeStoryId === id && isPlayingAudio) {
-      setIsPlayingAudio(false);
-      stopTone();
-    } else {
-      setActiveStoryId(id);
-      setIsPlayingAudio(true);
-      setAudioProgress(0);
-      const story = VETERAN_STORIES.find((s) => s.id === id);
-      if (story) {
-        playTone(story.frequencyHz, true);
-      }
-    }
-  };
-
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#26d464]/30 selection:text-[#ededed] bg-blueprint-grid">
+    <div className="flex flex-col w-full min-h-screen bg-transparent text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900 relative">
       {/* ──────────────────────────────────────────────────────────
           1. HEADER: Experience Hub
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Experience Header"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#262626]"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-zinc-200/90 bg-white/70 backdrop-blur-md"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-zinc-500">+ [AUDIO // TACIT EXP]</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-zinc-500">+ [MST-{CHAIN_ID}]</div>
+          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [AUDIO // TACIT EXP]</div>
+          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [MST-{CHAIN_ID}]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626]">
-            <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-            <span className="text-xs font-mono font-medium text-[#ededed]">Machinist Tacit Audio & Story Archive</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-xs font-mono text-[#26d464]">Earn {REWARD_PER_POST} EXPEN / Valid Entry</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+            <span className="text-xs font-mono font-bold text-zinc-900">Machinist Tacit Audio & Story Archive</span>
+            <span className="text-zinc-300">•</span>
+            <span className="text-xs font-mono font-bold text-emerald-700">Earn {REWARD_PER_POST} EXPEN / Valid Entry</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-montserrat leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat leading-[1.15]">
             Veteran Machinist Tacit Experience Hub
           </h1>
 
-          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins">
+          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-3xl font-body">
             Real machine shop know-how lives in acoustic pitch, chip curl color, and tactile vibration.
             Listen to master operators share decades of field-tested tricks that prevent broken tooling,
             dampen chatter, and save thousands in scrap.
@@ -278,21 +247,21 @@ export default function ExperiencePage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Harmonics Simulator"
-        className="py-14 sm:py-20 border-b border-[#262626] bg-[#0c0c0c]/90"
+        className="py-14 sm:py-20 border-b border-zinc-200/90 bg-white/40 backdrop-blur-sm"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div className="space-y-2">
               <div className="flex items-center gap-2">
-                <IconAcoustics className="w-5 h-5 text-[#26d464]" />
-                <span className="text-xs font-mono uppercase tracking-wider text-[#26d464] font-semibold">
+                <IconAcoustics className="w-5 h-5 text-emerald-700" />
+                <span className="text-xs font-mono uppercase tracking-wider text-emerald-800 font-bold">
                   Interactive Shop-Floor Diagnostic
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
                 Machinist Harmonic Resonance & Chatter Simulator
               </h2>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-2xl font-poppins">
+              <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl font-body">
                 Adjust tool overhang, workpiece alloy, and spindle speed to see how harmonic vibration develops—and how veteran operators dampen it.
               </p>
             </div>
@@ -300,17 +269,17 @@ export default function ExperiencePage() {
             <button
               type="button"
               onClick={() => setAudioMuted(!audioMuted)}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#262626] bg-[#141414] text-xs font-mono text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838] transition self-start sm:self-auto"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-zinc-200 bg-white text-xs font-mono font-bold text-zinc-800 hover:bg-zinc-50 shadow-xs transition cursor-pointer self-start sm:self-auto"
             >
               {audioMuted ? (
                 <>
-                  <IconVolumeMute className="w-4 h-4 text-zinc-500" />
+                  <IconVolumeMute className="w-4 h-4 text-zinc-400" />
                   <span>Acoustic Audio Muted</span>
                 </>
               ) : (
                 <>
-                  <IconVolume className="w-4 h-4 text-[#26d464]" />
-                  <span className="text-[#26d464]">Synthesizer Active</span>
+                  <IconVolume className="w-4 h-4 text-emerald-700" />
+                  <span className="text-emerald-800">Synthesizer Active</span>
                 </>
               )}
             </button>
@@ -318,10 +287,10 @@ export default function ExperiencePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Control Panel */}
-            <div className="lg:col-span-5 p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-5">
+            <div className="lg:col-span-5 p-6 sm:p-7 rounded-4xl bg-white border border-zinc-200/90 shadow-xl space-y-5">
               {/* Alloy Selector */}
               <div>
-                <label className="text-xs font-mono uppercase text-[#a1a1aa] block mb-2">
+                <label className="text-xs font-mono uppercase text-zinc-500 font-bold block mb-2">
                   Workpiece Material
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -330,14 +299,14 @@ export default function ExperiencePage() {
                       key={mat.name}
                       type="button"
                       onClick={() => setSelectedMaterial(idx)}
-                      className={`p-2.5 rounded-lg border text-left text-xs font-mono transition ${
+                      className={`p-3 rounded-2xl border text-left text-xs font-mono transition cursor-pointer ${
                         selectedMaterial === idx
-                          ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold shadow-sm shadow-[#26d464]/20"
-                          : "bg-[#141414] border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838]"
+                          ? "bg-emerald-50/80 border-emerald-600 text-zinc-900 font-bold shadow-xs ring-2 ring-emerald-600/10"
+                          : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-white"
                       }`}
                     >
-                      <div className="truncate">{mat.name}</div>
-                      <div className="text-[10px] text-[#26d464]">{mat.hardness}</div>
+                      <div className="truncate font-bold">{mat.name}</div>
+                      <div className="text-[11px] text-emerald-700 font-bold mt-0.5">{mat.hardness}</div>
                     </button>
                   ))}
                 </div>
@@ -346,8 +315,8 @@ export default function ExperiencePage() {
               {/* RPM Slider */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-mono">
-                  <span className="text-[#a1a1aa]">Spindle Speed (RPM)</span>
-                  <span className="text-[#26d464] font-bold">{rpm} RPM</span>
+                  <span className="text-zinc-500 font-bold">Spindle Speed (RPM)</span>
+                  <span className="text-emerald-700 font-bold">{rpm} RPM</span>
                 </div>
                 <input
                   type="range"
@@ -356,11 +325,11 @@ export default function ExperiencePage() {
                   step="50"
                   value={rpm}
                   onChange={(e) => setRpm(Number(e.target.value))}
-                  className="w-full h-1.5 bg-[#262626] rounded-lg appearance-none cursor-pointer accent-[#26d464]"
+                  className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                 />
-                <div className="flex justify-between text-[10px] font-mono text-[#a1a1aa]">
+                <div className="flex justify-between text-[11px] font-mono text-zinc-400">
                   <span>600 RPM</span>
-                  <span>Optimal: {currentMat.baseRpm}</span>
+                  <span className="font-bold text-zinc-700">Optimal: {currentMat.baseRpm}</span>
                   <span>4500 RPM</span>
                 </div>
               </div>
@@ -368,8 +337,8 @@ export default function ExperiencePage() {
               {/* Overhang Slider */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-mono">
-                  <span className="text-[#a1a1aa]">Tool Overhang Ratio (L/D)</span>
-                  <span className="text-[#ededed] font-bold">{overhang}:1</span>
+                  <span className="text-zinc-500 font-bold">Tool Overhang Ratio (L/D)</span>
+                  <span className="text-zinc-900 font-bold">{overhang}:1</span>
                 </div>
                 <input
                   type="range"
@@ -378,9 +347,9 @@ export default function ExperiencePage() {
                   step="0.5"
                   value={overhang}
                   onChange={(e) => setOverhang(Number(e.target.value))}
-                  className="w-full h-1.5 bg-[#262626] rounded-lg appearance-none cursor-pointer accent-[#26d464]"
+                  className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                 />
-                <div className="flex justify-between text-[10px] font-mono text-[#a1a1aa]">
+                <div className="flex justify-between text-[11px] font-mono text-zinc-400">
                   <span>2:1 (Rigid)</span>
                   <span>4:1 (Standard)</span>
                   <span>7:1 (Extreme)</span>
@@ -389,16 +358,16 @@ export default function ExperiencePage() {
             </div>
 
             {/* Diagnostic Viewport & Readout */}
-            <div className="lg:col-span-7 p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-6">
-              <div className="flex items-center justify-between border-b border-[#262626] pb-3">
-                <span className="text-xs font-mono uppercase text-[#a1a1aa]">
+            <div className="lg:col-span-7 p-6 sm:p-7 rounded-4xl bg-white border border-zinc-200/90 shadow-xl space-y-6">
+              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                <span className="text-xs font-mono uppercase text-zinc-500 font-bold">
                   Acoustic Spectrum & Waveform
                 </span>
                 <span
-                  className={`px-2.5 py-0.5 rounded-full text-xs font-mono font-bold ${
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
                     isResonanceZone
-                      ? "bg-red-500/20 text-red-400 border border-red-500/30"
-                      : "bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30"
+                      ? "bg-red-50 text-red-700 border border-red-200 shadow-2xs"
+                      : "bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs"
                   }`}
                 >
                   {isResonanceZone ? "SEVERE CHATTER DETECTED" : "STABLE CUTTING ZONE"}
@@ -406,8 +375,8 @@ export default function ExperiencePage() {
               </div>
 
               {/* Dynamic Waveform Graph simulation */}
-              <div className="h-32 w-full rounded-xl bg-[#0a0a0a] border border-[#262626] p-4 flex items-center justify-center gap-1.5 relative overflow-hidden">
-                <div className="absolute top-2 left-3 text-[10px] font-mono text-[#a1a1aa]">
+              <div className="h-32 w-full rounded-2xl bg-zinc-50 border border-zinc-200 p-4 flex items-center justify-center gap-1.5 relative overflow-hidden">
+                <div className="absolute top-2 left-3 text-[11px] font-mono font-bold text-zinc-500">
                   PEAK: {calculatedResonance} Hz · {isResonanceZone ? "AMPLITUDE: 8.4 mm/s (UNSTABLE)" : "AMPLITUDE: 0.9 mm/s (STABLE)"}
                 </div>
                 {[12, 28, 45, 80, 52, 95, 34, 76, 20, 60, 88, 40, 25, 70, 90, 30, 48, 65, 35, 20].map((h, i) => {
@@ -429,7 +398,7 @@ export default function ExperiencePage() {
                         ease: "easeInOut",
                       }}
                       className={`w-2 rounded-full transition-all duration-300 ${
-                        isResonanceZone ? "bg-red-500/80" : "bg-[#26d464]/80"
+                        isResonanceZone ? "bg-red-500" : "bg-emerald-600"
                       }`}
                       style={{ height: `${finalHeight}%` }}
                     />
@@ -438,16 +407,16 @@ export default function ExperiencePage() {
               </div>
 
               {/* Tacit Advice Box */}
-              <div className="p-4 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ededed]">
+              <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-2">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-900">
                   {isResonanceZone ? (
-                    <IconAlert className="w-4 h-4 text-orange-400" />
+                    <IconAlert className="w-4 h-4 text-amber-600" />
                   ) : (
-                    <IconCheck className="w-4 h-4 text-[#26d464]" />
+                    <IconCheck className="w-4 h-4 text-emerald-600" />
                   )}
                   <span>Veteran Machinist Diagnostic Recommendation:</span>
                 </div>
-                <p className="text-xs text-[#a1a1aa] leading-relaxed font-poppins">
+                <p className="text-xs text-zinc-600 leading-relaxed font-body">
                   {isResonanceZone
                     ? `Resonance frequency of ${calculatedResonance} Hz coincides with the natural harmonic frequency of ${currentMat.name}. Shift spindle RPM to ${
                         currentMat.baseRpm - 200
@@ -468,12 +437,12 @@ export default function ExperiencePage() {
         className="py-16 sm:py-24"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-10">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#262626] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 pb-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
                 Featured Shop-Floor Experience Logs
               </h2>
-              <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1 font-poppins">
+              <p className="text-xs sm:text-sm text-zinc-600 mt-1 font-body">
                 Listen to authentic setups, audio recordings, and field tricks recorded by master machinists.
               </p>
             </div>
@@ -485,10 +454,10 @@ export default function ExperiencePage() {
                   key={cat}
                   type="button"
                   onClick={() => setActiveTab(cat)}
-                  className={`px-3 py-1.5 rounded-lg border transition ${
+                  className={`px-3.5 py-1.5 rounded-xl border transition cursor-pointer font-bold ${
                     activeTab === cat
-                      ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold shadow-sm shadow-[#26d464]/20"
-                      : "bg-[#121212] border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838]"
+                      ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
+                      : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
                   }`}
                 >
                   {cat}
@@ -503,56 +472,56 @@ export default function ExperiencePage() {
               return (
                 <div
                   key={story.id}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-4 hover:border-[#383838] transition flex flex-col justify-between"
+                  className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-4 hover:shadow-xl hover:border-emerald-500/50 transition-all flex flex-col justify-between"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#2e2e2e] text-[#26d464]">
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
                         {story.category}
                       </span>
-                      <span className="text-[#a1a1aa] flex items-center gap-1">
-                        <IconCheck className="w-3.5 h-3.5 text-[#26d464]" />
+                      <span className="text-zinc-500 flex items-center gap-1 font-bold">
+                        <IconCheck className="w-3.5 h-3.5 text-emerald-700" />
                         <span>MST Verified</span>
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-[#ededed] font-montserrat">
+                    <h3 className="text-base font-bold text-zinc-900 font-montserrat">
                       {story.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
                       {story.summary}
                     </p>
                   </div>
 
                   {/* Audio Player Strip */}
-                  <div className="pt-4 border-t border-[#1f1f1f] space-y-3">
+                  <div className="pt-4 border-t border-zinc-100 space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <button
                         type="button"
                         onClick={() => togglePlay(story.id)}
-                        className={`h-9 w-9 rounded-full flex items-center justify-center transition ${
+                        className={`h-10 w-10 rounded-full flex items-center justify-center transition cursor-pointer ${
                           active
-                            ? "bg-[#26d464] text-black shadow-lg shadow-[#26d464]/30"
-                            : "bg-[#1c1c1c] text-[#ededed] hover:bg-[#262626]"
+                            ? "bg-emerald-800 text-white shadow-md shadow-emerald-950/20"
+                            : "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 border border-zinc-200"
                         }`}
                         aria-label={active ? "Pause audio" : "Play audio log"}
                       >
                         {active ? (
-                          <IconPause className="w-4 h-4 text-black" />
+                          <IconPause className="w-4 h-4 text-white" />
                         ) : (
-                          <IconPlay className="w-4 h-4 ml-0.5" />
+                          <IconPlay className="w-4 h-4 ml-0.5 text-zinc-900" />
                         )}
                       </button>
 
                       <div className="flex-1 text-xs font-mono">
-                        <div className="flex justify-between text-[11px] text-[#a1a1aa] mb-1">
-                          <span>{active ? "ACOUSTIC LOG PLAYING" : "VETERAN VOICE MEMO"}</span>
+                        <div className="flex justify-between text-[11px] text-zinc-500 mb-1">
+                          <span className="font-bold">{active ? "ACOUSTIC LOG PLAYING" : "VETERAN VOICE MEMO"}</span>
                           <span>{story.audioDuration} ({story.frequencyHz} Hz)</span>
                         </div>
-                        <div className="h-1.5 w-full bg-[#262626] rounded-full overflow-hidden">
+                        <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
                           <div
-                            className={`h-full bg-[#26d464] transition-all duration-200 ${
+                            className={`h-full bg-emerald-600 transition-all duration-200 ${
                               active ? "animate-pulse" : ""
                             }`}
                             style={{ width: active ? `${Math.max(5, audioProgress)}%` : "0%" }}
@@ -562,13 +531,13 @@ export default function ExperiencePage() {
                     </div>
 
                     {/* Author & Reward Badge */}
-                    <div className="flex items-center justify-between text-[11px] font-mono text-[#a1a1aa] pt-1">
+                    <div className="flex items-center justify-between text-xs font-mono text-zinc-500 pt-1">
                       <div>
-                        <span className="text-[#ededed] font-semibold">{story.author}</span>
-                        <span className="text-zinc-600"> · </span>
+                        <span className="text-zinc-900 font-bold">{story.author}</span>
+                        <span className="text-zinc-300"> · </span>
                         <span>{story.location}</span>
                       </div>
-                      <div className="text-[#26d464] font-bold">
+                      <div className="text-emerald-700 font-bold">
                         +{story.rewardAmount}
                       </div>
                     </div>
@@ -585,13 +554,13 @@ export default function ExperiencePage() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Contribute CTA"
-        className="py-14 bg-[#0a0a0a] border-t border-[#262626]"
+        className="py-14 max-w-5xl mx-auto my-8 px-4 sm:px-6 lg:px-8 w-full"
       >
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#ededed] font-montserrat">
+        <div className="rounded-4xl bg-white border border-zinc-200/90 shadow-2xl p-8 sm:p-12 text-center space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-montserrat">
             Have a Hard-Won Shop Secret?
           </h2>
-          <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-xl mx-auto font-poppins">
+          <p className="text-xs sm:text-sm text-zinc-600 max-w-xl mx-auto font-body">
             Share your fixturing trick, thermal offset, or chatter solution with the community. Valid posts mint {REWARD_PER_POST} EXPEN tokens directly to your wallet on MST Testnet (Chain ID: {CHAIN_ID}, up to {DAILY_CAP} EXPEN daily).
           </p>
           <div className="pt-2">
