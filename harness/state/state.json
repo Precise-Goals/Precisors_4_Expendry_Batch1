@@ -2,8 +2,8 @@
   "harness_version": "1.0.0",
   "profile": "fullstack-web+blockchain",
   "derived_from": {
-    "raw_md_sha": "6f662e846ed1334ce3d4247e322c849be3e49eba764bc2cbd30668ce3a880915",
-    "harness_md_sha": "cc464fc5ee5413974cc9baaaf9bd51f655e6233573644996d7131c269e0bb9f1"
+    "raw_md_sha": "9e53a17cc81bbe1cb4a8c9280ac32ac32f260dcacc6eb3b09c7c5ace5738589c",
+    "harness_md_sha": "3dfb77d4c74b6d7f68dc4fe1bd58b44f569ff2ecbd953feeffa9dc62b150e1d7"
   },
   "mode": "RETRO",
   "sprint": 4,
@@ -17,16 +17,16 @@
   },
   "lanes": [],
   "attempts": {},
-  "last_commit": "15e8ea3",
+  "last_commit": "cf5cf98",
   "last_gate": {
     "name": "G5",
     "status": "pass",
-    "at": "2026-10-27T01:40:00Z",
+    "at": "2026-10-29T18:15:00Z",
     "log": "harness/logs/events.jsonl"
   },
   "breaker": {
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-27T01:40:00Z"
+  "updated_at": "2026-10-29T18:15:00Z"
 }
