@@ -28,7 +28,7 @@ jobs:
       - name: Install Harness Test Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest
+          pip install -r requirements.txt
 
       - name: Run Harness Health Verification (check_harness.py)
         run: python scripts/check_harness.py
@@ -48,22 +48,11 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Setup Node.js Environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: packages/contracts/package.json
-
-      - name: Install Contracts Dependencies
-        run: |
-          cd packages/contracts
-          npm ci
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
 
       - name: Compile and Test Hardhat Contracts
-        run: |
-          cd packages/contracts
-          npx hardhat test
+        run: bun run test --filter=contracts
 
   web-test:
     name: Gate G1 - Web Application Integration Suite
