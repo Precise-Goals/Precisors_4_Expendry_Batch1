@@ -178,22 +178,10 @@ export default function Home() {
                   <Link href="/community">
                     <button
                       type="button"
-                      className="px-7 py-3.5 rounded-xl bg-[#ff5a1f] hover:bg-[#ea4e14] text-white font-semibold text-sm shadow-xl shadow-orange-500/20 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 group"
+                      className="px-8 py-4 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold text-sm sm:text-base shadow-xl shadow-emerald-950/20 transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2.5 group"
                     >
                       <span>Explore Community Knowledge</span>
                       <span className="group-hover:translate-x-1 transition-transform font-mono">→</span>
-                    </button>
-                  </Link>
-                </MagneticTrack>
-
-                <MagneticTrack strength={0.15} specular={false}>
-                  <Link href="/onboarding">
-                    <button
-                      type="button"
-                      className="px-7 py-3.5 rounded-xl bg-white hover:bg-zinc-50 text-zinc-900 font-medium text-sm border-2 border-[#16a34a] transition-all duration-150 active:scale-[0.97] select-none cursor-pointer flex items-center gap-2 shadow-sm"
-                    >
-                      <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
-                      <span>Connect Wallet & Onboard</span>
                     </button>
                   </Link>
                 </MagneticTrack>
