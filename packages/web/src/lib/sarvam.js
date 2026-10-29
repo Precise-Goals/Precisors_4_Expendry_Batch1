@@ -233,8 +233,13 @@ export async function transcribe(audioBlob, lang = DEFAULT_LANGUAGE) {
 
   const formData = new FormData();
   formData.append("file", audioBlob, "audio.webm");
-  formData.append("model", "saaras:v3");
-  formData.append("language_code", langCode);
+  // Sarvam STT model: Use 'saarika:v2.5' for automatic language detection; 'saaras:v3' for explicit language codes.
+  const isAuto = resolvedLang === "auto" || langCode === "unknown";
+  const modelName = isAuto ? "saarika:v2.5" : "saaras:v3";
+  formData.append("model", modelName);
+  if (!isAuto && langCode) {
+    formData.append("language_code", langCode);
+  }
 
   const headers = {
     ...(apiKey ? { "api-subscription-key": apiKey } : {}),
