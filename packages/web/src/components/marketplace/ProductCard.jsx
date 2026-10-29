@@ -9,18 +9,12 @@ export default function ProductCard({ product }) {
   if (!product) return null;
 
   const expenEquivalent = (product.price * 2).toFixed(0);
-  const refCode = `REF: EXP-TL-${product.id.toUpperCase()}`;
+  const refCode = `REF: EXP-MD-${product.id.toUpperCase()}`;
 
   return (
-    <article className="flex flex-col rounded-2xl border border-[#262626] bg-[#121212] hover:border-[#383838] transition-all duration-200 overflow-hidden group hover:shadow-2xl hover:-translate-y-1 motion-reduce:hover:translate-y-0 specular-card">
+    <article className="flex flex-col rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 transition-all duration-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 motion-reduce:hover:translate-y-0">
       {/* Packaging Frame / Visual Viewport */}
-      <div className="relative h-48 w-full bg-[#0a0a0a] border-b border-[#222222] flex items-center justify-center overflow-hidden">
-        {/* Specular radial highlight behind image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-radial from-white/[0.04] to-transparent pointer-events-none"
-        />
-
+      <div className="relative h-52 w-full bg-zinc-50 border-b border-zinc-200 flex items-center justify-center overflow-hidden">
         <Image
           src={product.imageUrl}
           alt={product.name}
@@ -33,36 +27,36 @@ export default function ProductCard({ product }) {
 
         {product.has3DModel && (
           <Link
-            href={`/showcase?model=${product.modelId || "lathe-body"}`}
-            className="absolute top-3 right-3 text-[11px] font-mono px-2.5 py-1 rounded-full bg-[#26d464]/15 text-[#26d464] border border-[#26d464]/40 font-semibold flex items-center gap-1.5 hover:bg-[#26d464]/25 hover:border-[#26d464] transition shadow-sm z-10 group/inspect"
-            title="Inspect tool in 3D WebGL viewport"
+            href={`/showcase?model=${product.modelId || "excel-mpk"}`}
+            className="absolute top-3 right-3 text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold flex items-center gap-1.5 hover:bg-emerald-100 hover:border-emerald-300 transition shadow-sm z-10 group/inspect"
+            title="Inspect precision implant in 3D WebGL CAD viewport"
           >
-            <IconCube3D className="w-3.5 h-3.5 text-[#26d464] group-hover/inspect:rotate-12 transition-transform" />
+            <IconCube3D className="w-3.5 h-3.5 text-emerald-600 group-hover/inspect:rotate-12 transition-transform" />
             <span
-              className="w-1.5 h-1.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none"
+              className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse motion-reduce:animate-none"
               aria-hidden="true"
             />
-            <span>3D INSPECTION</span>
+            <span>3D INSPECT</span>
           </Link>
         )}
 
         <div className="absolute top-3 left-3 flex flex-col gap-1">
-          <span className="telemetry-chip">
+          <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700">
             {product.category}
           </span>
-          <span className="text-[11px] font-mono text-[#a1a1aa]">
+          <span className="text-[10px] font-mono text-zinc-500">
             {refCode}
           </span>
         </div>
       </div>
 
       {/* Product Content Details */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      <div className="p-6 flex-1 flex flex-col justify-between">
         <div>
-          <h3 className="text-base font-bold text-[#ededed] group-hover:text-[#26d464] transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
+          <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
             {product.name}
           </h3>
-          <p className="text-xs text-[#a1a1aa] mt-2 line-clamp-2 leading-relaxed font-body">
+          <p className="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed font-body">
             {product.description}
           </p>
 
@@ -74,9 +68,9 @@ export default function ProductCard({ product }) {
                 .map(([key, val]) => (
                   <span
                     key={key}
-                    className="text-[11px] font-mono bg-[#161616] border border-[#262626] text-[#a1a1aa] px-2 py-0.5 rounded"
+                    className="text-[11px] font-mono bg-zinc-100 border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded"
                   >
-                    {key}: <span className="text-[#ededed] font-medium">{val}</span>
+                    {key}: <span className="text-zinc-900 font-semibold">{val}</span>
                   </span>
                 ))}
             </div>
@@ -84,24 +78,24 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Pricing & CTA */}
-        <div className="mt-5 pt-4 border-t border-[#222222] flex items-center justify-between">
+        <div className="mt-5 pt-4 border-t border-zinc-100 flex items-center justify-between">
           <div>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa] block">Dual Price</span>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block">Unit Price</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-lg font-bold text-[#ededed] font-mono tabular-nums">
+              <span className="text-xl sm:text-2xl font-black text-zinc-900 font-mono tracking-tight tabular-nums">
                 ${product.price.toFixed(2)}
               </span>
-              <span className="text-[11px] text-[#26d464] font-mono font-semibold">
-                {"//"} {expenEquivalent} EXPEN
+              <span className="text-xs font-mono font-bold text-emerald-600">
+                · {expenEquivalent} EXPEN
               </span>
             </div>
           </div>
 
           <Link
             href={`/marketplace/${product.id}`}
-            className="px-3.5 py-1.5 rounded-lg bg-[#161616] border border-[#262626] hover:border-[#26d464]/60 text-xs font-semibold text-[#ededed] hover:text-[#26d464] hover:bg-[#1a1a1a] transition font-montserrat active:scale-[0.98] shadow-sm flex items-center gap-1"
+            className="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold font-montserrat transition shadow-sm active:scale-95 cursor-pointer"
           >
-            <span>Inspect Tool</span>
+            Details →
           </Link>
         </div>
       </div>
