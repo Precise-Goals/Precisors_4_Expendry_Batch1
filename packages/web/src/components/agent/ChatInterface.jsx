@@ -160,15 +160,15 @@ export default function ChatInterface({
   };
 
   return (
-    <div className="flex flex-col h-full rounded-2xl border border-[#262626] bg-[#0c0c0c] shadow-2xl overflow-hidden specular-card">
+    <div className="flex flex-col h-full rounded-2xl border border-[#262626] !bg-[#0c0c0c] shadow-2xl overflow-hidden">
       {/* Header Bar */}
-      <div className="px-5 py-3.5 border-b border-[#262626] flex items-center justify-between bg-[#121212]/90 backdrop-blur">
+      <div className="px-5 py-3.5 border-b border-[#262626] flex items-center justify-between !bg-[#121212]/95 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-[#26d464] shadow-inner">
             <IconBolt className="w-4 h-4 text-[#26d464]" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-[#ededed] flex items-center gap-2 font-display">
+            <h2 className="text-sm font-semibold !text-white flex items-center gap-2 font-display">
               Sarvam AI Assistant
               <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 font-bold">
                 sarvam-105b
@@ -177,7 +177,7 @@ export default function ChatInterface({
                 auto-detect active
               </span>
             </h2>
-            <p className="text-xs text-[#a1a1aa]">
+            <p className="text-xs !text-[#a1a1aa]">
               {detectedLang === "hi"
                 ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी) · भाषा स्वतः शोधली जाते"
                 : detectedLang === "mr"
@@ -221,7 +221,7 @@ export default function ChatInterface({
                   className={`max-w-[85%] sm:max-w-[80%] rounded-lg px-4 py-3 text-sm leading-relaxed ${
                     isUser
                       ? "bg-[#26d464] text-[#0a0a0a] font-semibold ml-auto shadow-md"
-                      : "bg-[#141414] border border-[#262626] text-[#ededed] shadow-inner specular-card"
+                      : "!bg-[#141414] border border-[#262626] !text-[#ededed] shadow-inner"
                   }`}
                 >
                   {!isUser && msg.detectedLang && msg.id !== "welcome" && (
@@ -238,7 +238,7 @@ export default function ChatInterface({
                   )}
 
                   <div aria-live="polite" aria-atomic="false">
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                    <p className="whitespace-pre-wrap !text-[#ededed] leading-relaxed">{msg.content}</p>
                     {/* Active streaming cursor */}
                     {isLoading && !isUser && msg.content && (
                       <span className="inline-block w-2 h-4 ml-1 bg-[#26d464] animate-pulse align-middle" />
@@ -314,7 +314,7 @@ export default function ChatInterface({
       {/* Input Composer Form */}
       <form
         onSubmit={handleSubmit}
-        className="p-3.5 border-t border-[#262626] bg-[#121212]/90 flex gap-2 items-center"
+        className="p-3.5 border-t border-[#262626] !bg-[#121212] flex gap-2 items-center"
       >
         <label htmlFor="agent-chat-input" className="sr-only">
           Ask machining question
@@ -327,13 +327,13 @@ export default function ChatInterface({
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask in English, हिंदी, or मराठी (e.g. feeds, lathe chatter, carbide grades)..."
           disabled={isLoading}
-          className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-md px-3.5 py-2.5 text-xs sm:text-sm text-[#ededed] placeholder-[#a1a1aa]/70 focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
+          className="flex-1 !bg-[#0a0a0a] border border-[#262626] rounded-md px-3.5 py-2.5 text-xs sm:text-sm !text-white placeholder-[#71717a] focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
         />
 
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="px-4 py-2.5 rounded-md bg-[#26d464] text-black font-semibold text-xs sm:text-sm hover:bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm active:scale-98"
+          className="px-4 py-2.5 rounded-md !bg-[#26d464] !text-black font-semibold text-xs sm:text-sm hover:!bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm active:scale-98"
           aria-label="Send message"
         >
           {isLoading ? (
