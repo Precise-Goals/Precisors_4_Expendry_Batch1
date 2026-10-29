@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { EXPLORER_URL } from "shared/constants";
 import { IconBrain, IconWrench, IconBolt, IconExternal, IconSend } from "@/components/ui/Icons";
+import { detectLanguage } from "@/lib/sarvam";
 
 export default function ChatInterface({
   lang = "auto",

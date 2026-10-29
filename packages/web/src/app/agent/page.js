@@ -13,6 +13,7 @@ const QUICK_PROMPTS = [
 ];
 
 export default function AgentPage() {
+  const [lang, setLang] = useState("auto");
   const [voiceText, setVoiceText] = useState("");
   const [activeSources, setActiveSources] = useState([]);
   const [activePrompt, setActivePrompt] = useState("");
@@ -56,7 +57,7 @@ export default function AgentPage() {
             </div>
 
             <VoiceButton
-              lang="auto"
+              lang={lang}
               onTranscript={handleVoiceTranscript}
             />
           </div>
@@ -108,7 +109,7 @@ export default function AgentPage() {
         {/* Chat Interface Container */}
         <div className="flex-1 min-h-[580px] flex flex-col">
           <ChatInterface
-            lang="auto"
+            lang={lang}
             externalInput={voiceText}
             onClearExternalInput={() => setVoiceText("")}
             onSourcesUpdated={(sources) => setActiveSources(sources)}
