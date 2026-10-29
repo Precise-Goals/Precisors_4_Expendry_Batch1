@@ -69,4 +69,18 @@ export const INITIAL_COMMUNITY_POSTS = [
     createdAt: "2026-10-26T15:00:00.000Z",
     rewarded: true,
   },
+  {
+    id: "post-006",
+    title: "Veteran Machinist Volunteering & Apprenticeship Guidance",
+    content:
+      "Veteran machinists volunteer their tacit knowledge on Expendry by reviewing junior CAD toolpaths, sharing shop-floor setup tips, and mentoring young operators. Each validated tacit insight earns 10 EXPEN tokens on MST testnet, building an immutable peer-reviewed manufacturing knowledge base across India and global machine shops.",
+    type: "Experience",
+    authorWallet: "0x56F082f0Ea037bE6B39C1d8ebF88768a4b67283a",
+    authorName: "Anand Joshi",
+    authorDesignation: "Master Machinist & Volunteer Mentor",
+    expenEarned: 10,
+    txHash: "0x7890abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456",
+    createdAt: "2026-10-27T08:00:00.000Z",
+    rewarded: true,
+  },
 ];

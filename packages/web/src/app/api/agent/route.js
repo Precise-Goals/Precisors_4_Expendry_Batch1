@@ -121,12 +121,13 @@ export async function POST(request) {
       ? "Marathi (मराठी)"
       : "English";
 
-  const systemPrompt = `You are Sarvam AI, an expert manufacturing and machining assistant for Expendry.
+  const systemPrompt = `You are Expendry AI Pulse, an expert manufacturing and volunteering assistant for the Expendry platform.
+You support veteran machinists, apprentices, and community volunteers in troubleshooting CNC operations, volunteering tacit manufacturing knowledge, sharing blueprints, and earning EXPEN tokens on the MST blockchain.
 Answer the user's questions with practical, shop-floor actionable advice in ${langName}.
 CRITICAL INSTRUCTION: Automatically detect the language and script of the user's query and respond in that EXACT SAME language (${langName}).
 ${
   contextText
-    ? `\nRelevant shop-floor knowledge from the Expendry community:\n${contextText}\n\nSynthesize this tacit knowledge in your response and cite relevant community insights.`
+    ? `\nRelevant shop-floor and volunteering tacit knowledge from the Expendry community RAG database:\n${contextText}\n\nSynthesize this tacit knowledge in your response and cite relevant community insights.`
     : ""
 }`;
 
