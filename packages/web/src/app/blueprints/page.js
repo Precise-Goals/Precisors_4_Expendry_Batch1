@@ -1,20 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import {
-  IconBlueprint,
-  IconCaliper,
   IconDownload,
   IconLock,
-  IconCheck,
   IconEye,
-  IconFileCode,
-  IconLayers,
-  IconCube3D,
-  IconToken,
-  IconShield,
 } from "@/components/ui/Icons";
 import { CHAIN_ID, OPERATOR_ADDRESS } from "shared/constants";
 
@@ -196,47 +187,47 @@ END-ISO-10303-21;`;
   };
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-[#0a0a0a] text-[#ededed] selection:bg-[#26d464]/30 selection:text-[#ededed] bg-blueprint-grid">
+    <div className="flex flex-col w-full min-h-screen bg-transparent text-zinc-900 selection:bg-emerald-100 selection:text-emerald-900 relative">
       {/* ──────────────────────────────────────────────────────────
           1. HEADER: Blueprints Repository
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Blueprints Header"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-[#262626]"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-zinc-200/90 bg-white/70 backdrop-blur-md"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-zinc-500">+ [CAD/CAM // GD&T]</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-zinc-500">+ [ISO-2768-mK]</div>
+          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [CAD/CAM // GD&T]</div>
+          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [ISO-2768-mK]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#121212] border border-[#262626]">
-            <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-            <span className="text-xs font-mono font-medium text-[#ededed]">Engineering Blueprints & GD&T CAD Crib</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-xs font-mono text-[#26d464]">MST-{CHAIN_ID}</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-zinc-200 shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+            <span className="text-xs font-mono font-bold text-zinc-900">Engineering Blueprints &amp; GD&amp;T CAD Crib</span>
+            <span className="text-zinc-300">•</span>
+            <span className="text-xs font-mono font-bold text-emerald-700">MST-{CHAIN_ID}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#ededed] font-montserrat leading-[1.15]">
-            Machinist CAD/CAM Blueprints & Tooling Specs
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat leading-[1.15]">
+            Machinist CAD/CAM Blueprints &amp; Tooling Specs
           </h1>
 
-          <p className="text-base sm:text-lg text-[#a1a1aa] leading-relaxed max-w-3xl font-poppins">
-            Precision engineering files, custom soft-jaw drawings, chatter-damped boring sleeves, and 5-axis workholding fixtures contributed by veteran toolmakers. Every print features verifiable GD&T tolerances and cryptographic provenance.
+          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-3xl font-body">
+            Precision engineering files, custom soft-jaw drawings, chatter-damped boring sleeves, and 5-axis workholding fixtures contributed by veteran toolmakers. Every print features verifiable GD&amp;T tolerances and cryptographic provenance.
           </p>
 
           {/* Quick Filter Bar */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-4">
-            <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono">
+            <div className="flex items-center gap-2 overflow-x-auto text-xs font-mono">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   type="button"
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-3 py-1.5 rounded-lg border transition ${
+                  className={`px-3.5 py-2 rounded-xl border transition cursor-pointer font-bold ${
                     selectedCategory === cat
-                      ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold shadow-sm shadow-[#26d464]/20"
-                      : "bg-[#121212] border-[#262626] text-[#a1a1aa] hover:text-[#ededed] hover:border-[#383838]"
+                      ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
+                      : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
                   }`}
                 >
                   {cat}
@@ -244,13 +235,13 @@ END-ISO-10303-21;`;
               ))}
             </div>
 
-            <div className="w-full sm:w-64">
+            <div className="w-full sm:w-72">
               <input
                 type="text"
                 placeholder="Search drawings by alloy or fixture..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg bg-[#121212] border border-[#262626] text-xs font-mono text-[#ededed] placeholder-zinc-500 focus:outline-none focus:border-[#26d464]"
+                className="w-full px-3.5 py-2 rounded-xl bg-white border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition shadow-2xs"
               />
             </div>
           </div>
@@ -271,62 +262,62 @@ END-ISO-10303-21;`;
               return (
                 <div
                   key={bp.id}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] specular-card space-y-4 hover:border-[#383838] transition flex flex-col justify-between"
+                  className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm hover:shadow-xl hover:border-emerald-500/50 transition-all flex flex-col justify-between space-y-4"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-[#26d464] font-bold">[{bp.id}]</span>
-                      <span className="px-2 py-0.5 rounded bg-[#181818] border border-[#2e2e2e] text-[#a1a1aa]">
+                      <span className="text-emerald-800 font-bold">[{bp.id}]</span>
+                      <span className="px-2.5 py-0.5 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 font-bold">
                         {bp.category}
                       </span>
                     </div>
 
-                    <h2 className="text-lg font-bold text-[#ededed] font-montserrat">
+                    <h2 className="text-lg font-bold text-zinc-900 font-montserrat">
                       {bp.title}
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed font-poppins">
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
                       {bp.description}
                     </p>
 
-                    <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#0e0e0e] border border-[#222222] text-xs font-mono text-[#a1a1aa]">
+                    <div className="grid grid-cols-2 gap-2.5 p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs font-mono text-zinc-700">
                       <div>
-                        <span className="text-zinc-500 block text-[10px]">TOLERANCE:</span>
-                        <span className="text-[#ededed]">{bp.tolerance}</span>
+                        <span className="text-zinc-500 block text-[10px] uppercase font-bold">TOLERANCE:</span>
+                        <span className="text-zinc-900 font-bold">{bp.tolerance}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 block text-[10px]">MATERIAL:</span>
-                        <span className="text-[#ededed] truncate block">{bp.material}</span>
+                        <span className="text-zinc-500 block text-[10px] uppercase font-bold">MATERIAL:</span>
+                        <span className="text-zinc-900 font-bold truncate block">{bp.material}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 block text-[10px]">SURFACE:</span>
-                        <span className="text-[#26d464]">{bp.surfaceFinish}</span>
+                        <span className="text-zinc-500 block text-[10px] uppercase font-bold">SURFACE:</span>
+                        <span className="text-emerald-700 font-bold">{bp.surfaceFinish}</span>
                       </div>
                       <div>
-                        <span className="text-zinc-500 block text-[10px]">CAD FORMAT:</span>
-                        <span className="text-[#ededed] truncate block">{bp.format}</span>
+                        <span className="text-zinc-500 block text-[10px] uppercase font-bold">CAD FORMAT:</span>
+                        <span className="text-zinc-900 font-bold truncate block">{bp.format}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Actions Bar */}
-                  <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between gap-3">
+                  <div className="pt-4 border-t border-zinc-100 flex items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => setSelectedBlueprint(bp)}
-                      className="text-xs font-mono text-[#26d464] hover:underline flex items-center gap-1.5"
+                      className="text-xs font-mono font-bold text-emerald-800 hover:text-emerald-900 hover:underline flex items-center gap-1.5 cursor-pointer"
                     >
-                      <IconEye className="w-4 h-4" />
-                      <span>Inspect Drawing GD&T</span>
+                      <IconEye className="w-4 h-4 text-emerald-700" />
+                      <span>Inspect Drawing GD&amp;T</span>
                     </button>
 
                     {isUnlocked ? (
                       <button
                         type="button"
                         onClick={() => handleDownloadPayload(bp)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#26d464]/20 border border-[#26d464]/40 text-[#26d464] text-xs font-mono font-bold hover:bg-[#26d464]/30 transition"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold hover:bg-emerald-100 transition shadow-xs cursor-pointer"
                       >
-                        <IconDownload className="w-4 h-4" />
+                        <IconDownload className="w-4 h-4 text-emerald-700" />
                         <span>Download STEP</span>
                       </button>
                     ) : (
@@ -334,9 +325,9 @@ END-ISO-10303-21;`;
                         type="button"
                         onClick={() => handleUnlock(bp)}
                         disabled={isUnlocking}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181818] border border-[#2e2e2e] hover:border-[#26d464]/50 text-[#ededed] text-xs font-mono font-medium hover:text-[#26d464] transition active:scale-98"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-mono font-bold transition shadow-xs cursor-pointer active:scale-95"
                       >
-                        <IconLock className="w-3.5 h-3.5 text-[#26d464]" />
+                        <IconLock className="w-3.5 h-3.5 text-white" />
                         <span>Unlock ({bp.costExpen} EXPEN)</span>
                       </button>
                     )}
@@ -355,60 +346,60 @@ END-ISO-10303-21;`;
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4"
         >
-          <div className="w-full max-w-2xl rounded-2xl bg-[#121212] border border-[#262626] specular-card shadow-2xl p-6 space-y-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between border-b border-[#262626] pb-4">
+          <div className="w-full max-w-2xl rounded-4xl bg-white border border-zinc-200/90 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-start justify-between border-b border-zinc-200 pb-4">
               <div>
-                <span className="text-xs font-mono text-[#26d464] font-bold">
-                  [{selectedBlueprint.id}] // GD&T INSPECTION SCHEMATIC
+                <span className="text-xs font-mono text-emerald-800 font-bold">
+                  [{selectedBlueprint.id}] // GD&amp;T INSPECTION SCHEMATIC
                 </span>
-                <h3 className="text-xl font-bold text-[#ededed] font-montserrat mt-1">
+                <h3 className="text-xl font-bold text-zinc-900 font-montserrat mt-1">
                   {selectedBlueprint.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedBlueprint(null)}
-                className="text-[#a1a1aa] hover:text-[#ededed] text-sm font-mono px-2 py-1 rounded bg-[#181818] border border-[#262626]"
+                className="text-zinc-600 hover:text-zinc-900 text-sm font-mono px-2.5 py-1 rounded-xl bg-zinc-100 border border-zinc-200 cursor-pointer"
               >
                 ✕ Close
               </button>
             </div>
 
             {/* Wireframe CAD Blueprint Drawing simulation */}
-            <div className="w-full rounded-xl bg-[#0e0e0e] border border-[#262626] p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
-              <div className="flex justify-between text-[#f97316]/80 border-b border-[#262626] pb-2">
+            <div className="w-full rounded-2xl bg-zinc-50 border border-zinc-200 p-4 flex flex-col justify-between relative overflow-hidden font-mono text-[10px]">
+              <div className="flex justify-between text-zinc-700 font-bold border-b border-zinc-200 pb-2">
                 <span>DATUM A: [{selectedBlueprint.datumA}]</span>
                 <span>TOL: {selectedBlueprint.tolerance}</span>
                 <button
                   type="button"
                   onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.25 : 1))}
-                  className="text-xs text-[#26d464] hover:underline"
+                  className="text-xs text-emerald-700 font-bold hover:underline cursor-pointer"
                 >
                   Zoom {zoomLevel}x
                 </button>
               </div>
 
               <div className="py-6 flex items-center justify-center transition-transform duration-300" style={{ transform: `scale(${zoomLevel})` }}>
-                <div className="border border-[#f97316]/40 border-dashed w-56 h-28 rounded flex flex-col items-center justify-center relative bg-[#f97316]/5">
-                  <span className="text-[#f97316] font-bold tracking-wider text-xs">
+                <div className="border border-zinc-300 border-dashed w-56 h-28 rounded-xl flex flex-col items-center justify-center relative bg-white shadow-xs">
+                  <span className="text-zinc-900 font-bold tracking-wider text-xs font-montserrat">
                     {selectedBlueprint.category.toUpperCase()}
                   </span>
-                  <span className="text-[10px] text-zinc-400 mt-0.5">{selectedBlueprint.material}</span>
-                  <div className="absolute -top-3 text-[#f97316] bg-[#0a0a0a] px-1.5 border border-[#f97316]/40 rounded">
+                  <span className="text-[11px] text-zinc-500 mt-0.5">{selectedBlueprint.material}</span>
+                  <div className="absolute -top-3 text-zinc-800 bg-zinc-100 px-2 py-0.5 border border-zinc-300 rounded-full font-bold">
                     ◄── 120.00 ±0.005 ──►
                   </div>
-                  <div className="absolute -left-5 -rotate-90 text-[#f97316] bg-[#0a0a0a] px-1 border border-[#f97316]/40 rounded">
+                  <div className="absolute -left-6 -rotate-90 text-zinc-800 bg-zinc-100 px-2 py-0.5 border border-zinc-300 rounded-full font-bold">
                     65.0 ±0.005
                   </div>
-                  <div className="absolute -bottom-3 text-[#26d464] bg-[#080d14] px-1.5 border border-[#26d464]/40 rounded">
+                  <div className="absolute -bottom-3 text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-300 rounded-full font-bold">
                     {selectedBlueprint.surfaceFinish}
                   </div>
                 </div>
               </div>
 
-              <div className="flex justify-between text-[#f97316]/80 border-t border-[#262626] pt-2">
+              <div className="flex justify-between text-zinc-600 font-bold border-t border-zinc-200 pt-2">
                 <span>DATUM B: [{selectedBlueprint.datumB}]</span>
                 <span>DATUM C: [{selectedBlueprint.datumC}]</span>
               </div>
@@ -416,24 +407,24 @@ END-ISO-10303-21;`;
 
             {/* Specs Table */}
             <div className="space-y-2">
-              <h4 className="text-xs font-mono uppercase text-[#a1a1aa]">
+              <h4 className="text-xs font-mono uppercase text-zinc-500 font-bold">
                 Critical Machining Specifications:
               </h4>
               <div className="grid grid-cols-2 gap-2 text-xs font-mono">
                 {selectedBlueprint.specs.map((s, idx) => (
                   <div
                     key={idx}
-                    className="p-2.5 rounded bg-[#181818] border border-[#262626] flex justify-between"
+                    className="p-2.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between"
                   >
                     <span className="text-zinc-500">{s.key}:</span>
-                    <span className="text-[#ededed] font-semibold">{s.value}</span>
+                    <span className="text-zinc-900 font-bold">{s.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Modal Bottom Actions */}
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-[#262626]">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-200">
               <Button
                 variant="secondary"
                 size="sm"
