@@ -149,14 +149,16 @@ export default function Home() {
                 </span>
               </motion.div>
 
-              {/* Massive Confident Display Headline */}
+              {/* Massive Confident Display Headline with Modern Editorial Italics */}
               <motion.h1
                 variants={itemVariants}
-                className="text-4xl sm:text-6xl lg:text-[64px] xl:text-[70px] font-extrabold tracking-tight text-[#09090b] leading-[1.08] text-balance font-montserrat"
+                className="text-4xl sm:text-6xl lg:text-[68px] xl:text-[76px] font-extrabold tracking-tight text-[#09090b] leading-[1.06] text-balance font-montserrat"
               >
                 Where Decades of <br />
-                Machining Wisdom <br />
-                <span className="text-[#16a34a]">Never Retires</span>
+                <span className="font-editorial-italic font-normal text-zinc-800 tracking-normal text-[1.06em]">
+                  Machining Wisdom
+                </span> <br />
+                <span className="text-[#16a34a] font-extrabold tracking-tight">Never Retires</span>
               </motion.h1>
 
               {/* Subtitle with Genuine Product Mission */}
@@ -164,10 +166,7 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-base sm:text-lg text-zinc-700 leading-relaxed max-w-lg font-poppins font-normal text-pretty"
               >
-                Decades of shop-floor knowledge, CNC chatter dampening, and custom
-                fixturing vanish when veteran machinists retire. Expendry captures
-                this tacit knowledge, rewards contributors in EXPEN tokens on MST testnet, and
-                empowers the next generation.
+                When veteran machinists retire, decades of <span className="font-editorial-italic text-zinc-900 font-medium text-[1.04em]">shop-floor intuition</span>, vibration dampening, and cutter geometry vanish. Expendry captures this tacit knowledge, rewards contributors in EXPEN on MST testnet, and empowers the next generation.
               </motion.p>
 
               {/* Tactile Magnetic CTAs with Emil Kowalski Spring Physics */}

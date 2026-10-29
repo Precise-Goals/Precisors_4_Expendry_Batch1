@@ -4,32 +4,29 @@ import React, { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
 /**
- * High-Performance Inertial Smooth Scroll Engine (Lenis-inspired)
- * Provides butter-smooth inertial scroll interpolation via requestAnimationFrame,
- * gracefully falling back on touch devices and prefers-reduced-motion.
+ * High-Precision Non-Glitchy Inertial Smooth Scroll Engine
+ * Preserves hardware-accelerated 120Hz trackpad scrolling while
+ * smoothing stepped discrete mouse wheels with luxury deceleration.
  */
 export default function SmoothScrollProvider({ children }) {
   const shouldReduceMotion = useReducedMotion();
-  const rafId = useRef(null);
-  const scrollTarget = useRef(0);
-  const currentScroll = useRef(0);
   const isScrolling = useRef(false);
+  const targetY = useRef(0);
+  const currentY = useRef(0);
+  const rafId = useRef(null);
 
   useEffect(() => {
-    // Disable on reduced-motion or non-browser environments
     if (shouldReduceMotion || typeof window === "undefined") return;
 
     // Detect touch device - preserve native momentum scrolling on touchscreens
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
 
-    currentScroll.current = window.scrollY;
-    scrollTarget.current = window.scrollY;
-
-    const lerp = (start, end, factor) => start + (end - start) * factor;
+    currentY.current = window.scrollY;
+    targetY.current = window.scrollY;
 
     const onWheel = (e) => {
-      // Do not override if user is scrolling inside a nested scrollable container (e.g. modal, code block)
+      // Allow native scrolling inside nested containers (code blocks, textareas, chat viewports)
       let target = e.target;
       while (target && target !== document.body) {
         if (target.scrollHeight > target.clientHeight) {
@@ -41,44 +38,53 @@ export default function SmoothScrollProvider({ children }) {
         target = target.parentElement;
       }
 
-      // Smooth scroll delta clamp
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      scrollTarget.current = Math.max(0, Math.min(maxScroll, scrollTarget.current + e.deltaY));
+      // Trackpad detection: small, non-stepped deltas are handled natively by the browser compositor
+      // Discrete wheel notches are typically multiples of 100 or >= 40
+      const isTrackpad = Math.abs(e.deltaY) < 35 || Math.abs(e.deltaY) % 1 !== 0;
+      if (isTrackpad) {
+        currentY.current = window.scrollY;
+        targetY.current = window.scrollY;
+        return;
+      }
+
+      // Stepped mouse wheel smoothing
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      targetY.current = Math.max(0, Math.min(maxScroll, targetY.current + e.deltaY));
 
       if (!isScrolling.current) {
         isScrolling.current = true;
-        rafId.current = requestAnimationFrame(updateScroll);
+        rafId.current = requestAnimationFrame(render);
       }
     };
 
-    const updateScroll = () => {
-      // 0.09 easing factor provides crisp, high-response luxury deceleration
-      currentScroll.current = lerp(currentScroll.current, scrollTarget.current, 0.09);
+    const render = () => {
+      // 0.12 factor gives snappy, responsive deceleration without lag
+      currentY.current += (targetY.current - currentY.current) * 0.12;
 
-      if (Math.abs(scrollTarget.current - currentScroll.current) < 0.5) {
-        currentScroll.current = scrollTarget.current;
-        window.scrollTo(0, currentScroll.current);
+      if (Math.abs(targetY.current - currentY.current) < 0.5) {
+        currentY.current = targetY.current;
+        window.scrollTo(0, currentY.current);
         isScrolling.current = false;
         return;
       }
 
-      window.scrollTo(0, currentScroll.current);
-      rafId.current = requestAnimationFrame(updateScroll);
+      window.scrollTo(0, currentY.current);
+      rafId.current = requestAnimationFrame(render);
     };
 
-    const onNativeScroll = () => {
+    const onScroll = () => {
       if (!isScrolling.current) {
-        currentScroll.current = window.scrollY;
-        scrollTarget.current = window.scrollY;
+        currentY.current = window.scrollY;
+        targetY.current = window.scrollY;
       }
     };
 
     window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("scroll", onNativeScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("scroll", onNativeScroll);
+      window.removeEventListener("scroll", onScroll);
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
   }, [shouldReduceMotion]);
