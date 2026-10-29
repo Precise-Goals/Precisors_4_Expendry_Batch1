@@ -181,7 +181,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="xl:hidden mt-2 p-4 rounded-3xl liquid-glass border border-zinc-200/90 shadow-2xl space-y-1"
+            className="xl:hidden mt-2 p-4 rounded-3xl liquid-glass border border-zinc-200/90 shadow-2xl space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto"
           >
             {NAV_LINKS.map((link) => {
               const isActive =
