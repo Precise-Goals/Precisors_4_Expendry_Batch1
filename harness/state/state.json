@@ -7,7 +7,7 @@
   },
   "mode": "RETRO",
   "sprint": 6,
-  "task_id": "T-S6-48",
+  "task_id": "T-CI-REMEDY",
   "current_stage": "complete",
   "stages": {
     "sprint-0": "done",
@@ -20,16 +20,16 @@
   },
   "lanes": [],
   "attempts": {},
-  "last_commit": "001a83c",
+  "last_commit": "cc1d474",
   "last_gate": {
     "name": "G4",
     "status": "pass",
-    "at": "2026-10-30T03:03:30Z",
+    "at": "2026-10-30T03:25:00Z",
     "log": "harness/logs/events.jsonl"
   },
   "breaker": {
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-30T03:03:30Z"
+  "updated_at": "2026-10-30T03:25:00Z"
 }
