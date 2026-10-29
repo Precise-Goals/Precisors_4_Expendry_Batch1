@@ -87,7 +87,7 @@ export default function ModelViewer({
           </span>
           <span className="text-white/20">|</span>
           <span className="text-[#a1a1aa] hidden sm:inline">
-            SEGMENTS: {model.segments || 32} // {model.geometryType?.toUpperCase()}
+            SEGMENTS: {model.segments || 32} {"//"} {model.geometryType?.toUpperCase()}
           </span>
         </div>
         <div className="flex items-center gap-2.5 text-[#a1a1aa]">

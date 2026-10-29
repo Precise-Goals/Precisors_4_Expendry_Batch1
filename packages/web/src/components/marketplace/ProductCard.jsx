@@ -90,7 +90,7 @@ export default function ProductCard({ product }) {
                 ${product.price.toFixed(2)}
               </span>
               <span className="text-[11px] text-[#26d464] font-mono font-semibold">
-                // {expenEquivalent} EXPEN
+                {"//"} {expenEquivalent} EXPEN
               </span>
             </div>
           </div>

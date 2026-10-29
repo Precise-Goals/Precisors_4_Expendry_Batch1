@@ -8,10 +8,13 @@ import { IconSpindle } from "@/components/ui/Icons";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home", num: "00" },
-  { href: "/marketplace", label: "Marketplace", num: "01" },
-  { href: "/community", label: "Community", num: "02" },
-  { href: "/showcase", label: "3D Showcase", num: "03", badge: "3D" },
-  { href: "/agent", label: "AI Agent", num: "04" },
+  { href: "/about", label: "About", num: "01" },
+  { href: "/agent", label: "Agent", num: "02" },
+  { href: "/marketplace", label: "Marketplace", num: "03" },
+  { href: "/experience", label: "Experience", num: "04" },
+  { href: "/blueprints", label: "Blueprints", num: "05" },
+  { href: "/patent", label: "Patent", num: "06" },
+  { href: "/partners", label: "Partners", num: "07" },
 ];
 
 export default function Navbar() {
@@ -99,7 +102,7 @@ export default function Navbar() {
         {/* Desktop Navigation: Segmented CNC Controller Channel Dock */}
         <nav
           aria-label="Main navigation"
-          className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner"
+          className="hidden xl:flex items-center gap-0.5 p-1 rounded-xl bg-[#121212]/90 border border-[#262626] shadow-inner"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -112,27 +115,27 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
-                className={`relative px-3.5 py-1.5 text-xs lg:text-sm font-medium rounded-lg transition-all duration-150 flex items-center ${
+                className={`relative px-2.5 py-1 text-xs font-medium rounded-lg transition-all duration-150 flex items-center ${
                   isActive
                     ? "text-[#ededed] bg-[#1c1c1c] border border-white/[0.08] shadow-sm font-semibold"
                     : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#161616]"
                 }`}
               >
                 {link.num && (
-                  <span className="font-mono text-[10px] text-white/30 mr-1.5 group-hover:text-white/60">
-                    {link.num} /
+                  <span className="font-mono text-[9px] text-white/30 mr-1 group-hover:text-white/60">
+                    {link.num}
                   </span>
                 )}
                 <span>{link.label}</span>
                 {link.badge && (
-                  <span className="ml-1.5 px-1.5 py-0.2 text-[10px] font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30 shadow-xs">
+                  <span className="ml-1 px-1 py-0.2 text-[9px] font-mono font-bold rounded bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/30 shadow-xs">
                     {link.badge}
                   </span>
                 )}
                 {isActive && (
                   <span
                     aria-hidden="true"
-                    className="absolute -bottom-1 left-2.5 right-2.5 h-0.5 bg-[#26d464] rounded-full shadow-[0_0_8px_rgba(38,212,100,0.6)]"
+                    className="absolute -bottom-1 left-2 right-2 h-0.5 bg-[#26d464] rounded-full shadow-[0_0_8px_rgba(38,212,100,0.6)]"
                   />
                 )}
               </Link>
@@ -144,7 +147,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center gap-3">
           <Link
             href="/onboarding"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-98 transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#161616] text-[#ededed] border border-[#262626] hover:border-[#26d464]/60 hover:bg-[#1c1c1c] active:scale-98 transition-all duration-150 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.08)] group"
           >
             <span className="h-2 w-2 rounded-full bg-[#26d464] shadow-[0_0_8px_#26d464] animate-pulse" />
             <span>Connect Wallet</span>
@@ -152,7 +155,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="flex md:hidden">
+        <div className="flex xl:hidden">
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}

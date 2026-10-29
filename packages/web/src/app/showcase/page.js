@@ -19,20 +19,18 @@ const ModelViewer = dynamic(
 );
 
 export default function ShowcasePage() {
-  const [activeModelId, setActiveModelId] = useState("lathe-body");
-  const activeModel =
-    MODELS.find((m) => m.id === activeModelId) || MODELS[0];
-
-  // Read model from URL query parameter on mount if present
-  useEffect(() => {
+  const [activeModelId, setActiveModelId] = useState(() => {
     if (typeof window !== "undefined") {
       const urlParams = new URLSearchParams(window.location.search);
       const modelParam = urlParams.get("model");
       if (modelParam && MODELS.some((m) => m.id === modelParam)) {
-        setActiveModelId(modelParam);
+        return modelParam;
       }
     }
-  }, []);
+    return "lathe-body";
+  });
+  const activeModel =
+    MODELS.find((m) => m.id === activeModelId) || MODELS[0];
 
   // Turret preset keyboard shortcuts: [1], [2], [3], [4]
   useEffect(() => {
@@ -224,7 +222,7 @@ export default function ShowcasePage() {
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-xs font-mono text-[#26d464] font-semibold">
-                      T-0{idx + 1} // {item.geometryType}
+                      T-0{idx + 1} {"//"} {item.geometryType}
                     </span>
                     <span className="text-[11px] text-[#71717a] font-mono">
                       REF: {item.id}

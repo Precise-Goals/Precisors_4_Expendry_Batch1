@@ -21,6 +21,7 @@ import {
   IconAlert,
   IconCheck,
   IconArrowRight,
+  IconShield,
 } from "@/components/ui/Icons";
 import { CHAIN_ID, EXPLORER_URL, DAILY_CAP, REWARD_PER_POST } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
@@ -548,6 +549,123 @@ export default function Home() {
                 </Card>
               </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          3.5 ECOSYSTEM HUBS DIRECTORY (Industry-Ready Platform Hubs)
+         ────────────────────────────────────────────────────────── */}
+      <section
+        aria-label="Ecosystem Hubs"
+        className="py-16 sm:py-24 border-b border-[#1f1f1f] bg-[#0a0a0a]"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#262626] pb-4">
+            <div>
+              <div className="inline-flex items-center gap-2 mb-2">
+                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                <span className="text-xs font-mono font-medium text-[#26d464] uppercase tracking-wider">
+                  Seven Core Ecosystem Portals
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-display">
+                Industrial Architecture & Operating Modules
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-md">
+              From shop-floor acoustic harmonics to on-chain patent timestamping and enterprise machine tool integration.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Hub 1: Experience */}
+            <Link href="/experience" className="group">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 transition-all space-y-3 flex flex-col justify-between specular-card">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-[#26d464] font-bold">01 // EXPERIENCE</span>
+                    <IconAcoustics className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    Machinist Experience Hub
+                  </h3>
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
+                    Interactive chatter harmonics simulator, veteran audio recordings, and field-tested lathe and mill tricks.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#1f1f1f] text-xs font-mono text-[#26d464] flex items-center justify-between">
+                  <span>Explore Simulator</span>
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Hub 2: Blueprints */}
+            <Link href="/blueprints" className="group">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 transition-all space-y-3 flex flex-col justify-between specular-card">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-[#26d464] font-bold">02 // BLUEPRINTS</span>
+                    <IconBlueprint className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    CAD/CAM Blueprints & GD&T
+                  </h3>
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
+                    STEP, DXF, and SolidWorks drawings for damped boring bars, soft jaws, and 5-axis tombstone fixtures.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#1f1f1f] text-xs font-mono text-[#26d464] flex items-center justify-between">
+                  <span>Inspect Drawings</span>
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Hub 3: Patents */}
+            <Link href="/patent" className="group">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 transition-all space-y-3 flex flex-col justify-between specular-card">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-[#26d464] font-bold">03 // PATENTS</span>
+                    <IconShield className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    Prior Art Patent Ledger
+                  </h3>
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
+                    Cryptographic SHA-256 timestamping on MST testnet blocks providing 35 U.S.C. § 102 prior art defense.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#1f1f1f] text-xs font-mono text-[#26d464] flex items-center justify-between">
+                  <span>Timestamp Invention</span>
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Hub 4: Partner Program */}
+            <Link href="/partners" className="group">
+              <div className="h-full p-6 rounded-2xl bg-[#121212] border border-[#262626] group-hover:border-[#26d464]/60 transition-all space-y-3 flex flex-col justify-between specular-card">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="text-[#26d464] font-bold">04 // PARTNERS</span>
+                    <IconToken className="w-4 h-4 text-[#26d464]" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#ededed] font-display group-hover:text-[#26d464] transition-colors">
+                    Enterprise & Investors
+                  </h3>
+                  <p className="text-xs text-[#a1a1aa] leading-relaxed">
+                    Dedicated portals for Machine Tool Builders, factory toolroom digitization, and industrial Web3 tokenomics.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-[#1f1f1f] text-xs font-mono text-[#26d464] flex items-center justify-between">
+                  <span>View Partner Tracks</span>
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

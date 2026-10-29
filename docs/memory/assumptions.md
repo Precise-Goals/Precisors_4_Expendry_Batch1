@@ -5,7 +5,7 @@ See `docs/harness.md §14` for the authoritative assumption table.
 
 | ID | Statement | Date | Status |
 |---|---|---|---|
-| A-001 | "About" page content folded into Home hero; no separate /about route | 2026-10-27 | Active |
+| A-001 | Dedicated routes created for /about, /experience, /blueprints, /patent, and /partners to support comprehensive industry-ready ecosystem | 2026-10-29 | Superseded |
 | A-002 | Marketplace products seeded as mock data (machining/CNC tools) | 2026-10-27 | Active |
 | A-003 | 3D models are placeholder GLBs; team replaces post-hackathon | 2026-10-27 | Active |
 | A-004 | EXPEN minting is server-side only (API route); OPERATOR_PRIVATE_KEY never on client | 2026-10-27 | Active |

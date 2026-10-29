@@ -58,34 +58,16 @@ export default function Footer() {
           {/* Core Routes */}
           <div>
             <h2 className="text-xs font-mono uppercase tracking-wider text-[#ededed] mb-3">
-              Ecosystem Telemetry
+              Ecosystem Navigation
             </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link
-                  href="/marketplace"
+                  href="/about"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
                   <span className="text-white/20 font-mono">01 //</span>
-                  <span>Tooling Marketplace</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/community"
-                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
-                >
-                  <span className="text-white/20 font-mono">02 //</span>
-                  <span>Machinist Knowledge Feed</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/showcase"
-                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
-                >
-                  <span className="text-white/20 font-mono">03 //</span>
-                  <span>3D CAD Tooling Inspector</span>
+                  <span>About & Manifesto</span>
                 </Link>
               </li>
               <li>
@@ -93,17 +75,53 @@ export default function Footer() {
                   href="/agent"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-white/20 font-mono">04 //</span>
-                  <span>Sarvam AI Machining Assistant</span>
+                  <span className="text-white/20 font-mono">02 //</span>
+                  <span>AI Machining Assistant</span>
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/onboarding"
+                  href="/marketplace"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">03 //</span>
+                  <span>Tooling Marketplace</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/experience"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">04 //</span>
+                  <span>Machinist Experience Hub</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/blueprints"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
                   <span className="text-white/20 font-mono">05 //</span>
-                  <span>Wallet Onboarding & KYC-Free</span>
+                  <span>Engineering Blueprints</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/patent"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">06 //</span>
+                  <span>Decentralized Patents</span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/partners"
+                  className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
+                >
+                  <span className="text-white/20 font-mono">07 //</span>
+                  <span>Partners & Investors</span>
                 </Link>
               </li>
             </ul>
