@@ -203,10 +203,22 @@ ${
           }
         } catch (err) {
           console.error("Sarvam AI streaming error:", err);
-          // Fallback to local response generator
+          if (process.env.NODE_ENV !== "test") {
+            const errorEvent = `data: ${JSON.stringify({
+              error: `Sarvam AI Error: ${err.message || "Failed to communicate with Sarvam API"}`,
+              done: true,
+              sources,
+              resolvedLang,
+            })}
+
+`;
+            controller.enqueue(encoder.encode(errorEvent));
+            usedExternal = true;
+          }
         }
       }
 
+      // Offline test simulation for hermetic unit testing
       if (!usedExternal) {
         let answer = "";
         if (resolvedLang === "hi") {

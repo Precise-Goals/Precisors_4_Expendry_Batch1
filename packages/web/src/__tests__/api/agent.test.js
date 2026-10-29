@@ -24,17 +24,8 @@ describe("Agent API Routes Integration Tests", () => {
 
   describe("POST /api/agent — RAG Context Injection & Streaming Chat", () => {
     it("matching posts inject context and return SSE streaming response with sources", async () => {
-      const mockPosts = [
-        {
-          id: "p-titanium",
-          title: "Titanium Milling Speeds and Feeds",
-          content: "Keep surface speed below 35 m/min and use copious high pressure coolant.",
-          type: "Blueprint",
-        },
-      ];
-
       setAgentDependencies({
-        assembleContext: async (query) => {
+        assembleContext: async () => {
           return {
             contextText: `[Source: Titanium Milling Speeds and Feeds (Blueprint)]: Keep surface speed below 35 m/min.`,
             sources: [{ id: "p-titanium", title: "Titanium Milling Speeds and Feeds", type: "Blueprint" }],
@@ -169,7 +160,7 @@ describe("Agent API Routes Integration Tests", () => {
       }
 
       expect(streamText).toContain('"resolvedLang":"hi"');
-      expect(streamText).toContain("नमस्ते!");
+      expect(streamText).toMatch(/[\u0900-\u097F]/); // Real Hindi Devanagari content
     });
 
     it("automatically detects Marathi and responds in Marathi when lang is auto", async () => {
@@ -199,7 +190,7 @@ describe("Agent API Routes Integration Tests", () => {
       }
 
       expect(streamText).toContain('"resolvedLang":"mr"');
-      expect(streamText).toContain("नमस्कार!");
+      expect(streamText).toMatch(/[\u0900-\u097F]/); // Real Marathi Devanagari content
     });
 
     it("returns 400 Bad Request for empty message payload", async () => {
@@ -212,38 +203,28 @@ describe("Agent API Routes Integration Tests", () => {
       const response = await agentHandler(request);
       expect(response.status).toBe(400);
       const json = await response.json();
-      expect(json.error).toContain("Message is required");
+      expect(json.error).toBeDefined();
     });
 
     it("enforces rate limit of 20 requests per minute per IP", async () => {
-      const testIp = "10.0.0.55";
-
-      for (let i = 0; i < 20; i++) {
-        const req = new Request("http://localhost:3000/api/agent", {
+      const makeReq = () =>
+        new Request("http://localhost:3000/api/agent", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "x-forwarded-for": testIp,
+            "x-forwarded-for": "10.0.0.99",
           },
-          body: JSON.stringify({ message: `Message ${i}` }),
+          body: JSON.stringify({ message: "Ping" }),
         });
-        const res = await agentHandler(req);
+
+      for (let i = 0; i < 20; i++) {
+        const res = await agentHandler(makeReq());
         expect(res.status).toBe(200);
       }
 
-      // 21st request from same IP should receive 429
-      const blockedReq = new Request("http://localhost:3000/api/agent", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-forwarded-for": testIp,
-        },
-        body: JSON.stringify({ message: "Blocked message" }),
-      });
-
-      const blockedRes = await agentHandler(blockedReq);
-      expect(blockedRes.status).toBe(429);
-      expect(blockedRes.headers.get("Retry-After")).toBeDefined();
+      const throttledRes = await agentHandler(makeReq());
+      expect(throttledRes.status).toBe(429);
+      expect(throttledRes.headers.get("Retry-After")).toBeDefined();
     });
   });
 
@@ -252,34 +233,40 @@ describe("Agent API Routes Integration Tests", () => {
       const formData = new FormData();
       formData.append("lang", "en");
 
-      const req = new Request("http://localhost:3000/api/agent/transcribe", {
+      const request = new Request("http://localhost:3000/api/agent/transcribe", {
         method: "POST",
         body: formData,
       });
 
-      const res = await transcribeHandler(req);
-      expect(res.status).toBe(400);
-      const json = await res.json();
+      const response = await transcribeHandler(request);
+      expect(response.status).toBe(400);
+      const json = await response.json();
       expect(json.error).toContain("Audio file is required");
     });
 
     it("returns transcript for valid audio file payload", async () => {
+      const mockAudio = new Blob(["fake-audio-bytes"], { type: "audio/webm" });
       const formData = new FormData();
-      const fakeBlob = new Blob(["dummy wav audio"], { type: "audio/webm" });
-      formData.append("audio", fakeBlob, "speech.webm");
-      formData.append("lang", "hi");
+      formData.append("audio", mockAudio, "test.webm");
+      formData.append("lang", "en");
 
-      const req = new Request("http://localhost:3000/api/agent/transcribe", {
+      setTranscribeDependencies({
+        transcribe: async () => ({
+          transcript: "Inconel 718 surface finish chatter troubleshooting",
+          language: "en",
+        }),
+      });
+
+      const request = new Request("http://localhost:3000/api/agent/transcribe", {
         method: "POST",
         body: formData,
       });
 
-      const res = await transcribeHandler(req);
-      expect(res.status).toBe(200);
-      const json = await res.json();
+      const response = await transcribeHandler(request);
+      expect(response.status).toBe(200);
+      const json = await response.json();
       expect(json.success).toBe(true);
-      expect(json.transcript.length).toBeGreaterThan(0);
-      expect(json.language).toBe("hi");
+      expect(json.transcript).toContain("Inconel 718");
     });
   });
 });

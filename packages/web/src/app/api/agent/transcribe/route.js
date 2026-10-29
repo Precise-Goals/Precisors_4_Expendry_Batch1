@@ -52,14 +52,18 @@ export async function POST(request) {
       try {
         const result = await transcribeFn(audioFile, resolvedLang);
         transcript = result.transcript;
-      } catch {
-        // Fallback if test audio or external network error
-        transcript = "";
+      } catch (err) {
+        if (process.env.NODE_ENV !== "test") {
+          return NextResponse.json(
+            { error: `Transcription service error: ${err.message}` },
+            { status: 502 }
+          );
+        }
       }
     }
 
-    if (!transcript) {
-      // Offline / test fallback
+    // Only test fallback for hermetic offline test runners
+    if (!transcript && process.env.NODE_ENV === "test") {
       if (resolvedLang === "hi") {
         transcript = "खराद मशीन पर टूल चयन और कटिंग स्पीड";
       } else if (resolvedLang === "mr") {
