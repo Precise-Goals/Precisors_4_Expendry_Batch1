@@ -53,7 +53,7 @@ export default function LanguageSelector({
     <div
       role="radiogroup"
       aria-label="Select assistant language"
-      className={`inline-flex items-center p-1 rounded-md bg-[#121212] border border-[#262626] ${className}`}
+      className={`inline-flex items-center p-1 rounded-2xl bg-zinc-100/90 border border-zinc-200/90 ${className}`}
     >
       {LANGUAGES.map((lang) => {
         const isSelected = selectedLang === lang.code;
@@ -65,16 +65,16 @@ export default function LanguageSelector({
             aria-checked={isSelected}
             aria-label={`${lang.label} (${lang.nativeName})`}
             onClick={() => handleSelect(lang.code)}
-            className={`px-3 py-1.5 rounded-sm text-xs font-medium transition-all duration-150 flex items-center gap-1.5 ${
+            className={`px-3.5 py-1.5 rounded-xl text-xs font-montserrat font-bold transition-all duration-150 flex items-center gap-1.5 cursor-pointer ${
               isSelected
-                ? "bg-[#26d464] text-[#0a0a0a] font-semibold shadow-sm"
-                : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#181818]"
+                ? "bg-emerald-800 text-white shadow-xs"
+                : "text-zinc-600 hover:text-zinc-900 hover:bg-white/80"
             }`}
           >
             <span>{lang.nativeName}</span>
             <span
               className={`text-[10px] uppercase font-mono ${
-                isSelected ? "text-[#0a0a0a]/80" : "text-[#71717a]"
+                isSelected ? "text-emerald-200" : "text-zinc-400"
               }`}
             >
               {lang.code}

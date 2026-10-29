@@ -334,10 +334,10 @@ export default function Home() {
 
               {/* 28-Bar Dynamic Graphic Equalizer */}
               <div
-                className="h-28 w-full rounded-xl bg-[#0d0e12] border border-[#262626] p-4 flex items-end justify-between gap-1 sm:gap-1.5 relative overflow-hidden"
+                className="h-28 w-full rounded-2xl bg-zinc-50 border border-zinc-200 p-4 flex items-end justify-between gap-1 sm:gap-1.5 relative overflow-hidden"
                 aria-label="Acoustic spectrum graph"
               >
-                <div className="absolute top-2 left-3 text-[11px] font-mono text-zinc-400">
+                <div className="absolute top-2 left-3 text-[11px] font-mono text-zinc-500 font-bold">
                   PEAK: {analyzingFlutter ? "2,420 Hz (CHATTER RES)" : `${activePreset.optimalHz} (STABLE)`} · dB: {analyzingFlutter ? "-12 dB" : "-42 dB"}
                 </div>
                 {[
