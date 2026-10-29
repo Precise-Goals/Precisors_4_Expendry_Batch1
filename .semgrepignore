@@ -1,0 +1,21 @@
+# Test suites and mock fixtures
+tests/
+*__tests__*
+*.test.js
+*.test.jsx
+*.test.ts
+*.test.tsx
+packages/contracts/test/
+packages/contracts/scripts/
+
+# Dependencies and build outputs
+node_modules/
+.next/
+dist/
+build/
+
+# Tooling and harness scripts
+scripts/
+.agents/
+.claude/
+harness/

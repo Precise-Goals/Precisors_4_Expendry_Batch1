@@ -3,6 +3,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 
 // Mock Three.js canvas components for headless test environments
+mock.module("three", () => ({}));
 mock.module("@react-three/fiber", () => ({
   Canvas: ({ children, className }) => React.createElement("div", { className, "data-testid": "three-canvas" }, children),
   useFrame: () => {},

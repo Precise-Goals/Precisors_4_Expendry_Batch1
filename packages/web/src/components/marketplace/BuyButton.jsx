@@ -11,7 +11,11 @@ export default function BuyButton({ product }) {
 
     setIsProcessing(true);
 
-    const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const randomBytes = new Uint8Array(4);
+    if (typeof window !== "undefined" && window.crypto?.getRandomValues) {
+      window.crypto.getRandomValues(randomBytes);
+    }
+    const randomSuffix = Array.from(randomBytes, (b) => b.toString(16).padStart(2, "0")).join("").toUpperCase() || Date.now().toString(36).toUpperCase();
     const orderId = `ORD-EXP-${Date.now()}-${randomSuffix}`;
 
     // Track analytics event if gtag is present

@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "bun:test";
+import crypto from 'crypto';
 import { ethers } from "ethers";
 import { POST as createPost, setPostsDependencies } from "../../app/api/posts/route.js";
 import { setRewardDependencies, dailyTallies } from "../../lib/reward.js";
@@ -23,7 +24,7 @@ describe("POST /api/posts Integration Tests", () => {
     mockDb = {
       collection: (colName) => ({
         add: async (data) => {
-          const id = `post_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+          const id = `post_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
           storedPosts.set(id, data);
           return { id };
         },

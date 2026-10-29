@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import { describe, it, expect, beforeEach, afterEach } from "bun:test";
 import { ethers } from "ethers";
 import { POST as postRoute, setPostsDependencies, clearRateLimits } from "../../app/api/posts/route.js";
@@ -14,7 +15,7 @@ describe("Posts API Stress & Boundary Verification (/api/posts)", () => {
     const mockDb = {
       collection: (colName) => ({
         add: async (data) => {
-          const doc = { id: `doc_${Date.now()}_${Math.random()}`, ...data };
+          const doc = { id: `doc_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`, ...data };
           createdDocs.push(doc);
           return doc;
         },

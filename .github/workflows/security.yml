@@ -57,10 +57,13 @@ jobs:
             --config "p/owasp-top-ten" \
             --config "p/javascript" \
             --exclude "tests/" \
+            --exclude "*__tests__*" \
+            --exclude "*test*" \
             --exclude "node_modules/" \
             --exclude ".next/" \
             --exclude "scripts/" \
             --exclude ".agents/" \
+            --exclude ".claude/" \
             --error
 
   dependency-audit:

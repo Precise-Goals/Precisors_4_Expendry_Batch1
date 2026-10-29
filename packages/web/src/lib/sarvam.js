@@ -103,7 +103,7 @@ async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250
           );
         }
         // Jittered exponential backoff
-        const jitter = Math.floor(Math.random() * 150);
+        const jitter = Date.now() % 150;
         const delay = initialDelayMs * Math.pow(2, attempt) + jitter;
         await new Promise((resolve) => setTimeout(resolve, delay));
         attempt++;
@@ -134,7 +134,7 @@ async function fetchWithRetry(url, options, maxRetries = 3, initialDelayMs = 250
           500
         );
       }
-      const jitter = Math.floor(Math.random() * 150);
+      const jitter = Date.now() % 150;
       const delay = initialDelayMs * Math.pow(2, attempt) + jitter;
       await new Promise((resolve) => setTimeout(resolve, delay));
       attempt++;

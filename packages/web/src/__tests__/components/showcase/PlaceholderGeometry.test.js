@@ -1,4 +1,6 @@
-import { describe, it, expect } from "bun:test";
+import { describe, it, expect, mock } from "bun:test";
+mock.module("three", () => ({}));
+mock.module("@react-three/fiber", () => ({}));
 import React from "react";
 import { renderToString } from "react-dom/server";
 import {

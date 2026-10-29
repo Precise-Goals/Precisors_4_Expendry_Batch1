@@ -64,7 +64,11 @@ export default function PatentPage() {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       return "0x" + hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
     } catch {
-      return "0x" + Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
+      const fallbackBytes = new Uint8Array(32);
+      if (typeof window !== "undefined" && window.crypto?.getRandomValues) {
+        window.crypto.getRandomValues(fallbackBytes);
+      }
+      return "0x" + Array.from(fallbackBytes, (b) => b.toString(16).padStart(2, "0")).join("");
     }
   };
 
@@ -75,7 +79,12 @@ export default function PatentPage() {
     setIsStamping(true);
     const payloadString = `${title}|${inventor}|${category}|${description}|${Date.now()}`;
     const realHash = await computeRealSha256(payloadString);
-    const pseudoBlock = (4900000 + Math.floor(Math.random() * 50000)).toLocaleString();
+    const randomBuffer = new Uint32Array(1);
+    if (typeof window !== "undefined" && window.crypto?.getRandomValues) {
+      window.crypto.getRandomValues(randomBuffer);
+    }
+    const blockOffset = (randomBuffer[0] || Date.now()) % 50000;
+    const pseudoBlock = (4900000 + blockOffset).toLocaleString();
 
     setTimeout(() => {
       const newPat = {
