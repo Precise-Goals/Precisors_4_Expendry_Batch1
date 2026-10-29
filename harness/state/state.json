@@ -7,7 +7,7 @@
   },
   "mode": "RETRO",
   "sprint": 6,
-  "task_id": "T-S6-CHAT-RECTANGLE-THEME",
+  "task_id": "T-S6-CHAT-MD-HINGLISH-GRAIN",
   "current_stage": "complete",
   "stages": {
     "sprint-0": "done",
@@ -20,16 +20,16 @@
   },
   "lanes": [],
   "attempts": {},
-  "last_commit": "b561e75",
+  "last_commit": "4f59f7f",
   "last_gate": {
     "name": "G4",
     "status": "pass",
-    "at": "2026-10-30T04:56:00Z",
+    "at": "2026-10-30T05:12:00Z",
     "log": "harness/logs/events.jsonl"
   },
   "breaker": {
     "tripped": false,
     "reason": null
   },
-  "updated_at": "2026-10-30T04:56:00Z"
+  "updated_at": "2026-10-30T05:12:00Z"
 }
