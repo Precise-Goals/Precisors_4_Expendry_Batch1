@@ -23,12 +23,12 @@ export const metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0a0a0a",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#0a0a0a] text-[#ededed] font-body grain antialiased selection:bg-[#26d464]/25 selection:text-[#ededed]">
+      <body className="min-h-screen flex flex-col bg-white text-[#09090b] font-body grain antialiased selection:bg-[#26d464]/25 selection:text-black">
         <SmoothScrollProvider>
           <a
             href="#main-content"

@@ -7,7 +7,7 @@ import { motion, useSpring, useMotionValue, useReducedMotion } from "framer-moti
  * Magnetic Element Tracking & Specular Reflection Engine
  * Emil Kowalski design engineering pattern:
  * - Gently pulls element towards cursor on proximity
- * - Projects dynamic radial specular sheen (Machining Green + Precision Blue)
+ * - Projects dynamic radial specular sheen (Machining Green + Calibrated Orange)
  * - Restores with fluid damped spring physics on exit
  */
 export function MagneticTrack({
@@ -83,7 +83,7 @@ export function MagneticTrack({
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] opacity-100 transition-opacity duration-300 overflow-hidden"
           style={{
-            background: `radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(38, 212, 100, 0.08), rgba(56, 189, 248, 0.05), transparent 75%)`,
+            background: `radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(38, 212, 100, 0.1), rgba(249, 115, 22, 0.06), transparent 75%)`,
           }}
         />
       )}

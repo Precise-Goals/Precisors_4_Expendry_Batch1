@@ -91,10 +91,10 @@ export default function Home() {
       >
         {/* Subtle Corner Engineering Crosshairs & Datums */}
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-[10px] font-mono text-white/25">+ [00,00] DATUM</div>
-          <div className="absolute top-4 right-4 text-[10px] font-mono text-white/25">+ [MST-{CHAIN_ID}]</div>
-          <div className="absolute bottom-4 left-4 text-[10px] font-mono text-white/20">[REF: 18.5204°N, 73.8567°E]</div>
-          <div className="absolute bottom-4 right-4 text-[10px] font-mono text-white/20">+ [ISO-2768-mK]</div>
+          <div className="absolute top-4 left-4 text-[11px] font-mono text-white/30">+ [00,00] DATUM</div>
+          <div className="absolute top-4 right-4 text-[11px] font-mono text-white/30">+ [MST-{CHAIN_ID}]</div>
+          <div className="absolute bottom-4 left-4 text-[11px] font-mono text-white/25">[REF: 18.5204°N, 73.8567°E]</div>
+          <div className="absolute bottom-4 right-4 text-[11px] font-mono text-white/25">+ [ISO-2768-mK]</div>
         </div>
 
         {/* Ambient Subtle Radial Glow */}
@@ -112,7 +112,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto space-y-6">
             {/* Protocol Status Beacon */}
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-[#121212] border border-[#262626] shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-[#26d464]" />
               <span className="text-xs font-mono font-medium text-[#ededed]">
                 MST Testnet Protocol Online
               </span>
@@ -174,16 +174,16 @@ export default function Home() {
             {/* Top Telemetry Overlay */}
             <div className="absolute top-0 left-0 right-0 z-20 px-4 py-3 bg-gradient-to-b from-[#0a0a0a]/90 via-[#0a0a0a]/50 to-transparent flex items-center justify-between text-xs font-mono">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-[#26d464]" />
                 <span className="text-[#ededed] font-semibold tracking-wider uppercase font-montserrat">
                   5-Axis CNC Precision Workstation
                 </span>
-                <span className="text-zinc-600">|</span>
+                <span className="text-zinc-400">|</span>
                 <span className="text-[#f97316] hidden sm:inline">Ti-6Al-4V Aerospace Spindle Feed</span>
               </div>
               <div className="flex items-center gap-3 text-[#a1a1aa]">
                 <span className="text-[#f97316] font-bold">LASER: 532nm CALIBRATED</span>
-                <span className="text-zinc-600">·</span>
+                <span className="text-zinc-400">·</span>
                 <span className="text-[#26d464] font-semibold">TOL: ±0.005mm</span>
               </div>
             </div>
@@ -213,13 +213,13 @@ export default function Home() {
             <div className="relative z-20 px-4 py-2.5 bg-[#0e0e0e] border-t border-[#222222] flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#a1a1aa]">
               <div className="flex items-center gap-3">
                 <span className="text-[#ededed] font-bold">WORKPIECE: AEROSPACE SHAFT</span>
-                <span className="text-zinc-600">/</span>
+                <span className="text-zinc-400">/</span>
                 <span>SPINDLE: 1,800 RPM</span>
-                <span className="text-zinc-600">/</span>
+                <span className="text-zinc-400">/</span>
                 <span className="text-[#26d464]">COOLANT: 70 BAR DUAL JET</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-zinc-500">ON-CHAIN PROVENANCE:</span>
+                <span className="text-zinc-400">ON-CHAIN PROVENANCE:</span>
                 <span className="text-[#f97316] font-semibold">MST-91562037</span>
               </div>
             </div>
@@ -263,7 +263,7 @@ export default function Home() {
                     className={`px-2.5 py-1 rounded-lg border transition ${
                       activePresetIndex === idx
                         ? "bg-[#1c1c1c] border-[#26d464] text-[#ededed] font-bold"
-                        : "bg-[#141414] border-[#262626] text-[#71717a] hover:text-[#a1a1aa]"
+                        : "bg-[#141414] border-[#262626] text-[#a1a1aa] hover:text-[#a1a1aa]"
                     }`}
                   >
                     {p.name.split(" ")[0]}
@@ -276,7 +276,7 @@ export default function Home() {
             <div className="mt-5 space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
                 <span className="text-[#a1a1aa] flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
                   SPECTROGRAM: 1,200 Hz – 3,600 Hz FLUTTER BANDWIDTH
                 </span>
                 <button
@@ -298,7 +298,7 @@ export default function Home() {
                 className="h-28 w-full rounded-xl bg-[#090909] border border-[#222222] p-4 flex items-end justify-between gap-1 sm:gap-2 relative overflow-hidden"
                 aria-label="Acoustic spectrum graph"
               >
-                <div className="absolute top-2 left-3 text-[10px] font-mono text-[#71717a]">
+                <div className="absolute top-2 left-3 text-[11px] font-mono text-[#a1a1aa]">
                   PEAK: {analyzingFlutter ? "2,420 Hz (CHTER)" : "1,800 Hz (STABLE)"} · dB: {analyzingFlutter ? "-12 dB" : "-42 dB"}
                 </div>
                 {[
@@ -335,21 +335,21 @@ export default function Home() {
             {/* Live Readout Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-xs font-mono">
               <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#222222]">
-                <span className="text-[#a1a1aa] block text-[10px] tracking-wider uppercase">SPINDLE SPEED</span>
+                <span className="text-[#a1a1aa] block text-[11px] tracking-wider uppercase">SPINDLE SPEED</span>
                 <span className="text-sm font-bold text-[#ededed]">{activePreset.rpm} RPM</span>
               </div>
               <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#222222]">
-                <span className="text-[#a1a1aa] block text-[10px] tracking-wider uppercase">FEED CALIBRATION</span>
+                <span className="text-[#a1a1aa] block text-[11px] tracking-wider uppercase">FEED CALIBRATION</span>
                 <span className="text-sm font-bold text-[#26d464]">
                   {analyzingFlutter ? "0.15 mm/rev (High)" : activePreset.feed}
                 </span>
               </div>
               <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#222222]">
-                <span className="text-[#a1a1aa] block text-[10px] tracking-wider uppercase">CUTTING TEMP</span>
+                <span className="text-[#a1a1aa] block text-[11px] tracking-wider uppercase">CUTTING TEMP</span>
                 <span className="text-sm font-bold text-[#ededed]">{activePreset.temp}</span>
               </div>
               <div className="p-3 rounded-lg bg-[#0e0e0e] border border-[#222222]">
-                <span className="text-[#a1a1aa] block text-[10px] tracking-wider uppercase">RESONANCE STATUS</span>
+                <span className="text-[#a1a1aa] block text-[11px] tracking-wider uppercase">RESONANCE STATUS</span>
                 <span className={`text-sm font-bold ${analyzingFlutter ? "text-[#f97316]" : "text-[#26d464]"}`}>
                   {analyzingFlutter ? "Harmonic Flutter Warning" : "Calibrated (98.6%)"}
                 </span>
@@ -366,7 +366,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-[#a1a1aa]">
           <div className="flex items-center gap-3">
             <span className="text-[#26d464] font-semibold flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
               MST TESTNET
             </span>
             <span className="text-white/20">/</span>
@@ -396,7 +396,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#262626] pb-4">
             <div>
               <div className="inline-flex items-center gap-2 mb-2">
-                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
+                <span className="h-2 w-2 rounded-full bg-[#26d464]" />
                 <span className="text-xs font-mono font-medium text-[#26d464] uppercase tracking-wider">
                   Complete Toolroom Workstation
                 </span>
@@ -606,7 +606,7 @@ export default function Home() {
             <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-4 specular-card flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#26d464] font-bold">01 // ARCHIVE</span>
+                  <span className="text-[#26d464] font-bold font-mono tracking-wider">KNOWLEDGE ARCHIVE</span>
                   <span className="p-1 rounded bg-[#181818] border border-[#262626] text-[#26d464]">
                     <IconLathe className="w-4 h-4" />
                   </span>
@@ -619,9 +619,9 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-3 border-t border-[#1f1f1f] flex flex-wrap gap-1.5">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Setup Tips</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Blueprints</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Voice Notes</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Setup Tips</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Blueprints</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">Voice Notes</span>
               </div>
             </div>
 
@@ -629,7 +629,7 @@ export default function Home() {
             <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-4 specular-card flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#26d464] font-bold">02 // REWARD</span>
+                  <span className="text-[#26d464] font-bold font-mono tracking-wider">ON-CHAIN TOKEN MINT</span>
                   <span className="p-1 rounded bg-[#181818] border border-[#262626] text-[#26d464]">
                     <IconToken className="w-4 h-4" />
                   </span>
@@ -650,7 +650,7 @@ export default function Home() {
             <div className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-4 specular-card flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#26d464] font-bold">03 // RETRIEVAL</span>
+                  <span className="text-[#26d464] font-bold font-mono tracking-wider">SARVAM AI RETRIEVAL</span>
                   <span className="p-1 rounded bg-[#181818] border border-[#262626] text-[#26d464]">
                     <IconBrain className="w-4 h-4" />
                   </span>
@@ -663,9 +663,9 @@ export default function Home() {
                 </p>
               </div>
               <div className="pt-3 border-t border-[#1f1f1f] flex flex-wrap gap-1.5">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">English</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">हिन्दी</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">मराठी</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">English</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">हिन्दी</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-[#181818] text-[#a1a1aa]">मराठी</span>
               </div>
             </div>
           </div>
@@ -712,7 +712,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <blockquote className="text-xs sm:text-sm text-[#ededed] italic pl-4 py-3 bg-[#161616] border-l-2 border-[#26d464] rounded-r-md leading-relaxed">
+                <blockquote className="text-xs sm:text-sm text-[#ededed] italic p-4 bg-[#141414] border border-[#262626] rounded-xl text-white leading-relaxed shadow-inner">
                   &quot;When turning Inconel 718, handbook speeds cause rapid notch wear within 4 minutes. You have to listen for the high-frequency harmonic flutter at 1,800 RPM and back off the feed by 0.03 mm/rev while targeting high-pressure flood coolant right at the tool flank.&quot;
                 </blockquote>
               </div>
@@ -730,7 +730,7 @@ export default function Home() {
                   )}
                   <span>{playingAudioSnippet ? "Pause Audio Memo (02:44)" : "Listen to Voice Memo"}</span>
                 </button>
-                <span className="text-[11px] font-mono text-[#71717a]">MST Block #4,812,042</span>
+                <span className="text-[11px] font-mono text-[#a1a1aa]">MST Block #4,812,042</span>
               </div>
             </div>
 
@@ -756,7 +756,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <blockquote className="text-xs sm:text-sm text-[#ededed] italic pl-4 py-3 bg-[#161616] border-l-2 border-[#26d464] rounded-r-md leading-relaxed">
+                <blockquote className="text-xs sm:text-sm text-[#ededed] italic p-4 bg-[#141414] border border-[#262626] rounded-xl text-white leading-relaxed shadow-inner">
                   &quot;Junior operators often scrap entire D2 die blocks because they ignore thermal expansion during morning shifts. On a cold 18°C morning, your spindle grows by 12 microns over the first 45 minutes of warm-up before hitting thermal equilibrium.&quot;
                 </blockquote>
               </div>
@@ -769,7 +769,7 @@ export default function Home() {
                   <span>View All 12 Archived Stories</span>
                   <span>→</span>
                 </Link>
-                <span className="text-[11px] font-mono text-[#71717a]">MST Block #4,790,211</span>
+                <span className="text-[11px] font-mono text-[#a1a1aa]">MST Block #4,790,211</span>
               </div>
             </div>
           </div>
@@ -833,7 +833,7 @@ export default function Home() {
                     onChange={(e) => setCalculatorPosts(Number(e.target.value))}
                     className="w-full h-2 bg-[#222222] rounded-lg appearance-none cursor-pointer accent-[#26d464]"
                   />
-                  <div className="flex justify-between text-[10px] font-mono text-[#71717a]">
+                  <div className="flex justify-between text-[11px] font-mono text-[#a1a1aa]">
                     <span>1 Post / Day</span>
                     <span>Daily Cap Threshold: 5 Posts (50 EXPEN)</span>
                     <span>10 Posts</span>
@@ -843,19 +843,19 @@ export default function Home() {
                 {/* DRO Metric Display Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs font-mono">
                   <div className="p-3 rounded-xl bg-[#090909] border border-[#222222]">
-                    <span className="text-[#71717a] block text-[10px]">DAILY YIELD:</span>
+                    <span className="text-[#a1a1aa] block text-[11px]">DAILY YIELD:</span>
                     <span className="text-lg font-bold text-[#26d464]">{calculatedDaily} EXPEN</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#090909] border border-[#222222]">
-                    <span className="text-[#71717a] block text-[10px]">MONTHLY YIELD:</span>
+                    <span className="text-[#a1a1aa] block text-[11px]">MONTHLY YIELD:</span>
                     <span className="text-lg font-bold text-[#ededed]">{calculatedMonthly} EXPEN</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#090909] border border-[#222222]">
-                    <span className="text-[#71717a] block text-[10px]">USD VALUATION:</span>
+                    <span className="text-[#a1a1aa] block text-[11px]">USD VALUATION:</span>
                     <span className="text-lg font-bold text-[#ededed]">${calculatedUsd}</span>
                   </div>
                   <div className="p-3 rounded-xl bg-[#090909] border border-[#222222]">
-                    <span className="text-[#71717a] block text-[10px]">GAS FEES:</span>
+                    <span className="text-[#a1a1aa] block text-[11px]">GAS FEES:</span>
                     <span className="text-lg font-bold text-[#26d464]">FREE (Gasless)</span>
                   </div>
                 </div>
@@ -908,7 +908,7 @@ export default function Home() {
                     <span className="text-[#26d464]">{DAILY_CAP} EXPEN</span>
                   </div>
                   <div className="flex flex-col gap-1.5 pt-2 border-t border-[#1f1f1f]">
-                    <span className="text-[#71717a] text-[10px]">CONTRACT ADDRESS:</span>
+                    <span className="text-[#a1a1aa] text-[11px]">CONTRACT ADDRESS:</span>
                     <div className="flex items-center justify-between gap-2 p-2 rounded bg-[#0a0a0a] border border-[#262626]">
                       <a
                         href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
@@ -921,7 +921,7 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={handleCopyAddress}
-                        className="px-2 py-0.5 text-[10px] rounded bg-[#1c1c1c] text-[#a1a1aa] hover:text-[#ededed] transition shrink-0"
+                        className="px-2 py-0.5 text-[11px] rounded bg-[#1c1c1c] text-[#a1a1aa] hover:text-[#ededed] transition shrink-0"
                       >
                         {copied ? "Copied!" : "Copy"}
                       </button>

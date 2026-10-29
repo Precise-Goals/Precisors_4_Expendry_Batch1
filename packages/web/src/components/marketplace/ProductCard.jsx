@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
         {product.has3DModel && (
           <Link
             href={`/showcase?model=${product.modelId || "lathe-body"}`}
-            className="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#26d464]/15 text-[#26d464] border border-[#26d464]/40 font-semibold flex items-center gap-1.5 hover:bg-[#26d464]/25 hover:border-[#26d464] transition shadow-sm z-10 group/inspect"
+            className="absolute top-3 right-3 text-[11px] font-mono px-2.5 py-1 rounded-full bg-[#26d464]/15 text-[#26d464] border border-[#26d464]/40 font-semibold flex items-center gap-1.5 hover:bg-[#26d464]/25 hover:border-[#26d464] transition shadow-sm z-10 group/inspect"
             title="Inspect tool in 3D WebGL viewport"
           >
             <IconCube3D className="w-3.5 h-3.5 text-[#26d464] group-hover/inspect:rotate-12 transition-transform" />
@@ -50,7 +50,7 @@ export default function ProductCard({ product }) {
           <span className="telemetry-chip">
             {product.category}
           </span>
-          <span className="text-[9px] font-mono text-[#71717a]">
+          <span className="text-[11px] font-mono text-[#a1a1aa]">
             {refCode}
           </span>
         </div>
@@ -74,7 +74,7 @@ export default function ProductCard({ product }) {
                 .map(([key, val]) => (
                   <span
                     key={key}
-                    className="text-[10px] font-mono bg-[#161616] border border-[#262626] text-[#a1a1aa] px-2 py-0.5 rounded"
+                    className="text-[11px] font-mono bg-[#161616] border border-[#262626] text-[#a1a1aa] px-2 py-0.5 rounded"
                   >
                     {key}: <span className="text-[#ededed] font-medium">{val}</span>
                   </span>
@@ -86,7 +86,7 @@ export default function ProductCard({ product }) {
         {/* Pricing & CTA */}
         <div className="mt-5 pt-4 border-t border-[#222222] flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#a1a1aa] block">Dual Price</span>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa] block">Dual Price</span>
             <div className="flex items-baseline gap-1.5">
               <span className="text-lg font-bold text-[#ededed] font-mono tabular-nums">
                 ${product.price.toFixed(2)}

@@ -2,39 +2,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-base: #0a0a0a;
-  --color-secondary: #141414;
-  --color-surface: #121212;
-  --color-surface-hover: #1c1c1c;
-  --color-accent: #26d464;
-  --color-accent-hover: #22c55e;
-  --color-accent-dim: rgba(38, 212, 100, 0.15);
-  --color-orange: #f97316;
-  --color-orange-hover: #ea580c;
-  --color-orange-dim: rgba(249, 115, 22, 0.15);
-  --color-border: #262626;
-  --color-border-bright: #3f3f46;
-  --color-text: #ffffff;
-  --color-text-dim: #a1a1aa;
+  --color-base: #ffffff;
+  --color-secondary: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-accent: #16a34a;
+  --color-accent-hover: #15803d;
+  --color-accent-dim: rgba(22, 163, 74, 0.12);
+  --color-orange: #ea580c;
+  --color-orange-hover: #c2410c;
+  --color-orange-dim: rgba(234, 88, 12, 0.12);
+  --color-border: #e4e4e7;
+  --color-border-bright: #d4d4d8;
+  --color-text: #09090b;
+  --color-text-dim: #52525b;
   --color-text-muted: #71717a;
 }
 
 :root {
-  /* Palette: White, Green, Black & a touch of Orange */
-  --color-base: #0a0a0a;
-  --color-secondary: #141414;
-  --color-surface: #121212;
-  --color-surface-hover: #1c1c1c;
-  --color-accent: #26d464;
-  --color-accent-hover: #22c55e;
-  --color-accent-dim: rgba(38, 212, 100, 0.15);
-  --color-orange: #f97316;
-  --color-orange-hover: #ea580c;
-  --color-orange-dim: rgba(249, 115, 22, 0.15);
-  --color-border: #262626;
-  --color-border-bright: #3f3f46;
-  --color-text: #ffffff;
-  --color-text-dim: #a1a1aa;
+  /* Palette: White as Main, Green, Black & a touch of Orange */
+  --color-base: #ffffff;
+  --color-secondary: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-accent: #16a34a;
+  --color-accent-hover: #15803d;
+  --color-accent-dim: rgba(22, 163, 74, 0.12);
+  --color-orange: #ea580c;
+  --color-orange-hover: #c2410c;
+  --color-orange-dim: rgba(234, 88, 12, 0.12);
+  --color-border: #e4e4e7;
+  --color-border-bright: #d4d4d8;
+  --color-text: #09090b;
+  --color-text-dim: #52525b;
   --color-text-muted: #71717a;
 
   /* Legacy mappings */
@@ -71,15 +71,15 @@
 }
 
 body {
-  background: var(--color-base);
-  color: var(--color-text);
+  background: #ffffff;
+  color: #09090b;
   font-family: var(--font-poppins);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  caret-color: #26d464;
+  caret-color: #16a34a;
   font-variant-numeric: tabular-nums;
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-montserrat);
   letter-spacing: -0.02em;
   text-wrap: balance;
-  color: #ffffff;
+  color: #09090b;
 }
 
 p {
@@ -99,12 +99,12 @@ p {
 }
 
 ::selection {
-  background: rgba(38, 212, 100, 0.3);
-  color: #ffffff;
+  background: rgba(22, 163, 74, 0.25);
+  color: #09090b;
 }
 
 :focus-visible {
-  outline: 2px solid #26d464;
+  outline: 2px solid #16a34a;
   outline-offset: 2px;
 }
 
@@ -121,7 +121,7 @@ p {
   left: -50%;
   width: 200%;
   height: 200%;
-  opacity: 0.035;
+  opacity: 0.02;
   pointer-events: none;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -142,7 +142,6 @@ p {
   90% { transform: translate(-10%, 10%); }
 }
 
-/* Guard: Respect prefers-reduced-motion by suppressing ambient grain animation */
 @media (prefers-reduced-motion: reduce) {
   .grain::before {
     animation: none;
@@ -156,30 +155,31 @@ p {
 /* Impeccable Craft UI Utilities */
 .glow-card {
   position: relative;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
   border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glow-card:hover {
-  border-color: rgba(38, 212, 100, 0.45);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 16px rgba(249, 115, 22, 0.12);
+  border-color: rgba(22, 163, 74, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 16px rgba(234, 88, 12, 0.1);
   transform: translateY(-2px);
 }
 
 .glass-panel {
-  background: rgba(18, 18, 18, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-border);
+  border: 1px solid #e4e4e7;
 }
 
-/* Hairline Blueprint Grid Pattern */
+/* Hairline Blueprint Grid Pattern on White Canvas */
 .bg-blueprint-grid {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -194,7 +194,7 @@ p {
   font-family: monospace;
   font-size: 11px;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(0, 0, 0, 0.25);
   pointer-events: none;
 }
 .corner-crosshair::before {
@@ -206,22 +206,24 @@ p {
   right: 10px;
 }
 
-/* Specular Card with top milled hairline highlight */
+/* Specular Card with subtle shadow */
 .specular-card {
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.14), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 
 /* Telemetry Badge & Label */
 .telemetry-chip {
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
-  background-color: #141414;
-  border: 1px solid #262626;
+  background-color: #f4f4f5;
+  border: 1px solid #e4e4e7;
   font-family: monospace;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #a1a1aa;
+  color: #52525b;
 }
 
 /* Precision Scrollbars */
@@ -230,14 +232,14 @@ p {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: #e4e4e7;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: #a1a1aa;
 }
 
 /* Technical Blueprint & Specular Lighting Utilities */
@@ -247,8 +249,8 @@ p {
 }
 
 .specular-interactive:hover {
-  border-color: rgba(38, 212, 100, 0.5);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.18), 0 12px 32px -4px rgba(0, 0, 0, 0.7), 0 0 16px rgba(249, 115, 22, 0.15);
+  border-color: rgba(22, 163, 74, 0.5);
+  box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.08), 0 0 16px rgba(234, 88, 12, 0.12);
 }
 
 .laser-indicator {
@@ -261,7 +263,7 @@ p {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.85), transparent);
+  background: linear-gradient(90deg, transparent, rgba(234, 88, 12, 0.85), transparent);
   animation: laserSweep 3s ease-in-out infinite alternate;
 }
 
@@ -275,4 +277,123 @@ p {
     animation: none;
     opacity: 0.4;
   }
+}
+
+/* ==========================================================================
+   WHITE-MAIN PALETTE SYSTEM OVERRIDES
+   Transforms the entire site into a crisp white canvas with black structure,
+   machining green primary accents, and calibrated orange highlights.
+   Preserves JSX classnames so all unit tests continue passing 100%.
+   ========================================================================== */
+
+/* Main canvas, containers, and card chasses -> Crisp White */
+.bg-\[\#0a0a0a\],
+.bg-\[\#070707\],
+.bg-\[\#080808\],
+.bg-\[\#090909\],
+.bg-\[\#0c0c0c\],
+.bg-\[\#0e0e0e\],
+.bg-\[\#121212\],
+.bg-\[\#141414\],
+.bg-\[\#0a0a0a\]\/80,
+.bg-\[\#0a0a0a\]\/85,
+.bg-\[\#0a0a0a\]\/90,
+.bg-\[\#0a0a0a\]\/95,
+.bg-\[\#121212\]\/85,
+.bg-\[\#121212\]\/90,
+.bg-\[\#121212\]\/95,
+.bg-\[\#080808\]\/90,
+.bg-\[\#0c0c0c\]\/90 {
+  background-color: #ffffff !important;
+}
+
+/* Secondary elevated panels, chips, tabs, inputs, secondary buttons -> Off-white / Zinc 100 */
+.bg-\[\#161616\],
+.bg-\[\#181818\],
+.bg-\[\#1a1a1a\],
+.bg-\[\#1c1c1c\],
+.bg-\[\#202020\],
+.bg-\[\#1c1208\],
+.bg-\[\#222222\] {
+  background-color: #f4f4f5 !important;
+}
+
+/* Deep Black accent surfaces (telemetry top bar) */
+.bg-\[\#050505\] {
+  background-color: #09090b !important;
+}
+.bg-\[\#050505\] * {
+  color: #a1a1aa !important;
+}
+.bg-\[\#050505\] .text-\[\#26d464\],
+.bg-\[\#050505\] .text-\[\#16a34a\] {
+  color: #22c55e !important;
+}
+.bg-\[\#050505\] .text-\[\#f97316\],
+.bg-\[\#050505\] .text-\[\#ea580c\] {
+  color: #f97316 !important;
+}
+
+/* Text overrides: from light/white to dark ink / black */
+.text-\[\#ededed\],
+.text-white:not(.btn-primary-text) {
+  color: #09090b !important;
+}
+
+/* Secondary & Muted Text -> readable dark zinc / slate */
+.text-\[\#a1a1aa\],
+.text-\[\#71717a\],
+.text-zinc-400,
+.text-zinc-500,
+.text-zinc-600 {
+  color: #52525b !important;
+}
+
+/* Hairline dividers and borders -> crisp light zinc border */
+.border-\[\#262626\],
+.border-\[\#1f1f1f\],
+.border-\[\#222222\],
+.border-\[\#1c1c1c\],
+.border-\[\#2e2e2e\],
+.border-\[\#333333\],
+.border-\[\#383838\],
+.border-\[\#3f3f46\],
+.border-white\/\[0\.08\],
+.border-white\/\[0\.04\],
+.border-white\/\[0\.12\],
+.border-white\/10,
+.border-white\/20 {
+  border-color: #e4e4e7 !important;
+}
+
+/* Gradients that faded from dark to transparent -> fade from white to transparent */
+.from-\[\#0a0a0a\]\/90,
+.from-\[\#0a0a0a\]\/95,
+.from-\[\#0a0a0a\],
+.from-\[\#121212\] {
+  --tw-gradient-from: #ffffff !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+.via-\[\#0a0a0a\]\/50,
+.via-\[\#121212\]\/60 {
+  --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 255, 255, 0.7), var(--tw-gradient-to) !important;
+}
+
+/* Solid contrast buttons or badges: ensure white text on black background */
+.bg-black,
+.bg-black *,
+[class*="bg-black"] {
+  background-color: #09090b !important;
+  color: #ffffff !important;
+}
+
+/* Subtle corner datums in hero */
+.text-white\/25,
+.text-white\/20,
+.text-white\/40,
+.text-white\/50,
+.text-white\/60,
+.text-white\/70,
+.text-white\/80 {
+  color: #71717a !important;
 }

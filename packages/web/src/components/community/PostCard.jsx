@@ -116,8 +116,8 @@ export default function PostCard({ post }) {
             </span>
             <span>{type}</span>
           </Badge>
-          <span className="text-xs text-[#71717a]">•</span>
-          <time dateTime={createdAt} className="text-xs text-[#71717a] font-mono">
+          <span className="text-xs text-[#a1a1aa]">•</span>
+          <time dateTime={createdAt} className="text-xs text-[#a1a1aa] font-mono">
             {formatRelativeTime(createdAt)}
           </time>
         </div>
@@ -139,15 +139,15 @@ export default function PostCard({ post }) {
       {/* Engineering Parameter Matrix (3-column micro-grid) */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-3 rounded-xl bg-[#0a0a0a] border border-[#222222] text-[11px] font-mono">
         <div>
-          <span className="text-[#71717a] block text-[9px] uppercase tracking-wider">MATERIAL</span>
+          <span className="text-[#a1a1aa] block text-[11px] uppercase tracking-wider">MATERIAL</span>
           <span className="text-[#ededed] font-semibold truncate block">{params.material}</span>
         </div>
         <div>
-          <span className="text-[#71717a] block text-[9px] uppercase tracking-wider">TOOL / PROCESS</span>
+          <span className="text-[#a1a1aa] block text-[11px] uppercase tracking-wider">TOOL / PROCESS</span>
           <span className="text-[#ededed] font-semibold truncate block">{params.tool}</span>
         </div>
         <div>
-          <span className="text-[#71717a] block text-[9px] uppercase tracking-wider">CALIBRATION</span>
+          <span className="text-[#a1a1aa] block text-[11px] uppercase tracking-wider">CALIBRATION</span>
           <span className="text-[#26d464] font-semibold truncate block">{params.tolerance}</span>
         </div>
       </div>
@@ -191,7 +191,7 @@ export default function PostCard({ post }) {
             <div className="font-semibold text-[#ededed] flex items-center gap-1.5">
               <span>{authorName || "Veteran Machinist"}</span>
             </div>
-            <div className="text-[11px] text-[#71717a]">
+            <div className="text-[11px] text-[#a1a1aa]">
               {authorDesignation || "Shop Floor Operator"} •{" "}
               <span className="font-mono text-[#a1a1aa]">{formattedWallet}</span>
             </div>

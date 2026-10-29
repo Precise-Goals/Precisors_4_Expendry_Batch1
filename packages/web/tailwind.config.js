@@ -9,33 +9,33 @@ module.exports = {
     extend: {
       colors: {
         base: {
-          DEFAULT: "#0a0a0a",
-          dark: "#000000",
-          light: "#141414",
+          DEFAULT: "#ffffff",
+          dark: "#f4f4f5",
+          light: "#ffffff",
         },
         accent: {
-          DEFAULT: "#26d464",
-          hover: "#21b856",
-          dim: "rgba(38, 212, 100, 0.15)",
+          DEFAULT: "#16a34a",
+          hover: "#15803d",
+          dim: "rgba(22, 163, 74, 0.12)",
         },
         orange: {
-          DEFAULT: "#f97316",
-          hover: "#ea580c",
-          dim: "rgba(249, 115, 22, 0.15)",
-          light: "#fb923c",
+          DEFAULT: "#ea580c",
+          hover: "#c2410c",
+          dim: "rgba(234, 88, 12, 0.12)",
+          light: "#f97316",
         },
         secondary: {
-          DEFAULT: "#141414",
-          hover: "#1f1f1f",
+          DEFAULT: "#f4f4f5",
+          hover: "#e4e4e7",
         },
         surface: {
-          DEFAULT: "#121212",
-          hover: "#1a1a1a",
-          elevated: "#222222",
+          DEFAULT: "#ffffff",
+          hover: "#f4f4f5",
+          elevated: "#ffffff",
         },
         border: {
-          DEFAULT: "#262626",
-          bright: "#3f3f46",
+          DEFAULT: "#e4e4e7",
+          bright: "#d4d4d8",
         },
       },
       fontFamily: {

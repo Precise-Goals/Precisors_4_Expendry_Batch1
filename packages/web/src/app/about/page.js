@@ -156,7 +156,7 @@ export default function AboutPage() {
             <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
               <div className="text-zinc-500 text-[10px] uppercase">Retirement Wave</div>
               <div className="text-lg font-bold text-[#ededed] mt-0.5">2.7M Operators</div>
-              <div className="text-[10px] text-amber-400 mt-0.5">Global Attrition</div>
+              <div className="text-[10px] text-orange-400 mt-0.5">Global Attrition</div>
             </div>
             <div className="p-3.5 rounded-xl bg-[#121212] border border-[#262626] specular-card">
               <div className="text-zinc-500 text-[10px] uppercase">Reward / Valid Post</div>

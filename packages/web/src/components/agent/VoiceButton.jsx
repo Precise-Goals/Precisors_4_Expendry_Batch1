@@ -141,7 +141,7 @@ export default function VoiceButton({
       )}
       {isRecording && (
         <span
-          className="absolute -inset-1 rounded-full border border-[#38bdf8]/50 animate-pulse motion-reduce:animate-none pointer-events-none"
+          className="absolute -inset-1 rounded-full border border-[#f97316]/60 animate-pulse motion-reduce:animate-none pointer-events-none"
           aria-hidden="true"
         />
       )}
@@ -187,7 +187,7 @@ export default function VoiceButton({
             ></path>
           </svg>
         ) : isRecording ? (
-          <div className="w-3 h-3 rounded-xs bg-[#ededed]" />
+          <div className="w-3 h-3 rounded-xs bg-white" />
         ) : (
           <IconMic className="w-4 h-4 text-[#26d464]" />
         )}

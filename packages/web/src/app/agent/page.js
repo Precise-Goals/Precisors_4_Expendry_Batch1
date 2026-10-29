@@ -30,7 +30,7 @@ export default function AgentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] flex flex-col pt-16 bg-blueprint-grid selection:bg-[#26d464]/30 selection:text-[#ededed]">
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col pt-16 bg-blueprint-grid selection:bg-[#26d464]/30 selection:text-white">
       <div className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-5">
         {/* Operator Console Header & Telemetry */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#262626]">
@@ -41,7 +41,7 @@ export default function AgentPage() {
                 Sarvam AI Operator Terminal · v1.4
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-montserrat">
               Machining Tacit Assistant
             </h1>
             <p className="text-xs sm:text-sm text-[#a1a1aa] mt-1 max-w-xl font-poppins">
@@ -73,7 +73,7 @@ export default function AgentPage() {
             <span className="text-zinc-600">·</span>
             <span>MODEL STATUS: ACTIVE</span>
             <span className="text-zinc-600">·</span>
-            <span className="text-[#38bdf8]">LATENCY: ~240ms</span>
+            <span className="text-[#f97316]">LATENCY: ~240ms</span>
             <span className="text-zinc-600">·</span>
             <span className="text-[#26d464]">AUTO-DETECT: ACTIVE</span>
           </div>

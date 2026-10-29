@@ -1,27 +1,27 @@
 # DESIGN.md — Expendry Design System & Tokens
-> Luxury Precision Industrial Workstation Architecture
+> Luxury Precision Industrial Workstation Architecture — White Main Palette, Green, Black, and Calibrated Orange
 
 ```yaml
 system:
   name: Expendry Machine Tool UI
   density: compact-industrial
-  theme: dark-monochrome-precision
+  theme: white-main-precision
 colors:
-  base: "#0a0a0a"
-  surface: "#121212"
-  surface-hover: "#1c1c1c"
-  secondary: "#161616"
-  primary: "#26d464"
-  primary-hover: "#21b856"
-  primary-dim: "rgba(38, 212, 100, 0.15)"
-  tech-blue: "#38bdf8"
-  tech-blue-hover: "#0284c7"
-  tech-blue-dim: "rgba(56, 189, 248, 0.15)"
-  border: "#262626"
-  border-bright: "#383838"
-  text-primary: "#ededed"
-  text-dim: "#a1a1aa"
-  text-muted: "#a1a1aa"
+  base: "#ffffff"
+  surface: "#ffffff"
+  surface-hover: "#f4f4f5"
+  secondary: "#f4f4f5"
+  primary: "#16a34a"
+  primary-hover: "#15803d"
+  primary-dim: "rgba(22, 163, 74, 0.12)"
+  orange: "#ea580c"
+  orange-hover: "#c2410c"
+  orange-dim: "rgba(234, 88, 12, 0.12)"
+  border: "#e4e4e7"
+  border-bright: "#d4d4d8"
+  text-primary: "#09090b"
+  text-dim: "#52525b"
+  text-muted: "#71717a"
   metal-steel: "#4a5568"
   metal-titanium: "#718096"
   carbide-dark: "#1a202c"
@@ -48,7 +48,7 @@ Expendry brings software craftsmanship to high-precision heavy industry. It is d
 
 2. **Magnetic Element Tracking (`MagneticTrack.jsx`)**:
    - Buttons, hero CTAs, and interactive cards track the user's cursor with subtle magnetic attraction.
-   - Dynamic radial specular lighting (`specular-interactive`) projecting green (`#26d464`) and technical blue (`#38bdf8`) reflections based on relative pointer coordinates.
+   - Dynamic radial specular lighting (`specular-interactive`) projecting green (`#26d464`) and calibrated safety orange (`#f97316`) reflections based on relative pointer coordinates.
 
 3. **Lenis-Inspired Smooth Scroll Engine (`SmoothScrollProvider.jsx`)**:
    - Client-side requestAnimationFrame inertial lerp scroll engine (0.09 easing factor).
@@ -60,21 +60,24 @@ Expendry brings software craftsmanship to high-precision heavy industry. It is d
 
 ---
 
-## 2. Color Palette & Lighting
+## 2. Color Palette & Lighting (White Main, Green, Black & Orange)
 
-The Expendry palette is an austere, high-contrast industrial spectrum engineered to simulate CNC lathe optical consoles:
+The Expendry palette is an austere, high-contrast industrial spectrum engineered with **White as the main canvas color**:
 
-- **Deep Obsidian Black (`#0a0a0a`)**: The base void canvas.
-- **Surface Layer (`#121212`)**: Elevated chassis and card containers with milled hairline specular highlights (`specular-card`).
-- **Precision Machining Green (`#26d464`)**: The primary phosphor indicator lamp for operational status, valid token mints, and active controls.
-- **Technical Precision Blue (`#38bdf8`)**: A restrained technical accent for laser alignment reticles (532nm), ISO-2768 datum callouts, and telemetry indicators.
-- **Crisp Silver-White (`#ededed`)**: High-contrast, non-glare text for toolroom legibility.
-- **Milled Zinc Grey (`#a1a1aa`)**: Secondary readouts meeting strict WCAG 5.8:1 contrast ratios.
+- **Pure White (`#ffffff`) — The Main Color**: The dominant background, main viewport surface, and primary container foundation. Delivers crisp clarity and high daylight visibility.
+- **Surface & Secondary Layer (`#f4f4f5` / `#ffffff`)**: Elevated chassis, card containers, inputs, and interactive bays with hairline milled borders (`#e4e4e7`).
+- **Precision Machining Green (`#16a34a` / `#26d464`)**: The signature phosphor indicator lamp for operational status, valid token mints, primary action buttons, active tabs, and live beacons.
+- **Deep Precision Black (`#09090b` / `#000000`)**: High-contrast typography, headings, contrast badges, structural dividers, datum markers, and engineering callouts.
+- **Calibrated Tactile Orange (`#ea580c` / `#f97316`)**: Precision industrial accent for laser alignment reticles (532nm), ISO-2768 datum callouts, tolerance calipers, warning badges, and tactile hover highlights ("a little bit of orange").
+- **Milled Zinc Grey (`#52525b` / `#71717a`)**: Secondary readouts meeting strict WCAG contrast ratios against the white background.
+
+### Palette Architecture
+- **White as Main Palette**: Per operator directive, the website adopts **White as the main color**, with **Green** as the primary accent, **Black** for high-contrast typography and structural definition, and **Orange** as the precise secondary accent.
 
 ---
 
 ## 3. Typography Architecture
 
-- **Headings & Display**: Montserrat (bold, uppercase tracking, mechanical weight).
+- **Headings & Display**: Montserrat (bold, uppercase tracking, mechanical weight, rendered in crisp `#ffffff`).
 - **Body & Paragraphs**: Poppins (geometric, clear, humanized technical reading).
 - **Telemetry & DRO Numeral Readouts**: JetBrains Mono / monospace (tabular numbers `font-variant-numeric: tabular-nums` to prevent layout jitter during live value changes).

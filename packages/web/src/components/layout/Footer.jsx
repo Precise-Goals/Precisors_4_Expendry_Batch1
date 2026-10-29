@@ -14,16 +14,16 @@ export default function Footer() {
 
       {/* Engineering Header Datum Bar */}
       <div className="border-b border-[#1c1c1c] bg-[#0a0a0a]/90 py-2 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono text-[#a1a1aa]">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#a1a1aa]">
           <div className="flex items-center gap-3">
-            <span className="text-zinc-500">+ [00,00] DATUM</span>
+            <span className="text-zinc-400">+ [00,00] DATUM</span>
             <span>·</span>
             <span className="text-[#f97316]">REF // ISO-2768-mK</span>
             <span>·</span>
             <span>SYS:MST-{CHAIN_ID}</span>
           </div>
           <div className="flex items-center gap-2 text-[#26d464]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464] animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-[#26d464]" />
             <span>OPERATOR TERMINAL ONLINE · GASLESS CONTRACTS ACTIVE</span>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default function Footer() {
               testnet, inspect 3D tooling geometries, and consult AI-powered machining intelligence.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#121212] border border-[#262626] text-xs font-mono text-[#26d464]">
-              <span className="h-2 w-2 rounded-full bg-[#f97316] animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-[#f97316]" />
               <span>MST Testnet · Chain ID: {CHAIN_ID} · 0x56F0...283a</span>
             </div>
           </div>
@@ -66,7 +66,7 @@ export default function Footer() {
                   href="/about"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">01 //</span>
+                  <span className="text-zinc-400 font-mono">01 //</span>
                   <span>About & Manifesto</span>
                 </Link>
               </li>
@@ -75,7 +75,7 @@ export default function Footer() {
                   href="/agent"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">02 //</span>
+                  <span className="text-zinc-400 font-mono">02 //</span>
                   <span>AI Machining Assistant</span>
                 </Link>
               </li>
@@ -84,7 +84,7 @@ export default function Footer() {
                   href="/marketplace"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">03 //</span>
+                  <span className="text-zinc-400 font-mono">03 //</span>
                   <span>Tooling Marketplace</span>
                 </Link>
               </li>
@@ -93,7 +93,7 @@ export default function Footer() {
                   href="/experience"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">04 //</span>
+                  <span className="text-zinc-400 font-mono">04 //</span>
                   <span>Machinist Experience Hub</span>
                 </Link>
               </li>
@@ -102,7 +102,7 @@ export default function Footer() {
                   href="/blueprints"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">05 //</span>
+                  <span className="text-zinc-400 font-mono">05 //</span>
                   <span>Engineering Blueprints</span>
                 </Link>
               </li>
@@ -111,7 +111,7 @@ export default function Footer() {
                   href="/patent"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">06 //</span>
+                  <span className="text-zinc-400 font-mono">06 //</span>
                   <span>Decentralized Patents</span>
                 </Link>
               </li>
@@ -120,7 +120,7 @@ export default function Footer() {
                   href="/partners"
                   className="hover:text-[#26d464] transition-colors flex items-center gap-1.5"
                 >
-                  <span className="text-zinc-500 font-mono">07 //</span>
+                  <span className="text-zinc-400 font-mono">07 //</span>
                   <span>Partners & Investors</span>
                 </Link>
               </li>

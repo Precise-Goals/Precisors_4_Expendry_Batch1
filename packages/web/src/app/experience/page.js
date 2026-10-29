@@ -441,7 +441,7 @@ export default function ExperiencePage() {
               <div className="p-4 rounded-xl bg-[#161616] border border-[#262626] space-y-2">
                 <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ededed]">
                   {isResonanceZone ? (
-                    <IconAlert className="w-4 h-4 text-amber-400" />
+                    <IconAlert className="w-4 h-4 text-orange-400" />
                   ) : (
                     <IconCheck className="w-4 h-4 text-[#26d464]" />
                   )}
