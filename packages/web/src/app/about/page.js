@@ -13,8 +13,10 @@ import {
   IconCheck,
   IconAcoustics,
   IconFactory,
+  IconExternal,
 } from "@/components/ui/Icons";
-import { CHAIN_ID, REWARD_PER_POST, DAILY_CAP } from "shared/constants";
+import { CHAIN_ID, REWARD_PER_POST, DAILY_CAP, EXPLORER_URL } from "shared/constants";
+import { EXPEN_ADDRESS } from "shared/contracts";
 
 const TIMELINE_EVENTS = [
   {
@@ -73,6 +75,15 @@ const CORE_PILLARS = [
 export default function AboutPage() {
   const shouldReduceMotion = useReducedMotion();
   const [activeEra, setActiveEra] = useState(3);
+  const [copiedContract, setCopiedContract] = useState(false);
+
+  const handleCopyContract = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(EXPEN_ADDRESS);
+      setCopiedContract(true);
+      setTimeout(() => setCopiedContract(false), 2000);
+    }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -104,7 +115,14 @@ export default function AboutPage() {
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
           <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [MANIFESTO // 01]</div>
-          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [MST-{CHAIN_ID}]</div>
+          <a
+            href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto absolute top-4 right-4 text-xs font-mono text-emerald-700 hover:text-emerald-800 font-bold underline decoration-dotted transition"
+          >
+            + [MST-{CHAIN_ID} SCAN ↗]
+          </a>
         </div>
 
         <motion.div
@@ -266,6 +284,54 @@ export default function AboutPage() {
                 <p className="text-xs sm:text-sm text-zinc-600 mt-2 leading-relaxed font-body">
                   Every knowledge contribution, blueprint release, and patent registration is verified cryptographically via EIP-191 signatures and stamped onto MST Testnet.
                 </p>
+              </div>
+
+              {/* Verified MSTScan Token Contract Capsule */}
+              <div className="p-4 sm:p-5 rounded-3xl bg-zinc-50 border border-zinc-200/90 shadow-2xs space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+                    </span>
+                    <span className="text-xs font-mono font-bold text-zinc-900">
+                      MST Testnet · Verified Contract
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono font-semibold text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                    Chain ID {CHAIN_ID}
+                  </span>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-2xl bg-white border border-zinc-200">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-[11px] font-mono font-bold text-zinc-400 select-none">EXPEN:</span>
+                    <span className="text-xs font-mono font-semibold text-zinc-800 truncate" title={EXPEN_ADDRESS}>
+                      {EXPEN_ADDRESS}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      onClick={handleCopyContract}
+                      aria-label="Copy contract address"
+                      className="px-2.5 py-1 text-xs font-mono font-bold rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-700 transition cursor-pointer"
+                    >
+                      {copiedContract ? "Copied!" : "Copy"}
+                    </button>
+
+                    <a
+                      href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-montserrat font-bold rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white transition shadow-2xs cursor-pointer"
+                    >
+                      <span>MSTScan</span>
+                      <IconExternal className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </div>
               </div>
 
               <ul className="space-y-3 text-xs sm:text-sm text-zinc-800 font-mono">
