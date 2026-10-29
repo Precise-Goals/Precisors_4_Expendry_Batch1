@@ -1,0 +1,75 @@
+name: Cybersecurity - Autonomous Sanity & SAST
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 2 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secret-scan:
+    name: Secret Leakage & Credential Sanity Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks Secret Detector
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Scan Repository for Unredacted Operator Keys
+        run: |
+          echo "Auditing git working tree for unredacted private keys..."
+          if grep -rnw . -e "OPERATOR_PRIVATE_KEY=0x" --exclude=".env*" --exclude-dir=".git" --exclude-dir="node_modules"; then
+            echo "::error::Unredacted operator private key detected in repository!"
+            exit 1
+          fi
+          echo "Secret check passed."
+
+  semgrep-sast:
+    name: OWASP Top 10 SAST Analysis (Semgrep)
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep:latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Execute Semgrep OWASP Security Rules
+        run: |
+          semgrep scan \
+            --config "p/owasp-top-ten" \
+            --config "p/javascript" \
+            --config "p/security-code-scan" \
+            --exclude "tests/" \
+            --exclude "node_modules/" \
+            --exclude ".next/" \
+            --error
+
+  dependency-audit:
+    name: Dependency Vulnerability Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun Runtime
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Audit NPM/Bun Dependencies
+        run: |
+          cd packages/contracts && npm audit --audit-level=high || true
