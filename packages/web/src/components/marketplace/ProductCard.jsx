@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { IconCube3D } from "@/components/ui/Icons";
 
 const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzEyMTIxMiIvPjwvc3ZnPg==";
@@ -17,7 +18,7 @@ export default function ProductCard({ product }) {
         {/* Specular radial highlight behind image */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-radial from-white/[0.03] to-transparent pointer-events-none"
+          className="absolute inset-0 bg-radial from-white/[0.04] to-transparent pointer-events-none"
         />
 
         <Image
@@ -33,19 +34,20 @@ export default function ProductCard({ product }) {
         {product.has3DModel && (
           <Link
             href={`/showcase?model=${product.modelId || "lathe-body"}`}
-            className="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#26d464]/20 text-[#26d464] border border-[#26d464]/40 font-semibold flex items-center gap-1.5 hover:bg-[#26d464]/30 transition shadow-sm z-10"
+            className="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-1 rounded-full bg-[#26d464]/15 text-[#26d464] border border-[#26d464]/40 font-semibold flex items-center gap-1.5 hover:bg-[#26d464]/25 hover:border-[#26d464] transition shadow-sm z-10 group/inspect"
             title="Inspect tool in 3D WebGL viewport"
           >
+            <IconCube3D className="w-3.5 h-3.5 text-[#26d464] group-hover/inspect:rotate-12 transition-transform" />
             <span
               className="w-1.5 h-1.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none"
               aria-hidden="true"
             />
-            <span>3D INSPECTION READY</span>
+            <span>3D INSPECTION</span>
           </Link>
         )}
 
         <div className="absolute top-3 left-3 flex flex-col gap-1">
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161616] text-[#ededed] border border-[#262626]">
+          <span className="telemetry-chip">
             {product.category}
           </span>
           <span className="text-[9px] font-mono text-[#71717a]">
@@ -57,10 +59,10 @@ export default function ProductCard({ product }) {
       {/* Product Content Details */}
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
-          <h3 className="text-base font-semibold text-[#ededed] group-hover:text-[#26d464] transition line-clamp-2 font-display">
+          <h3 className="text-base font-bold text-[#ededed] group-hover:text-[#26d464] transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
             {product.name}
           </h3>
-          <p className="text-xs text-[#a1a1aa] mt-2 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-[#a1a1aa] mt-2 line-clamp-2 leading-relaxed font-body">
             {product.description}
           </p>
 
@@ -74,7 +76,7 @@ export default function ProductCard({ product }) {
                     key={key}
                     className="text-[10px] font-mono bg-[#161616] border border-[#262626] text-[#a1a1aa] px-2 py-0.5 rounded"
                   >
-                    {key}: <span className="text-[#ededed]">{val}</span>
+                    {key}: <span className="text-[#ededed] font-medium">{val}</span>
                   </span>
                 ))}
             </div>
@@ -84,9 +86,9 @@ export default function ProductCard({ product }) {
         {/* Pricing & CTA */}
         <div className="mt-5 pt-4 border-t border-[#222222] flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-[#71717a] block">Dual Price</span>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[#a1a1aa] block">Dual Price</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-lg font-bold text-white font-mono">
+              <span className="text-lg font-bold text-[#ededed] font-mono tabular-nums">
                 ${product.price.toFixed(2)}
               </span>
               <span className="text-[11px] text-[#26d464] font-mono font-semibold">
@@ -97,9 +99,9 @@ export default function ProductCard({ product }) {
 
           <Link
             href={`/marketplace/${product.id}`}
-            className="px-3.5 py-1.5 rounded-lg bg-[#161616] border border-[#262626] hover:border-[#26d464] text-xs font-semibold text-[#ededed] hover:text-[#26d464] hover:bg-[#1a1a1a] transition active:scale-98 shadow-sm"
+            className="px-3.5 py-1.5 rounded-lg bg-[#161616] border border-[#262626] hover:border-[#26d464]/60 text-xs font-semibold text-[#ededed] hover:text-[#26d464] hover:bg-[#1a1a1a] transition font-montserrat active:scale-[0.98] shadow-sm flex items-center gap-1"
           >
-            Inspect Tool
+            <span>Inspect Tool</span>
           </Link>
         </div>
       </div>

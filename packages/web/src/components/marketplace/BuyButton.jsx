@@ -57,7 +57,7 @@ export default function BuyButton({ product }) {
         onClick={handleBuy}
         disabled={isProcessing}
         aria-label={`Buy ${product?.name} in demo mode`}
-        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#26d464] text-neutral-950 font-bold text-sm hover:bg-[#20b855] transition shadow-lg shadow-[#26d464]/10 flex items-center justify-center gap-2.5 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#26d464] text-[#0a0a0a] font-montserrat font-bold text-sm hover:bg-[#21b856] transition shadow-lg shadow-[#26d464]/10 flex items-center justify-center gap-2.5 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider"
       >
         {isProcessing ? (
           <>
@@ -98,7 +98,7 @@ export default function BuyButton({ product }) {
               />
             </svg>
             <span>Instant Demo Order</span>
-            <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-neutral-950 text-[#26d464]">
+            <span className="text-[9px] uppercase font-mono px-1.5 py-0.5 rounded bg-[#0a0a0a] text-[#26d464] border border-[#26d464]/30 font-bold">
               Demo
             </span>
           </>
@@ -110,7 +110,7 @@ export default function BuyButton({ product }) {
         <div
           role="status"
           aria-live="polite"
-          className="fixed bottom-6 right-6 z-50 max-w-sm rounded-xl bg-neutral-900 border border-[#26d464]/40 p-4 shadow-2xl flex items-start gap-3 animate-in fade-in slide-in-from-bottom-4 duration-200"
+          className="fixed bottom-6 right-6 z-50 max-w-sm rounded-xl bg-[#121212] border border-[#26d464]/50 p-4 shadow-2xl flex items-start gap-3 specular-card animate-in fade-in slide-in-from-bottom-4 duration-200"
         >
           <div className="w-8 h-8 rounded-full bg-[#26d464]/20 border border-[#26d464]/40 flex items-center justify-center text-[#26d464] shrink-0 mt-0.5">
             <svg
@@ -129,16 +129,16 @@ export default function BuyButton({ product }) {
           </div>
 
           <div className="flex-1">
-            <h4 className="text-sm font-semibold text-white flex items-center gap-2">
+            <h4 className="text-sm font-bold text-[#ededed] font-montserrat flex items-center gap-2">
               Purchase Confirmed
-              <span className="text-[10px] font-mono px-1.5 py-0.2 bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 rounded">
+              <span className="text-[10px] font-mono px-1.5 py-0.2 bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/30 rounded">
                 Demo Mode
               </span>
             </h4>
-            <p className="text-xs text-neutral-300 mt-1 leading-relaxed">
+            <p className="text-xs text-[#a1a1aa] font-body mt-1 leading-relaxed">
               {toast.message}
             </p>
-            <div className="mt-2 pt-2 border-t border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+            <div className="mt-2 pt-2 border-t border-[#262626] flex items-center justify-between text-[11px] font-mono text-[#a1a1aa]">
               <span>{toast.orderId}</span>
               <span className="text-[#26d464] font-semibold">${toast.price.toFixed(2)}</span>
             </div>
@@ -147,7 +147,7 @@ export default function BuyButton({ product }) {
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-neutral-500 hover:text-neutral-300 -mr-1 -mt-1 p-1 text-xs"
+            className="text-[#a1a1aa] hover:text-[#ededed] -mr-1 -mt-1 p-1 text-xs"
             aria-label="Close notification"
           >
             ✕

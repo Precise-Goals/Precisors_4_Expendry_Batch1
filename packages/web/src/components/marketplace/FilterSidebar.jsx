@@ -11,10 +11,10 @@ export default function FilterSidebar({
   return (
     <aside
       aria-label="Product filters"
-      className={`rounded-2xl border border-neutral-800 bg-[#0d0d0d] p-5 ${className}`}
+      className={`rounded-2xl border border-[#262626] bg-[#121212] p-5 specular-card ${className}`}
     >
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-neutral-800">
-        <h2 className="text-sm font-bold text-white flex items-center gap-2">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#262626]">
+        <h2 className="text-sm font-bold text-[#ededed] font-montserrat flex items-center gap-2">
           <svg
             className="w-4 h-4 text-[#26d464]"
             fill="none"
@@ -34,7 +34,7 @@ export default function FilterSidebar({
         {(selectedCategory !== "All" || minPrice || maxPrice || search) && (
           <Link
             href="/marketplace"
-            className="text-xs text-neutral-400 hover:text-[#26d464] transition"
+            className="text-xs font-mono text-[#a1a1aa] hover:text-[#26d464] transition"
           >
             Clear all
           </Link>
@@ -47,7 +47,7 @@ export default function FilterSidebar({
 
         {/* Category Filter Fieldset */}
         <fieldset className="space-y-3">
-          <legend className="text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-2">
+          <legend className="text-[11px] font-mono font-semibold text-[#a1a1aa] uppercase tracking-wider mb-2">
             Tooling Category
           </legend>
 
@@ -63,11 +63,15 @@ export default function FilterSidebar({
                     name="category"
                     value={cat}
                     defaultChecked={isChecked}
-                    className="w-4 h-4 accent-[#26d464] bg-neutral-900 border-neutral-700 cursor-pointer"
+                    className="w-4 h-4 accent-[#26d464] bg-[#0a0a0a] border-[#262626] cursor-pointer"
                   />
                   <label
                     htmlFor={inputId}
-                    className="text-xs text-neutral-300 hover:text-white cursor-pointer select-none"
+                    className={`text-xs cursor-pointer select-none transition-colors ${
+                      isChecked
+                        ? "text-[#26d464] font-semibold"
+                        : "text-[#ededed] hover:text-[#26d464]"
+                    }`}
                   >
                     {cat}
                   </label>
@@ -78,8 +82,8 @@ export default function FilterSidebar({
         </fieldset>
 
         {/* Price Range Filter Fieldset */}
-        <fieldset className="space-y-3 pt-4 border-t border-neutral-800">
-          <legend className="text-xs font-semibold text-neutral-300 uppercase tracking-wider mb-2">
+        <fieldset className="space-y-3 pt-4 border-t border-[#262626]">
+          <legend className="text-[11px] font-mono font-semibold text-[#a1a1aa] uppercase tracking-wider mb-2">
             Price Range ($)
           </legend>
 
@@ -96,7 +100,7 @@ export default function FilterSidebar({
                 step="1"
                 placeholder="Min ($)"
                 defaultValue={minPrice}
-                className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-2.5 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464]"
+                className="w-full bg-[#161616] border border-[#262626] rounded-lg px-2.5 py-1.5 text-xs text-[#ededed] font-mono placeholder-[#71717a] focus:outline-none focus:border-[#26d464] focus:ring-1 focus:ring-[#26d464]/20 transition"
               />
             </div>
             <div>
@@ -111,7 +115,7 @@ export default function FilterSidebar({
                 step="1"
                 placeholder="Max ($)"
                 defaultValue={maxPrice}
-                className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-2.5 py-1.5 text-xs text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-[#26d464]"
+                className="w-full bg-[#161616] border border-[#262626] rounded-lg px-2.5 py-1.5 text-xs text-[#ededed] font-mono placeholder-[#71717a] focus:outline-none focus:border-[#26d464] focus:ring-1 focus:ring-[#26d464]/20 transition"
               />
             </div>
           </div>
@@ -121,7 +125,7 @@ export default function FilterSidebar({
         <div className="pt-2">
           <button
             type="submit"
-            className="w-full py-2 rounded-lg bg-[#26d464] text-neutral-950 font-bold text-xs hover:bg-[#20b855] transition shadow-sm"
+            className="w-full py-2.5 rounded-xl bg-[#26d464] text-[#0a0a0a] font-montserrat font-bold text-xs uppercase tracking-wider hover:bg-[#21b856] transition shadow-md shadow-[#26d464]/10 active:scale-[0.98]"
           >
             Apply Filters
           </button>

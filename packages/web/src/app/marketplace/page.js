@@ -69,11 +69,11 @@ async function MarketplaceCatalog({ searchParams }) {
               name="search"
               defaultValue={search}
               placeholder="Search by alloy, standard, tool..."
-              className="bg-[#121212] border border-[#262626] rounded-lg px-3 py-1.5 text-xs text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464] w-full sm:w-60 font-mono"
+              className="bg-[#121212] border border-[#262626] rounded-xl px-3 py-1.5 text-xs text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464] focus:ring-1 focus:ring-[#26d464]/20 w-full sm:w-64 font-mono transition-all"
             />
             <button
               type="submit"
-              className="px-3.5 py-1.5 rounded-lg bg-[#161616] hover:bg-[#202020] border border-[#262626] text-[#ededed] text-xs font-medium transition"
+              className="px-4 py-1.5 rounded-xl bg-[#161616] hover:bg-[#202020] border border-[#262626] hover:border-[#383838] text-[#ededed] hover:text-white text-xs font-semibold font-montserrat transition active:scale-[0.98]"
             >
               Search
             </button>
@@ -88,16 +88,16 @@ async function MarketplaceCatalog({ searchParams }) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-20 px-4 rounded-xl border border-dashed border-[#262626] bg-[#0e0e0e]">
-            <h3 className="text-base font-semibold text-[#ededed]">
+          <div className="text-center py-20 px-4 rounded-2xl border border-dashed border-[#262626] bg-[#0e0e0e] specular-card">
+            <h3 className="text-base font-bold text-[#ededed] font-montserrat">
               No matching tooling products found in crib
             </h3>
-            <p className="text-xs text-[#a1a1aa] mt-1">
+            <p className="text-xs text-[#a1a1aa] font-body mt-1">
               Try adjusting your category filter, price bounds, or search keywords.
             </p>
             <Link
               href="/marketplace"
-              className="mt-4 inline-block px-4 py-2 rounded-lg bg-[#161616] border border-[#262626] text-[#ededed] text-xs font-medium hover:bg-[#202020] transition"
+              className="mt-4 inline-block px-4 py-2 rounded-xl bg-[#161616] border border-[#262626] text-[#ededed] text-xs font-semibold font-montserrat hover:bg-[#202020] hover:border-[#26d464]/40 hover:text-[#26d464] transition active:scale-[0.98]"
             >
               Reset Filters
             </Link>
@@ -116,15 +116,15 @@ export default function MarketplacePage({ searchParams }) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-8 border-b border-[#262626]">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#26d464] animate-pulse" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#26d464] animate-pulse motion-reduce:animate-none" />
               <span className="text-xs font-mono uppercase tracking-widest text-[#26d464] font-semibold">
                 ISO 2768-mK Vetted Tooling Catalog
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white font-montserrat">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#ededed] font-montserrat">
               Machining & Tooling Marketplace
             </h1>
-            <p className="text-sm text-[#a1a1aa] mt-1 max-w-2xl">
+            <p className="text-sm text-[#a1a1aa] font-body mt-1 max-w-2xl">
               Precision carbide cutters, modular vises, metrology tools, and
               accessories vetted by shop-floor veterans. Dual priced in USD and EXPEN.
             </p>
@@ -132,7 +132,7 @@ export default function MarketplacePage({ searchParams }) {
 
           <Link
             href="/showcase"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#161616] border border-[#262626] text-[#26d464] hover:bg-[#1a1a1a] hover:border-[#26d464]/60 transition text-sm font-semibold self-start md:self-auto shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#161616] border border-[#262626] text-[#26d464] hover:bg-[#1a1a1a] hover:border-[#26d464]/60 transition text-xs font-semibold font-montserrat self-start md:self-auto shadow-sm specular-card active:scale-[0.98]"
           >
             <IconCube3D className="w-4 h-4 text-[#26d464]" />
             <span>Launch 3D Tooling Showcase</span>
@@ -145,7 +145,7 @@ export default function MarketplacePage({ searchParams }) {
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div
                   key={i}
-                  className="h-80 rounded-xl bg-[#121212] border border-[#262626] animate-pulse"
+                  className="h-80 rounded-2xl bg-[#121212] border border-[#262626] animate-pulse specular-card"
                 />
               ))}
             </div>

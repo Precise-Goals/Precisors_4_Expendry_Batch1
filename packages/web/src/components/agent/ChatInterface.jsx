@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { EXPLORER_URL } from "shared/constants";
-import { IconBrain, IconWrench } from "@/components/ui/Icons";
+import { IconBrain, IconWrench, IconSend, IconExternal, IconBolt } from "@/components/ui/Icons";
 
 export default function ChatInterface({
   lang = "en",
@@ -152,29 +152,17 @@ export default function ChatInterface({
   };
 
   return (
-    <div className="flex flex-col h-full max-w-4xl mx-auto rounded-2xl border border-[#262626] bg-[#0c0c0c] shadow-2xl overflow-hidden specular-card">
+    <div className="flex flex-col h-full rounded-2xl border border-[#262626] bg-[#0c0c0c] shadow-2xl overflow-hidden specular-card">
       {/* Header Bar */}
       <div className="px-5 py-3.5 border-b border-[#262626] flex items-center justify-between bg-[#121212]/90 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center text-[#26d464] shadow-inner">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
+            <IconBolt className="w-4 h-4 text-[#26d464]" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-[#ededed] flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-[#ededed] flex items-center gap-2 font-display">
               Sarvam AI Assistant
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 font-bold">
+              <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-[#26d464]/10 text-[#26d464] border border-[#26d464]/20 font-bold">
                 sarvam-105b
               </span>
             </h2>
@@ -219,46 +207,51 @@ export default function ChatInterface({
                 )}
 
                 <div
-                  className={`max-w-[85%] sm:max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-lg px-4 py-3 text-sm leading-relaxed ${
                     isUser
-                      ? "bg-[#26d464] text-black font-semibold ml-auto shadow-md"
+                      ? "bg-[#26d464] text-[#0a0a0a] font-semibold ml-auto shadow-md"
                       : "bg-[#141414] border border-[#262626] text-[#ededed] shadow-inner specular-card"
                   }`}
                 >
                   <div aria-live="polite" aria-atomic="false">
                     <p className="whitespace-pre-wrap">{msg.content}</p>
+                    {/* Active streaming cursor */}
+                    {isLoading && !isUser && msg.content && (
+                      <span className="inline-block w-2 h-4 ml-1 bg-[#26d464] animate-pulse align-middle" />
+                    )}
                   </div>
 
                   {/* Tactile Blueprint Source Citations */}
                   {msg.sources && msg.sources.length > 0 && (
                     <div className="mt-4 pt-3 border-t border-[#262626] space-y-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#71717a] block">
+                      <span className="text-xs font-mono uppercase tracking-wider text-[#a1a1aa] block font-semibold">
                         RAG Grounding Sources (MST Verified):
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {msg.sources.map((src) => (
                           <div
                             key={src.id}
-                            className="p-2 rounded-lg bg-[#0c0c0c] border border-[#262626] text-xs flex flex-col gap-1 max-w-sm"
+                            className="p-2.5 rounded-lg bg-[#0c0c0c] border border-[#262626] text-xs flex flex-col gap-1 max-w-sm"
                           >
                             <div className="flex items-center justify-between gap-2">
                               <span className="font-semibold text-[#ededed] truncate">
                                 {src.title}
                               </span>
-                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1c1c1c] text-[#26d464] shrink-0 border border-[#2a2a2a]">
+                              <span className="text-xs font-mono px-1.5 py-0.5 rounded bg-[#1c1c1c] text-[#26d464] shrink-0 border border-[#2a2a2a]">
                                 {src.type}
                               </span>
                             </div>
-                            <div className="flex items-center justify-between text-[10px] font-mono text-[#71717a]">
+                            <div className="flex items-center justify-between text-xs font-mono text-[#a1a1aa]">
                               <span>By: {src.authorName || "Veteran"}</span>
                               {src.txHash && (
                                 <a
                                   href={`${EXPLORER_URL}/tx/${src.txHash}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-[#26d464] hover:underline"
+                                  className="text-[#26d464] hover:underline inline-flex items-center gap-1"
                                 >
-                                  MST Tx ↗
+                                  <span>MST Tx</span>
+                                  <IconExternal className="w-3 h-3 text-[#26d464]" />
                                 </a>
                               )}
                             </div>
@@ -287,7 +280,7 @@ export default function ChatInterface({
               <span className="w-2 h-2 rounded-full bg-[#26d464] animate-pulse [animation-delay:-0.15s]"></span>
               <span className="w-2 h-2 rounded-full bg-[#26d464] animate-pulse"></span>
             </div>
-            <span className="italic font-mono text-[11px]">Sarvam AI is synthesizing shop-floor telemetry...</span>
+            <span className="italic font-mono text-xs text-[#a1a1aa]">Sarvam AI is synthesizing shop-floor telemetry...</span>
           </div>
         )}
 
@@ -316,13 +309,13 @@ export default function ChatInterface({
               : "Ask about feeds, lathe chatter, carbide grades, tapping..."
           }
           disabled={isLoading}
-          className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-xl px-3.5 py-2.5 text-sm text-[#ededed] placeholder-[#71717a] focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
+          className="flex-1 bg-[#0a0a0a] border border-[#262626] rounded-md px-3.5 py-2.5 text-xs sm:text-sm text-[#ededed] placeholder-[#a1a1aa]/70 focus:outline-none focus:border-[#26d464] transition disabled:opacity-50"
         />
 
         <button
           type="submit"
           disabled={isLoading || !input.trim()}
-          className="px-4 py-2.5 rounded-xl bg-[#26d464] text-black font-semibold text-sm hover:bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm active:scale-98"
+          className="px-4 py-2.5 rounded-md bg-[#26d464] text-black font-semibold text-xs sm:text-sm hover:bg-[#20b855] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 shadow-sm active:scale-98"
           aria-label="Send message"
         >
           {isLoading ? (
@@ -346,19 +339,7 @@ export default function ChatInterface({
               ></path>
             </svg>
           ) : (
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <IconSend className="w-4 h-4 text-black" />
           )}
           <span>Send</span>
         </button>

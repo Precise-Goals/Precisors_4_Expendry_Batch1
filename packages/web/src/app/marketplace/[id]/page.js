@@ -55,7 +55,7 @@ export default async function ProductDetailPage({ params }) {
           <div className="flex items-center gap-2">
             <Link
               href="/marketplace"
-              className="hover:text-[#ededed] transition text-[#a1a1aa]"
+              className="hover:text-[#26d464] transition text-[#a1a1aa]"
             >
               Marketplace
             </Link>
@@ -119,7 +119,7 @@ export default async function ProductDetailPage({ params }) {
               {product.has3DModel ? (
                 <Link
                   href={`/showcase?model=${product.modelId}`}
-                  className="inline-flex items-center justify-center gap-2.5 w-full px-5 py-3 rounded-xl bg-[#26d464]/10 border border-[#26d464]/30 text-[#26d464] hover:bg-[#26d464]/20 hover:border-[#26d464]/60 transition text-xs font-semibold font-montserrat shadow-sm shadow-[#26d464]/10 group"
+                  className="inline-flex items-center justify-center gap-2.5 w-full px-5 py-3 rounded-xl bg-[#26d464]/10 border border-[#26d464]/40 text-[#26d464] hover:bg-[#26d464]/20 hover:border-[#26d464] transition text-xs font-bold font-montserrat shadow-sm shadow-[#26d464]/10 group active:scale-[0.98]"
                 >
                   <IconCube3D className="w-4 h-4 text-[#26d464] group-hover:scale-110 transition-transform" />
                   <span>Inspect in Interactive 3D Viewer</span>
@@ -160,31 +160,31 @@ export default async function ProductDetailPage({ params }) {
                   <span className="text-[#383838]">•</span>
                   <span>{product.reviewsCount} Machinist Reviews</span>
                   <span className="text-[#383838]">•</span>
-                  <span className="text-[#26d464] flex items-center gap-1">
-                    <IconCheck className="w-3.5 h-3.5" />
+                  <span className="text-[#26d464] flex items-center gap-1 font-semibold">
+                    <IconCheck className="w-3.5 h-3.5 text-[#26d464]" />
                     Verified MST Origin
                   </span>
                 </div>
               )}
 
               {/* Pricing Well */}
-              <div className="mt-6 rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+              <div className="mt-6 rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 specular-card">
                 <div>
                   <span className="text-[10px] uppercase font-mono text-[#a1a1aa] tracking-widest block mb-1">
                     Unit Price (USD)
                   </span>
-                  <div className="text-3xl sm:text-4xl font-black text-[#ededed] font-montserrat tracking-tight">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-[#ededed] font-mono tracking-tight tabular-nums">
                     ${product.price.toFixed(2)}
                   </div>
                 </div>
 
                 <div className="sm:text-right">
                   <span className="text-[10px] uppercase font-mono text-[#a1a1aa] tracking-widest block mb-1">
-                    Token Settlement
+                    Token Settlement (MST Testnet)
                   </span>
-                  <div className="inline-flex items-center gap-1.5 text-sm sm:text-base font-mono text-[#26d464] font-bold">
+                  <div className="inline-flex items-center gap-2 text-base sm:text-lg font-mono text-[#26d464] font-bold">
                     <IconToken className="w-4 h-4 text-[#26d464]" />
-                    <span>{expenTokens} EXPEN Tokens</span>
+                    <span>{expenTokens} EXPEN</span>
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default async function ProductDetailPage({ params }) {
 
               <Link
                 href="/marketplace"
-                className="px-5 py-3 rounded-xl bg-[#161616] hover:bg-[#1c1c1c] border border-[#262626] hover:border-[#383838] text-[#ededed] text-sm font-semibold transition text-center font-montserrat"
+                className="px-5 py-3 rounded-xl bg-[#161616] hover:bg-[#1c1c1c] border border-[#262626] hover:border-[#383838] text-[#ededed] hover:text-white text-xs font-semibold transition text-center font-montserrat active:scale-[0.98]"
               >
                 Back to Catalog
               </Link>
@@ -231,7 +231,7 @@ export default async function ProductDetailPage({ params }) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
               {/* Metric 1: Substrate Chemistry */}
-              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between hover:border-[#383838] transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
@@ -249,7 +249,7 @@ export default async function ProductDetailPage({ params }) {
               </div>
 
               {/* Metric 2: Hardness */}
-              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between hover:border-[#383838] transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
@@ -267,7 +267,7 @@ export default async function ProductDetailPage({ params }) {
               </div>
 
               {/* Metric 3: Thermal Barrier */}
-              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between hover:border-[#383838] transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
@@ -285,7 +285,7 @@ export default async function ProductDetailPage({ params }) {
               </div>
 
               {/* Metric 4: Quality Standard */}
-              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between">
+              <div className="rounded-xl border border-[#262626] bg-[#161616] p-5 flex flex-col justify-between hover:border-[#383838] transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-mono uppercase tracking-wider text-[#a1a1aa]">
@@ -336,7 +336,7 @@ export default async function ProductDetailPage({ params }) {
                       {product.id}
                     </td>
                   </tr>
-                  <tr className="bg-[#0e0e0e]">
+                  <tr className="bg-[#121212]">
                     <td className="px-6 py-4 font-medium text-[#a1a1aa] text-xs sm:text-sm font-body">
                       Category Classification
                     </td>
@@ -348,7 +348,7 @@ export default async function ProductDetailPage({ params }) {
                     <td className="px-6 py-4 font-medium text-[#a1a1aa] text-xs sm:text-sm font-body">
                       Settlement Currency
                     </td>
-                    <td className="px-6 py-4 text-[#26d464] font-mono text-xs sm:text-sm">
+                    <td className="px-6 py-4 text-[#26d464] font-mono text-xs sm:text-sm font-semibold">
                       EXPEN (MST Testnet ERC-20) / USD Fiat
                     </td>
                   </tr>
@@ -356,7 +356,7 @@ export default async function ProductDetailPage({ params }) {
                     Object.entries(product.specs).map(([specKey, specVal], idx) => (
                       <tr
                         key={specKey}
-                        className={idx % 2 === 0 ? "bg-[#0e0e0e]" : "bg-[#161616]"}
+                        className={idx % 2 === 0 ? "bg-[#121212]" : "bg-[#161616]"}
                       >
                         <td className="px-6 py-4 font-medium text-[#a1a1aa] capitalize text-xs sm:text-sm font-body">
                           {specKey.replace(/([A-Z])/g, " $1")}

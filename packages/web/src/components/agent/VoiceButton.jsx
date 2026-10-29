@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { IconMic } from "@/components/ui/Icons";
 
 export default function VoiceButton({
   lang = "en",
@@ -157,17 +158,17 @@ export default function VoiceButton({
             ? "Transcribing voice audio..."
             : "Voice input: press to speak in English, Hindi, or Marathi"
         }
-        className={`relative z-10 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 shadow-md ${
+        className={`relative z-10 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200 shadow-sm ${
           isRecording
             ? "bg-red-500 text-white shadow-red-500/20 scale-105"
             : isProcessing
-            ? "bg-neutral-800 text-neutral-400 cursor-wait"
-            : "bg-neutral-900 border border-neutral-750 text-[#26d464] hover:bg-neutral-800 hover:border-[#26d464]/50"
+            ? "bg-[#161616] text-[#a1a1aa] cursor-wait"
+            : "bg-[#121212] border border-[#262626] text-[#26d464] hover:bg-[#181818] hover:border-[#26d464]/50"
         } disabled:opacity-50 disabled:cursor-not-allowed`}
       >
         {isProcessing ? (
           <svg
-            className="w-5 h-5 animate-spin motion-reduce:animate-none text-[#26d464]"
+            className="w-4 h-4 animate-spin motion-reduce:animate-none text-[#26d464]"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -186,28 +187,16 @@ export default function VoiceButton({
             ></path>
           </svg>
         ) : isRecording ? (
-          <div className="w-3.5 h-3.5 rounded-xs bg-white" />
+          <div className="w-3 h-3 rounded-xs bg-[#ededed]" />
         ) : (
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 003-3V5a3 3 0 10-6 0v6a3 3 0 003 3z"
-            />
-          </svg>
+          <IconMic className="w-4 h-4 text-[#26d464]" />
         )}
       </button>
 
       {errorMsg && (
         <span
           role="alert"
-          className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] bg-red-950/90 text-red-300 border border-red-800/60 px-2 py-0.5 rounded shadow"
+          className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs bg-red-950/90 text-red-300 border border-red-800/60 px-2 py-0.5 rounded shadow"
         >
           {errorMsg}
         </span>
