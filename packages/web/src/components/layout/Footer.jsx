@@ -2,7 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
+import { IconExternal } from "@/components/ui/Icons";
 import { EXPLORER_URL, CHAIN_ID } from "shared/constants";
+import { EXPEN_ADDRESS } from "shared/contracts";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -14,27 +16,28 @@ export default function Footer() {
   return (
     <footer
       aria-label="Site footer"
-      className="footer-container bg-black text-white relative overflow-hidden select-none"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 select-none relative"
     >
-      {/* 1. Top Emerald Accent Strip */}
-      <div
-        className="footer-top-strip w-full h-1.5 bg-[#16a34a]"
-        aria-hidden="true"
-      />
+      {/* Floating Island White Container */}
+      <div className="footer-container relative rounded-4xl bg-white border border-zinc-200/90 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] overflow-hidden p-8 sm:p-12 lg:p-16">
+        {/* Top Radiant Gradient Accent Strip */}
+        <div
+          className="footer-top-strip absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700"
+          aria-hidden="true"
+        />
 
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-10 pb-8">
-        {/* 2. Upper 4-Column Navigation Grid */}
+        {/* Upper 4-Column Navigation Grid */}
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 items-start">
           {/* Column 1: PLATFORM */}
           <div className="col-span-1 md:col-span-4 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
               PLATFORM
             </h2>
-            <nav aria-label="Platform Links" className="space-y-1.5">
+            <nav aria-label="Platform Links" className="space-y-2">
               <div>
                 <Link
                   href="/"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Home
                 </Link>
@@ -42,7 +45,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/about"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   About
                 </Link>
@@ -50,7 +53,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/heritage"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Biorad Heritage
                 </Link>
@@ -58,7 +61,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/marketplace"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   3D Marketplace
                 </Link>
@@ -66,7 +69,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/agent"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Sarvam AI Agent
                 </Link>
@@ -76,14 +79,14 @@ export default function Footer() {
 
           {/* Column 2: ENGINEERING */}
           <div className="col-span-1 md:col-span-3 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
               ENGINEERING
             </h2>
-            <nav aria-label="Engineering Links" className="space-y-1.5">
+            <nav aria-label="Engineering Links" className="space-y-2">
               <div>
                 <Link
                   href="/blueprints"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Blueprints
                 </Link>
@@ -91,7 +94,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/experience"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Experience
                 </Link>
@@ -99,7 +102,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/patent"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Patents
                 </Link>
@@ -107,7 +110,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/partners"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Partners
                 </Link>
@@ -117,14 +120,14 @@ export default function Footer() {
 
           {/* Column 3: ECOSYSTEM & COMPLIANCE */}
           <div className="col-span-1 md:col-span-3 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
               ECOSYSTEM &amp; LEGAL
             </h2>
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <div>
                 <Link
                   href="/privacy"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Privacy Policy
                 </Link>
@@ -132,7 +135,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/terms"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Terms of Service
                 </Link>
@@ -142,9 +145,10 @@ export default function Footer() {
                   href="https://www.bioradmedisys.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
-                  Biorad Medisys Pune ↗
+                  <span>Biorad Medisys Pune</span>
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
                 </a>
               </div>
               <div>
@@ -152,9 +156,21 @@ export default function Footer() {
                   href="https://bridgekey.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
-                  BridgeKey Wallet ↗
+                  <span>BridgeKey Wallet</span>
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
+                </a>
+              </div>
+              <div>
+                <a
+                  href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-nav-link text-sm sm:text-base font-bold text-emerald-800 hover:text-emerald-950 transition-colors leading-tight inline-flex items-center gap-1.5"
+                >
+                  <span>EXPEN Contract (MSTScan)</span>
+                  <IconExternal className="w-3.5 h-3.5 text-emerald-700" />
                 </a>
               </div>
               <div>
@@ -162,9 +178,10 @@ export default function Footer() {
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-normal text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
-                  MSTScan Explorer ↗
+                  <span>MSTScan Explorer</span>
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
                 </a>
               </div>
             </div>
@@ -172,38 +189,38 @@ export default function Footer() {
 
           {/* Column 4: CONTACT & SHOP-FLOOR */}
           <div className="col-span-1 md:col-span-2 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
               SHOP-FLOOR
             </h2>
-            <div className="space-y-1 text-xs sm:text-sm text-zinc-400 font-mono">
+            <div className="space-y-1.5 text-xs sm:text-sm text-zinc-600 font-mono">
               <div>
                 <a
                   href="mailto:info@expendry.io"
-                  className="footer-nav-link text-zinc-300 hover:text-[#16a34a] transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-zinc-800 hover:text-emerald-700 font-bold transition-colors leading-tight inline-block"
                 >
                   info@expendry.io
                 </a>
               </div>
-              <p className="text-zinc-500 pt-1">
+              <p className="text-zinc-500 pt-1 leading-relaxed">
                 Precision Cluster, Pune, MH, India
               </p>
             </div>
           </div>
         </div>
 
-        {/* 3. Hairline Dotted Divider Line */}
+        {/* Radiant Gradient Separator */}
         <div
-          className="footer-dotted-divider w-full border-b border-dotted border-zinc-800 my-8"
+          className="footer-gradient-divider w-full h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent my-10"
           aria-hidden="true"
         />
 
-        {/* 4. Zoomed-In Hero Wordmark Statement (High-Impact Machining Green) */}
-        <div className="w-full overflow-hidden select-none py-2 sm:py-4 flex items-center justify-center">
-          <div className="footer-hero-wordmark font-montserrat font-black tracking-tighter text-[#16a34a] leading-none whitespace-nowrap text-5xl sm:text-7xl md:text-8xl lg:text-[11vw] flex items-baseline justify-center hover:scale-[1.01] transition-transform duration-300">
-            <span className="opacity-95 hover:opacity-100 transition-opacity relative">
+        {/* Monumental Hero Wordmark Statement with Radiant Background-Clip Gradient */}
+        <div className="w-full overflow-hidden select-none py-4 sm:py-6 flex items-center justify-center">
+          <div className="footer-hero-wordmark font-montserrat font-black tracking-tighter leading-none whitespace-nowrap text-5xl sm:text-7xl md:text-8xl lg:text-[11vw] flex items-baseline justify-center hover:scale-[1.01] transition-transform duration-300">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-800 via-teal-600 to-zinc-900 relative">
               expendry
               <sup
-                className="text-[0.22em] font-normal text-zinc-500 align-super ml-1 sm:ml-2"
+                className="text-[0.22em] font-extrabold text-emerald-600 align-super ml-1 sm:ml-2"
                 aria-label="Registered trademark"
               >
                 ®
@@ -212,36 +229,41 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 5. Bottom Signoff Bar */}
-        <div className="footer-bottom-bar border-t border-zinc-900 pt-6 mt-2 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400 font-mono gap-4">
-          {/* Left: Location */}
+        {/* Bottom Signoff Bar */}
+        <div className="footer-bottom-bar border-t border-zinc-100 pt-6 mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-4">
+          {/* Left: Location & Verified Chain */}
           <div className="flex items-center gap-2">
             <span
-              className="h-2 w-2 rounded-full bg-[#16a34a]"
+              className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse"
               aria-hidden="true"
             />
-            <span className="text-zinc-400">Pune Engineering Cluster, MH, IN</span>
-            <span className="text-zinc-600">·</span>
-            <span className="text-zinc-400">
+            <span className="text-zinc-600 font-medium">Pune Engineering Cluster, MH, IN</span>
+            <span className="text-zinc-300">·</span>
+            <a
+              href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-800 font-bold hover:underline"
+            >
               MST-Testnet #{CHAIN_ID}
-            </span>
+            </a>
           </div>
 
           {/* Center: Copyright */}
-          <div className="text-center text-zinc-400 font-sans">
+          <div className="text-center text-zinc-500 font-sans">
             © 2026 Expendry Ecosystem. All Rights Reserved.
           </div>
 
-          {/* Right: Back to top smooth scroller */}
+          {/* Right: Tactile Back to Top Liquid Glass Pill */}
           <button
             type="button"
             onClick={scrollToTop}
-            className="text-zinc-400 hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 group font-sans focus:outline-none focus:ring-1 focus:ring-[#16a34a] rounded px-1"
+            className="px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-800 text-xs font-mono font-bold transition shadow-2xs active:scale-95 cursor-pointer inline-flex items-center gap-1.5 group"
             aria-label="Scroll back to top of page"
           >
             <span>Back to top</span>
             <span
-              className="inline-block transition-transform duration-200 group-hover:-translate-y-0.5 text-[#16a34a]"
+              className="inline-block transition-transform duration-200 group-hover:-translate-y-0.5 text-emerald-700"
               aria-hidden="true"
             >
               ↑
