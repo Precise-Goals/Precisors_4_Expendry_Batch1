@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
@@ -23,7 +24,6 @@ import {
 } from "@/components/ui/Icons";
 import { CHAIN_ID, EXPLORER_URL, DAILY_CAP, REWARD_PER_POST } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
-import HeroPicture from "@/components/home/HeroPicture";
 
 const SPINDLE_PRESETS = [
   { name: "Inconel 718", rpm: 1800, feed: "0.12 mm/rev", temp: "420°C", load: "78%", optimalHz: "1,800 Hz" },
@@ -103,27 +103,41 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Hero Section"
-        className="relative overflow-hidden pt-10 pb-16 sm:pt-14 sm:pb-24 border-b border-[#e4e4e7] bg-gradient-to-b from-white via-[#fbfcfd] to-[#f4f7f5]"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-[#e4e4e7] bg-white min-h-[580px] lg:min-h-[640px] flex items-center"
       >
-        {/* Ambient Precision Green Specular Reflection */}
+        {/* Hero Background Photo (h.png) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/4 right-1/4 w-[500px] h-[350px] bg-emerald-500/[0.07] blur-[140px] rounded-full"
-        />
+          className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
+        >
+          <Image
+            src="/images/h.png"
+            alt=""
+            fill
+            priority
+            quality={95}
+            className="object-cover object-right lg:object-center"
+          />
+          {/* Directional gradient wash: preserves crystal-clear text contrast on left, reveals medical implants on right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 sm:via-white/75 to-transparent z-10" />
+          {/* Soft top & bottom edge integration */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent z-10" />
+          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-white/70 to-transparent z-10" />
+        </div>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+          className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[500px] lg:min-h-[560px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[480px] lg:min-h-[540px]">
             {/* Left Column: Bold Headline & CTAs */}
-            <div className="lg:col-span-6 space-y-6 sm:space-y-7 z-10 text-left">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-7 text-left">
               {/* Protocol Status Beacon */}
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[#f4f4f5] border border-[#e4e4e7] shadow-sm"
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#e4e4e7] shadow-sm"
               >
                 <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
                 <span className="text-xs font-mono font-medium text-zinc-800">
@@ -148,7 +162,7 @@ export default function Home() {
               {/* Subtitle with Genuine Product Mission */}
               <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-lg font-poppins font-normal text-pretty"
+                className="text-base sm:text-lg text-zinc-700 leading-relaxed max-w-lg font-poppins font-normal text-pretty"
               >
                 Decades of shop-floor knowledge, CNC chatter dampening, and custom
                 fixturing vanish when veteran machinists retire. Expendry captures
@@ -202,12 +216,41 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right Column: High-Fidelity Hero Picture Showcase */}
+            {/* Right Column: Contextual Glassmorphic Telemetry Overlay Pins on Background Photo */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-6 relative w-full h-full flex items-center justify-center lg:justify-end"
+              className="lg:col-span-5 relative w-full h-full min-h-[280px] sm:min-h-[360px] flex flex-col justify-between items-start lg:items-end py-4 pointer-events-auto"
             >
-              <HeroPicture />
+              {/* Top Floating Telemetry Chip */}
+              <motion.div
+                whileHover={{ scale: 1.03, y: -2 }}
+                transition={{ type: "spring", stiffness: 350, damping: 22 }}
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border-2 border-[#16a34a] shadow-xl shadow-emerald-950/10 text-xs font-mono select-none"
+              >
+                <span className="h-2.5 w-2.5 rounded-full bg-[#16a34a] animate-ping" />
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-[#09090b] text-[13px]">5-Axis CNC Precision Implants</span>
+                  <span className="text-zinc-500 text-[11px]">Ti-6Al-4V ELI · Medical Grade</span>
+                </div>
+              </motion.div>
+
+              {/* Bottom Floating Telemetry Chip */}
+              <motion.div
+                whileHover={{ scale: 1.03, y: -2 }}
+                transition={{ type: "spring", stiffness: 350, damping: 22 }}
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-zinc-900/90 backdrop-blur-md border border-white/20 shadow-2xl text-xs font-mono text-white select-none mt-auto"
+              >
+                <div className="h-8 w-8 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-[#26d464]">
+                  <IconCaliper className="w-4 h-4 text-[#26d464]" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[#26d464] font-bold text-[13px]">±0.002 mm</span>
+                    <span className="text-zinc-400 text-[11px]">Verified CMM</span>
+                  </div>
+                  <span className="text-zinc-400 text-[10px]">MST-721 Digital Twin Provenance</span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </motion.div>

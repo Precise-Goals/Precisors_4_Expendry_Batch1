@@ -286,21 +286,15 @@ p {
    and dark UI components from unwanted overrides.
    ========================================================================== */
 
-/* Navbar & Hero Isolation: Preserve dark aesthetic and crisp typography */
+/* Navbar Isolation: Preserve dark glassmorphic navbar aesthetic */
 header .text-white,
-header [class*="text-white"],
-section[aria-label="Hero Section"] .text-white,
-section[aria-label="Hero Section"] [class*="text-white"] {
+header [class*="text-white"] {
   color: #ffffff;
 }
 
-section[aria-label="Hero Section"] h1 {
-  color: #ffffff !important;
-}
-
-/* In non-hero, non-navbar sections, ensure crisp dark ink typography */
-main:not(section[aria-label="Hero Section"] *) h1:not(header *):not(section[aria-label="Hero Section"] *),
-main:not(section[aria-label="Hero Section"] *) h2:not(header *):not(section[aria-label="Hero Section"] *),
-main:not(section[aria-label="Hero Section"] *) h3:not(header *):not(section[aria-label="Hero Section"] *) {
+/* Base Headings: Ensure crisp dark ink typography across all sections */
+h1:not(header *),
+h2:not(header *),
+h3:not(header *) {
   color: #09090b;
 }
