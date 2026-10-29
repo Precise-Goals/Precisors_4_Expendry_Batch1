@@ -207,12 +207,12 @@ export default function ChatInterface({
   };
 
   return (
-    <div className="flex flex-col h-full rounded-3xl border border-zinc-200/90 bg-white/90 backdrop-blur-xl shadow-2xl overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="flex flex-col h-full rounded-3xl border border-zinc-200/90 bg-white/95 backdrop-blur-2xl shadow-2xl overflow-hidden relative selection:bg-emerald-100 selection:text-emerald-900">
       {/* Clean Glassmorphic Header */}
-      <div className="px-6 py-4 border-b border-zinc-200/80 flex items-center justify-between bg-zinc-50/60 backdrop-blur-md">
+      <div className="px-6 py-4 border-b border-zinc-200/80 flex items-center justify-between bg-zinc-50/70 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-zinc-900 flex items-center justify-center text-emerald-400 shadow-md">
-            <IconBolt className="w-5 h-5 text-emerald-400" />
+          <div className="w-10 h-10 rounded-2xl bg-emerald-800 flex items-center justify-center text-emerald-200 shadow-md">
+            <IconBolt className="w-5 h-5 text-white" />
           </div>
           <div>
             <h2 className="text-sm font-extrabold text-zinc-900 flex items-center gap-2 font-montserrat tracking-tight">
@@ -221,7 +221,7 @@ export default function ChatInterface({
                 105B Reasoning
               </span>
             </h2>
-            <p className="text-xs text-zinc-500 font-poppins">
+            <p className="text-xs text-zinc-500 font-body">
               {detectedLang === "hi"
                 ? "दुकान-तल मशीनिंग ज्ञानकोश (हिंदी) · भाषा स्वतः शोधली जाते"
                 : detectedLang === "mr"
@@ -232,7 +232,7 @@ export default function ChatInterface({
         </div>
 
         {activeSources.length > 0 && (
-          <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+          <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             <span>{activeSources.length} Grounded Source{activeSources.length > 1 ? "s" : ""}</span>
           </div>
@@ -243,7 +243,7 @@ export default function ChatInterface({
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-gradient-to-b from-white via-zinc-50/30 to-white"
+        className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-gradient-to-b from-white via-zinc-50/20 to-white"
       >
         <ul
           role="log"
@@ -260,21 +260,21 @@ export default function ChatInterface({
                 className={`flex gap-3.5 ${isUser ? "justify-end" : "justify-start"}`}
               >
                 {!isUser && (
-                  <div className="w-9 h-9 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <IconBrain className="w-4 h-4 text-emerald-600" />
+                  <div className="w-9 h-9 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <IconBrain className="w-4 h-4 text-emerald-700" />
                   </div>
                 )}
 
                 <div
-                  className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-5 sm:px-6 py-4 text-sm sm:text-base leading-relaxed ${
+                  className={`max-w-[85%] sm:max-w-[80%] rounded-3xl px-5 sm:px-6 py-4 text-sm sm:text-base leading-relaxed ${
                     isUser
-                      ? "bg-zinc-900 text-white font-medium ml-auto shadow-md"
-                      : "bg-white border border-zinc-200/90 text-zinc-900 shadow-sm"
+                      ? "bg-emerald-800 text-white font-medium ml-auto shadow-md rounded-br-xs"
+                      : "bg-white border border-zinc-200/90 text-zinc-900 shadow-sm rounded-bl-xs"
                   }`}
                 >
                   {!isUser && msg.id !== "welcome" && (
                     <div className="mb-3 flex items-center justify-between gap-2 border-b border-zinc-100 pb-2">
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-700 font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                         {msg.detectedLang === "hi"
                           ? "हिंदी (HI)"
@@ -298,7 +298,7 @@ export default function ChatInterface({
                   )}
 
                   <div aria-live="polite" aria-atomic="false">
-                    <p className="whitespace-pre-wrap leading-relaxed text-pretty">{msg.content}</p>
+                    <p className="whitespace-pre-wrap leading-relaxed text-pretty font-body">{msg.content}</p>
                     {/* Active streaming cursor indicator */}
                     {isLoading && !isUser && msg.content && (
                       <span className="inline-block w-2 h-4 ml-1.5 bg-emerald-600 animate-pulse align-middle" />
@@ -315,13 +315,13 @@ export default function ChatInterface({
                         {msg.sources.map((src) => (
                           <div
                             key={src.id}
-                            className="p-3 rounded-xl bg-zinc-50 border border-zinc-200 text-xs flex flex-col gap-1 max-w-sm shadow-2xs"
+                            className="p-3 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs flex flex-col gap-1 max-w-sm shadow-xs"
                           >
                             <div className="flex items-center justify-between gap-2">
                               <span className="font-bold text-zinc-900 truncate">
                                 {src.title}
                               </span>
-                              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold shrink-0">
+                              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold shrink-0">
                                 {src.type}
                               </span>
                             </div>
@@ -347,7 +347,7 @@ export default function ChatInterface({
                 </div>
 
                 {isUser && (
-                  <div className="w-9 h-9 rounded-xl bg-zinc-900 flex items-center justify-center shrink-0 mt-0.5 shadow-md">
+                  <div className="w-9 h-9 rounded-2xl bg-zinc-900 flex items-center justify-center shrink-0 mt-0.5 shadow-md">
                     <IconWrench className="w-4 h-4 text-emerald-400" />
                   </div>
                 )}
@@ -373,10 +373,10 @@ export default function ChatInterface({
           CHATGPT-STYLE BOTTOM INPUT COMPOSER
           Input box with Send button + Voice Mic button right beside it!
          ────────────────────────────────────────────────────────── */}
-      <div className="p-3 sm:p-4 bg-white/90 backdrop-blur-xl border-t border-zinc-200">
+      <div className="p-3.5 sm:p-4 bg-white/95 backdrop-blur-2xl border-t border-zinc-200/90">
         <form
           onSubmit={handleSubmit}
-          className="max-w-4xl mx-auto flex items-center gap-2 bg-zinc-50 border border-zinc-300 rounded-2xl p-1.5 sm:p-2 focus-within:border-emerald-600 focus-within:ring-2 focus-within:ring-emerald-600/10 focus-within:bg-white transition-all shadow-xs"
+          className="max-w-4xl mx-auto flex items-center gap-2.5 bg-zinc-50 border border-zinc-300 rounded-2xl p-1.5 sm:p-2 focus-within:border-emerald-600 focus-within:ring-4 focus-within:ring-emerald-600/10 focus-within:bg-white transition-all shadow-xs"
         >
           <label htmlFor="agent-chat-input" className="sr-only">
             Ask machining question
@@ -396,7 +396,7 @@ export default function ChatInterface({
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white transition disabled:opacity-30 disabled:hover:bg-zinc-900 flex items-center justify-center shrink-0 cursor-pointer active:scale-95 shadow-xs"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white transition disabled:opacity-30 disabled:hover:bg-zinc-800 flex items-center justify-center shrink-0 cursor-pointer active:scale-95 shadow-xs"
             aria-label="Send message"
           >
             {isLoading ? (
