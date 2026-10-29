@@ -12,10 +12,9 @@ mock.module("next/navigation", () => ({
 }));
 
 import Navbar, { NAV_LINKS } from "../../components/layout/Navbar.jsx";
-import { EXPLORER_URL } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
 
-describe("Navbar — Liquid Glass Floating Capsule Component", () => {
+describe("Navbar — Clean Liquid Glass Floating Capsule Component", () => {
   it("renders the floating detached capsule with liquid-glass-pill styling", () => {
     const html = renderToString(React.createElement(Navbar));
 
@@ -35,7 +34,7 @@ describe("Navbar — Liquid Glass Floating Capsule Component", () => {
     }
   });
 
-  it("renders the brand logo with spindle icon and EXPENDRY wordmark", () => {
+  it("renders the brand logo with spindle icon and EXPEND RY wordmark", () => {
     const html = renderToString(React.createElement(Navbar));
 
     expect(html).toContain("EXPEND");
@@ -43,19 +42,15 @@ describe("Navbar — Liquid Glass Floating Capsule Component", () => {
     expect(html).toContain('href="/"');
   });
 
-  it("renders the verified MSTScan token contract badge pointing to deployed EXPEN", () => {
+  it("renders strictly the Sign In CTA button and does NOT display the MST contract capsule in the navbar", () => {
     const html = renderToString(React.createElement(Navbar));
 
-    expect(html).toContain(`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`);
-    expect(html).toContain("MST");
-    expect(html).toContain(EXPEN_ADDRESS.slice(0, 6));
-    expect(html).toContain(EXPEN_ADDRESS.slice(-4));
-  });
-
-  it("renders the Sign In CTA button pointing to /login", () => {
-    const html = renderToString(React.createElement(Navbar));
-
+    // Sign In button must be present
     expect(html).toContain('href="/login"');
     expect(html).toContain("Sign In");
+
+    // MST contract capsule must NOT be present in Navbar (relocated to /about section)
+    expect(html).not.toContain(EXPEN_ADDRESS);
+    expect(html).not.toContain("View EXPEN Token Contract on MSTScan Explorer");
   });
 });
