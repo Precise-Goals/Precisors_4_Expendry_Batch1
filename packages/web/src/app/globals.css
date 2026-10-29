@@ -12,8 +12,8 @@
   --color-orange: #ea580c;
   --color-orange-hover: #c2410c;
   --color-orange-dim: rgba(234, 88, 12, 0.12);
-  --color-border: #16a34a;
-  --color-border-bright: #22c55e;
+  --color-border: #e4e4e7;
+  --color-border-bright: #d4d4d8;
   --color-text: #09090b;
   --color-text-dim: #52525b;
   --color-text-muted: #71717a;
@@ -31,8 +31,8 @@
   --color-orange: #ea580c;
   --color-orange-hover: #c2410c;
   --color-orange-dim: rgba(234, 88, 12, 0.12);
-  --color-border: #16a34a;
-  --color-border-bright: #22c55e;
+  --color-border: #e4e4e7;
+  --color-border-bright: #d4d4d8;
   --color-text: #09090b;
   --color-text-dim: #52525b;
   --color-text-muted: #71717a;
@@ -156,14 +156,14 @@ p {
 .glow-card {
   position: relative;
   background: #ffffff;
-  border: 1.5px solid #16a34a;
+  border: 1px solid #e4e4e7;
   border-radius: 12px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glow-card:hover {
-  border-color: rgba(22, 163, 74, 0.5);
+  border-color: rgba(22, 163, 74, 0.45);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 16px rgba(234, 88, 12, 0.1);
   transform: translateY(-2px);
 }
@@ -172,14 +172,14 @@ p {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid #16a34a;
+  border: 1px solid #e4e4e7;
 }
 
-/* Hairline Blueprint Grid Pattern on White Canvas */
+/* Hairline Blueprint Grid Pattern */
 .bg-blueprint-grid {
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
@@ -206,10 +206,10 @@ p {
   right: 10px;
 }
 
-/* Specular Card with subtle shadow */
+/* Specular Card */
 .specular-card {
   background: #ffffff;
-  border: 1.5px solid #16a34a;
+  border: 1px solid #e4e4e7;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 }
 
@@ -218,7 +218,7 @@ p {
   padding: 0.125rem 0.5rem;
   border-radius: 4px;
   background-color: #f4f4f5;
-  border: 1.5px solid #16a34a;
+  border: 1px solid #e4e4e7;
   font-family: monospace;
   font-size: 10px;
   text-transform: uppercase;
@@ -280,120 +280,27 @@ p {
 }
 
 /* ==========================================================================
-   WHITE-MAIN PALETTE SYSTEM OVERRIDES
-   Transforms the entire site into a crisp white canvas with black structure,
-   machining green primary accents, and calibrated orange highlights.
-   Preserves JSX classnames so all unit tests continue passing 100%.
+   WHITE-MAIN PALETTE SYSTEM ADAPTATIONS
+   Applies clean white surfaces and light borders to internal cards
+   while protecting the dark luxury Hero, the dark glassmorphic Navbar,
+   and dark UI components from unwanted overrides.
    ========================================================================== */
 
-/* Main canvas, containers, and card chasses -> Crisp White */
-.bg-\[\#0a0a0a\],
-.bg-\[\#070707\],
-.bg-\[\#080808\],
-.bg-\[\#090909\],
-.bg-\[\#0c0c0c\],
-.bg-\[\#0e0e0e\],
-.bg-\[\#121212\],
-.bg-\[\#141414\],
-.bg-\[\#0a0a0a\]\/80,
-.bg-\[\#0a0a0a\]\/85,
-.bg-\[\#0a0a0a\]\/90,
-.bg-\[\#0a0a0a\]\/95,
-.bg-\[\#121212\]\/85,
-.bg-\[\#121212\]\/90,
-.bg-\[\#121212\]\/95,
-.bg-\[\#080808\]\/90,
-.bg-\[\#0c0c0c\]\/90 {
-  background-color: #ffffff !important;
+/* Navbar & Hero Isolation: Preserve dark aesthetic and crisp typography */
+header .text-white,
+header [class*="text-white"],
+section[aria-label="Hero Section"] .text-white,
+section[aria-label="Hero Section"] [class*="text-white"] {
+  color: #ffffff;
 }
 
-/* Secondary elevated panels, chips, tabs, inputs, secondary buttons -> Off-white / Zinc 100 */
-.bg-\[\#161616\],
-.bg-\[\#181818\],
-.bg-\[\#1a1a1a\],
-.bg-\[\#1c1c1c\],
-.bg-\[\#202020\],
-.bg-\[\#1c1208\],
-.bg-\[\#222222\] {
-  background-color: #f4f4f5 !important;
-}
-
-/* Deep Black accent surfaces (telemetry top bar) */
-.bg-\[\#050505\] {
-  background-color: #09090b !important;
-}
-.bg-\[\#050505\] * {
-  color: #a1a1aa !important;
-}
-.bg-\[\#050505\] .text-\[\#26d464\],
-.bg-\[\#050505\] .text-\[\#16a34a\] {
-  color: #22c55e !important;
-}
-.bg-\[\#050505\] .text-\[\#f97316\],
-.bg-\[\#050505\] .text-\[\#ea580c\] {
-  color: #f97316 !important;
-}
-
-/* Text overrides: from light/white to dark ink / black */
-.text-\[\#ededed\],
-.text-white:not(.btn-primary-text) {
-  color: #09090b !important;
-}
-
-/* Secondary & Muted Text -> readable dark zinc / slate */
-.text-\[\#a1a1aa\],
-.text-\[\#71717a\],
-.text-zinc-400,
-.text-zinc-500,
-.text-zinc-600 {
-  color: #52525b !important;
-}
-
-/* Hairline dividers and borders -> crisp light zinc border */
-.border-\[\#262626\],
-.border-\[\#1f1f1f\],
-.border-\[\#222222\],
-.border-\[\#1c1c1c\],
-.border-\[\#2e2e2e\],
-.border-\[\#333333\],
-.border-\[\#383838\],
-.border-\[\#3f3f46\],
-.border-white\/\[0\.08\],
-.border-white\/\[0\.04\],
-.border-white\/\[0\.12\],
-.border-white\/10,
-.border-white\/20 {
-  border-color: #e4e4e7 !important;
-}
-
-/* Gradients that faded from dark to transparent -> fade from white to transparent */
-.from-\[\#0a0a0a\]\/90,
-.from-\[\#0a0a0a\]\/95,
-.from-\[\#0a0a0a\],
-.from-\[\#121212\] {
-  --tw-gradient-from: #ffffff !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
-}
-.via-\[\#0a0a0a\]\/50,
-.via-\[\#121212\]\/60 {
-  --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 255, 255, 0.7), var(--tw-gradient-to) !important;
-}
-
-/* Solid contrast buttons or badges: ensure white text on black background */
-.bg-black,
-.bg-black *,
-[class*="bg-black"] {
-  background-color: #09090b !important;
+section[aria-label="Hero Section"] h1 {
   color: #ffffff !important;
 }
 
-/* Subtle corner datums in hero */
-.text-white\/25,
-.text-white\/20,
-.text-white\/40,
-.text-white\/50,
-.text-white\/60,
-.text-white\/70,
-.text-white\/80 {
-  color: #71717a !important;
+/* In non-hero, non-navbar sections, ensure crisp dark ink typography */
+main:not(section[aria-label="Hero Section"] *) h1:not(header *):not(section[aria-label="Hero Section"] *),
+main:not(section[aria-label="Hero Section"] *) h2:not(header *):not(section[aria-label="Hero Section"] *),
+main:not(section[aria-label="Hero Section"] *) h3:not(header *):not(section[aria-label="Hero Section"] *) {
+  color: #09090b;
 }

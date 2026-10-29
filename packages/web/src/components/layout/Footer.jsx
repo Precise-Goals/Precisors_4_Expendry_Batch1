@@ -1,177 +1,344 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-import { EXPLORER_URL, CHAIN_ID, REWARD_PER_POST, DAILY_CAP } from "shared/constants";
-import { IconSpindle } from "@/components/ui/Icons";
+import { EXPLORER_URL, CHAIN_ID } from "shared/constants";
 
 export default function Footer() {
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <footer
       aria-label="Site footer"
-      className="border-t-2 border-[#16a34a] bg-white text-zinc-600 relative overflow-hidden"
+      className="footer-container bg-[#000000] text-white relative overflow-hidden select-none"
     >
-      {/* Blueprint grid accent bar */}
-      <div className="h-0.5 w-full bg-gradient-to-r from-transparent via-[#16a34a] to-transparent" />
+      {/* 1. Top Gray Accent Strip (matches reference image) */}
+      <div
+        className="footer-top-strip w-full h-3 sm:h-3.5 bg-zinc-300"
+        aria-hidden="true"
+      />
 
-      {/* Engineering Header Datum Bar */}
-      <div className="border-b border-[#16a34a]/30 bg-[#f8fafc] py-2 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-zinc-500">
-          <div className="flex items-center gap-3">
-            <span className="text-zinc-400">+ [00,00] DATUM</span>
-            <span>·</span>
-            <span className="text-[#0284c7]">REF // ISO-2768-mK</span>
-            <span>·</span>
-            <span>SYS:MST-{CHAIN_ID}</span>
-          </div>
-          <div className="flex items-center gap-2 text-[#16a34a] font-semibold">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
-            <span>OPERATOR TERMINAL ONLINE · GASLESS CONTRACTS ACTIVE</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-          {/* Brand Info & Mission */}
-          <div className="md:col-span-2 space-y-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-[#09090b] font-montserrat hover:text-[#16a34a] transition-colors"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] shadow-inner">
-                <IconSpindle className="w-4 h-4 text-[#16a34a]" />
-              </span>
-              <span>
-                EXPEND<span className="text-[#16a34a]">RY</span>
-              </span>
-            </Link>
-            <p className="text-xs sm:text-sm text-zinc-600 max-w-md leading-relaxed text-pretty font-poppins">
-              Where experience is never retired. Empowering veteran machinists to
-              archive tacit shop-floor wisdom, earn EXPEN rewards on MST
-              testnet, inspect 3D tooling geometries, and consult AI-powered machining intelligence.
-            </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-[#f8fafc] border border-[#16a34a] text-xs font-mono text-[#16a34a]">
-              <span className="h-2 w-2 rounded-full bg-[#16a34a]" />
-              <span>MST Testnet · Chain ID: {CHAIN_ID} · 0x56F0...283a</span>
-            </div>
-          </div>
-
-          {/* Core Routes */}
-          <div>
-            <h2 className="text-xs font-mono uppercase tracking-wider text-[#09090b] font-bold mb-3">
-              Ecosystem Navigation
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-12 sm:pt-16 pb-8">
+        {/* 2. Upper 3-Column Navigation Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-start">
+          {/* Column 1: LINKS */}
+          <div className="md:col-span-5 space-y-4">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+              LINKS
             </h2>
-            <ul className="space-y-2 text-xs">
-              <li>
+            <nav aria-label="Footer Navigation Links" className="space-y-1.5">
+              <div>
+                <Link
+                  href="/"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                >
+                  Home
+                </Link>
+              </div>
+              <div>
                 <Link
                   href="/about"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span className="text-zinc-400 font-mono">01 //</span>
-                  <span>About & Manifesto</span>
+                  About
                 </Link>
-              </li>
-              <li>
-                <Link
-                  href="/agent"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
-                >
-                  <span className="text-zinc-400 font-mono">02 //</span>
-                  <span>AI Machining Assistant</span>
-                </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link
                   href="/marketplace"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span className="text-zinc-400 font-mono">03 //</span>
-                  <span>Tooling Marketplace</span>
+                  Marketplace
                 </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link
                   href="/experience"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span className="text-zinc-400 font-mono">04 //</span>
-                  <span>Machinist Experience Hub</span>
+                  Experience
                 </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link
                   href="/blueprints"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span className="text-zinc-400 font-mono">05 //</span>
-                  <span>Engineering Blueprints</span>
+                  Blueprints
                 </Link>
-              </li>
-              <li>
+              </div>
+              <div>
                 <Link
                   href="/patent"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span className="text-zinc-400 font-mono">06 //</span>
-                  <span>Decentralized Patents</span>
+                  Patents
                 </Link>
-              </li>
-              <li>
-                <Link
-                  href="/partners"
-                  className="hover:text-[#16a34a] transition-colors flex items-center gap-1.5"
-                >
-                  <span className="text-zinc-400 font-mono">07 //</span>
-                  <span>Partners & Investors</span>
-                </Link>
-              </li>
-            </ul>
+              </div>
+            </nav>
           </div>
 
-          {/* Resources & Blockchain */}
-          <div>
-            <h2 className="text-xs font-mono uppercase tracking-wider text-[#09090b] font-bold mb-3">
-              Network & Verification
+          {/* Column 2: CONNECT */}
+          <div className="md:col-span-4 space-y-4">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+              CONNECT
             </h2>
-            <ul className="space-y-2 text-xs">
-              <li>
+            <div className="space-y-1.5">
+              <div>
+                <a
+                  href="https://x.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                >
+                  X
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+                >
+                  Linked In
+                </a>
+              </div>
+              <div>
                 <a
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#16a34a] transition-colors inline-flex items-center gap-1 text-xs"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span>MSTScan Blockchain Explorer</span>
-                  <span aria-hidden="true">↗</span>
+                  MSTScan
                 </a>
-              </li>
-              <li>
+              </div>
+              <div>
                 <a
-                  href="https://testnetfaucet.mstblockchain.com"
+                  href="https://discord.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#16a34a] transition-colors inline-flex items-center gap-1 text-xs"
+                  className="footer-nav-link text-lg sm:text-2xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
                 >
-                  <span>MST Testnet Faucet</span>
-                  <span aria-hidden="true">↗</span>
+                  Discord
                 </a>
-              </li>
-              <li>
-                <div className="p-2.5 rounded-lg bg-[#f8fafc] border border-[#16a34a] text-[11px] font-mono text-zinc-600 mt-2 space-y-1">
-                  <div className="text-[#09090b] font-semibold">TOKENOMICS RULE:</div>
-                  <div>{REWARD_PER_POST} EXPEN / Valid Post</div>
-                  <div className="text-[#16a34a] font-medium">{DAILY_CAP} EXPEN Daily Cap / Wallet</div>
-                </div>
-              </li>
-            </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 3: CONTACT */}
+          <div className="md:col-span-3 space-y-4 md:text-right">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-500 uppercase">
+              CONTACT
+            </h2>
+            <div>
+              <a
+                href="mailto:info@expendry.io"
+                className="footer-nav-link text-base sm:text-xl font-normal text-white hover:text-[#26d464] transition-colors leading-tight inline-block"
+              >
+                info[at]expendry.io
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar: Shop-Floor Terminal Signoff */}
-        <div className="border-t border-[#16a34a]/20 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-zinc-500 gap-4">
-          <p>© 2026 Expendry Ecosystem. All rights reserved.</p>
-          <p className="text-center sm:text-right">
-            Engineered for veteran machinists and high-precision CNC tooling. MST Blockchain Testnet Chain ID {CHAIN_ID}.
+        {/* 3. Hairline Dotted Divider Line (matches reference image) */}
+        <div
+          className="footer-dotted-divider w-full border-b border-dotted border-zinc-700/60 my-10 sm:my-14"
+          aria-hidden="true"
+        />
+
+        {/* 4. Massive Panoramic Wordmark Statement */}
+        <div className="w-full overflow-hidden select-none py-2 my-2 flex items-center justify-center">
+          <div className="footer-hero-wordmark font-montserrat font-extrabold tracking-tighter text-zinc-300 leading-none whitespace-nowrap text-[12vw] sm:text-[13vw] flex items-baseline justify-center">
+            <span className="opacity-90 hover:opacity-100 transition-opacity">
+              expendry
+            </span>
+            <span className="mx-2 sm:mx-4 opacity-90 hover:opacity-100 transition-opacity relative">
+              expendry
+              <sup
+                className="text-[0.22em] font-normal text-zinc-400 align-super ml-0.5 sm:ml-1"
+                aria-label="Registered trademark"
+              >
+                ®
+              </sup>
+            </span>
+            <span className="opacity-90 hover:opacity-100 transition-opacity">
+              expendry<span className="text-[#26d464]">.</span>
+            </span>
+          </div>
+        </div>
+
+        {/* 5. Authentic Industrial / Garment Care Label Stamp */}
+        <div className="footer-care-stamp my-10 sm:my-12 flex flex-col items-center justify-center text-center space-y-1.5">
+          <p className="footer-care-heading text-xs sm:text-sm font-normal text-zinc-400 tracking-wide font-sans">
+            Handled with
           </p>
+          <p className="footer-care-title text-sm sm:text-base font-bold text-white tracking-[0.16em] uppercase font-sans">
+            100% TACIT WISDOM
+          </p>
+
+          {/* Care Symbol Glyphs Row */}
+          <div
+            className="footer-care-icons-row flex items-center justify-center gap-3 sm:gap-4 my-2 text-zinc-300"
+            aria-label="Manufacturing Care Symbols"
+          >
+            {/* (A) Circle A */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 17l4-10 4 10" />
+              <path d="M9.5 13.5h5" />
+            </svg>
+
+            {/* Crossed square / tumble dry care icon */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="12" cy="12" r="6" />
+              <line x1="4" y1="4" x2="20" y2="20" />
+              <line x1="20" y1="4" x2="4" y2="20" />
+            </svg>
+
+            {/* Wash tub with 30 */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 8h18l-2 11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L3 8z" />
+              <path d="M3 11c2-1 4-1 6 0s4 1 6 0 4-1 6 0" />
+              <text
+                x="12"
+                y="17.2"
+                textAnchor="middle"
+                fontSize="6"
+                fontWeight="bold"
+                fill="currentColor"
+                stroke="none"
+              >
+                30
+              </text>
+            </svg>
+
+            {/* Iron / Care press symbol */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 17h16a2 2 0 0 0 2-2c0-4-3-7-7-7H8l-4 9z" />
+              <line x1="4" y1="17" x2="22" y2="17" />
+            </svg>
+
+            {/* T-Shirt Garment Outline */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 4L3 8l3 3 2-2v11h8V9l2 2 3-3-4-4c-1.5 2-4.5 2-6 0z" />
+            </svg>
+
+            {/* (A) Circle A */}
+            <svg
+              className="w-5 h-5 sm:w-6 sm:h-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M8 17l4-10 4 10" />
+              <path d="M9.5 13.5h5" />
+            </svg>
+          </div>
+
+          <p className="footer-care-heading text-xs sm:text-sm font-normal text-zinc-400 tracking-wide font-sans">
+            Designed and
+          </p>
+          <p className="footer-care-title text-sm sm:text-base font-bold text-white tracking-[0.16em] uppercase font-sans">
+            MANUFACTURED IN
+          </p>
+          <p className="footer-care-footer text-xs sm:text-sm font-medium text-zinc-400 tracking-[0.18em] uppercase font-sans">
+            PUNE & MIDC BHOSARI, INDIA
+          </p>
+        </div>
+
+        {/* 6. Bottom Signoff Bar (matches reference image) */}
+        <div className="footer-bottom-bar pt-8 flex flex-col sm:flex-row items-center justify-between text-xs sm:text-[13px] text-zinc-400 font-sans gap-4">
+          {/* Left: Location with subtle active green/orange status */}
+          <div className="flex items-center gap-2">
+            <span
+              className="h-1.5 w-1.5 rounded-full bg-[#26d464]"
+              aria-hidden="true"
+            />
+            <span className="text-zinc-400">Pune, MH, IN</span>
+            <span className="text-zinc-600">·</span>
+            <span className="text-[11px] font-mono text-[#f97316]">
+              MST-{CHAIN_ID}
+            </span>
+          </div>
+
+          {/* Center: Copyright */}
+          <div className="text-center text-zinc-400">
+            ©2026 Expendry. All Rights Reserved.
+          </div>
+
+          {/* Right: Back to top smooth scroller */}
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="text-zinc-400 hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 group font-sans focus:outline-none focus:ring-1 focus:ring-[#26d464] rounded px-1"
+            aria-label="Scroll back to top of page"
+          >
+            <span>Back to top</span>
+            <span
+              className="inline-block transition-transform duration-200 group-hover:-translate-y-0.5 text-[#26d464]"
+              aria-hidden="true"
+            >
+              ↑
+            </span>
+          </button>
         </div>
       </div>
     </footer>

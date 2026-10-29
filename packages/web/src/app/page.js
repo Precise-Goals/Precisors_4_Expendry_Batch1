@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import {
   IconAcoustics,
@@ -23,7 +22,17 @@ import {
 } from "@/components/ui/Icons";
 import { CHAIN_ID, EXPLORER_URL, DAILY_CAP, REWARD_PER_POST } from "shared/constants";
 import { EXPEN_ADDRESS } from "shared/contracts";
-import MagneticTrack from "@/components/ui/MagneticTrack";
+const HeroTokenStage = dynamic(
+  () => import("@/components/home/HeroTokenStage"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full min-h-[380px] rounded-2xl bg-[#0a0a0a] border border-[#262626] flex items-center justify-center animate-pulse text-zinc-500">
+        <div className="w-8 h-8 rounded-full border-2 border-[#26d464] border-t-transparent animate-spin" />
+      </div>
+    ),
+  }
+);
 
 const SPINDLE_PRESETS = [
   { name: "Inconel 718", rpm: 1800, feed: "0.12 mm/rev", temp: "420°C", load: "78%" },
@@ -173,7 +182,7 @@ export default function Home() {
                 <span className="text-zinc-600">·</span>
                 <span>Daily Cap: {DAILY_CAP} EXPEN</span>
                 <span className="text-zinc-600">·</span>
-                <span className="text-orange-400 font-semibold">Gasless MST</span>
+                <span className="text-[#ea580c] font-semibold">Gasless MST</span>
               </motion.div>
             </div>
 
@@ -193,18 +202,14 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section className="py-12 sm:py-16 bg-white border-b border-[#e4e4e7] relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-          {/* ──────────────────────────────────────────────────────────
-              Interactive DRO Machining Control Deck (Box with Green Border)
-             ────────────────────────────────────────────────────────── */}
           <motion.div
             variants={itemVariants}
-            className="mt-14 max-w-4xl mx-auto rounded-2xl bg-white border-2 border-[#16a34a] p-5 sm:p-7 shadow-lg shadow-emerald-500/10 relative overflow-hidden"
+            className="max-w-4xl mx-auto rounded-2xl bg-white border border-[#e4e4e7] p-5 sm:p-7 shadow-sm hover:shadow-md transition-all relative overflow-hidden"
           >
             {/* Header Telemetry Row */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#16a34a]/30">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-lg bg-[#f4f4f5] border border-[#16a34a] flex items-center justify-center text-[#16a34a] shadow-inner">
+                <div className="h-10 w-10 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
                   <IconAcoustics className="w-5 h-5" />
                 </div>
                 <div>
@@ -212,7 +217,7 @@ export default function Home() {
                     <span className="text-sm font-mono font-bold text-[#09090b] uppercase tracking-wider">
                       Live Tacit Acoustic Analyzer
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-[#16a34a]/10 text-[#16a34a] border border-[#16a34a]">
+                    <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-[#16a34a]/10 text-[#16a34a] border border-[#16a34a]/30">
                       Spindle Harmonics
                     </span>
                   </div>
@@ -222,7 +227,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Alloy Switcher Pills (Boxes with Green Border) */}
+              {/* Alloy Switcher Pills */}
               <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-mono">
                 {SPINDLE_PRESETS.map((p, idx) => (
                   <button
@@ -231,8 +236,8 @@ export default function Home() {
                     onClick={() => setActivePresetIndex(idx)}
                     className={`px-2.5 py-1 rounded-lg border transition ${
                       activePresetIndex === idx
-                        ? "bg-[#16a34a] border-[#16a34a] text-white font-bold"
-                        : "bg-white border border-[#16a34a] text-zinc-700 hover:bg-[#16a34a]/10"
+                        ? "bg-[#16a34a] border-[#16a34a] text-white font-bold shadow-sm"
+                        : "bg-white border-[#e4e4e7] text-zinc-700 hover:bg-[#f4f4f5]"
                     }`}
                   >
                     {p.name.split(" ")[0]}
@@ -253,8 +258,8 @@ export default function Home() {
                   onClick={() => setAnalyzingFlutter(!analyzingFlutter)}
                   className={`px-3 py-1 rounded text-xs font-mono font-bold transition flex items-center gap-1.5 ${
                     analyzingFlutter
-                      ? "bg-amber-100 text-amber-800 border border-[#16a34a]"
-                      : "bg-white text-zinc-800 border border-[#16a34a] hover:bg-[#16a34a]/10"
+                      ? "bg-amber-100 text-amber-800 border border-amber-300"
+                      : "bg-white text-zinc-800 border border-[#e4e4e7] hover:bg-[#f4f4f5]"
                   }`}
                 >
                   <IconWrench className="w-3.5 h-3.5 text-[#16a34a]" />
@@ -262,12 +267,12 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* 24-Bar Dynamic Graphic Equalizer (Box with Green Border) */}
+              {/* 24-Bar Dynamic Graphic Equalizer */}
               <div
-                className="h-28 w-full rounded-xl bg-[#f8fafc] border-2 border-[#16a34a] p-4 flex items-end justify-between gap-1 sm:gap-2 relative overflow-hidden"
+                className="h-28 w-full rounded-xl bg-[#0d0e12] border border-[#262626] p-4 flex items-end justify-between gap-1 sm:gap-2 relative overflow-hidden"
                 aria-label="Acoustic spectrum graph"
               >
-                <div className="absolute top-2 left-3 text-[11px] font-mono text-zinc-500">
+                <div className="absolute top-2 left-3 text-[11px] font-mono text-zinc-400">
                   PEAK: {analyzingFlutter ? "2,420 Hz (CHTER)" : "1,800 Hz (STABLE)"} · dB: {analyzingFlutter ? "-12 dB" : "-42 dB"}
                 </div>
                 {[
@@ -292,8 +297,8 @@ export default function Home() {
                     }}
                     className={`w-full rounded-t-sm transition-colors duration-300 ${
                       analyzingFlutter
-                        ? i > 11 && i < 16 ? "bg-amber-500" : "bg-[#16a34a]/60"
-                        : "bg-[#16a34a]"
+                        ? i > 11 && i < 16 ? "bg-[#ea580c]" : "bg-[#16a34a]/60"
+                        : "bg-[#26d464]"
                     }`}
                     style={{ height: `${height * 0.65}%` }}
                   />
@@ -301,41 +306,41 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Live Readout Metrics Grid (Boxes with Green Border) */}
+            {/* Live Readout Metrics Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 text-xs font-mono">
-              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#16a34a]">
+              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#e4e4e7]">
                 <span className="text-zinc-500 block text-[11px] tracking-wider uppercase font-semibold">SPINDLE SPEED</span>
                 <span className="text-sm font-bold text-[#09090b]">{activePreset.rpm} RPM</span>
               </div>
-              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#16a34a]">
+              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#e4e4e7]">
                 <span className="text-zinc-500 block text-[11px] tracking-wider uppercase font-semibold">FEED CALIBRATION</span>
                 <span className="text-sm font-bold text-[#16a34a]">
                   {analyzingFlutter ? "0.15 mm/rev (High)" : activePreset.feed}
                 </span>
               </div>
-              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#16a34a]">
+              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#e4e4e7]">
                 <span className="text-zinc-500 block text-[11px] tracking-wider uppercase font-semibold">CUTTING TEMP</span>
                 <span className="text-sm font-bold text-[#09090b]">{activePreset.temp}</span>
               </div>
-              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#16a34a]">
+              <div className="p-3 rounded-lg bg-[#f8fafc] border border-[#e4e4e7]">
                 <span className="text-zinc-500 block text-[11px] tracking-wider uppercase font-semibold">RESONANCE STATUS</span>
-                <span className={`text-sm font-bold ${analyzingFlutter ? "text-amber-600" : "text-[#16a34a]"}`}>
+                <span className={`text-sm font-bold ${analyzingFlutter ? "text-[#ea580c]" : "text-[#16a34a]"}`}>
                   {analyzingFlutter ? "Harmonic Flutter Warning" : "Calibrated (98.6%)"}
                 </span>
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          2. LIVE TELEMETRY MARQUEE TICKER (Border with Green Color)
+          2. LIVE TELEMETRY MARQUEE TICKER
          ────────────────────────────────────────────────────────── */}
-      <div className="w-full bg-[#f8fafc] border-b-2 border-[#16a34a] py-2.5 px-4 overflow-hidden">
+      <div className="w-full bg-[#f8fafc] border-b border-[#e4e4e7] py-2.5 px-4 overflow-hidden">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-zinc-600">
           <div className="flex items-center gap-3">
             <span className="text-[#16a34a] font-bold flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a] animate-pulse" />
               MST TESTNET
             </span>
             <span className="text-zinc-300">/</span>
@@ -355,14 +360,14 @@ export default function Home() {
       </div>
 
       {/* ──────────────────────────────────────────────────────────
-          3. SIX-PILLAR BENTO GRID (All Boxes with Green Border)
+          3. SIX-PILLAR BENTO GRID
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Platform Architecture Portals"
-        className="py-16 sm:py-24 border-b-2 border-[#16a34a] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#16a34a]/30 pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#e4e4e7] pb-4">
             <div>
               <div className="inline-flex items-center gap-2 mb-2">
                 <span className="h-2 w-2 rounded-full bg-[#16a34a]" />
@@ -382,10 +387,10 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* 01: Experience Hub */}
             <Link href="/experience" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconAcoustics className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="accent" size="sm">
@@ -401,7 +406,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>Explore Simulator</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -410,10 +415,10 @@ export default function Home() {
 
             {/* 02: Blueprints CAD/CAM */}
             <Link href="/blueprints" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconBlueprint className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="default" size="sm">
@@ -429,7 +434,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>Inspect Blueprints</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -438,10 +443,10 @@ export default function Home() {
 
             {/* 03: Sarvam AI Assistant */}
             <Link href="/agent" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconBrain className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="default" size="sm">
@@ -457,7 +462,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>Launch Operator Terminal</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -466,10 +471,10 @@ export default function Home() {
 
             {/* 04: 3D CAD Tooling Inspector */}
             <Link href="/showcase" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconCube3D className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="accent" size="sm">
@@ -485,7 +490,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>Open 3D Workstation</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -494,10 +499,10 @@ export default function Home() {
 
             {/* 05: Prior Art Patent Ledger */}
             <Link href="/patent" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconShield className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="default" size="sm">
@@ -513,7 +518,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>Register Invention</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -522,10 +527,10 @@ export default function Home() {
 
             {/* 06: Partners & Investors */}
             <Link href="/partners" className="group block h-full">
-              <div className="h-full p-6 rounded-2xl bg-white border-2 border-[#16a34a] hover:border-[#15803d] hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+              <div className="h-full p-6 rounded-2xl bg-white border border-[#e4e4e7] hover:border-[#16a34a]/50 hover:shadow-lg transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#16a34a] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                    <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
                       <IconFactory className="w-5 h-5 text-[#16a34a]" />
                     </span>
                     <Badge variant="default" size="sm">
@@ -541,7 +546,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
                   <span>View Partner Tracks</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </div>
@@ -552,11 +557,11 @@ export default function Home() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          4. 3-STEP KNOWLEDGE LOOP (All Step Boxes with Green Border)
+          4. 3-STEP KNOWLEDGE LOOP
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="How Expendry Works"
-        className="py-16 sm:py-24 border-b-2 border-[#16a34a] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
@@ -571,12 +576,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Step 1: Archive (Box with Green Border) */}
-            <div className="p-6 rounded-2xl bg-[#f8fafc] border-2 border-[#16a34a] space-y-4 flex flex-col justify-between shadow-sm">
+            {/* Step 1: Archive */}
+            <div className="p-6 rounded-2xl bg-[#f8fafc] border border-[#e4e4e7] space-y-4 flex flex-col justify-between shadow-sm">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
                   <span className="text-[#16a34a] font-bold tracking-wider">KNOWLEDGE ARCHIVE</span>
-                  <span className="p-1.5 rounded bg-white border border-[#16a34a] text-[#16a34a] shadow-sm">
+                  <span className="p-1.5 rounded bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
                     <IconLathe className="w-4 h-4" />
                   </span>
                 </div>
@@ -587,19 +592,19 @@ export default function Home() {
                   Veterans record fixturing setups, chatter frequencies, and thermal offsets via structured audio memos or blueprint shares.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#16a34a]/30 flex flex-wrap gap-1.5">
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">Setup Tips</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">Blueprints</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">Voice Notes</span>
+              <div className="pt-3 border-t border-[#e4e4e7] flex flex-wrap gap-1.5">
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">Setup Tips</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">Blueprints</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">Voice Notes</span>
               </div>
             </div>
 
-            {/* Step 2: Mint (Box with Green Border) */}
-            <div className="p-6 rounded-2xl bg-[#f8fafc] border-2 border-[#16a34a] space-y-4 flex flex-col justify-between shadow-sm">
+            {/* Step 2: Mint */}
+            <div className="p-6 rounded-2xl bg-[#f8fafc] border border-[#e4e4e7] space-y-4 flex flex-col justify-between shadow-sm">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
                   <span className="text-[#16a34a] font-bold tracking-wider">ON-CHAIN TOKEN MINT</span>
-                  <span className="p-1.5 rounded bg-white border border-[#16a34a] text-[#16a34a] shadow-sm">
+                  <span className="p-1.5 rounded bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
                     <IconToken className="w-4 h-4" />
                   </span>
                 </div>
@@ -610,17 +615,17 @@ export default function Home() {
                   Every valid post initiates an on-chain mint of {REWARD_PER_POST} EXPEN tokens directly to your wallet. Enforced by smart contracts up to {DAILY_CAP} EXPEN/day.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#16a34a]/30 text-xs font-mono text-[#16a34a] font-bold">
+              <div className="pt-3 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] font-bold">
                 <span>{REWARD_PER_POST} EXPEN / Post · Max {DAILY_CAP} EXPEN / Day</span>
               </div>
             </div>
 
-            {/* Step 3: Consult (Box with Green Border) */}
-            <div className="p-6 rounded-2xl bg-[#f8fafc] border-2 border-[#16a34a] space-y-4 flex flex-col justify-between shadow-sm">
+            {/* Step 3: Consult */}
+            <div className="p-6 rounded-2xl bg-[#f8fafc] border border-[#e4e4e7] space-y-4 flex flex-col justify-between shadow-sm">
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
                   <span className="text-[#16a34a] font-bold tracking-wider">SARVAM AI RETRIEVAL</span>
-                  <span className="p-1.5 rounded bg-white border border-[#16a34a] text-[#16a34a] shadow-sm">
+                  <span className="p-1.5 rounded bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
                     <IconBrain className="w-4 h-4" />
                   </span>
                 </div>
@@ -631,10 +636,10 @@ export default function Home() {
                   Apprentice machinists query the tacit knowledge base in Hindi, Marathi, or English. BM25-lite RAG injects exact veteran troubleshooting quotes.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#16a34a]/30 flex flex-wrap gap-1.5">
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">English</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">हिन्दी</span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#16a34a] text-zinc-800 font-medium">मराठी</span>
+              <div className="pt-3 border-t border-[#e4e4e7] flex flex-wrap gap-1.5">
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">English</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">हिन्दी</span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white border border-[#e4e4e7] text-zinc-800 font-medium">मराठी</span>
               </div>
             </div>
           </div>
@@ -642,11 +647,11 @@ export default function Home() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          5. VETERAN TACIT STORIES & AUDIO LOGS (Boxes with Green Border)
+          5. VETERAN TACIT STORIES & AUDIO LOGS
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Veteran Insights"
-        className="py-16 sm:py-24 border-b-2 border-[#16a34a] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="space-y-3 max-w-2xl">
@@ -659,8 +664,8 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Persona 1: Rameshwar (Box with Green Border) */}
-            <div className="p-8 rounded-2xl bg-white border-2 border-[#16a34a] space-y-6 shadow-md shadow-emerald-500/10 flex flex-col justify-between">
+            {/* Persona 1: Rameshwar */}
+            <div className="p-8 rounded-2xl bg-white border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-zinc-500 uppercase font-semibold">AEROSPACE INCONEL // 42 YRS EXP</span>
@@ -668,7 +673,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#16a34a] flex items-center justify-center text-[#16a34a] shadow-inner">
+                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
                     <IconLathe className="w-6 h-6" />
                   </div>
                   <div>
@@ -681,16 +686,16 @@ export default function Home() {
                   </div>
                 </div>
 
-                <blockquote className="text-xs sm:text-sm text-zinc-800 italic p-4 bg-[#f8fafc] border border-[#16a34a] rounded-xl leading-relaxed shadow-inner">
+                <blockquote className="text-xs sm:text-sm text-zinc-800 italic p-4 bg-[#f8fafc] border border-[#e4e4e7] rounded-xl leading-relaxed shadow-inner">
                   &quot;When turning Inconel 718, handbook speeds cause rapid notch wear within 4 minutes. You have to listen for the high-frequency harmonic flutter at 1,800 RPM and back off the feed by 0.03 mm/rev while targeting high-pressure flood coolant right at the tool flank.&quot;
                 </blockquote>
               </div>
 
-              <div className="pt-4 border-t border-[#16a34a]/30 flex items-center justify-between">
+              <div className="pt-4 border-t border-[#e4e4e7] flex items-center justify-between">
                 <button
                   type="button"
                   onClick={() => setPlayingAudioSnippet(!playingAudioSnippet)}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-[#16a34a] text-xs font-mono text-zinc-900 hover:bg-[#16a34a]/10 transition font-semibold"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-[#e4e4e7] text-xs font-mono text-zinc-900 hover:bg-[#f4f4f5] transition font-semibold"
                 >
                   {playingAudioSnippet ? (
                     <IconPause className="w-3.5 h-3.5 text-[#16a34a]" />
@@ -703,8 +708,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Persona 2: Devendra (Box with Green Border) */}
-            <div className="p-8 rounded-2xl bg-white border-2 border-[#16a34a] space-y-6 shadow-md shadow-emerald-500/10 flex flex-col justify-between">
+            {/* Persona 2: Devendra */}
+            <div className="p-8 rounded-2xl bg-white border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-zinc-500 uppercase font-semibold">FORGING DIES // 29 YRS EXP</span>
@@ -712,7 +717,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#16a34a] flex items-center justify-center text-[#16a34a] shadow-inner">
+                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
                     <IconCaliper className="w-6 h-6" />
                   </div>
                   <div>
@@ -725,12 +730,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                <blockquote className="text-xs sm:text-sm text-zinc-800 italic p-4 bg-[#f8fafc] border border-[#16a34a] rounded-xl leading-relaxed shadow-inner">
+                <blockquote className="text-xs sm:text-sm text-zinc-800 italic p-4 bg-[#f8fafc] border border-[#e4e4e7] rounded-xl leading-relaxed shadow-inner">
                   &quot;Junior operators often scrap entire D2 die blocks because they ignore thermal expansion during morning shifts. On a cold 18°C morning, your spindle grows by 12 microns over the first 45 minutes of warm-up before hitting thermal equilibrium.&quot;
                 </blockquote>
               </div>
 
-              <div className="pt-4 border-t border-[#16a34a]/30 flex items-center justify-between">
+              <div className="pt-4 border-t border-[#e4e4e7] flex items-center justify-between">
                 <Link
                   href="/experience"
                   className="text-xs font-mono text-[#16a34a] hover:underline flex items-center gap-1.5 font-bold"
@@ -746,7 +751,7 @@ export default function Home() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          6. POTENTIOMETER & DRO TOKEN REWARD CALCULATOR (All Boxes with Green Border)
+          6. POTENTIOMETER & DRO TOKEN REWARD CALCULATOR
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="EXPEN Token Economics"
@@ -768,15 +773,15 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* DRO Console Box (Green Border) */}
-              <div className="p-6 rounded-2xl bg-[#f8fafc] border-2 border-[#16a34a] space-y-6 shadow-md shadow-emerald-500/10">
-                <div className="flex items-center justify-between border-b border-[#16a34a]/30 pb-3 text-xs font-mono">
+              {/* DRO Console Box */}
+              <div className="p-6 rounded-2xl bg-[#f8fafc] border border-[#e4e4e7] space-y-6 shadow-sm">
+                <div className="flex items-center justify-between border-b border-[#e4e4e7] pb-3 text-xs font-mono">
                   <span className="text-zinc-700 font-semibold">DAILY VALID CONTRIBUTIONS</span>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setCalculatorPosts((prev) => Math.max(1, prev - 1))}
-                      className="h-7 w-7 rounded bg-white border border-[#16a34a] text-zinc-900 hover:bg-[#16a34a]/10 font-bold shadow-sm"
+                      className="h-7 w-7 rounded bg-white border border-[#e4e4e7] text-zinc-900 hover:bg-[#f4f4f5] font-bold shadow-sm"
                     >
                       -
                     </button>
@@ -784,7 +789,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={() => setCalculatorPosts((prev) => Math.min(10, prev + 1))}
-                      className="h-7 w-7 rounded bg-white border border-[#16a34a] text-zinc-900 hover:bg-[#16a34a]/10 font-bold shadow-sm"
+                      className="h-7 w-7 rounded bg-white border border-[#e4e4e7] text-zinc-900 hover:bg-[#f4f4f5] font-bold shadow-sm"
                     >
                       +
                     </button>
@@ -809,29 +814,29 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* DRO Metric Display Grid (All Boxes with Green Border) */}
+                {/* DRO Metric Display Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-xs font-mono">
-                  <div className="p-3 rounded-xl bg-white border border-[#16a34a] shadow-sm">
+                  <div className="p-3 rounded-xl bg-white border border-[#e4e4e7] shadow-sm">
                     <span className="text-zinc-500 block text-[11px] font-semibold">DAILY YIELD:</span>
                     <span className="text-lg font-bold text-[#16a34a]">{calculatedDaily} EXPEN</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-white border border-[#16a34a] shadow-sm">
+                  <div className="p-3 rounded-xl bg-white border border-[#e4e4e7] shadow-sm">
                     <span className="text-zinc-500 block text-[11px] font-semibold">MONTHLY YIELD:</span>
                     <span className="text-lg font-bold text-[#09090b]">{calculatedMonthly} EXPEN</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-white border border-[#16a34a] shadow-sm">
+                  <div className="p-3 rounded-xl bg-white border border-[#e4e4e7] shadow-sm">
                     <span className="text-zinc-500 block text-[11px] font-semibold">USD VALUATION:</span>
                     <span className="text-lg font-bold text-[#09090b]">${calculatedUsd}</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-white border border-[#16a34a] shadow-sm">
+                  <div className="p-3 rounded-xl bg-white border border-[#e4e4e7] shadow-sm">
                     <span className="text-zinc-500 block text-[11px] font-semibold">GAS FEES:</span>
                     <span className="text-lg font-bold text-[#16a34a]">FREE (Gasless)</span>
                   </div>
                 </div>
               </div>
 
-              {/* Safety Notice (Box with Green Border) */}
-              <div className="p-4 rounded-xl bg-emerald-50/60 border border-[#16a34a] flex items-start gap-3 text-xs text-emerald-950 font-medium">
+              {/* Safety Notice */}
+              <div className="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200 flex items-start gap-3 text-xs text-emerald-950 font-medium">
                 <IconAlert className="w-4 h-4 text-[#16a34a] shrink-0 mt-0.5" />
                 <span>
                   MST Testnet Protocol Notice: EXPEN is an educational utility token built for the MST Blockchain Buildathon to demonstrate shop-floor knowledge tokenization.
@@ -839,9 +844,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Milled Token Card (Box with Green Border) */}
+            {/* Right: Milled Token Card */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm rounded-2xl bg-white p-6 border-2 border-[#16a34a] shadow-xl shadow-emerald-500/15 space-y-6 relative overflow-hidden">
+              <div className="w-full max-w-sm rounded-2xl bg-white p-6 border border-[#e4e4e7] shadow-lg shadow-black/5 space-y-6 relative overflow-hidden">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider font-mono text-zinc-600 font-bold">
                     ERC-20 Token
@@ -852,7 +857,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col items-center justify-center py-2">
-                  <div className="h-20 w-20 rounded-full bg-[#f4f4f5] border-2 border-[#16a34a] flex items-center justify-center shadow-md shadow-[#16a34a]/15">
+                  <div className="h-20 w-20 rounded-full bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center shadow-md">
                     <IconToken className="w-10 h-10 text-[#16a34a]" />
                   </div>
                   <span className="mt-3 text-2xl font-black tracking-wider text-[#09090b] font-display">
@@ -863,7 +868,7 @@ export default function Home() {
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xs border-t border-[#16a34a]/30 pt-4 font-mono">
+                <div className="space-y-2 text-xs border-t border-[#e4e4e7] pt-4 font-mono">
                   <div className="flex justify-between text-zinc-600 font-medium">
                     <span>Chain ID</span>
                     <span className="text-[#09090b] font-bold">{CHAIN_ID}</span>
@@ -876,9 +881,9 @@ export default function Home() {
                     <span>Daily Cap / Wallet</span>
                     <span className="text-[#16a34a] font-bold">{DAILY_CAP} EXPEN</span>
                   </div>
-                  <div className="flex flex-col gap-1.5 pt-2 border-t border-[#16a34a]/30">
+                  <div className="flex flex-col gap-1.5 pt-2 border-t border-[#e4e4e7]">
                     <span className="text-zinc-500 text-[11px] font-semibold">CONTRACT ADDRESS:</span>
-                    <div className="flex items-center justify-between gap-2 p-2 rounded bg-[#f8fafc] border border-[#16a34a]">
+                    <div className="flex items-center justify-between gap-2 p-2 rounded bg-[#f8fafc] border border-[#e4e4e7]">
                       <a
                         href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
                         target="_blank"
@@ -890,7 +895,7 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={handleCopyAddress}
-                        className="px-2.5 py-0.5 text-[11px] rounded bg-white border border-[#16a34a] text-zinc-800 hover:bg-[#16a34a]/10 transition shrink-0 font-semibold shadow-sm"
+                        className="px-2.5 py-0.5 text-[11px] rounded bg-white border border-[#e4e4e7] text-zinc-800 hover:bg-[#f4f4f5] transition shrink-0 font-semibold shadow-sm"
                       >
                         {copied ? "Copied!" : "Copy"}
                       </button>

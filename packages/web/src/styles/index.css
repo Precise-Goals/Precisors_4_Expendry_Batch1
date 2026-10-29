@@ -1,8 +1,0 @@
-/* ============================================================================
-   Expendry Custom Styles Root
-   Allows manual editing of color palette, typography, and footer styles.
-   ============================================================================ */
-
-@import "./colors.css";
-@import "./typography.css";
-@import "./footer.css";
