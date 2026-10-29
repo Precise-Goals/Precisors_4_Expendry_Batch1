@@ -12,7 +12,7 @@ export default function ProductCard({ product }) {
   const refCode = `REF: EXP-MD-${product.id.toUpperCase()}`;
 
   return (
-    <article className="flex flex-col rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 transition-all duration-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 motion-reduce:hover:translate-y-0">
+    <article className="flex flex-col rounded-3xl border border-zinc-200/90 bg-white hover:border-emerald-500/60 transition-all duration-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 motion-reduce:hover:translate-y-0 shadow-sm">
       {/* Packaging Frame / Visual Viewport */}
       <div className="relative h-52 w-full bg-zinc-50 border-b border-zinc-200 flex items-center justify-center overflow-hidden">
         <Image
@@ -28,12 +28,12 @@ export default function ProductCard({ product }) {
         {product.has3DModel && (
           <Link
             href={`/showcase?model=${product.modelId || "excel-mpk"}`}
-            className="absolute top-3 right-3 text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold flex items-center gap-1.5 hover:bg-emerald-100 hover:border-emerald-300 transition shadow-sm z-10 group/inspect"
+            className="absolute top-3 right-3 text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold flex items-center gap-1.5 hover:bg-emerald-100 hover:border-emerald-300 transition shadow-xs z-10 group/inspect"
             title="Inspect precision implant in 3D WebGL CAD viewport"
           >
-            <IconCube3D className="w-3.5 h-3.5 text-emerald-600 group-hover/inspect:rotate-12 transition-transform" />
+            <IconCube3D className="w-3.5 h-3.5 text-emerald-700 group-hover/inspect:rotate-12 transition-transform" />
             <span
-              className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse motion-reduce:animate-none"
+              className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse motion-reduce:animate-none"
               aria-hidden="true"
             />
             <span>3D INSPECT</span>
@@ -51,9 +51,9 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Product Content Details */}
-      <div className="p-6 flex-1 flex flex-col justify-between">
+      <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
+          <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-700 transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
             {product.name}
           </h3>
           <p className="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed font-body">
@@ -78,22 +78,22 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Pricing & CTA */}
-        <div className="mt-5 pt-4 border-t border-zinc-100 flex items-center justify-between">
+        <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block">Unit Price</span>
+            <span className="text-xs font-mono text-zinc-400 block">Unit Cost</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-xl sm:text-2xl font-black text-zinc-900 font-mono tracking-tight tabular-nums">
-                ${product.price.toFixed(2)}
+              <span className="text-lg font-extrabold text-zinc-900 font-montserrat tracking-tight">
+                ${product.price}
               </span>
-              <span className="text-xs font-mono font-bold text-emerald-600">
-                · {expenEquivalent} EXPEN
+              <span className="text-xs font-mono font-bold text-emerald-700">
+                ({expenEquivalent} EXPEN)
               </span>
             </div>
           </div>
 
           <Link
             href={`/marketplace/${product.id}`}
-            className="px-4 py-2 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold font-montserrat transition shadow-sm active:scale-95 cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-montserrat font-bold transition shadow-md shadow-emerald-950/20 active:scale-95 cursor-pointer"
           >
             Details →
           </Link>
