@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import PostCard from "@/components/community/PostCard";
-import { IconEdit, IconEye, IconSparkles, IconCheck } from "@/components/ui/Icons";
+import { IconEdit, IconEye, IconSparkles } from "@/components/ui/Icons";
 import { POST_TYPES, EXPLORER_URL } from "shared/constants";
 
 export default function PostComposer({ onPostCreated }) {
@@ -101,32 +101,24 @@ function ComposerInner({ onPostCreated }) {
         expenEarned: data.expenRewarded || 10,
         txHash: data.txHash,
         createdAt: new Date().toISOString(),
-        rewarded: true,
       };
-
-      try {
-        const stored = localStorage.getItem("expendry_custom_posts");
-        const list = stored ? JSON.parse(stored) : [];
-        list.unshift(newPost);
-        localStorage.setItem("expendry_custom_posts", JSON.stringify(list));
-      } catch {
-        // ignore
-      }
 
       if (onPostCreated) {
         onPostCreated(newPost);
       }
     } catch (err) {
-      setError(err.message || "Failed to publish post.");
+      setError(err.message || "Failed to publish post. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const previewPost = {
-    id: "preview-temp-id",
-    title: title || "Untitled Knowledge Note",
-    content: content || "Your tacit knowledge note content will render here...",
+    id: "preview-temp",
+    title: title || "Your Knowledge Title Here",
+    content:
+      content ||
+      "Detailed notes on feeds, speeds, chatter damping, fixture parameters, or scrap reduction will appear here in the live preview card...",
     type,
     authorWallet: address,
     authorName: "You (Connected Machinist)",
@@ -137,17 +129,17 @@ function ComposerInner({ onPostCreated }) {
   };
 
   return (
-    <Card className="p-6 bg-[#121212] border-[#262626] shadow-lg mb-8">
-      <div className="flex items-center justify-between border-b border-[#1f1f1f] pb-4 mb-4">
-        <div className="flex items-center gap-2">
-          <span className="p-2 rounded-lg bg-[#161616] border border-[#262626] flex items-center justify-center">
-            <IconEdit className="w-4 h-4 text-[#26d464]" />
+    <Card className="p-6 sm:p-8 bg-white/95 backdrop-blur-xl border border-zinc-200/90 shadow-xl rounded-3xl mb-8">
+      <div className="flex items-center justify-between border-b border-zinc-100 pb-4 mb-5">
+        <div className="flex items-center gap-3">
+          <span className="p-2.5 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-emerald-700 shadow-xs">
+            <IconEdit className="w-4 h-4 text-emerald-700" />
           </span>
           <div>
-            <h2 className="text-base font-bold text-[#ededed] font-display">
+            <h2 className="text-base font-bold text-zinc-900 font-montserrat">
               Contribute Shop-Floor Knowledge
             </h2>
-            <p className="text-xs text-[#a1a1aa]">
+            <p className="text-xs text-zinc-500 font-body">
               Share tacit machining tricks and earn 10 EXPEN on MST testnet.
             </p>
           </div>
@@ -155,12 +147,12 @@ function ComposerInner({ onPostCreated }) {
         <button
           type="button"
           onClick={() => setIsPreview((prev) => !prev)}
-          className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[#262626] bg-[#161616] text-[#ededed] hover:border-[#383838] transition-colors focus:outline-none focus:ring-1 focus:ring-[#26d464]"
+          className="text-xs font-montserrat font-bold px-3.5 py-2 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-800 hover:bg-zinc-100 transition shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-600 cursor-pointer"
         >
           {isPreview ? (
-            <span className="inline-flex items-center gap-1.5"><IconEdit className="w-3.5 h-3.5" /> Edit Mode</span>
+            <span className="inline-flex items-center gap-1.5"><IconEdit className="w-3.5 h-3.5 text-emerald-700" /> Edit Mode</span>
           ) : (
-            <span className="inline-flex items-center gap-1.5"><IconEye className="w-3.5 h-3.5" /> Preview Note</span>
+            <span className="inline-flex items-center gap-1.5"><IconEye className="w-3.5 h-3.5 text-emerald-700" /> Preview Note</span>
           )}
         </button>
       </div>
@@ -169,11 +161,11 @@ function ComposerInner({ onPostCreated }) {
       {successResult && (
         <div
           role="status"
-          className="mb-6 p-4 rounded-xl bg-[#26d464]/10 border border-[#26d464]/30 space-y-2 text-xs text-[#26d464]"
+          className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2 text-xs text-emerald-800"
         >
           <div className="flex items-center justify-between font-bold">
             <span className="inline-flex items-center gap-1.5">
-              <IconSparkles className="w-4 h-4 text-[#26d464]" />
+              <IconSparkles className="w-4 h-4 text-emerald-700" />
               <span>Post Published & +{successResult.expenRewarded} EXPEN Minted!</span>
             </span>
             <Badge variant="accent" size="sm">
@@ -181,13 +173,13 @@ function ComposerInner({ onPostCreated }) {
             </Badge>
           </div>
           {successResult.txHash && (
-            <p className="font-mono text-[11px] text-[#a1a1aa]">
+            <p className="font-mono text-[11px] text-zinc-600">
               Tx Hash:{" "}
               <a
                 href={`${EXPLORER_URL}/tx/${successResult.txHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#26d464] hover:underline"
+                className="text-emerald-700 hover:underline font-bold"
               >
                 {successResult.txHash}
               </a>
@@ -200,7 +192,7 @@ function ComposerInner({ onPostCreated }) {
       {error && (
         <div
           role="alert"
-          className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-xs text-red-400"
+          className="mb-4 p-4 rounded-2xl bg-red-50 border border-red-200 text-xs text-red-700"
         >
           {error}
         </div>
@@ -208,7 +200,7 @@ function ComposerInner({ onPostCreated }) {
 
       {isPreview ? (
         <div className="space-y-4">
-          <div className="text-xs text-[#71717a] font-medium uppercase tracking-wider">
+          <div className="text-xs text-zinc-500 font-mono font-bold uppercase tracking-wider">
             Live Preview of Rendered Knowledge Card:
           </div>
           <PostCard post={previewPost} />
@@ -217,7 +209,7 @@ function ComposerInner({ onPostCreated }) {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Post Type Selector */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-[#ededed]">
+            <label className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">
               Select Knowledge Category
             </label>
             <div className="flex flex-wrap gap-2">
@@ -226,10 +218,10 @@ function ComposerInner({ onPostCreated }) {
                   key={t}
                   type="button"
                   onClick={() => setType(t)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border ${
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-montserrat font-semibold transition-all border cursor-pointer ${
                     type === t
-                      ? "bg-[#26d464] text-black border-[#26d464] font-semibold"
-                      : "bg-[#161616] text-[#a1a1aa] border-[#262626] hover:text-[#ededed]"
+                      ? "bg-emerald-800 text-white border-emerald-800 shadow-xs font-bold"
+                      : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100"
                   }`}
                 >
                   {t}
@@ -240,8 +232,8 @@ function ComposerInner({ onPostCreated }) {
 
           {/* Title */}
           <div className="space-y-1.5">
-            <label htmlFor="post-title" className="block text-xs font-medium text-[#ededed]">
-              Title / Technique Summary <span className="text-[#26d464]">*</span>
+            <label htmlFor="post-title" className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">
+              Title / Technique Summary <span className="text-emerald-700">*</span>
             </label>
             <input
               id="post-title"
@@ -251,19 +243,19 @@ function ComposerInner({ onPostCreated }) {
               placeholder="e.g. Mitigating Spindle Chatter on Extended Boring Bars"
               maxLength={120}
               required
-              className="w-full px-3.5 py-2 rounded-lg bg-[#161616] border border-[#262626] text-sm text-[#ededed] placeholder-[#71717a] focus:outline-none focus:ring-2 focus:ring-[#26d464]"
+              className="w-full px-4 py-2.5 rounded-2xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 font-body transition"
             />
           </div>
 
           {/* Content */}
           <div className="space-y-1.5">
             <div className="flex justify-between items-center">
-              <label htmlFor="post-content" className="block text-xs font-medium text-[#ededed]">
-                Tacit Details & Calibration Notes <span className="text-[#26d464]">*</span>
+              <label htmlFor="post-content" className="block text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">
+                Tacit Details & Calibration Notes <span className="text-emerald-700">*</span>
               </label>
               <span
                 className={`text-[11px] font-mono ${
-                  charCount > maxChars ? "text-red-400" : "text-[#71717a]"
+                  charCount > maxChars ? "text-red-500 font-bold" : "text-zinc-400"
                 }`}
               >
                 {charCount} / {maxChars}
@@ -277,13 +269,13 @@ function ComposerInner({ onPostCreated }) {
               placeholder="Detail your spindle speeds, coolant setup, fixturing jigs, acoustic feedback, or scrap reduction advice..."
               maxLength={maxChars}
               required
-              className="w-full px-3.5 py-2.5 rounded-lg bg-[#161616] border border-[#262626] text-sm text-[#ededed] placeholder-[#71717a] focus:outline-none focus:ring-2 focus:ring-[#26d464] leading-relaxed resize-y"
+              className="w-full px-4 py-3 rounded-2xl bg-zinc-50 border border-zinc-300 text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10 font-body leading-relaxed resize-y transition"
             />
           </div>
 
           {/* Submit Action */}
-          <div className="flex items-center justify-between pt-2">
-            <span className="text-[11px] text-[#71717a]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+            <span className="text-xs text-zinc-500 font-mono">
               Mints 10 EXPEN on MST testnet upon verification.
             </span>
             <Button

@@ -10,14 +10,14 @@ const PostComposer = dynamic(
     loading: () => (
       <div
         aria-label="Loading composer"
-        className="w-full p-6 rounded-2xl bg-[#121212] border border-[#262626] mb-8 animate-pulse space-y-4"
+        className="w-full p-6 sm:p-8 rounded-3xl bg-white/95 border border-zinc-200/90 mb-8 animate-pulse space-y-4 shadow-sm"
       >
         <div className="flex items-center justify-between">
-          <div className="h-5 w-32 bg-[#1c1c1c] rounded-full" />
-          <div className="h-6 w-20 bg-[#1c1c1c] rounded-full" />
+          <div className="h-5 w-32 bg-zinc-200 rounded-full" />
+          <div className="h-6 w-20 bg-zinc-200 rounded-full" />
         </div>
-        <div className="h-10 w-full bg-[#161616] rounded-xl" />
-        <div className="h-24 w-full bg-[#161616] rounded-xl" />
+        <div className="h-10 w-full bg-zinc-100 rounded-xl" />
+        <div className="h-24 w-full bg-zinc-100 rounded-xl" />
       </div>
     ),
   }
@@ -37,23 +37,23 @@ async function CommunityFeedSlot({ searchParams }) {
 
 export default function CommunityPage({ searchParams }) {
   return (
-    <div className="flex-1 flex flex-col bg-[#0a0a0a] min-h-[calc(100vh-4rem)] bg-blueprint-grid">
+    <div className="flex-1 flex flex-col bg-transparent min-h-[calc(100vh-4rem)] relative selection:bg-emerald-100 selection:text-emerald-900">
       {/* Community Header Shell */}
       <section
         aria-label="Community Header"
-        className="border-b border-[#262626] bg-[#0c0c0c]/80 backdrop-blur py-10 sm:py-14"
+        className="border-b border-zinc-200/90 bg-white/70 backdrop-blur-md py-10 sm:py-14"
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-4 text-center sm:text-left">
           <div className="inline-flex items-center gap-2">
-            <Badge variant="accent" size="sm">
+            <span className="text-xs font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
               Community Knowledge Exchange
-            </Badge>
-            <span className="text-xs text-[#71717a] font-mono">• {REWARD_PER_POST} EXPEN / Valid Post</span>
+            </span>
+            <span className="text-xs text-zinc-500 font-mono">• {REWARD_PER_POST} EXPEN / Valid Post</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#ededed] font-display">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
             Machinist Tacit Knowledge Feed
           </h1>
-          <p className="text-sm sm:text-base text-[#a1a1aa] max-w-2xl leading-relaxed">
+          <p className="text-sm sm:text-base text-zinc-600 max-w-2xl leading-relaxed font-body">
             Preserving decades of tooling setups, chatter dampening techniques,
             and shop-floor insights. Contributed by veteran operators and
             rewarded with EXPEN tokens on MST Testnet.
@@ -61,19 +61,19 @@ export default function CommunityPage({ searchParams }) {
 
           {/* Live Knowledge Ledger Banner */}
           <div className="pt-2">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#121212] border border-[#262626] text-xs font-mono specular-card">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 rounded-3xl bg-white/95 backdrop-blur-xl border border-zinc-200/90 text-xs font-mono shadow-md">
               <div className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-[#26d464] animate-pulse" />
-                <span className="text-[#a1a1aa]">TOTAL ARCHIVED INSIGHTS:</span>
-                <span className="text-[#ededed] font-bold">12</span>
+                <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
+                <span className="text-zinc-500">TOTAL ARCHIVED INSIGHTS:</span>
+                <span className="text-zinc-900 font-bold">12</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#a1a1aa]">EXPEN REWARD POOL:</span>
-                <span className="text-[#26d464] font-bold">ACTIVE (MST)</span>
+                <span className="text-zinc-500">EXPEN REWARD POOL:</span>
+                <span className="text-emerald-700 font-bold">ACTIVE (MST)</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-[#a1a1aa]">DAILY CAP / WALLET:</span>
-                <span className="text-[#ededed] font-bold">{DAILY_CAP} EXPEN</span>
+                <span className="text-zinc-500">DAILY CAP / WALLET:</span>
+                <span className="text-zinc-900 font-bold">{DAILY_CAP} EXPEN</span>
               </div>
             </div>
           </div>
@@ -92,10 +92,10 @@ export default function CommunityPage({ searchParams }) {
               {[1, 2, 3].map((n) => (
                 <div
                   key={n}
-                  className="p-6 rounded-2xl bg-[#121212] border border-[#262626] space-y-4 animate-pulse"
+                  className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 space-y-4 animate-pulse shadow-sm"
                 >
-                  <div className="h-6 w-24 bg-[#1c1c1c] rounded-full" />
-                  <div className="h-6 w-3/4 bg-[#1c1c1c] rounded" />
+                  <div className="h-6 w-24 bg-zinc-200 rounded-full" />
+                  <div className="h-6 w-3/4 bg-zinc-200 rounded" />
                 </div>
               ))}
             </div>

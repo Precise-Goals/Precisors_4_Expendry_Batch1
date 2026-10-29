@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { POST_TYPES } from "shared/constants";
 
@@ -54,7 +54,7 @@ export default function FilterTabs({ activeType = "All", onSelectType }) {
       <div
         role="tablist"
         aria-label="Filter posts by type"
-        className="flex items-center gap-2 p-1.5 rounded-xl bg-[#121212] border border-[#262626] w-max min-w-full sm:min-w-0"
+        className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-100/90 border border-zinc-200/90 w-max min-w-full sm:min-w-0"
       >
         {ALL_TABS.map((tab, idx) => {
           const isSelected = activeType === tab;
@@ -71,10 +71,10 @@ export default function FilterTabs({ activeType = "All", onSelectType }) {
               tabIndex={isSelected ? 0 : -1}
               onClick={() => handleSelect(tab)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all focus:outline-none focus:ring-2 focus:ring-[#26d464] whitespace-nowrap select-none ${
+              className={`px-4 py-2 text-xs font-montserrat font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-emerald-600 whitespace-nowrap select-none cursor-pointer ${
                 isSelected
-                  ? "bg-[#26d464] text-black shadow-sm shadow-[#26d464]/20"
-                  : "text-[#a1a1aa] hover:text-[#ededed] hover:bg-[#1a1a1a]"
+                  ? "bg-emerald-800 text-white shadow-xs"
+                  : "text-zinc-600 hover:text-zinc-900 hover:bg-white/80"
               }`}
             >
               {tab}
