@@ -417,14 +417,14 @@ footer a:hover svg,
   color: #16a34a !important;
 }
 
-.kol::After {
+.kol::after {
     content: "";
     display: block;
-    background: #ffffff24;
-    width: 43%;
+    background: #ffffffc7;
+    width: 45%;
     height: 30rem;
     position: absolute;
     top: 0;
     z-index: -1;
-    filter: blur(16px);
+    filter: blur(15px);
 }

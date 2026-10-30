@@ -141,7 +141,7 @@ export default function Home() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center min-h-[480px] lg:min-h-[540px]">
             {/* Left Column: Bold Headline & CTAs */}
-            <div className="lg:col-span-7 space-y-6 sm:space-y-7 text-left">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-7 text-left kol">
               {/* Protocol Status Beacon */}
               <motion.div
                 variants={itemVariants}
@@ -653,7 +653,10 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#09090b] font-display">
               A Closed-Loop Knowledge Economy for Precision Manufacturing
             </h2>
-            <p className="text-sm sm:text-base leading-relaxed text-zinc-800">
+            <p className="text-sm sm:text-base leading-relaxed text-zinc-800"
+            style={{
+              color:"black"
+            }}>
               &quot;Where experience is never retired.&quot; We transform shop-floor
               wisdom into verifiable on-chain knowledge assets through a 3-step
               incentive loop.

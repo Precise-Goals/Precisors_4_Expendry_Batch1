@@ -9,11 +9,11 @@ import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/community", label: "Feed" },
-  { href: "/marketplace", label: "3D Market" },
-  { href: "/blueprints", label: "Blueprints" },
-  { href: "/experience", label: "Tacit Audio" },
+  { href: "/marketplace", label: "Marketplace" },
   { href: "/showcase", label: "3D CAD" },
   { href: "/chat", label: "AI Pulse" },
+  { href: "/blueprints", label: "Blueprints" },
+  { href: "/experience", label: "Tacit Audio" },
   { href: "/heritage", label: "Heritage" },
   { href: "/about", label: "About" },
 ];
@@ -129,6 +129,9 @@ export default function Navbar() {
           <Link
             href="/login"
             className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-montserrat font-bold transition shadow-md shadow-emerald-950/20 active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
+            style={{
+              color:"white"
+            }}
           >
             <span>Sign In</span>
             <span aria-hidden="true">→</span>
