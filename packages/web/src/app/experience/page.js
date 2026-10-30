@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Button } from "@/components/ui/Button";
 import {
   IconAcoustics,
@@ -86,7 +87,7 @@ const MATERIALS = [
 ];
 
 export default function ExperiencePage() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const [activeStoryId, setActiveStoryId] = useState("exp-01");
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);

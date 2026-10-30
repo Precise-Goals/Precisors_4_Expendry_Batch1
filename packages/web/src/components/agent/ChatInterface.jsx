@@ -190,17 +190,25 @@ export default function ChatInterface({
         audioRef.current = null;
       }
 
+      // Clean markdown tags & URLs so TTS receives clean speakable text
+      const cleanText = text
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/[*_#`~>]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
       const res = await fetch("/api/agent/speak", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text, lang: msgLang || "en" }),
+        body: JSON.stringify({ text: cleanText, lang: msgLang || "auto" }),
       });
 
       if (!res.ok) throw new Error("Synthesis failed");
       const data = await res.json();
+      const audioBase64 = data.audio || data.audio_base64;
 
-      if (data.audio && data.audio !== "mock-audio-base64-test") {
-        const audio = new Audio(`data:audio/wav;base64,${data.audio}`);
+      if (audioBase64 && audioBase64 !== "mock-audio-base64-test") {
+        const audio = new Audio(`data:audio/wav;base64,${audioBase64}`);
         audioRef.current = audio;
         audio.onended = () => setSpeakingMsgId(null);
         audio.onerror = () => setSpeakingMsgId(null);

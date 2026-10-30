@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Card } from "@/components/ui/Card";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
@@ -34,7 +35,7 @@ export default function ProfileSetupStep({
   onBack,
   isLoading = false,
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const containerRef = useRef(null);
   useFocusTrap(containerRef, true, onBack);
 

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import {
@@ -73,7 +74,7 @@ const CORE_PILLARS = [
 ];
 
 export default function AboutPage() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const [activeEra, setActiveEra] = useState(3);
   const [copiedContract, setCopiedContract] = useState(false);
 

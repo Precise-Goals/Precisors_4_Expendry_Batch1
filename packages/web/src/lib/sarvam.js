@@ -240,8 +240,14 @@ export async function synthesise(text, lang = DEFAULT_LANGUAGE) {
     throw new SarvamError("Text is required for audio synthesis", 400);
   }
 
-  const resolvedLang = normalizeLanguage(lang);
-  const langCode = SARVAM_LANGUAGE_CODES[resolvedLang] || "en-IN";
+  let resolvedLang = normalizeLanguage(lang);
+  if (resolvedLang === "auto") {
+    resolvedLang = detectLanguage(text);
+  }
+  let langCode = SARVAM_LANGUAGE_CODES[resolvedLang] || "en-IN";
+  if (langCode === "unknown" || !langCode) {
+    langCode = "en-IN";
+  }
   const apiKey = getApiKey();
   const baseUrl = getBaseUrl();
 

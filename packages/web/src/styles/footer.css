@@ -19,3 +19,6 @@ footer a:hover svg,
   color: #16a34a !important;
 }
 
+section.py-16.sm\:py-24.bg-transparent {
+    border: none;
+}

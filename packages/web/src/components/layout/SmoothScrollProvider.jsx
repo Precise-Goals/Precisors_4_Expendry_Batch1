@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 
 /**
  * High-Precision Non-Glitchy Inertial Smooth Scroll Engine
@@ -9,7 +9,7 @@ import { useReducedMotion } from "framer-motion";
  * smoothing stepped discrete mouse wheels with luxury deceleration.
  */
 export default function SmoothScrollProvider({ children }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const isScrolling = useRef(false);
   const targetY = useRef(0);
   const currentY = useRef(0);

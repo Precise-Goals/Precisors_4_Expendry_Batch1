@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
+import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 
 /**
  * Magnetic Element Tracking & Specular Reflection Engine
@@ -18,7 +19,7 @@ export function MagneticTrack({
   as = "div",
   ...props
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
 

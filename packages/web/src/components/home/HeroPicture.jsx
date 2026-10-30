@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 
 /**
  * HeroPicture — High-Fidelity Precision Medical & Industrial CNC Showcase
@@ -10,7 +11,7 @@ import { motion, useReducedMotion } from "framer-motion";
  * and contextual telemetry chips for the Expendry hero section.
  */
 export default function HeroPicture() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const [isHovered, setIsHovered] = useState(false);
 
   return (

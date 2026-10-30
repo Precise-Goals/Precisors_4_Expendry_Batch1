@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Badge } from "@/components/ui/Badge";
 import { MagneticTrack } from "@/components/ui/MagneticTrack";
 import {
@@ -32,7 +33,7 @@ const SPINDLE_PRESETS = [
 ];
 
 export default function Home() {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const [analyzingFlutter, setAnalyzingFlutter] = useState(false);
   const [activePresetIndex, setActivePresetIndex] = useState(0);
   const [calculatorPosts, setCalculatorPosts] = useState(3);
@@ -103,7 +104,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Hero Section"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-[#e4e4e7] bg-transparent min-h-[580px] lg:min-h-[640px] flex items-center"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24   bg-transparent min-h-[580px] lg:min-h-[640px] flex items-center"
       >
         {/* Hero Background Photo (h.png) */}
         <div
@@ -258,11 +259,11 @@ export default function Home() {
       {/* ──────────────────────────────────────────────────────────
           2. INTERACTIVE DRO MACHINING CONTROL DECK
          ────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-transparent border-b border-[#e4e4e7] relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-transparent   relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto rounded-3xl glass-card border border-zinc-200/90 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
             {/* Header Telemetry Row */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4  ">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
                   <IconAcoustics className="w-5 h-5" />
@@ -401,7 +402,7 @@ export default function Home() {
       {/* ──────────────────────────────────────────────────────────
           3. LIVE TELEMETRY MARQUEE TICKER
          ────────────────────────────────────────────────────────── */}
-      <div className="w-full bg-[#f8fafc] border-b border-[#e4e4e7] py-2.5 px-4 overflow-hidden">
+      <div className="w-full bg-[#f8fafc]   py-2.5 px-4 overflow-hidden">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono text-zinc-600">
           <div className="flex items-center gap-3">
             <span className="text-[#16a34a] font-bold flex items-center gap-1.5">
@@ -429,10 +430,10 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Platform Architecture Portals"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
+        className="py-16 sm:py-24   bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#e4e4e7] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4   pb-4">
             <div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#09090b] font-display">
                 Industrial Architecture & Operating Modules
@@ -632,7 +633,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="How Expendry Works"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
+        className="py-16 sm:py-24   bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
@@ -743,7 +744,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Veteran Insights"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
+        className="py-16 sm:py-24   bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="space-y-3 max-w-2xl">
@@ -876,7 +877,7 @@ export default function Home() {
 
               {/* DRO Console Box */}
               <div className="p-7 rounded-3xl glass-card border border-zinc-200/90 space-y-6 shadow-md">
-                <div className="flex items-center justify-between border-b border-[#e4e4e7] pb-3 text-xs font-mono">
+                <div className="flex items-center justify-between   pb-3 text-xs font-mono">
                   <span className="text-zinc-700 font-semibold">DAILY VALID CONTRIBUTIONS</span>
                   <div className="flex items-center gap-2">
                     <button

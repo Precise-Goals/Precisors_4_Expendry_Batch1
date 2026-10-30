@@ -90,5 +90,39 @@ describe("Sprint 5 Integration & Sanity Test Suite", () => {
       expect(jsonHi.success).toBe(true);
       expect(jsonHi.language).toBe("hi");
     });
+
+    it("automatically detects language and avoids unknown target codes when lang is auto", async () => {
+      const requestAutoHindi = new Request("http://localhost:3000/api/agent/speak", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: "नमस्ते दोस्तों, कैसे हैं आप सब?",
+          lang: "auto",
+        }),
+      });
+
+      const resAuto = await speakHandler(requestAutoHindi);
+      expect(resAuto.status).toBe(200);
+      const jsonAuto = await resAuto.json();
+      expect(jsonAuto.success).toBe(true);
+      expect(jsonAuto.language).toBe("hi");
+      expect(jsonAuto.audio).toBeDefined();
+      expect(jsonAuto.audio_base64).toBeDefined();
+
+      const requestAutoEnglish = new Request("http://localhost:3000/api/agent/speak", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: "Welcome to Expendry manufacturing platform",
+          language_code: "auto",
+        }),
+      });
+
+      const resAutoEn = await speakHandler(requestAutoEnglish);
+      expect(resAutoEn.status).toBe(200);
+      const jsonAutoEn = await resAutoEn.json();
+      expect(jsonAutoEn.success).toBe(true);
+      expect(jsonAutoEn.language).toBe("en");
+    });
   });
 });

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { synthesise, normalizeLanguage } from "@/lib/sarvam";
+import { synthesise, normalizeLanguage, detectLanguage } from "@/lib/sarvam";
 
 export async function POST(request) {
   try {
@@ -13,7 +13,7 @@ export async function POST(request) {
       );
     }
 
-    const { text, lang = "en" } = body || {};
+    const { text, lang, language_code } = body || {};
 
     if (!text || typeof text !== "string" || !text.trim()) {
       return NextResponse.json(
@@ -22,13 +22,19 @@ export async function POST(request) {
       );
     }
 
-    const resolvedLang = normalizeLanguage(lang);
+    const inputLang = lang || language_code || "auto";
+    let resolvedLang = normalizeLanguage(inputLang);
+    if (resolvedLang === "auto") {
+      resolvedLang = detectLanguage(text);
+    }
+
     const apiKey = process.env.SARVAM_API_KEY;
 
     if (!apiKey || apiKey.startsWith("test-")) {
       return NextResponse.json({
         success: true,
         audio: "mock-audio-base64-test",
+        audio_base64: "mock-audio-base64-test",
         language: resolvedLang,
       });
     }
@@ -38,12 +44,14 @@ export async function POST(request) {
     return NextResponse.json({
       success: true,
       audio: result.audio,
+      audio_base64: result.audio,
       language: result.language,
     });
   } catch (err) {
+    console.error("Audio synthesis error:", err.message);
     return NextResponse.json(
       { error: err.message || "Failed to synthesise audio" },
-      { status: 500 }
+      { status: err.status && err.status >= 400 && err.status < 600 ? err.status : 500 }
     );
   }
 }

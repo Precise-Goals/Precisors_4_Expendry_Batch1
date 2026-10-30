@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 import { Card } from "@/components/ui/Card";
 import { IconToken, IconCheck, IconExternal } from "@/components/ui/Icons";
 import { useWallet } from "@/hooks/useWallet";
 import { CHAIN_ID } from "shared/constants";
 
 export default function WalletConnectStep({ onConnected, initialAddress = null }) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
   const { connect, address, formattedAddress, isConnected, isConnecting, error: walletError } = useWallet();
   const [localError, setLocalError] = useState(null);
 

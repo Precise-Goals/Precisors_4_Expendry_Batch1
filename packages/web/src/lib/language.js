@@ -12,6 +12,9 @@ export function normalizeLanguage(lang, fallback = DEFAULT_LANGUAGE) {
   if (!lang || typeof lang !== "string") return fallback;
   const clean = lang.toLowerCase().trim();
   if (clean === "auto") return "auto";
+  if (clean === "hi" || clean.startsWith("hi-") || clean.startsWith("hi_")) return "hi";
+  if (clean === "mr" || clean.startsWith("mr-") || clean.startsWith("mr_")) return "mr";
+  if (clean === "en" || clean.startsWith("en-") || clean.startsWith("en_")) return "en";
   return SUPPORTED_LANGUAGES.includes(clean) ? clean : fallback;
 }
 

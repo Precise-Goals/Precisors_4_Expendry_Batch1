@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useSafeReducedMotion } from "@/hooks/useSafeReducedMotion";
 
 export default function PageTransition({ children }) {
   const pathname = usePathname();
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = useSafeReducedMotion();
 
   const variants = {
     initial: {
@@ -32,7 +33,7 @@ export default function PageTransition({ children }) {
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
         variants={variants}
