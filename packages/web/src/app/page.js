@@ -118,12 +118,16 @@ export default function Home() {
             priority
             quality={95}
             className="object-cover object-right lg:object-center"
+            style={{
+              borderRadius:"40rem 15rem 40rem 15rem",
+            }}
+
           />
           {/* Directional gradient wash: preserves crystal-clear text contrast on left, reveals medical implants on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 sm:via-white/75 to-transparent z-10" />
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 sm:via-white/75 to-transparent z-10" /> */}
           {/* Soft top & bottom edge integration */}
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent z-10" />
-          <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-white/70 to-transparent z-10" />
+          {/* <div className="absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-white/70 to-transparent z-10" /> */}
         </div>
 
         <motion.div
@@ -154,9 +158,15 @@ export default function Home() {
               <motion.h1
                 variants={itemVariants}
                 className="text-4xl sm:text-6xl lg:text-[68px] xl:text-[76px] font-extrabold tracking-tight text-[#09090b] leading-[1.06] text-balance font-montserrat"
+                style={{
+                  fontSize:"3rem"
+                }}
               >
                 Where Decades of <br />
-                <span className="font-editorial-italic font-normal text-zinc-800 tracking-normal text-[1.06em]">
+                <span className="font-editorial-italic font-normal text-zinc-800 tracking-normal text-[1.06em]"
+                style={{
+                  fontFamily:"Montserrat"
+                }}>
                   Machining Wisdom
                 </span> <br />
                 <span className="text-[#16a34a] font-extrabold tracking-tight">Never Retires</span>
@@ -641,7 +651,7 @@ export default function Home() {
               A Closed-Loop Knowledge Economy for Precision Manufacturing
             </h2>
             <p className="text-sm sm:text-base leading-relaxed"
-            style={{color:""}}>
+            style={{color:"black"}}>
               &quot;Where experience is never retired.&quot; We transform shop-floor
               wisdom into verifiable on-chain knowledge assets through a 3-step
               incentive loop.

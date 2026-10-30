@@ -7,8 +7,8 @@ describe("Button UI Primitive", () => {
   it("renders children and default primary variant", () => {
     const html = renderToString(React.createElement(Button, null, "Connect Wallet"));
     expect(html).toContain("Connect Wallet");
-    expect(html).toContain("bg-[#26d464]");
-    expect(html).toContain("text-black");
+    expect(html).toContain("bg-emerald-800");
+    expect(html).toContain("text-white");
     expect(html).toContain('type="button"');
   });
 

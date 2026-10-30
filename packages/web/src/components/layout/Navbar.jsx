@@ -70,7 +70,7 @@ export default function Navbar() {
             className="flex items-center gap-2 text-base sm:text-lg font-black tracking-tight text-zinc-950 hover:text-emerald-700 transition-colors font-montserrat"
             aria-label="Expendry Home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl overflow-hidden bg-white/90 border border-emerald-200/90 shadow-2xs shrink-0 p-0.5">
+            <span style={{borderRadius:"4rem"}} className="flex h-8 w-8 items-center justify-center rounded-xl overflow-hidden bg-white/90 border border-emerald-200/90 shadow-2xs shrink-0 ">
               <img
                 src="/logo1to1.png"
                 alt="Expendry Short Icon"

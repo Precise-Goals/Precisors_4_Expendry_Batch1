@@ -22,7 +22,7 @@ export const Button = React.forwardRef(function Button(
 
   const variants = {
     primary:
-      "bg-[#26d464] text-black font-semibold hover:bg-[#21b856] active:bg-[#1fa34c] shadow-md shadow-[#26d464]/10 hover:shadow-[#26d464]/20",
+      "bg-emerald-800 text-white font-semibold hover:bg-emerald-900 active:bg-emerald-950 shadow-md shadow-emerald-950/20",
     secondary:
       "bg-[#161616] text-white border border-[#262626] hover:bg-[#202020] hover:border-[#383838] hover:text-white active:bg-[#121212] shadow-sm",
     ghost:
@@ -30,7 +30,7 @@ export const Button = React.forwardRef(function Button(
     tech:
       "bg-[#1c1208] text-[#f97316] border border-[#ea580c]/40 hover:bg-[#291a0c] hover:border-[#f97316]/70 shadow-sm shadow-[#f97316]/10 active:bg-[#120b04]",
     orange:
-      "bg-[#f97316] text-black font-semibold hover:bg-[#ea580c] active:bg-[#c2410c] shadow-md shadow-[#f97316]/20",
+      "bg-[#ea580c] text-white font-semibold hover:bg-[#c2410c] active:bg-[#9a3412] shadow-md shadow-[#ea580c]/20",
     contrast:
       "bg-white text-black font-semibold hover:bg-zinc-200 active:bg-zinc-300 shadow-md",
     danger:
