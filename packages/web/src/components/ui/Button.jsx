@@ -26,7 +26,7 @@ export const Button = React.forwardRef(function Button(
     secondary:
       "bg-[#161616] text-white border border-[#262626] hover:bg-[#202020] hover:border-[#383838] hover:text-white active:bg-[#121212] shadow-sm",
     ghost:
-      "bg-transparent text-[#a1a1aa] hover:text-white hover:bg-[#161616] active:bg-[#121212]",
+      "bg-transparent text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 active:bg-zinc-200 font-semibold",
     tech:
       "bg-[#1c1208] text-[#f97316] border border-[#ea580c]/40 hover:bg-[#291a0c] hover:border-[#f97316]/70 shadow-sm shadow-[#f97316]/10 active:bg-[#120b04]",
     orange:

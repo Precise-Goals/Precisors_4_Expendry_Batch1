@@ -205,8 +205,8 @@ export default function ExperiencePage() {
         className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-zinc-200/90 bg-white/70 backdrop-blur-md"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [AUDIO // TACIT EXP]</div>
-          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [MST-{CHAIN_ID}]</div>
+          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-600 font-bold">+ [AUDIO // TACIT EXP]</div>
+          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-600 font-bold">+ [MST-{CHAIN_ID}]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
@@ -214,14 +214,14 @@ export default function ExperiencePage() {
             <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
             <span className="text-xs font-mono font-bold text-zinc-900">Machinist Tacit Audio & Story Archive</span>
             <span className="text-zinc-300">•</span>
-            <span className="text-xs font-mono font-bold text-emerald-700">Earn {REWARD_PER_POST} EXPEN / Valid Entry</span>
+            <span className="text-xs font-mono font-bold text-emerald-800">Earn {REWARD_PER_POST} EXPEN / Valid Entry</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 font-montserrat leading-[1.15]">
             Veteran Machinist Tacit Experience Hub
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-3xl font-body">
+          <p className="text-base sm:text-lg text-zinc-700 leading-relaxed max-w-3xl font-body">
             Real machine shop know-how lives in acoustic pitch, chip curl color, and tactile vibration.
             Listen to master operators share decades of field-tested tricks that prevent broken tooling,
             dampen chatter, and save thousands in scrap.
@@ -255,14 +255,14 @@ export default function ExperiencePage() {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <IconAcoustics className="w-5 h-5 text-emerald-700" />
-                <span className="text-xs font-mono uppercase tracking-wider text-emerald-800 font-bold">
+                <span className="text-xs font-mono uppercase tracking-wider text-emerald-900 font-bold">
                   Interactive Shop-Floor Diagnostic
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
                 Machinist Harmonic Resonance & Chatter Simulator
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-600 max-w-2xl font-body">
+              <p className="text-xs sm:text-sm text-zinc-700 max-w-2xl font-body">
                 Adjust tool overhang, workpiece alloy, and spindle speed to see how harmonic vibration develops—and how veteran operators dampen it.
               </p>
             </div>
@@ -274,13 +274,13 @@ export default function ExperiencePage() {
             >
               {audioMuted ? (
                 <>
-                  <IconVolumeMute className="w-4 h-4 text-zinc-400" />
+                  <IconVolumeMute className="w-4 h-4 text-zinc-600" />
                   <span>Acoustic Audio Muted</span>
                 </>
               ) : (
                 <>
                   <IconVolume className="w-4 h-4 text-emerald-700" />
-                  <span className="text-emerald-800">Synthesizer Active</span>
+                  <span className="text-emerald-900 font-bold">Synthesizer Active</span>
                 </>
               )}
             </button>
@@ -291,7 +291,7 @@ export default function ExperiencePage() {
             <div className="lg:col-span-5 p-6 sm:p-7 rounded-4xl bg-white border border-zinc-200/90 shadow-xl space-y-5">
               {/* Alloy Selector */}
               <div>
-                <label className="text-xs font-mono uppercase text-zinc-500 font-bold block mb-2">
+                <label className="text-xs font-mono uppercase text-zinc-700 font-bold block mb-2">
                   Workpiece Material
                 </label>
                 <div className="grid grid-cols-2 gap-2">
@@ -303,11 +303,11 @@ export default function ExperiencePage() {
                       className={`p-3 rounded-2xl border text-left text-xs font-mono transition cursor-pointer ${
                         selectedMaterial === idx
                           ? "bg-emerald-50/80 border-emerald-600 text-zinc-900 font-bold shadow-xs ring-2 ring-emerald-600/10"
-                          : "bg-zinc-50 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-white"
+                          : "bg-zinc-50 border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-white font-semibold"
                       }`}
                     >
                       <div className="truncate font-bold">{mat.name}</div>
-                      <div className="text-[11px] text-emerald-700 font-bold mt-0.5">{mat.hardness}</div>
+                      <div className="text-[11px] text-emerald-800 font-bold mt-0.5">{mat.hardness}</div>
                     </button>
                   ))}
                 </div>
@@ -316,8 +316,8 @@ export default function ExperiencePage() {
               {/* RPM Slider */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-mono">
-                  <span className="text-zinc-500 font-bold">Spindle Speed (RPM)</span>
-                  <span className="text-emerald-700 font-bold">{rpm} RPM</span>
+                  <span className="text-zinc-700 font-bold">Spindle Speed (RPM)</span>
+                  <span className="text-emerald-800 font-bold">{rpm} RPM</span>
                 </div>
                 <input
                   type="range"
@@ -328,9 +328,9 @@ export default function ExperiencePage() {
                   onChange={(e) => setRpm(Number(e.target.value))}
                   className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                 />
-                <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                <div className="flex justify-between text-[11px] font-mono text-zinc-600 font-medium">
                   <span>600 RPM</span>
-                  <span className="font-bold text-zinc-700">Optimal: {currentMat.baseRpm}</span>
+                  <span className="font-bold text-zinc-800">Optimal: {currentMat.baseRpm}</span>
                   <span>4500 RPM</span>
                 </div>
               </div>
@@ -338,8 +338,8 @@ export default function ExperiencePage() {
               {/* Overhang Slider */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-mono">
-                  <span className="text-zinc-500 font-bold">Tool Overhang Ratio (L/D)</span>
-                  <span className="text-zinc-900 font-bold">{overhang}:1</span>
+                  <span className="text-zinc-700 font-bold">Tool Overhang Ratio (L/D)</span>
+                  <span className="text-zinc-950 font-bold">{overhang}:1</span>
                 </div>
                 <input
                   type="range"
@@ -350,7 +350,7 @@ export default function ExperiencePage() {
                   onChange={(e) => setOverhang(Number(e.target.value))}
                   className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                 />
-                <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                <div className="flex justify-between text-[11px] font-mono text-zinc-600 font-medium">
                   <span>2:1 (Rigid)</span>
                   <span>4:1 (Standard)</span>
                   <span>7:1 (Extreme)</span>
@@ -361,14 +361,14 @@ export default function ExperiencePage() {
             {/* Diagnostic Viewport & Readout */}
             <div className="lg:col-span-7 p-6 sm:p-7 rounded-4xl bg-white border border-zinc-200/90 shadow-xl space-y-6">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
-                <span className="text-xs font-mono uppercase text-zinc-500 font-bold">
+                <span className="text-xs font-mono uppercase text-zinc-700 font-bold">
                   Acoustic Spectrum & Waveform
                 </span>
                 <span
                   className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
                     isResonanceZone
                       ? "bg-red-50 text-red-700 border border-red-200 shadow-2xs"
-                      : "bg-emerald-50 text-emerald-800 border border-emerald-200 shadow-2xs"
+                      : "bg-emerald-50 text-emerald-900 border border-emerald-300 shadow-2xs"
                   }`}
                 >
                   {isResonanceZone ? "SEVERE CHATTER DETECTED" : "STABLE CUTTING ZONE"}
@@ -377,7 +377,7 @@ export default function ExperiencePage() {
 
               {/* Dynamic Waveform Graph simulation */}
               <div className="h-32 w-full rounded-2xl bg-zinc-50 border border-zinc-200 p-4 flex items-center justify-center gap-1.5 relative overflow-hidden">
-                <div className="absolute top-2 left-3 text-[11px] font-mono font-bold text-zinc-500">
+                <div className="absolute top-2 left-3 text-[11px] font-mono font-bold text-zinc-600">
                   PEAK: {calculatedResonance} Hz · {isResonanceZone ? "AMPLITUDE: 8.4 mm/s (UNSTABLE)" : "AMPLITUDE: 0.9 mm/s (STABLE)"}
                 </div>
                 {[12, 28, 45, 80, 52, 95, 34, 76, 20, 60, 88, 40, 25, 70, 90, 30, 48, 65, 35, 20].map((h, i) => {
@@ -409,7 +409,7 @@ export default function ExperiencePage() {
 
               {/* Tacit Advice Box */}
               <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-900">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-zinc-950">
                   {isResonanceZone ? (
                     <IconAlert className="w-4 h-4 text-amber-600" />
                   ) : (
@@ -417,7 +417,7 @@ export default function ExperiencePage() {
                   )}
                   <span>Veteran Machinist Diagnostic Recommendation:</span>
                 </div>
-                <p className="text-xs text-zinc-600 leading-relaxed font-body">
+                <p className="text-xs text-zinc-700 leading-relaxed font-body">
                   {isResonanceZone
                     ? `Resonance frequency of ${calculatedResonance} Hz coincides with the natural harmonic frequency of ${currentMat.name}. Shift spindle RPM to ${
                         currentMat.baseRpm - 200
@@ -440,10 +440,10 @@ export default function ExperiencePage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-zinc-200 pb-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
                 Featured Shop-Floor Experience Logs
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-600 mt-1 font-body">
+              <p className="text-xs sm:text-sm text-zinc-700 mt-1 font-body">
                 Listen to authentic setups, audio recordings, and field tricks recorded by master machinists.
               </p>
             </div>
@@ -458,7 +458,7 @@ export default function ExperiencePage() {
                   className={`px-3.5 py-1.5 rounded-xl border transition cursor-pointer font-bold ${
                     activeTab === cat
                       ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
-                      : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                      : "bg-white border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 font-semibold"
                   }`}
                 >
                   {cat}
@@ -477,20 +477,20 @@ export default function ExperiencePage() {
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
+                      <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-900 font-bold">
                         {story.category}
                       </span>
-                      <span className="text-zinc-500 flex items-center gap-1 font-bold">
+                      <span className="text-zinc-600 flex items-center gap-1 font-bold">
                         <IconCheck className="w-3.5 h-3.5 text-emerald-700" />
                         <span>MST Verified</span>
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                    <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                       {story.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                    <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                       {story.summary}
                     </p>
                   </div>
@@ -504,19 +504,19 @@ export default function ExperiencePage() {
                         className={`h-10 w-10 rounded-full flex items-center justify-center transition cursor-pointer ${
                           active
                             ? "bg-emerald-800 text-white shadow-md shadow-emerald-950/20"
-                            : "bg-zinc-100 text-zinc-900 hover:bg-zinc-200 border border-zinc-200"
+                            : "bg-zinc-100 text-zinc-950 hover:bg-zinc-200 border border-zinc-300 font-bold"
                         }`}
                         aria-label={active ? "Pause audio" : "Play audio log"}
                       >
                         {active ? (
                           <IconPause className="w-4 h-4 text-white" />
                         ) : (
-                          <IconPlay className="w-4 h-4 ml-0.5 text-zinc-900" />
+                          <IconPlay className="w-4 h-4 ml-0.5 text-zinc-950" />
                         )}
                       </button>
 
                       <div className="flex-1 text-xs font-mono">
-                        <div className="flex justify-between text-[11px] text-zinc-500 mb-1">
+                        <div className="flex justify-between text-[11px] text-zinc-600 font-medium mb-1">
                           <span className="font-bold">{active ? "ACOUSTIC LOG PLAYING" : "VETERAN VOICE MEMO"}</span>
                           <span>{story.audioDuration} ({story.frequencyHz} Hz)</span>
                         </div>
@@ -532,13 +532,13 @@ export default function ExperiencePage() {
                     </div>
 
                     {/* Author & Reward Badge */}
-                    <div className="flex items-center justify-between text-xs font-mono text-zinc-500 pt-1">
+                    <div className="flex items-center justify-between text-xs font-mono text-zinc-600 pt-1">
                       <div>
-                        <span className="text-zinc-900 font-bold">{story.author}</span>
+                        <span className="text-zinc-950 font-bold">{story.author}</span>
                         <span className="text-zinc-300"> · </span>
                         <span>{story.location}</span>
                       </div>
-                      <div className="text-emerald-700 font-bold">
+                      <div className="text-emerald-800 font-bold">
                         +{story.rewardAmount}
                       </div>
                     </div>
@@ -558,10 +558,10 @@ export default function ExperiencePage() {
         className="py-14 max-w-5xl mx-auto my-8 px-4 sm:px-6 lg:px-8 w-full"
       >
         <div className="rounded-4xl bg-white border border-zinc-200/90 shadow-2xl p-8 sm:p-12 text-center space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-montserrat">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 font-montserrat">
             Have a Hard-Won Shop Secret?
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 max-w-xl mx-auto font-body">
+          <p className="text-xs sm:text-sm text-zinc-700 max-w-xl mx-auto font-body">
             Share your fixturing trick, thermal offset, or chatter solution with the community. Valid posts mint {REWARD_PER_POST} EXPEN tokens directly to your wallet on MST Testnet (Chain ID: {CHAIN_ID}, up to {DAILY_CAP} EXPEN daily).
           </p>
           <div className="pt-2">

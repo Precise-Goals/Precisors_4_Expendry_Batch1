@@ -17,9 +17,16 @@ export default function Footer() {
     <footer
       aria-label="Site footer"
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 select-none relative"
+      style={{
+        width:"100%",
+        maxWidth:"80vw"
+      }}
     >
       {/* Floating Island White Container */}
-      <div className="footer-container relative rounded-4xl bg-white/80 glass-panel border border-zinc-200/90 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] overflow-hidden p-8 sm:p-12 lg:p-16">
+      <div className="footer-container relative rounded-4xl bg-white/80 glass-panel border border-zinc-200/90 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] overflow-hidden p-8 sm:p-12 lg:p-16"
+      style={{
+        borderRadius:"4rem"
+      }}>
         {/* Top Radiant Gradient Accent Strip */}
         <div
           className="footer-top-strip absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700"
@@ -220,12 +227,15 @@ export default function Footer() {
             <span
               className="bg-clip-text text-transparent bg-gradient-to-r from-zinc-950 via-zinc-900 to-emerald-950 relative"
               style={{
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "currentColor",
-                color: "#09090b",
+                fontSize: "18rem",
+                backgroundImage: "url('/images/horizon.png')",
+                WebkitBackgroundClip:"text",
+                backgroundPositionY:"40%",
+                backgroundSize:"cover",
+                backgroundClip: "text",
+                color: "transparent"
               }}
-            >
-              expendry
+            >Expendry.
               <sup
                 className="text-[0.22em] font-extrabold text-emerald-600 align-super ml-1 sm:ml-2"
                 aria-label="Registered trademark"

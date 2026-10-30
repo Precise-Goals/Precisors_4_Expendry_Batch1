@@ -87,7 +87,7 @@ export default async function ProductDetailPage({ params }) {
               <span className="telemetry-chip">
                 {product.category}
               </span>
-              <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider font-bold">
+              <span className="text-[10px] font-mono text-zinc-700 uppercase tracking-wider font-bold">
                 Precision Grade A1
               </span>
             </div>
@@ -113,13 +113,13 @@ export default async function ProductDetailPage({ params }) {
               {product.has3DModel ? (
                 <Link
                   href={`/showcase?model=${product.modelId}`}
-                  className="inline-flex items-center justify-center gap-2.5 w-full px-5 py-3.5 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white transition text-xs font-bold font-montserrat shadow-md group active:scale-[0.98] cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 w-full px-5 py-3.5 rounded-xl bg-zinc-900 hover:bg-emerald-800 text-white transition text-xs font-bold font-montserrat shadow-md group active:scale-[0.98] cursor-pointer"
                 >
                   <IconCube3D className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
                   <span>Inspect in Interactive 3D Viewer</span>
                 </Link>
               ) : (
-                <div className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-500 text-xs font-mono">
+                <div className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-zinc-100 border border-zinc-200 text-zinc-600 font-semibold text-xs font-mono">
                   <span>Standard 2D Tooling Model</span>
                 </div>
               )}
@@ -134,27 +134,27 @@ export default async function ProductDetailPage({ params }) {
                 <span className="telemetry-chip">
                   {product.category}
                 </span>
-                <span className="text-xs text-emerald-700 font-mono font-bold flex items-center gap-1.5">
+                <span className="text-xs text-emerald-800 font-mono font-bold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse motion-reduce:animate-none" />
                   In Stock &amp; Ready for Dispatch
                 </span>
               </div>
 
               {/* Title */}
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-montserrat tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 font-montserrat tracking-tight leading-tight">
                 {product.name}
               </h1>
 
               {/* Verified machinist credentials */}
               {product.rating && (
-                <div className="mt-3 flex items-center gap-2 text-xs font-mono text-zinc-500">
-                  <span className="text-zinc-900 font-bold">
+                <div className="mt-3 flex items-center gap-2 text-xs font-mono text-zinc-600">
+                  <span className="text-zinc-950 font-bold">
                     {product.rating.toFixed(1)} / 5.0
                   </span>
                   <span className="text-zinc-300">•</span>
                   <span>{product.reviewsCount} Machinist Reviews</span>
                   <span className="text-zinc-300">•</span>
-                  <span className="text-emerald-700 flex items-center gap-1 font-bold">
+                  <span className="text-emerald-800 flex items-center gap-1 font-bold">
                     <IconCheck className="w-3.5 h-3.5 text-emerald-600" />
                     Verified MST Origin
                   </span>
@@ -164,19 +164,19 @@ export default async function ProductDetailPage({ params }) {
               {/* Pricing Well */}
               <div className="mt-6 rounded-xl border border-zinc-200 bg-zinc-50 p-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-zinc-500 tracking-widest block mb-1 font-bold">
+                  <span className="text-[10px] uppercase font-mono text-zinc-700 tracking-widest block mb-1 font-bold">
                     Unit Price (USD)
                   </span>
-                  <div className="text-3xl sm:text-4xl font-extrabold text-zinc-900 font-mono tracking-tight tabular-nums">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-mono tracking-tight tabular-nums">
                     ${product.price.toFixed(2)}
                   </div>
                 </div>
 
                 <div className="sm:text-right">
-                  <span className="text-[10px] uppercase font-mono text-zinc-500 tracking-widest block mb-1 font-bold">
+                  <span className="text-[10px] uppercase font-mono text-zinc-700 tracking-widest block mb-1 font-bold">
                     Token Settlement (MST Testnet)
                   </span>
-                  <div className="inline-flex items-center gap-2 text-base sm:text-lg font-mono text-emerald-700 font-bold">
+                  <div className="inline-flex items-center gap-2 text-base sm:text-lg font-mono text-emerald-800 font-bold">
                     <IconToken className="w-4 h-4 text-emerald-600" />
                     <span>{expenTokens} EXPEN</span>
                   </div>
@@ -184,7 +184,7 @@ export default async function ProductDetailPage({ params }) {
               </div>
 
               {/* Description */}
-              <p className="mt-6 text-sm text-zinc-600 leading-relaxed font-body">
+              <p className="mt-6 text-sm text-zinc-700 leading-relaxed font-body">
                 {product.description}
               </p>
             </div>
@@ -210,11 +210,11 @@ export default async function ProductDetailPage({ params }) {
               <div>
                 <h2
                   id="metallurgical-matrix-title"
-                  className="text-xl font-bold text-zinc-900 font-montserrat tracking-tight"
+                  className="text-xl font-bold text-zinc-950 font-montserrat tracking-tight"
                 >
                   Metallurgical Matrix
                 </h2>
-                <p className="text-xs text-zinc-600 font-body mt-1">
+                <p className="text-xs text-zinc-700 font-body mt-1">
                   Microstructure composition, hardness gradients, and thermal barrier verification.
                 </p>
               </div>
@@ -228,16 +228,16 @@ export default async function ProductDetailPage({ params }) {
               <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 flex flex-col justify-between hover:border-zinc-300 transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-bold">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-700 font-bold">
                       Substrate Chemistry
                     </span>
-                    <IconSpindle className="w-4 h-4 text-emerald-600" />
+                    <IconSpindle className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <div className="text-sm font-mono font-bold text-zinc-900">
+                  <div className="text-sm font-mono font-bold text-zinc-950">
                     CoCrMo Cast Alloy (ASTM F75)
                   </div>
                 </div>
-                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-500">
+                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-600 font-semibold">
                   Biocompatible Joint Substrate
                 </div>
               </div>
@@ -246,16 +246,16 @@ export default async function ProductDetailPage({ params }) {
               <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 flex flex-col justify-between hover:border-zinc-300 transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-bold">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-700 font-bold">
                       Hardness
                     </span>
-                    <IconCaliper className="w-4 h-4 text-emerald-600" />
+                    <IconCaliper className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <div className="text-sm font-mono font-bold text-zinc-900">
+                  <div className="text-sm font-mono font-bold text-zinc-950">
                     35 - 45 HRC (Core Heat Treated)
                   </div>
                 </div>
-                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-500">
+                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-600 font-semibold">
                   Rockwell Scale Verification
                 </div>
               </div>
@@ -264,16 +264,16 @@ export default async function ProductDetailPage({ params }) {
               <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 flex flex-col justify-between hover:border-zinc-300 transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-bold">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-700 font-bold">
                       Surface Finish
                     </span>
-                    <IconThermal className="w-4 h-4 text-emerald-600" />
+                    <IconThermal className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <div className="text-sm font-mono font-bold text-zinc-900">
+                  <div className="text-sm font-mono font-bold text-zinc-950">
                     Ra ≤ 0.02 μm (Super-finish)
                   </div>
                 </div>
-                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-500">
+                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-600 font-semibold">
                   Precision Joint Articulation
                 </div>
               </div>
@@ -282,16 +282,16 @@ export default async function ProductDetailPage({ params }) {
               <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 flex flex-col justify-between hover:border-zinc-300 transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-bold">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-700 font-bold">
                       Quality Standard
                     </span>
-                    <IconBlueprint className="w-4 h-4 text-emerald-600" />
+                    <IconBlueprint className="w-4 h-4 text-emerald-700" />
                   </div>
-                  <div className="text-sm font-mono font-bold text-zinc-900">
+                  <div className="text-sm font-mono font-bold text-zinc-950">
                     ISO 13485:2016 / CE Mark
                   </div>
                 </div>
-                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-500">
+                <div className="mt-3 pt-3 border-t border-zinc-200 text-[11px] font-mono text-zinc-600 font-semibold">
                   Medical Device Regulatory Spec
                 </div>
               </div>
@@ -306,11 +306,11 @@ export default async function ProductDetailPage({ params }) {
               <div>
                 <h2
                   id="technical-specifications-title"
-                  className="text-xl font-bold text-zinc-900 font-montserrat tracking-tight flex items-center gap-2"
+                  className="text-xl font-bold text-zinc-950 font-montserrat tracking-tight flex items-center gap-2"
                 >
                   <span>Technical Specifications</span>
                 </h2>
-                <p className="text-xs text-zinc-600 font-body mt-1">
+                <p className="text-xs text-zinc-700 font-body mt-1">
                   Dimensional calibrations, geometry parameters, and manufacturer tolerances.
                 </p>
               </div>
@@ -323,26 +323,26 @@ export default async function ProductDetailPage({ params }) {
               <table className="min-w-full divide-y divide-zinc-200 text-left text-sm">
                 <tbody className="divide-y divide-zinc-200">
                   <tr className="bg-white">
-                    <td className="px-6 py-4 font-medium text-zinc-600 w-1/3 text-xs sm:text-sm font-body">
+                    <td className="px-6 py-4 font-medium text-zinc-700 w-1/3 text-xs sm:text-sm font-body">
                       Product Identifier
                     </td>
-                    <td className="px-6 py-4 text-zinc-900 font-mono text-xs sm:text-sm font-bold">
+                    <td className="px-6 py-4 text-zinc-950 font-mono text-xs sm:text-sm font-bold">
                       {product.id}
                     </td>
                   </tr>
                   <tr className="bg-zinc-50">
-                    <td className="px-6 py-4 font-medium text-zinc-600 text-xs sm:text-sm font-body">
+                    <td className="px-6 py-4 font-medium text-zinc-700 text-xs sm:text-sm font-body">
                       Category Classification
                     </td>
-                    <td className="px-6 py-4 text-zinc-900 font-mono text-xs sm:text-sm font-bold">
+                    <td className="px-6 py-4 text-zinc-950 font-mono text-xs sm:text-sm font-bold">
                       {product.category}
                     </td>
                   </tr>
                   <tr className="bg-white">
-                    <td className="px-6 py-4 font-medium text-zinc-600 text-xs sm:text-sm font-body">
+                    <td className="px-6 py-4 font-medium text-zinc-700 text-xs sm:text-sm font-body">
                       Settlement Currency
                     </td>
-                    <td className="px-6 py-4 text-emerald-700 font-mono text-xs sm:text-sm font-bold">
+                    <td className="px-6 py-4 text-emerald-800 font-mono text-xs sm:text-sm font-bold">
                       EXPEN (MST Testnet ERC-20) / USD Fiat
                     </td>
                   </tr>
@@ -352,10 +352,10 @@ export default async function ProductDetailPage({ params }) {
                         key={specKey}
                         className={idx % 2 === 0 ? "bg-zinc-50" : "bg-white"}
                       >
-                        <td className="px-6 py-4 font-medium text-zinc-600 capitalize text-xs sm:text-sm font-body">
+                        <td className="px-6 py-4 font-medium text-zinc-700 capitalize text-xs sm:text-sm font-body">
                           {specKey.replace(/([A-Z])/g, " $1")}
                         </td>
-                        <td className="px-6 py-4 text-zinc-900 font-mono text-xs sm:text-sm font-semibold">
+                        <td className="px-6 py-4 text-zinc-950 font-mono text-xs sm:text-sm font-bold">
                           {specVal}
                         </td>
                       </tr>

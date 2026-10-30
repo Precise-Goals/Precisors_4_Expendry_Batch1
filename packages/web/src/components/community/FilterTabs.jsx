@@ -74,7 +74,7 @@ export default function FilterTabs({ activeType = "All", onSelectType }) {
               className={`px-4 py-2 text-xs font-montserrat font-bold rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-emerald-600 whitespace-nowrap select-none cursor-pointer ${
                 isSelected
                   ? "bg-emerald-800 text-white shadow-xs"
-                  : "text-zinc-600 hover:text-zinc-900 hover:bg-white/80"
+                  : "text-zinc-700 hover:text-zinc-950 hover:bg-white"
               }`}
             >
               {tab}

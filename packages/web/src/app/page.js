@@ -110,6 +110,9 @@ export default function Home() {
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
+          style={{
+            margin:"0% 3%"
+          }}
         >
           <Image
             src="/images/h.png"
@@ -145,11 +148,11 @@ export default function Home() {
                 className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full liquid-glass-pill border border-[#e4e4e7] shadow-sm"
               >
                 <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
-                <span className="text-xs font-mono font-medium text-zinc-800">
+                <span className="text-xs font-mono font-bold text-zinc-900">
                   MST Testnet Protocol Online
                 </span>
-                <span className="text-zinc-300">•</span>
-                <span className="text-xs font-mono font-bold text-[#16a34a]">
+                <span className="text-zinc-500 font-bold">•</span>
+                <span className="text-xs font-mono font-bold text-emerald-800">
                   Chain ID {CHAIN_ID}
                 </span>
               </motion.div>
@@ -219,9 +222,9 @@ export default function Home() {
                   <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
                   <span>{REWARD_PER_POST} EXPEN / Verified Post</span>
                 </span>
-                <span className="text-zinc-300">·</span>
+                <span className="text-zinc-500 font-bold">·</span>
                 <span>Daily Cap: {DAILY_CAP} EXPEN</span>
-                <span className="text-zinc-300">·</span>
+                <span className="text-zinc-500 font-bold">·</span>
                 <span className="text-[#ea580c] font-semibold">Gasless MST</span>
               </motion.div>
             </div>
@@ -302,17 +305,17 @@ export default function Home() {
                       key={p.name}
                       type="button"
                       onClick={() => setActivePresetIndex(idx)}
-                      className={`relative px-3 py-1.5 rounded-lg transition-colors font-medium z-10 active:scale-95 ${
+                      className={`relative px-3 py-1.5 rounded-lg transition-colors font-semibold z-10 active:scale-95 ${
                         isSelected
                           ? "text-white font-bold"
-                          : "text-zinc-600 hover:text-black"
+                          : "text-zinc-700 hover:text-zinc-950"
                       }`}
                     >
                       {isSelected && (
                         <motion.div
                           layoutId={shouldReduceMotion ? undefined : "activeAlloyPill"}
                           transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                          className="absolute inset-0 bg-[#16a34a] rounded-lg shadow-sm -z-10"
+                          className="absolute inset-0 bg-emerald-800 rounded-lg shadow-sm -z-10"
                         />
                       )}
                       <span>{p.name.split(" ")[0]}</span>
@@ -325,8 +328,8 @@ export default function Home() {
             {/* Spectrogram Viewport */}
             <div className="mt-5 space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
-                <span className="text-zinc-600 flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
+                <span className="text-zinc-700 font-semibold flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-700" />
                   SPECTROGRAM: 1,200 Hz – 3,600 Hz FLUTTER BANDWIDTH
                 </span>
                 <button
@@ -419,17 +422,17 @@ export default function Home() {
               <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a] animate-pulse" />
               MST TESTNET
             </span>
-            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-500 font-bold">/</span>
             <span>CHAIN ID: {CHAIN_ID}</span>
-            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-500 font-bold">/</span>
             <span>GAS: &lt;0.001 GWEI</span>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
             <span>REWARD POOL: 10 EXPEN / POST</span>
-            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-500 font-bold">/</span>
             <span>DAILY CAP: {DAILY_CAP} EXPEN</span>
-            <span className="text-zinc-300">/</span>
+            <span className="text-zinc-500 font-bold">/</span>
             <span className="text-[#16a34a] font-bold">RAG GROUNDING: SARVAM 105B</span>
           </div>
         </div>
@@ -449,7 +452,7 @@ export default function Home() {
                 Industrial Architecture & Operating Modules
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-zinc-600 max-w-md">
+            <p className="text-xs sm:text-sm text-zinc-700 font-poppins max-w-md">
               From shop-floor acoustic harmonics to on-chain patent timestamping and enterprise machine tool integration.
             </p>
           </div>
@@ -461,23 +464,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconAcoustics className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconAcoustics className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="accent" size="sm">
                         Simulator
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         Machinist Experience Hub
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         Harmonic vibration and chatter dampening simulator, audio recordings from master turners, and setup tricks.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>Explore Simulator</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -491,23 +494,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconBlueprint className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconBlueprint className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="default" size="sm">
                         GD&T Specs
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         Engineering Blueprints & CAD
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         STEP, DXF, and SolidWorks drawings for damped boring bars, soft pie jaws, and 5-axis tombstone fixtures.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>Inspect Blueprints</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -521,23 +524,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconBrain className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconBrain className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="default" size="sm">
                         EN · HI · MR
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         Sarvam AI Machining Assistant
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         Voice-enabled operator consultation in English, Hindi, and Marathi with instant shop-floor BM25 RAG citations.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>Launch Operator Terminal</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -551,23 +554,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconCube3D className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconCube3D className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="accent" size="sm">
                         WebGL 60FPS
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         3D CAD Tooling Inspector
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         Inspect 4-station CNC turret geometries, dimensional calipers (±0.005mm), and lighting environments in Three.js.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>Open 3D Workstation</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -581,23 +584,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconShield className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconShield className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="default" size="sm">
                         35 U.S.C. § 102
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         Prior Art Patent Ledger
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         Timestamp novel tooling jigs and setup geometries onto MST testnet to establish tamper-proof legal prior art.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>Register Invention</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -611,23 +614,23 @@ export default function Home() {
                 <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
-                        <IconFactory className="w-5 h-5 text-[#16a34a]" />
+                      <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-emerald-800 group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
+                        <IconFactory className="w-5 h-5 text-emerald-800" />
                       </span>
                       <Badge variant="default" size="sm">
                         Enterprise
                       </Badge>
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-[#16a34a] transition-colors">
+                      <h3 className="text-lg font-bold text-[#09090b] font-montserrat group-hover:text-emerald-800 transition-colors">
                         Manufacturer & Investor Portal
                       </h3>
-                      <p className="text-xs text-zinc-600 leading-relaxed mt-1.5 font-poppins">
+                      <p className="text-xs text-zinc-700 leading-relaxed mt-1.5 font-poppins">
                         Toolroom digitization for machine tool OEMs (Mazak, Haas) and industrial Web3 tokenomics for institutional funds.
                       </p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] flex items-center justify-between font-bold">
+                  <div className="pt-4 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 flex items-center justify-between font-bold">
                     <span>View Partner Tracks</span>
                     <span className="group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -650,8 +653,7 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#09090b] font-display">
               A Closed-Loop Knowledge Economy for Precision Manufacturing
             </h2>
-            <p className="text-sm sm:text-base leading-relaxed"
-            style={{color:"black"}}>
+            <p className="text-sm sm:text-base leading-relaxed text-zinc-800">
               &quot;Where experience is never retired.&quot; We transform shop-floor
               wisdom into verifiable on-chain knowledge assets through a 3-step
               incentive loop.
@@ -664,21 +666,21 @@ export default function Home() {
               onClick={() => setActiveLoopStep(0)}
               className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 0
-                  ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
+                  ? "bg-white border-emerald-700 shadow-md ring-1 ring-emerald-700/30"
                   : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#16a34a] font-bold tracking-wider">KNOWLEDGE ARCHIVE</span>
-                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
+                  <span className="text-emerald-800 font-bold tracking-wider">KNOWLEDGE ARCHIVE</span>
+                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-emerald-800 shadow-sm">
                     <IconLathe className="w-4 h-4" />
                   </span>
                 </div>
                 <h3 className="text-base font-bold text-[#09090b] font-display">
                   Capture Tacit Intuition
                 </h3>
-                <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
+                <p className="text-xs text-zinc-700 mt-2 leading-relaxed">
                   Veterans record fixturing setups, chatter frequencies, and thermal offsets via structured audio memos or blueprint shares.
                 </p>
               </div>
@@ -694,25 +696,25 @@ export default function Home() {
               onClick={() => setActiveLoopStep(1)}
               className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 1
-                  ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
+                  ? "bg-white border-emerald-700 shadow-md ring-1 ring-emerald-700/30"
                   : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#16a34a] font-bold tracking-wider">ON-CHAIN TOKEN MINT</span>
-                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
+                  <span className="text-emerald-800 font-bold tracking-wider">ON-CHAIN TOKEN MINT</span>
+                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-emerald-800 shadow-sm">
                     <IconToken className="w-4 h-4" />
                   </span>
                 </div>
                 <h3 className="text-base font-bold text-[#09090b] font-display">
                   Mint EXPEN on MST Testnet
                 </h3>
-                <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
+                <p className="text-xs text-zinc-700 mt-2 leading-relaxed">
                   Every valid post initiates an on-chain mint of {REWARD_PER_POST} EXPEN tokens directly to your wallet. Enforced by smart contracts up to {DAILY_CAP} EXPEN/day.
                 </p>
               </div>
-              <div className="pt-3 border-t border-[#e4e4e7] text-xs font-mono text-[#16a34a] font-bold">
+              <div className="pt-3 border-t border-[#e4e4e7] text-xs font-mono text-emerald-800 font-bold">
                 <span>{REWARD_PER_POST} EXPEN / Post · Max {DAILY_CAP} EXPEN / Day</span>
               </div>
             </div>
@@ -722,21 +724,21 @@ export default function Home() {
               onClick={() => setActiveLoopStep(2)}
               className={`p-7 rounded-3xl border transition-all duration-300 space-y-4 flex flex-col justify-between cursor-pointer ${
                 activeLoopStep === 2
-                  ? "bg-white border-[#16a34a] shadow-md ring-1 ring-[#16a34a]/30"
+                  ? "bg-white border-emerald-700 shadow-md ring-1 ring-emerald-700/30"
                   : "bg-white border-zinc-200 hover:border-zinc-300 shadow-xs"
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3 text-xs font-mono">
-                  <span className="text-[#16a34a] font-bold tracking-wider">SARVAM AI RETRIEVAL</span>
-                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-[#16a34a] shadow-sm">
+                  <span className="text-emerald-800 font-bold tracking-wider">SARVAM AI RETRIEVAL</span>
+                  <span className="p-1.5 rounded-lg bg-white border border-[#e4e4e7] text-emerald-800 shadow-sm">
                     <IconBrain className="w-4 h-4" />
                   </span>
                 </div>
                 <h3 className="text-base font-bold text-[#09090b] font-display">
                   Consult Sarvam AI
                 </h3>
-                <p className="text-xs text-zinc-600 mt-2 leading-relaxed">
+                <p className="text-xs text-zinc-700 mt-2 leading-relaxed">
                   Apprentice machinists query the tacit knowledge base in Hindi, Marathi, or English. BM25-lite RAG injects exact veteran troubleshooting quotes.
                 </p>
               </div>
@@ -762,7 +764,7 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#09090b] font-display">
               Authentic Machinist Service Dossiers
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-600">
+            <p className="text-xs sm:text-sm text-zinc-700">
               Real field calibrations shared by master toolmakers with decades of spindle time.
             </p>
           </div>
@@ -772,19 +774,19 @@ export default function Home() {
             <div className="p-8 rounded-2xl glass-card border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-500 uppercase font-semibold">AEROSPACE INCONEL // 42 YRS EXP</span>
-                  <span className="text-[#16a34a] font-bold">Earned: 620 EXPEN</span>
+                  <span className="text-zinc-700 uppercase font-bold">AEROSPACE INCONEL // 42 YRS EXP</span>
+                  <span className="text-emerald-800 font-bold">Earned: 620 EXPEN</span>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
+                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-emerald-800 shadow-inner">
                     <IconLathe className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#09090b] font-display">
                       Rameshwar Kulkarni
                     </h3>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-zinc-600 font-medium">
                       Chief CNC Turning Specialist • MIDC Bhosari, Pune
                     </p>
                   </div>
@@ -800,7 +802,7 @@ export default function Home() {
                 {playingAudioSnippet && (
                   <div className="w-full h-1.5 bg-[#e4e4e7] rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-[#16a34a]"
+                      className="h-full bg-emerald-700"
                       style={{ width: `${audioProgress}%` }}
                     />
                   </div>
@@ -813,13 +815,13 @@ export default function Home() {
                     className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white border border-[#e4e4e7] text-xs font-mono text-zinc-900 hover:bg-[#f4f4f5] transition font-semibold active:scale-95 shadow-sm"
                   >
                     {playingAudioSnippet ? (
-                      <IconPause className="w-3.5 h-3.5 text-[#16a34a]" />
+                      <IconPause className="w-3.5 h-3.5 text-emerald-800" />
                     ) : (
-                      <IconPlay className="w-3.5 h-3.5 text-[#16a34a]" />
+                      <IconPlay className="w-3.5 h-3.5 text-emerald-800" />
                     )}
                     <span>{playingAudioSnippet ? "Pause Audio Memo (02:44)" : "Listen to Voice Memo"}</span>
                   </button>
-                  <span className="text-[11px] font-mono text-zinc-500">MST Block #4,812,042</span>
+                  <span className="text-[11px] font-mono text-zinc-600 font-semibold">MST Block #4,812,042</span>
                 </div>
               </div>
             </div>
@@ -828,19 +830,19 @@ export default function Home() {
             <div className="p-8 rounded-2xl glass-card border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-zinc-500 uppercase font-semibold">FORGING DIES // 29 YRS EXP</span>
-                  <span className="text-[#16a34a] font-bold">Earned: 450 EXPEN</span>
+                  <span className="text-zinc-700 uppercase font-bold">FORGING DIES // 29 YRS EXP</span>
+                  <span className="text-emerald-800 font-bold">Earned: 450 EXPEN</span>
                 </div>
 
                 <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-[#16a34a] shadow-inner">
+                  <div className="h-12 w-12 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] flex items-center justify-center text-emerald-800 shadow-inner">
                     <IconCaliper className="w-6 h-6" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#09090b] font-display">
                       Devendra Patil
                     </h3>
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-zinc-600 font-medium">
                       Precision Tool & Die Master • Kolhapur Industrial Hub
                     </p>
                   </div>
@@ -854,12 +856,12 @@ export default function Home() {
               <div className="pt-4 border-t border-[#e4e4e7] flex items-center justify-between">
                 <Link
                   href="/experience"
-                  className="text-xs font-mono text-[#16a34a] hover:underline flex items-center gap-1.5 font-bold"
+                  className="text-xs font-mono text-emerald-800 hover:underline flex items-center gap-1.5 font-bold"
                 >
                   <span>View All 12 Archived Stories</span>
                   <span>→</span>
                 </Link>
-                <span className="text-[11px] font-mono text-zinc-500">MST Block #4,790,211</span>
+                <span className="text-[11px] font-mono text-zinc-600 font-semibold">MST Block #4,790,211</span>
               </div>
             </div>
           </div>

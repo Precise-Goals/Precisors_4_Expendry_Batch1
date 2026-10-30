@@ -122,7 +122,7 @@ export default function PostCard({ post }) {
           </time>
         </div>
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-mono font-bold">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-200 text-xs font-mono font-bold">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
           <span>+{expenEarned} EXPEN Minted</span>
         </span>
@@ -131,7 +131,7 @@ export default function PostCard({ post }) {
       {/* Title with hover emerald */}
       <h3
         id={`post-title-${post.id || title.slice(0, 10)}`}
-        className="text-lg font-bold text-zinc-900 font-montserrat leading-snug hover:text-emerald-700 transition-colors"
+        className="text-lg font-bold text-zinc-950 font-montserrat leading-snug hover:text-emerald-800 transition-colors"
       >
         {title}
       </h3>
@@ -148,12 +148,12 @@ export default function PostCard({ post }) {
         </div>
         <div>
           <span className="text-zinc-600 block text-[11px] uppercase tracking-wider font-bold">CALIBRATION</span>
-          <span className="text-emerald-800 font-bold truncate block">{params.tolerance}</span>
+          <span className="text-emerald-900 font-bold truncate block">{params.tolerance}</span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="text-sm text-zinc-800 leading-relaxed whitespace-pre-line font-body">
+      <div className="text-sm text-zinc-900 leading-relaxed whitespace-pre-line font-body">
         <p>{displayContent}</p>
         {isLongContent && (
           <button
@@ -203,7 +203,7 @@ export default function PostCard({ post }) {
             href={`${EXPLORER_URL}/tx/${txHash}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono font-bold text-emerald-800 hover:text-emerald-950 hover:underline inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs hover:border-emerald-300 transition"
+            className="text-xs font-mono font-bold text-emerald-900 hover:text-emerald-950 hover:underline inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs hover:border-emerald-300 transition"
             title={`Verified on MST Testnet: ${txHash}`}
           >
             <span>Tx: {txHash.slice(0, 10)}...</span>

@@ -68,13 +68,13 @@ export default function LanguageSelector({
             className={`px-3.5 py-1.5 rounded-xl text-xs font-montserrat font-bold transition-all duration-150 flex items-center gap-1.5 cursor-pointer ${
               isSelected
                 ? "bg-emerald-800 text-white shadow-xs"
-                : "text-zinc-600 hover:text-zinc-900 hover:bg-white/80"
+                : "text-zinc-700 hover:text-zinc-950 hover:bg-white font-semibold"
             }`}
           >
             <span>{lang.nativeName}</span>
             <span
-              className={`text-[10px] uppercase font-mono ${
-                isSelected ? "text-emerald-200" : "text-zinc-400"
+              className={`text-[10px] uppercase font-mono font-bold ${
+                isSelected ? "text-emerald-100" : "text-zinc-600"
               }`}
             >
               {lang.code}

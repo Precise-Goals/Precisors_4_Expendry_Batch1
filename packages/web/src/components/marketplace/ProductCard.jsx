@@ -28,10 +28,10 @@ export default function ProductCard({ product }) {
         {product.has3DModel && (
           <Link
             href={`/showcase?model=${product.modelId || "excel-mpk"}`}
-            className="absolute top-3 right-3 text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold flex items-center gap-1.5 hover:bg-emerald-100 hover:border-emerald-300 transition shadow-xs z-10 group/inspect"
+            className="absolute top-3 right-3 text-[11px] font-mono px-3 py-1 rounded-full bg-emerald-50 text-emerald-900 border border-emerald-300 font-bold flex items-center gap-1.5 hover:bg-emerald-100 hover:border-emerald-400 transition shadow-xs z-10 group/inspect"
             title="Inspect precision implant in 3D WebGL CAD viewport"
           >
-            <IconCube3D className="w-3.5 h-3.5 text-emerald-700 group-hover/inspect:rotate-12 transition-transform" />
+            <IconCube3D className="w-3.5 h-3.5 text-emerald-800 group-hover/inspect:rotate-12 transition-transform" />
             <span
               className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse motion-reduce:animate-none"
               aria-hidden="true"
@@ -41,10 +41,10 @@ export default function ProductCard({ product }) {
         )}
 
         <div className="absolute top-3 left-3 flex flex-col gap-1">
-          <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700">
+          <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-300 text-zinc-800">
             {product.category}
           </span>
-          <span className="text-[10px] font-mono text-zinc-500">
+          <span className="text-[10px] font-mono font-semibold text-zinc-600">
             {refCode}
           </span>
         </div>
@@ -53,10 +53,10 @@ export default function ProductCard({ product }) {
       {/* Product Content Details */}
       <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
         <div>
-          <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-700 transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
+          <h3 className="text-base font-bold text-zinc-950 group-hover:text-emerald-800 transition-colors line-clamp-2 font-montserrat tracking-tight leading-snug">
             {product.name}
           </h3>
-          <p className="text-xs text-zinc-600 mt-2 line-clamp-2 leading-relaxed font-body">
+          <p className="text-xs text-zinc-700 mt-2 line-clamp-2 leading-relaxed font-body">
             {product.description}
           </p>
 
@@ -68,9 +68,9 @@ export default function ProductCard({ product }) {
                 .map(([key, val]) => (
                   <span
                     key={key}
-                    className="text-[11px] font-mono bg-zinc-100 border border-zinc-200 text-zinc-700 px-2 py-0.5 rounded"
+                    className="text-[11px] font-mono bg-zinc-100 border border-zinc-200 text-zinc-800 px-2 py-0.5 rounded font-medium"
                   >
-                    {key}: <span className="text-zinc-900 font-semibold">{val}</span>
+                    {key}: <span className="text-zinc-950 font-bold">{val}</span>
                   </span>
                 ))}
             </div>
@@ -80,12 +80,12 @@ export default function ProductCard({ product }) {
         {/* Pricing & CTA */}
         <div className="pt-4 border-t border-zinc-100 flex items-center justify-between">
           <div>
-            <span className="text-xs font-mono text-zinc-400 block">Unit Cost</span>
+            <span className="text-xs font-mono text-zinc-600 font-semibold block">Unit Cost</span>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-lg font-extrabold text-zinc-900 font-montserrat tracking-tight">
+              <span className="text-lg font-extrabold text-zinc-950 font-montserrat tracking-tight">
                 ${product.price}
               </span>
-              <span className="text-xs font-mono font-bold text-emerald-700">
+              <span className="text-xs font-mono font-bold text-emerald-800">
                 ({expenEquivalent} EXPEN)
               </span>
             </div>

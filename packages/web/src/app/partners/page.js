@@ -47,8 +47,8 @@ export default function PartnersPage() {
         className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-zinc-200/90 bg-white/70 backdrop-blur-md"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [ENTERPRISE // PARTNERS]</div>
-          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [MST-{CHAIN_ID}]</div>
+          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-600 font-bold">+ [ENTERPRISE // PARTNERS]</div>
+          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-600 font-bold">+ [MST-{CHAIN_ID}]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
@@ -56,14 +56,14 @@ export default function PartnersPage() {
             <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
             <span className="text-xs font-mono font-bold text-zinc-900">Expendry Strategic Ecosystem</span>
             <span className="text-zinc-300">•</span>
-            <span className="text-xs font-mono font-bold text-emerald-700">Manufacturers &amp; Investors</span>
+            <span className="text-xs font-mono font-bold text-emerald-800">Manufacturers &amp; Investors</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 font-montserrat leading-[1.15]">
             Partner Program for Machine Tool Builders &amp; Industrial Investors
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-3xl font-body">
+          <p className="text-base sm:text-lg text-zinc-700 leading-relaxed max-w-3xl font-body">
             Bridge heavy industrial manufacturing with decentralized tacit knowledge tokenization.
             Whether you operate 50 CNC machines or back industrial Web3 protocols, Expendry offers
             institutional infrastructure, custom Sarvam AI RAG integrations, and verifiable token economics.
@@ -77,10 +77,10 @@ export default function PartnersPage() {
               className={`px-4 py-2.5 rounded-2xl border text-xs font-mono font-bold transition flex items-center gap-2 cursor-pointer ${
                 activeTrack === "manufacturers"
                   ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
-                  : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                  : "bg-white border-zinc-200 text-zinc-800 hover:text-zinc-950 hover:bg-zinc-50"
               }`}
             >
-              <IconFactory className="w-4 h-4 text-white" />
+              <IconFactory className={`w-4 h-4 ${activeTrack === "manufacturers" ? "text-white" : "text-emerald-800"}`} />
               <span>For Machine Tool Manufacturers</span>
             </button>
 
@@ -90,10 +90,10 @@ export default function PartnersPage() {
               className={`px-4 py-2.5 rounded-2xl border text-xs font-mono font-bold transition flex items-center gap-2 cursor-pointer ${
                 activeTrack === "investors"
                   ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
-                  : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                  : "bg-white border-zinc-200 text-zinc-800 hover:text-zinc-950 hover:bg-zinc-50"
               }`}
             >
-              <IconTrendingUp className="w-4 h-4 text-white" />
+              <IconTrendingUp className={`w-4 h-4 ${activeTrack === "investors" ? "text-white" : "text-emerald-800"}`} />
               <span>For Industrial Web3 Investors</span>
             </button>
           </div>
@@ -111,10 +111,10 @@ export default function PartnersPage() {
           {activeTrack === "manufacturers" ? (
             <div className="space-y-12">
               <div className="space-y-3 max-w-3xl">
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
                   Transform Factory Floor Brain Drain into a Proprietary Intelligence Engine
                 </h2>
-                <p className="text-sm text-zinc-600 leading-relaxed font-body">
+                <p className="text-sm text-zinc-700 leading-relaxed font-body">
                   When your top toolmaker leaves, your scrap rate spikes. Expendry deploys non-intrusive voice memo stations and Sarvam AI assistants directly into your toolrooms.
                 </p>
               </div>
@@ -123,20 +123,20 @@ export default function PartnersPage() {
               <div className="p-6 sm:p-8 rounded-4xl bg-white border border-zinc-200/90 shadow-xl space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-zinc-100 pb-4 gap-2">
                   <div className="flex items-center gap-2">
-                    <IconCaliper className="w-5 h-5 text-emerald-700" />
-                    <span className="text-xs font-mono uppercase tracking-wider text-emerald-800 font-bold">
+                    <IconCaliper className="w-5 h-5 text-emerald-800" />
+                    <span className="text-xs font-mono uppercase tracking-wider text-emerald-850 font-bold">
                       Enterprise Scrap Reduction &amp; Token Yield Calculator
                     </span>
                   </div>
-                  <span className="text-xs font-mono text-zinc-500 font-medium">Simulated 12-Month Pro-Forma</span>
+                  <span className="text-xs font-mono text-zinc-600 font-semibold">Simulated 12-Month Pro-Forma</span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Spindles */}
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-mono">
-                      <span className="text-zinc-600 font-bold">Active CNC Spindles</span>
-                      <span className="text-zinc-900 font-bold">{spindles} Units</span>
+                      <span className="text-zinc-700 font-bold">Active CNC Spindles</span>
+                      <span className="text-zinc-950 font-bold">{spindles} Units</span>
                     </div>
                     <input
                       type="range"
@@ -147,7 +147,7 @@ export default function PartnersPage() {
                       onChange={(e) => setSpindles(Number(e.target.value))}
                       className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                     />
-                    <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                    <div className="flex justify-between text-[11px] font-mono text-zinc-600 font-medium">
                       <span>5 units</span>
                       <span>150 units</span>
                     </div>
@@ -156,8 +156,8 @@ export default function PartnersPage() {
                   {/* Monthly Tooling Spend */}
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-mono">
-                      <span className="text-zinc-600 font-bold">Monthly Tooling Spend</span>
-                      <span className="text-zinc-900 font-bold">${monthlyToolSpend.toLocaleString()}</span>
+                      <span className="text-zinc-700 font-bold">Monthly Tooling Spend</span>
+                      <span className="text-zinc-950 font-bold">${monthlyToolSpend.toLocaleString()}</span>
                     </div>
                     <input
                       type="range"
@@ -168,7 +168,7 @@ export default function PartnersPage() {
                       onChange={(e) => setMonthlyToolSpend(Number(e.target.value))}
                       className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                     />
-                    <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                    <div className="flex justify-between text-[11px] font-mono text-zinc-600 font-medium">
                       <span>$2k/mo</span>
                       <span>$50k/mo</span>
                     </div>
@@ -177,7 +177,7 @@ export default function PartnersPage() {
                   {/* Scrap Rate */}
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs font-mono">
-                      <span className="text-zinc-600 font-bold">Current Scrap Rate</span>
+                      <span className="text-zinc-700 font-bold">Current Scrap Rate</span>
                       <span className="text-red-600 font-bold">{scrapRate}%</span>
                     </div>
                     <input
@@ -189,7 +189,7 @@ export default function PartnersPage() {
                       onChange={(e) => setScrapRate(Number(e.target.value))}
                       className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-emerald-700"
                     />
-                    <div className="flex justify-between text-[11px] font-mono text-zinc-400">
+                    <div className="flex justify-between text-[11px] font-mono text-zinc-600 font-medium">
                       <span>1.0%</span>
                       <span>12.0%</span>
                     </div>
@@ -199,25 +199,25 @@ export default function PartnersPage() {
                 {/* Outputs */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-1">
-                    <div className="text-xs font-mono uppercase text-zinc-500 font-bold">
+                    <div className="text-xs font-mono uppercase text-zinc-700 font-bold">
                       Est. Annual Scrap &amp; Tooling Savings
                     </div>
-                    <div className="text-2xl font-bold font-mono text-emerald-700">
+                    <div className="text-2xl font-bold font-mono text-emerald-800">
                       +${estimatedSavings.toLocaleString()} / yr
                     </div>
-                    <div className="text-[11px] font-mono text-zinc-500">
+                    <div className="text-[11px] font-mono text-zinc-600 font-medium">
                       Based on 38% scrap deflection via Sarvam AI acoustic warnings
                     </div>
                   </div>
 
                   <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 space-y-1">
-                    <div className="text-xs font-mono uppercase text-zinc-500 font-bold">
+                    <div className="text-xs font-mono uppercase text-zinc-700 font-bold">
                       Est. Veteran Operator Token Retention
                     </div>
-                    <div className="text-2xl font-bold font-mono text-zinc-900">
+                    <div className="text-2xl font-bold font-mono text-zinc-950">
                       {estimatedExpenMints.toLocaleString()} EXPEN / yr
                     </div>
-                    <div className="text-[11px] font-mono text-zinc-500">
+                    <div className="text-[11px] font-mono text-zinc-600 font-medium">
                       Direct {REWARD_PER_POST} EXPEN incentives per validated shop troubleshooting log
                     </div>
                   </div>
@@ -229,34 +229,34 @@ export default function PartnersPage() {
                   <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
                     <IconBrain className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     Private Shop RAG Fine-Tuning
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     Ground Sarvam AI on your specific machine fleet, proprietary part numbers, and fixture catalogues. Operators query setups in Hindi, Marathi, or English.
                   </p>
                 </div>
 
                 <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-3">
-                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
+                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs">
                     <IconToken className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     Enterprise EXPEN Reward Grants
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     Provide internal bonus tokens to your senior machinists whenever they record a high-value troubleshooting note, creating authentic retention.
                   </p>
                 </div>
 
                 <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-3">
-                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
+                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs">
                     <IconShield className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     Verified Tooling Supplier Badge
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     List cutting tools, chucks, and holders directly in the Expendry Marketplace with 3D Three.js CAD inspection and MST verification.
                   </p>
                 </div>
@@ -265,10 +265,10 @@ export default function PartnersPage() {
           ) : (
             <div className="space-y-12">
               <div className="space-y-3 max-w-3xl">
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
                   Tokenomics of Real-World Industrial Tacit Intelligence
                 </h2>
-                <p className="text-sm text-zinc-600 leading-relaxed font-body">
+                <p className="text-sm text-zinc-700 leading-relaxed font-body">
                   Unlike speculative meme tokens, EXPEN captures real value from precision manufacturing transactions, blueprint licensing, and decentralized patent claims on MST Testnet.
                 </p>
               </div>
@@ -276,60 +276,60 @@ export default function PartnersPage() {
               {/* Web3 Investor Telemetry Strip */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="p-4 rounded-3xl bg-white border border-zinc-200/90 shadow-sm">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">BLOCKCHAIN</div>
-                  <div className="text-sm font-bold font-mono text-zinc-900 mt-1">MST Testnet</div>
-                  <div className="text-[11px] font-mono text-emerald-700 font-bold">Chain {CHAIN_ID}</div>
+                  <div className="text-[10px] font-mono text-zinc-700 font-bold uppercase">BLOCKCHAIN</div>
+                  <div className="text-sm font-bold font-mono text-zinc-950 mt-1">MST Testnet</div>
+                  <div className="text-[11px] font-mono text-emerald-800 font-bold">Chain {CHAIN_ID}</div>
                 </div>
                 <div className="p-4 rounded-3xl bg-white border border-zinc-200/90 shadow-sm">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">MINT CAP</div>
-                  <div className="text-sm font-bold font-mono text-zinc-900 mt-1">{DAILY_CAP} EXPEN/day</div>
-                  <div className="text-[11px] font-mono text-zinc-500">Per Wallet Hard Limit</div>
+                  <div className="text-[10px] font-mono text-zinc-700 font-bold uppercase">MINT CAP</div>
+                  <div className="text-sm font-bold font-mono text-zinc-950 mt-1">{DAILY_CAP} EXPEN/day</div>
+                  <div className="text-[11px] font-mono text-zinc-600 font-medium">Per Wallet Hard Limit</div>
                 </div>
                 <div className="p-4 rounded-3xl bg-white border border-zinc-200/90 shadow-sm">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">GASLESS RELAY</div>
-                  <div className="text-sm font-bold font-mono text-emerald-700 mt-1">EIP-191 Auth</div>
-                  <div className="text-[11px] font-mono text-zinc-500 truncate">{OPERATOR_ADDRESS.slice(0, 10)}...</div>
+                  <div className="text-[10px] font-mono text-zinc-700 font-bold uppercase">GASLESS RELAY</div>
+                  <div className="text-sm font-bold font-mono text-emerald-800 mt-1">EIP-191 Auth</div>
+                  <div className="text-[11px] font-mono text-zinc-600 font-medium truncate">{OPERATOR_ADDRESS.slice(0, 10)}...</div>
                 </div>
                 <div className="p-4 rounded-3xl bg-white border border-zinc-200/90 shadow-sm">
-                  <div className="text-[10px] font-mono text-zinc-500 font-bold uppercase">BURN MECHANISM</div>
-                  <div className="text-sm font-bold font-mono text-zinc-900 mt-1">Deflationary</div>
-                  <div className="text-[11px] font-mono text-emerald-700 font-bold">CAD &amp; Patent Royalties</div>
+                  <div className="text-[10px] font-mono text-zinc-700 font-bold uppercase">BURN MECHANISM</div>
+                  <div className="text-sm font-bold font-mono text-zinc-950 mt-1">Deflationary</div>
+                  <div className="text-[11px] font-mono text-emerald-800 font-bold">CAD &amp; Patent Royalties</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-3">
-                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
+                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs">
                     <IconToken className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     Supply / Burn Equilibrium
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     Minting is capped at 50 EXPEN/day per operator. Token burns occur on every blueprint CAD download and patent licensing royalty distribution.
                   </p>
                 </div>
 
                 <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-3">
-                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
+                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs">
                     <IconTrendingUp className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     Real-World Asset (RWA) Utility
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     Direct utility powering the Tooling Marketplace, AI query compute credits, and manufacturing jig prior art registration fees.
                   </p>
                 </div>
 
                 <div className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 shadow-sm space-y-3">
-                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-2xs">
+                  <div className="h-11 w-11 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-800 shadow-2xs">
                     <IconShield className="w-5 h-5" />
                   </div>
-                  <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+                  <h3 className="text-base font-bold text-zinc-950 font-montserrat">
                     MST Blockchain Native
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed font-body">
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-body">
                     Built for high throughput, predictable low-cost gas, and non-custodial EIP-191 personal sign compatibility for frictionless shop-floor adoption.
                   </p>
                 </div>
@@ -348,10 +348,10 @@ export default function PartnersPage() {
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="space-y-2 text-center">
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
               Apply for the Expendry Partner Network
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-600 font-body">
+            <p className="text-xs sm:text-sm text-zinc-700 font-body">
               Our engineering team responds within 24 business hours with custom integration parameters.
             </p>
           </div>
@@ -361,10 +361,10 @@ export default function PartnersPage() {
               <div className="h-12 w-12 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center mx-auto text-emerald-800">
                 <IconCheck className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-zinc-900 font-montserrat">
+              <h3 className="text-lg font-bold text-zinc-950 font-montserrat">
                 Partnership Inquiry Dispatched
               </h3>
-              <p className="text-xs font-mono text-zinc-600 max-w-md mx-auto">
+              <p className="text-xs font-mono text-zinc-700 max-w-md mx-auto">
                 Thank you, {contactName || "Partner"} ({companyName}). Your partner dossier has been logged. Our ecosystem lead will reach out to {email} shortly.
               </p>
             </div>
@@ -375,7 +375,7 @@ export default function PartnersPage() {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-mono uppercase text-zinc-700 font-bold block mb-1.5">
+                  <label className="text-xs font-mono uppercase text-zinc-800 font-bold block mb-1.5">
                     Organization / Company Name
                   </label>
                   <input
@@ -384,12 +384,12 @@ export default function PartnersPage() {
                     placeholder="e.g. Apex Precision CNC Ltd"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
+                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-950 placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-mono uppercase text-zinc-700 font-bold block mb-1.5">
+                  <label className="text-xs font-mono uppercase text-zinc-800 font-bold block mb-1.5">
                     Contact Person Name
                   </label>
                   <input
@@ -398,14 +398,14 @@ export default function PartnersPage() {
                     placeholder="e.g. Frank Kowalski"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
+                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-950 placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-mono uppercase text-zinc-700 font-bold block mb-1.5">
+                  <label className="text-xs font-mono uppercase text-zinc-800 font-bold block mb-1.5">
                     Corporate Email
                   </label>
                   <input
@@ -414,18 +414,18 @@ export default function PartnersPage() {
                     placeholder="name@precisionmachining.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
+                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-950 placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-mono uppercase text-zinc-700 font-bold block mb-1.5">
+                  <label className="text-xs font-mono uppercase text-zinc-800 font-bold block mb-1.5">
                     Fleet Size or Investment Focus
                   </label>
                   <select
                     value={scale}
                     onChange={(e) => setScale(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition cursor-pointer"
+                    className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-mono text-zinc-950 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition cursor-pointer"
                   >
                     <option>1-10 CNC Spindles</option>
                     <option>10-50 CNC Spindles</option>
@@ -438,7 +438,7 @@ export default function PartnersPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                <span className="text-xs font-mono text-zinc-500">
+                <span className="text-xs font-mono text-zinc-600 font-medium">
                   Direct Response Guarantee: &lt; 24h
                 </span>
                 <Button type="submit" variant="primary" size="md" className="w-full sm:w-auto">

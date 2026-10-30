@@ -41,14 +41,14 @@ async function MarketplaceCatalog({ searchParams }) {
       <div className="flex-1 w-full space-y-6">
         {/* Search and Results Counter */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
-          <div className="text-xs text-zinc-600 font-mono">
+          <div className="text-xs text-zinc-700 font-mono">
             Catalog Inventory:{" "}
-            <span className="text-zinc-900 font-bold">
+            <span className="text-zinc-950 font-bold">
               {filteredProducts.length}
             </span>{" "}
             items verified
             {selectedCategory !== "All" && (
-              <span className="ml-1 text-emerald-700 font-bold">in {selectedCategory}</span>
+              <span className="ml-1 text-emerald-800 font-bold">in {selectedCategory}</span>
             )}
           </div>
 
@@ -69,7 +69,7 @@ async function MarketplaceCatalog({ searchParams }) {
               name="search"
               defaultValue={search}
               placeholder="Search by alloy, standard, tool..."
-              className="bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 w-full sm:w-64 font-mono transition-all"
+              className="bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-950 placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 w-full sm:w-64 font-mono transition-all"
             />
             <button
               type="submit"
@@ -89,10 +89,10 @@ async function MarketplaceCatalog({ searchParams }) {
           </div>
         ) : (
           <div className="text-center py-20 px-4 rounded-3xl border border-dashed border-zinc-300 bg-zinc-50/70 p-8">
-            <h3 className="text-base font-bold text-zinc-900 font-montserrat">
+            <h3 className="text-base font-bold text-zinc-950 font-montserrat">
               No matching tooling products found in crib
             </h3>
-            <p className="text-xs text-zinc-600 font-body mt-1">
+            <p className="text-xs text-zinc-700 font-body mt-1">
               Try adjusting your category filter, price bounds, or search keywords.
             </p>
             <Link
@@ -117,14 +117,14 @@ export default function MarketplacePage({ searchParams }) {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse motion-reduce:animate-none" />
-              <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold">
+              <span className="text-xs font-mono uppercase tracking-widest text-emerald-800 font-bold">
                 ISO 2768-mK Vetted Tooling Catalog
               </span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 font-montserrat">
               Machining &amp; Tooling Marketplace
             </h1>
-            <p className="text-sm sm:text-base text-zinc-600 font-body mt-2 max-w-2xl">
+            <p className="text-sm sm:text-base text-zinc-700 font-body mt-2 max-w-2xl">
               Precision carbide cutters, modular vises, metrology tools, and
               medical implants vetted by shop-floor veterans. Dual priced in USD and EXPEN.
             </p>
@@ -132,9 +132,9 @@ export default function MarketplacePage({ searchParams }) {
 
           <Link
             href="/showcase"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full liquid-glass-pill text-zinc-900 hover:text-emerald-800 transition text-xs font-bold font-montserrat self-start md:self-auto shadow-sm active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full liquid-glass-pill text-zinc-950 hover:text-emerald-900 transition text-xs font-bold font-montserrat self-start md:self-auto shadow-sm active:scale-[0.98]"
           >
-            <IconCube3D className="w-4 h-4 text-emerald-700" />
+            <IconCube3D className="w-4 h-4 text-emerald-800" />
             <span>Launch 3D Tooling Showcase</span>
           </Link>
         </div>

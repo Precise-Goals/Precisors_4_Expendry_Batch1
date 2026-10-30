@@ -312,8 +312,8 @@ END-ISO-10303-21;`;
         className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-zinc-200/90 bg-white/70 backdrop-blur-md"
       >
         <div aria-hidden="true" className="pointer-events-none select-none">
-          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-400 font-bold">+ [CAD/CAM // GD&amp;T]</div>
-          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-400 font-bold">+ [ISO-2768-mK]</div>
+          <div className="absolute top-4 left-4 text-xs font-mono text-zinc-600 font-bold">+ [CAD/CAM // GD&amp;T]</div>
+          <div className="absolute top-4 right-4 text-xs font-mono text-zinc-600 font-bold">+ [ISO-2768-mK]</div>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 space-y-6">
@@ -321,14 +321,14 @@ END-ISO-10303-21;`;
             <span className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse" />
             <span className="text-xs font-mono font-bold text-zinc-900">Engineering Blueprints &amp; GD&amp;T CAD Crib</span>
             <span className="text-zinc-300">•</span>
-            <span className="text-xs font-mono font-bold text-emerald-700">MST-{CHAIN_ID}</span>
+            <span className="text-xs font-mono font-bold text-emerald-800">MST-{CHAIN_ID}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-950 font-montserrat leading-[1.15]">
             Machinist CAD/CAM Blueprints &amp; Acoustic Sound Notes
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-600 leading-relaxed max-w-3xl font-body">
+          <p className="text-base sm:text-lg text-zinc-700 leading-relaxed max-w-3xl font-body">
             Precision engineering drawings, custom soft-jaw blueprints, chatter-damped boring sleeves, and 5-axis workholding fixtures. Every drawing includes interactive acoustic sound notes calibrated to real machining harmonics.
           </p>
 
@@ -343,7 +343,7 @@ END-ISO-10303-21;`;
                   className={`px-3.5 py-2 rounded-xl border transition cursor-pointer font-bold ${
                     selectedCategory === cat
                       ? "bg-emerald-800 border-emerald-800 text-white shadow-xs"
-                      : "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                      : "bg-white border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 font-semibold"
                   }`}
                 >
                   {cat}
@@ -357,7 +357,7 @@ END-ISO-10303-21;`;
                 placeholder="Search drawings or frequencies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3.5 py-2 rounded-xl bg-white border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition shadow-2xs"
+                className="w-full px-3.5 py-2 rounded-xl bg-white border border-zinc-300 text-xs font-mono text-zinc-900 placeholder:text-zinc-500 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition shadow-2xs"
               />
             </div>
           </div>
@@ -446,7 +446,7 @@ END-ISO-10303-21;`;
                           className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold transition shadow-2xs shrink-0 cursor-pointer active:scale-95 ${
                             isPlaying
                               ? "bg-emerald-700 text-white shadow-xs"
-                              : "bg-white border border-zinc-300 text-zinc-800 hover:text-emerald-800 hover:border-emerald-500"
+                              : "bg-white border border-zinc-300 text-zinc-800 hover:text-emerald-900 hover:border-emerald-500 font-bold"
                           }`}
                           aria-label={`Play sound note for ${bp.title}`}
                         >
@@ -461,7 +461,7 @@ END-ISO-10303-21;`;
                     <button
                       type="button"
                       onClick={() => setSelectedBlueprint(bp)}
-                      className="text-xs font-mono font-bold text-emerald-800 hover:text-emerald-900 hover:underline flex items-center gap-1.5 cursor-pointer"
+                      className="text-xs font-mono font-bold text-emerald-800 hover:text-emerald-950 hover:underline flex items-center gap-1.5 cursor-pointer"
                     >
                       <IconEye className="w-4 h-4 text-emerald-700" />
                       <span>Inspect Drawing GD&amp;T</span>
@@ -471,7 +471,7 @@ END-ISO-10303-21;`;
                       <button
                         type="button"
                         onClick={() => handleDownloadPayload(bp)}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-bold hover:bg-emerald-100 transition shadow-xs cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-900 text-xs font-mono font-bold hover:bg-emerald-100 transition shadow-xs cursor-pointer"
                       >
                         <IconDownload className="w-4 h-4 text-emerald-700" />
                         <span>Download STEP</span>
@@ -507,17 +507,17 @@ END-ISO-10303-21;`;
           <div className="w-full max-w-2xl rounded-4xl bg-white border border-zinc-200/90 shadow-2xl p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-zinc-200 pb-4">
               <div>
-                <span className="text-xs font-mono text-emerald-800 font-bold">
+                <span className="text-xs font-mono text-emerald-900 font-bold">
                   [{selectedBlueprint.id}] // GD&amp;T INSPECTION SCHEMATIC
                 </span>
-                <h3 className="text-xl font-bold text-zinc-900 font-montserrat mt-1">
+                <h3 className="text-xl font-bold text-zinc-950 font-montserrat mt-1">
                   {selectedBlueprint.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedBlueprint(null)}
-                className="text-zinc-600 hover:text-zinc-900 text-sm font-mono px-2.5 py-1 rounded-xl bg-zinc-100 border border-zinc-200 cursor-pointer"
+                className="text-zinc-700 hover:text-zinc-950 font-bold text-sm font-mono px-2.5 py-1 rounded-xl bg-zinc-100 border border-zinc-200 cursor-pointer"
               >
                 ✕ Close
               </button>
@@ -531,7 +531,7 @@ END-ISO-10303-21;`;
                 <button
                   type="button"
                   onClick={() => setZoomLevel((prev) => (prev === 1 ? 1.25 : 1))}
-                  className="text-xs text-emerald-700 font-bold hover:underline cursor-pointer"
+                  className="text-xs text-emerald-800 font-bold hover:underline cursor-pointer"
                 >
                   Zoom {zoomLevel}x
                 </button>
@@ -539,17 +539,17 @@ END-ISO-10303-21;`;
 
               <div className="py-6 flex items-center justify-center transition-transform duration-300" style={{ transform: `scale(${zoomLevel})` }}>
                 <div className="border border-zinc-300 border-dashed w-56 h-28 rounded-xl flex flex-col items-center justify-center relative bg-white shadow-xs">
-                  <span className="text-zinc-900 font-bold tracking-wider text-xs font-montserrat">
+                  <span className="text-zinc-950 font-bold tracking-wider text-xs font-montserrat">
                     {selectedBlueprint.category.toUpperCase()}
                   </span>
-                  <span className="text-[11px] text-zinc-500 mt-0.5">{selectedBlueprint.material}</span>
+                  <span className="text-[11px] text-zinc-600 font-semibold mt-0.5">{selectedBlueprint.material}</span>
                   <div className="absolute -top-3 text-zinc-800 bg-zinc-100 px-2 py-0.5 border border-zinc-300 rounded-full font-bold">
                     ◄── 120.00 ±0.005 ──►
                   </div>
                   <div className="absolute -left-6 -rotate-90 text-zinc-800 bg-zinc-100 px-2 py-0.5 border border-zinc-300 rounded-full font-bold">
                     65.0 ±0.005
                   </div>
-                  <div className="absolute -bottom-3 text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-300 rounded-full font-bold">
+                  <div className="absolute -bottom-3 text-emerald-900 bg-emerald-50 px-2 py-0.5 border border-emerald-300 rounded-full font-bold">
                     {selectedBlueprint.surfaceFinish}
                   </div>
                 </div>

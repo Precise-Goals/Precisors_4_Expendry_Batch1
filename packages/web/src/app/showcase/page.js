@@ -65,14 +65,14 @@ export default function ShowcasePage() {
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
               Interactive 3D Tooling &amp; Implant Inspection
             </h1>
-            <p className="text-sm sm:text-base text-zinc-600 mt-2 max-w-3xl font-poppins">
+            <p className="text-sm sm:text-base text-zinc-700 mt-2 max-w-3xl font-poppins">
               Centrally calibrated Three.js CAD inspection of the 9 high-precision Biorad Medisys Pune products: knee joints, hip stems, dual-mobility cups, ureteral stents, and endoscopy instruments.
             </p>
           </div>
 
           <Link
             href="/marketplace"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-emerald-600 text-white transition text-xs font-bold font-mono self-start md:self-auto shadow-sm active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-900 hover:bg-emerald-800 text-white transition text-xs font-bold font-mono self-start md:self-auto shadow-sm active:scale-95"
           >
             <span>Browse 3D Catalog</span>
             <span aria-hidden="true">→</span>
@@ -95,13 +95,13 @@ export default function ShowcasePage() {
                   onClick={() => setActiveModelId(model.id)}
                   className={`px-3.5 py-2 rounded-xl text-xs font-semibold font-mono transition-all duration-150 flex items-center gap-2 cursor-pointer ${
                     isSelected
-                      ? "bg-emerald-800 text-white shadow-md border border-emerald-900"
-                      : "bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 hover:border-zinc-300"
+                      ? "bg-emerald-800 text-white shadow-md border border-emerald-900 font-bold"
+                      : "bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 hover:border-zinc-300"
                   }`}
                 >
                   <span
                     className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                      isSelected ? "bg-emerald-600 text-white" : "bg-zinc-100 text-zinc-600"
+                      isSelected ? "bg-emerald-700 text-white" : "bg-zinc-100 text-zinc-700"
                     }`}
                   >
                     [{idx + 1}]
@@ -139,13 +139,13 @@ export default function ShowcasePage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-bold">
                 {activeProduct?.category || "Orthopedic Knees"}
               </span>
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 font-bold">
                 {activeModel.geometryType}
               </span>
-              <span className="text-xs font-mono text-zinc-500">
+              <span className="text-xs font-mono text-zinc-600 font-medium">
                 Mesh Density: {activeModel.segments || 64} Segments
               </span>
             </div>
@@ -227,7 +227,7 @@ export default function ShowcasePage() {
             <div className="space-y-3 pt-4 border-t border-zinc-200">
               <Link
                 href={`/marketplace/${activeModel.productId}`}
-                className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition text-center shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                className="w-full py-3.5 px-4 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs uppercase tracking-wider transition text-center shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-95"
               >
                 <span>View in Marketplace Catalog</span>
                 <span aria-hidden="true">→</span>
@@ -263,10 +263,10 @@ export default function ShowcasePage() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs font-mono text-emerald-700 font-bold">
+                      <span className="text-xs font-mono text-emerald-800 font-bold">
                         M-0{idx + 1} {'//'} {prod?.category || item.geometryType}
                       </span>
-                      <span className="text-[11px] text-zinc-400 font-mono">
+                      <span className="text-[11px] text-zinc-600 font-mono font-semibold">
                         {item.productId}
                       </span>
                     </div>

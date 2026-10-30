@@ -41,8 +41,8 @@ export default function CommunityHeader() {
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-600 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200">
-                <IconEye className="w-3.5 h-3.5 text-zinc-400" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-700 font-semibold px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200">
+                <IconEye className="w-3.5 h-3.5 text-zinc-600" />
                 <span>Read Only Mode</span>
               </span>
               <Link href="/onboarding">

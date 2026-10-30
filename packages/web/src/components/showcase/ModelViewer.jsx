@@ -172,7 +172,7 @@ export default function ModelViewer({
           <span className="text-emerald-800 font-bold">
             CAD-3D: {model.shortName || model.name}
           </span>
-          <span className="text-zinc-300">|</span>
+          <span className="text-zinc-500 font-bold">|</span>
           <span className="text-emerald-700 hidden sm:inline font-mono font-semibold">
             GLB ASSET {"//"} {model.geometryType?.toUpperCase()}
           </span>
@@ -182,17 +182,17 @@ export default function ModelViewer({
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
             60 FPS
           </span>
-          <span className="text-zinc-300">·</span>
+          <span className="text-zinc-500 font-bold">·</span>
           <span>PBR: {model.materials?.metalness ?? 0.95}</span>
         </div>
       </div>
 
       {/* CAD Coordinate Ticks & Crosshair Markers */}
-      <div aria-hidden="true" className="pointer-events-none select-none text-[10px] font-mono text-zinc-400 font-semibold">
+      <div aria-hidden="true" className="pointer-events-none select-none text-[10px] font-mono text-zinc-600 font-bold">
         <span className="absolute top-11 left-3">+ [X: 00.00]</span>
         <span className="absolute top-11 right-3">+ [Y: 00.00]</span>
         <span className="absolute bottom-16 left-3">+ [Z: 00.00]</span>
-        <span className="absolute bottom-16 right-3 text-emerald-800 font-bold">+ [DATUM A]</span>
+        <span className="absolute bottom-16 right-3 text-emerald-900 font-bold">+ [DATUM A]</span>
       </div>
 
       {/* Dimensional Caliper Dynamic HUD Lines Overlay */}
@@ -203,7 +203,7 @@ export default function ModelViewer({
               <span className="absolute -left-1 -top-1.5 h-3 w-px bg-emerald-600" />
               <span className="absolute -right-1 -top-1.5 h-3 w-px bg-emerald-600" />
             </div>
-            <span className="text-[10px] font-mono font-bold text-emerald-800 bg-white/95 px-2.5 py-0.5 rounded-full border border-emerald-300 -mt-2.5 shadow-xs">
+            <span className="text-[10px] font-mono font-bold text-emerald-900 bg-white/95 px-2.5 py-0.5 rounded-full border border-emerald-300 -mt-2.5 shadow-xs">
               TOLERANCE: {toleranceLabel}
             </span>
           </div>
@@ -212,7 +212,7 @@ export default function ModelViewer({
             <div className="h-full w-px bg-emerald-600/40 relative flex items-center">
               <span className="absolute -top-1 -left-1.5 w-3 h-px bg-emerald-600" />
               <span className="absolute -bottom-1 -left-1.5 w-3 h-px bg-emerald-600" />
-              <span className="text-[9px] font-mono font-bold text-emerald-800 bg-white/95 px-2 py-0.5 rounded-full border border-emerald-300 -rotate-90 -translate-x-6 whitespace-nowrap shadow-xs">
+              <span className="text-[9px] font-mono font-bold text-emerald-900 bg-white/95 px-2 py-0.5 rounded-full border border-emerald-300 -rotate-90 -translate-x-6 whitespace-nowrap shadow-xs">
                 BIOMEDICAL ALLOY
               </span>
             </div>
@@ -330,7 +330,7 @@ export default function ModelViewer({
             className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               isRotating
                 ? "bg-emerald-800 text-white shadow-sm"
-                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
+                : "text-zinc-800 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-300"
             }`}
           >
             Auto-Rotate: {isRotating ? "ON" : "OFF"}
@@ -342,7 +342,7 @@ export default function ModelViewer({
             className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               isWireframe
                 ? "bg-emerald-800 text-white shadow-sm"
-                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
+                : "text-zinc-800 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-300"
             }`}
           >
             Wireframe: {isWireframe ? "ON" : "OFF"}
@@ -354,7 +354,7 @@ export default function ModelViewer({
             className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
               showCalipers
                 ? "bg-emerald-800 text-white shadow-sm"
-                : "text-zinc-700 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70"
+                : "text-zinc-800 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-300"
             }`}
           >
             Calipers: {showCalipers ? "ON" : "OFF"}
@@ -367,7 +367,7 @@ export default function ModelViewer({
                 prev === "laser" ? "studio" : prev === "studio" ? "toolroom" : "laser"
               )
             }
-            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-800 bg-white/70 hover:bg-white border border-zinc-200/70 transition-all capitalize cursor-pointer"
+            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-800 bg-white/80 hover:bg-white border border-zinc-300 transition-all capitalize cursor-pointer"
           >
             Light: {lightingPreset}
           </button>
@@ -375,14 +375,14 @@ export default function ModelViewer({
           <button
             type="button"
             onClick={handleResetView}
-            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-600 hover:text-zinc-950 bg-white/70 hover:bg-white border border-zinc-200/70 transition-all cursor-pointer"
+            className="px-3 py-1.5 rounded-full text-xs font-mono font-bold text-zinc-800 hover:text-zinc-950 bg-white/80 hover:bg-white border border-zinc-300 transition-all cursor-pointer"
           >
             Reset
           </button>
         </div>
 
         {/* Right Hint */}
-        <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-zinc-600 liquid-glass-pill px-4 py-2 rounded-full border border-zinc-200/90 shadow-sm bg-white/80 backdrop-blur-md">
+        <div className="hidden lg:flex items-center gap-2 text-xs font-mono font-semibold text-zinc-700 liquid-glass-pill px-4 py-2 rounded-full border border-zinc-200/90 shadow-sm bg-white/80 backdrop-blur-md">
           <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
           <span>Drag to Orbit · Scroll to Zoom · Arrows: ±15°</span>
         </div>

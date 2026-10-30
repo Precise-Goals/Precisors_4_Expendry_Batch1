@@ -34,7 +34,7 @@ export default function FilterSidebar({
         {(selectedCategory !== "All" || minPrice || maxPrice || search) && (
           <Link
             href="/marketplace"
-            className="text-xs font-mono text-zinc-500 hover:text-emerald-700 transition"
+            className="text-xs font-mono text-zinc-600 hover:text-emerald-800 font-semibold transition"
           >
             Clear all
           </Link>
@@ -47,7 +47,7 @@ export default function FilterSidebar({
 
         {/* Category Filter Fieldset */}
         <fieldset className="space-y-3">
-          <legend className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-2">
+          <legend className="text-[11px] font-mono font-bold text-zinc-700 uppercase tracking-wider mb-2">
             Tooling Category
           </legend>
 
@@ -69,8 +69,8 @@ export default function FilterSidebar({
                     htmlFor={inputId}
                     className={`text-xs cursor-pointer select-none transition-colors ${
                       isChecked
-                        ? "text-emerald-800 font-bold"
-                        : "text-zinc-700 hover:text-emerald-700 font-medium"
+                        ? "text-emerald-900 font-bold"
+                        : "text-zinc-800 hover:text-emerald-900 font-semibold"
                     }`}
                   >
                     {cat}
@@ -83,7 +83,7 @@ export default function FilterSidebar({
 
         {/* Price Range Filter Fieldset */}
         <fieldset className="space-y-3 pt-4 border-t border-zinc-200">
-          <legend className="text-[11px] font-mono font-bold text-zinc-500 uppercase tracking-wider mb-2">
+          <legend className="text-[11px] font-mono font-bold text-zinc-700 uppercase tracking-wider mb-2">
             Price Range ($)
           </legend>
 
@@ -100,7 +100,7 @@ export default function FilterSidebar({
                 step="1"
                 placeholder="Min ($)"
                 defaultValue={minPrice}
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-900 font-mono placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-900 font-mono placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
               />
             </div>
             <div>
@@ -115,7 +115,7 @@ export default function FilterSidebar({
                 step="1"
                 placeholder="Max ($)"
                 defaultValue={maxPrice}
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-900 font-mono placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs text-zinc-900 font-mono placeholder:text-zinc-500 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/15 transition"
               />
             </div>
           </div>

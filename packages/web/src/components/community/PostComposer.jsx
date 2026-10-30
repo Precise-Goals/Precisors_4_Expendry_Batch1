@@ -161,7 +161,7 @@ function ComposerInner({ onPostCreated }) {
       {successResult && (
         <div
           role="status"
-          className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2 text-xs text-emerald-800"
+          className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2 text-xs text-emerald-900"
         >
           <div className="flex items-center justify-between font-bold">
             <span className="inline-flex items-center gap-1.5">
@@ -173,13 +173,13 @@ function ComposerInner({ onPostCreated }) {
             </Badge>
           </div>
           {successResult.txHash && (
-            <p className="font-mono text-[11px] text-zinc-600">
+            <p className="font-mono text-[11px] text-zinc-700">
               Tx Hash:{" "}
               <a
                 href={`${EXPLORER_URL}/tx/${successResult.txHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-700 hover:underline font-bold"
+                className="text-emerald-800 hover:underline font-bold"
               >
                 {successResult.txHash}
               </a>
@@ -221,7 +221,7 @@ function ComposerInner({ onPostCreated }) {
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-montserrat font-semibold transition-all border cursor-pointer ${
                     type === t
                       ? "bg-emerald-800 text-white border-emerald-800 shadow-xs font-bold"
-                      : "bg-zinc-50 text-zinc-700 border-zinc-200 hover:bg-zinc-100"
+                      : "bg-zinc-50 text-zinc-800 border-zinc-200 hover:bg-zinc-100 font-semibold"
                   }`}
                 >
                   {t}
@@ -255,7 +255,7 @@ function ComposerInner({ onPostCreated }) {
               </label>
               <span
                 className={`text-[11px] font-mono ${
-                  charCount > maxChars ? "text-red-500 font-bold" : "text-zinc-400"
+                  charCount > maxChars ? "text-red-500 font-bold" : "text-zinc-600 font-medium"
                 }`}
               >
                 {charCount} / {maxChars}
@@ -275,7 +275,7 @@ function ComposerInner({ onPostCreated }) {
 
           {/* Submit Action */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-            <span className="text-xs text-zinc-500 font-mono">
+            <span className="text-xs text-zinc-600 font-mono font-medium">
               Mints 10 EXPEN on MST testnet upon verification.
             </span>
             <Button

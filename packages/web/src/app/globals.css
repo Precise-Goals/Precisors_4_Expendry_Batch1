@@ -416,3 +416,15 @@ footer a:hover svg,
 .footer-nav-link:hover svg {
   color: #16a34a !important;
 }
+
+.kol::After {
+    content: "";
+    display: block;
+    background: #ffffff24;
+    width: 43%;
+    height: 30rem;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    filter: blur(16px);
+}

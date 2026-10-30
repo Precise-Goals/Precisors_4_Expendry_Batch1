@@ -102,7 +102,7 @@ export default function BuyButton({ product }) {
               />
             </svg>
             <span>Instant Demo Order</span>
-            <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-emerald-900/60 text-emerald-200 border border-emerald-600/40 font-bold">
+            <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-100 border border-emerald-700/60 font-bold">
               Demo
             </span>
           </>
@@ -116,7 +116,7 @@ export default function BuyButton({ product }) {
           aria-live="polite"
           className="fixed bottom-6 right-6 z-50 max-w-sm rounded-3xl bg-white/95 backdrop-blur-2xl border border-zinc-200/90 p-5 shadow-2xl flex items-start gap-3.5 animate-in fade-in slide-in-from-bottom-4 duration-200"
         >
-          <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 shrink-0 mt-0.5 shadow-2xs">
+          <div className="w-8 h-8 rounded-full bg-emerald-50 border border-emerald-300 flex items-center justify-center text-emerald-800 shrink-0 mt-0.5 shadow-2xs">
             <svg
               className="w-4 h-4"
               fill="none"
@@ -133,25 +133,25 @@ export default function BuyButton({ product }) {
           </div>
 
           <div className="flex-1">
-            <h4 className="text-sm font-bold text-zinc-900 font-montserrat flex items-center gap-2">
+            <h4 className="text-sm font-bold text-zinc-950 font-montserrat flex items-center gap-2">
               Purchase Confirmed
-              <span className="text-[10px] font-mono px-2 py-0.5 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-bold">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-emerald-50 text-emerald-900 border border-emerald-300 rounded-full font-bold">
                 Demo Mode
               </span>
             </h4>
-            <p className="text-xs text-zinc-600 font-body mt-1 leading-relaxed">
+            <p className="text-xs text-zinc-700 font-body mt-1 leading-relaxed">
               {toast.message}
             </p>
-            <div className="mt-2 pt-2 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-500">
+            <div className="mt-2 pt-2 border-t border-zinc-100 flex items-center justify-between text-xs font-mono text-zinc-600 font-semibold">
               <span>{toast.orderId}</span>
-              <span className="text-emerald-700 font-bold">${toast.price.toFixed(2)}</span>
+              <span className="text-emerald-800 font-bold">${toast.price.toFixed(2)}</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={() => setToast(null)}
-            className="text-zinc-400 hover:text-zinc-900 -mr-1 -mt-1 p-1 text-xs cursor-pointer"
+            className="text-zinc-600 hover:text-zinc-950 font-bold -mr-1 -mt-1 p-1 text-xs cursor-pointer"
             aria-label="Close notification"
           >
             ✕
