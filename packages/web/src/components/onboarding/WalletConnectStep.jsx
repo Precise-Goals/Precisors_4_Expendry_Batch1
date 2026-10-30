@@ -23,13 +23,10 @@ export default function WalletConnectStep({ onConnected, initialAddress = null }
         onConnected(res.address);
       }
     } catch (err) {
-      // In dev or static environment without Metamask / BridgeKey extension, provide dev fallback address
-      if (typeof window !== "undefined") {
-        const fallbackAddr = "0x73595081334A18D4298A160b162faB4Fb4B3c85B";
-        if (onConnected) onConnected(fallbackAddr);
-        return;
-      }
-      setLocalError(err.message || "Failed to connect BridgeKey wallet.");
+      setLocalError(
+        err.message ||
+          "BridgeKey wallet extension was not detected or the connection was rejected. Please ensure the BridgeKey browser extension is installed, enabled, and unlocked."
+      );
     }
   };
 
@@ -71,10 +68,23 @@ export default function WalletConnectStep({ onConnected, initialAddress = null }
         {error && (
           <div
             role="alert"
-            className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 flex items-start gap-2.5"
+            className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700 space-y-2.5"
           >
-            <span className="text-base leading-none">⚠️</span>
-            <span>{error}</span>
+            <div className="flex items-start gap-2.5">
+              <span className="text-base leading-none">⚠️</span>
+              <span className="font-medium leading-relaxed">{error}</span>
+            </div>
+            <div className="pl-6">
+              <a
+                href="https://bridgekey.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-mono text-[11px] font-bold shadow-xs transition"
+              >
+                <span>Install BridgeKey Extension</span>
+                <IconExternal className="w-3 h-3 text-white" />
+              </a>
+            </div>
           </div>
         )}
 
@@ -122,7 +132,7 @@ export default function WalletConnectStep({ onConnected, initialAddress = null }
             {/* Direct Link to BridgeKey.io */}
             <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 text-center space-y-1.5">
               <span className="text-xs text-zinc-600 font-body block">
-                Don't have a BridgeKey Web3 wallet yet?
+                Don&apos;t have a BridgeKey Web3 wallet yet?
               </span>
               <a
                 href="https://bridgekey.io/"

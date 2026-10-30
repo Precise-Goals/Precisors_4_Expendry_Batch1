@@ -2,13 +2,6 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const requiredEnvVars = [
-  "NEXT_PUBLIC_FIREBASE_API_KEY",
-  "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
-  "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
-  "NEXT_PUBLIC_FIREBASE_APP_ID",
-];
-
 function getFirebaseConfig() {
   const config = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || process.env.FIREBASE_API_KEY,
@@ -20,15 +13,18 @@ function getFirebaseConfig() {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || process.env.FIREBASE_DATABASE_URL,
   };
 
-  // Environment variable safety guard
-  for (const envKey of requiredEnvVars) {
-    const fallbackKey = envKey.replace("NEXT_PUBLIC_", "");
-    if (!process.env[envKey] && !process.env[fallbackKey]) {
-      throw new Error(
-        `Firebase Initialization Error: Missing required environment variable '${envKey}' (or '${fallbackKey}'). ` +
-        `Please check your .env configuration.`
-      );
-    }
+  // Check statically resolved config properties so Turbopack/Next.js replacements work in browser
+  if (!config.apiKey || !config.authDomain || !config.projectId || !config.appId) {
+    const missing = [];
+    if (!config.apiKey) missing.push("NEXT_PUBLIC_FIREBASE_API_KEY");
+    if (!config.authDomain) missing.push("NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN");
+    if (!config.projectId) missing.push("NEXT_PUBLIC_FIREBASE_PROJECT_ID");
+    if (!config.appId) missing.push("NEXT_PUBLIC_FIREBASE_APP_ID");
+
+    throw new Error(
+      `Firebase Initialization Error: Missing required environment variable(s): ${missing.join(", ")}. ` +
+      `Please check your .env configuration.`
+    );
   }
 
   return config;

@@ -61,7 +61,7 @@ export default function HeritagePage() {
             </p>
             <p className="text-sm text-zinc-600 leading-relaxed font-body">
               Machining surgical CoCrMo alloys and titanium Ti-6Al-4V ELI demands tolerances under
-              ±0.005mm and mirror surface finishes of Ra &lt; 0.02 µm. Veteran machinists across Pune's industrial
+              ±0.005mm and mirror surface finishes of Ra &lt; 0.02 µm. Veteran machinists across Pune&apos;s industrial
               clusters (Pimpri-Chinchwad, Bhosari, Chakan) accumulated decades of unwritten rules:
               how to damp chatter harmonics on knee condyles, offset thermal spindle drift at dawn, and avoid micro-notching on carbide inserts.
             </p>

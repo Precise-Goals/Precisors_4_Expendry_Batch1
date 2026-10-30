@@ -27,45 +27,44 @@ export default function OnboardingPage() {
   const [walletAddr, setWalletAddr] = useState(null);
   const [walletMsg, setWalletMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isWorstCaseActive, setIsWorstCaseActive] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    designation: "",
-    company: "",
-    email: "",
-    phone: "",
+  const [isWorstCaseActive, setIsWorstCaseActive] = useState(() => {
+    if (typeof window !== "undefined") {
+      return new URLSearchParams(window.location.search).get("data") === "worst";
+    }
+    return false;
   });
 
-  const [errors, setErrors] = useState({});
-
-  // Auto-populate from Google Auth session if available
-  useEffect(() => {
+  const [formData, setFormData] = useState(() => {
+    let email = "";
+    let name = "";
     if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("data") === "worst") {
+        return { ...WORST_CASE_DATA };
+      }
       try {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get("data") === "worst") {
-          setIsWorstCaseActive(true);
-          setFormData({ ...WORST_CASE_DATA });
-          return;
-        }
-
         const rawSession = sessionStorage.getItem("expendry_user_session");
         if (rawSession) {
           const session = JSON.parse(rawSession);
           if (session) {
-            setFormData((prev) => ({
-              ...prev,
-              email: prev.email || session.email || "",
-              name: prev.name || session.displayName || "",
-            }));
+            email = session.email || "";
+            name = session.displayName || "";
           }
         }
       } catch {
-        // ignore
+        // ignore storage errors
       }
     }
-  }, []);
+    return {
+      name,
+      designation: "",
+      company: "",
+      email,
+      phone: "",
+    };
+  });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -243,7 +242,7 @@ export default function OnboardingPage() {
                     Welcome to Expendry
                   </h1>
                   <p className="text-xs sm:text-sm text-zinc-600 font-body">
-                    Let's personalize your workspace in the manufacturing knowledge ecosystem.
+                    Let&apos;s personalize your workspace in the manufacturing knowledge ecosystem.
                   </p>
                 </div>
 

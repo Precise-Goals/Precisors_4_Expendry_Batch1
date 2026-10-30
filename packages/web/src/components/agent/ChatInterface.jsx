@@ -165,14 +165,6 @@ export default function ChatInterface({
   const audioRef = useRef(null);
   const shouldAutoScrollRef = useRef(true);
 
-  // Sync external prompt clicks from parent page if provided
-  useEffect(() => {
-    if (externalInput) {
-      handleSendMessage(externalInput);
-      if (onClearExternalInput) onClearExternalInput();
-    }
-  }, [externalInput, onClearExternalInput]);
-
   // Track manual scrolling to avoid disrupting user reading
   const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
@@ -337,6 +329,17 @@ export default function ChatInterface({
       setIsLoading(false);
     }
   };
+
+  // Sync external prompt clicks from parent page if provided asynchronously
+  useEffect(() => {
+    if (externalInput) {
+      const timer = setTimeout(() => {
+        handleSendMessage(externalInput);
+        if (onClearExternalInput) onClearExternalInput();
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [externalInput, onClearExternalInput]);
 
   const handleFormSubmit = (e) => {
     if (e) e.preventDefault();

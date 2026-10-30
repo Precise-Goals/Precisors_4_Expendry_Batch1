@@ -5,8 +5,22 @@ import { CHAIN_ID, NETWORK_CONFIG } from "shared/constants";
  */
 export function getProvider() {
   if (typeof window === "undefined") return null;
+
+  // 1. Direct BridgeKey extension injection
   if (window.bridgekey) return window.bridgekey;
+
+  // 2. Check for multi-injected wallet providers (EIP-5749 / window.ethereum.providers)
+  if (window.ethereum?.providers && Array.isArray(window.ethereum.providers)) {
+    const bridgekeyProvider = window.ethereum.providers.find(
+      (p) => p.isBridgeKey || p.name?.toLowerCase().includes("bridgekey")
+    );
+    if (bridgekeyProvider) return bridgekeyProvider;
+    return window.ethereum.providers[0];
+  }
+
+  // 3. Standard injected window.ethereum (MetaMask or BridgeKey acting as default)
   if (window.ethereum) return window.ethereum;
+
   return null;
 }
 

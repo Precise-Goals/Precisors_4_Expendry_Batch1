@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { MODELS } from "@/data/models";
+import { BIORAD_MODELS } from "@/data/models";
+import { PRODUCTS } from "@/data/products";
 
 const ModelViewer = dynamic(
   () => import("@/components/showcase/ModelViewer"),
@@ -23,23 +24,26 @@ export default function ShowcasePage() {
     if (typeof window !== "undefined") {
       const urlParams = new URLSearchParams(window.location.search);
       const modelParam = urlParams.get("model");
-      if (modelParam && MODELS.some((m) => m.id === modelParam)) {
+      if (modelParam && BIORAD_MODELS.some((m) => m.id === modelParam)) {
         return modelParam;
       }
     }
-    return MODELS[0]?.id || "excel-mpk";
+    return BIORAD_MODELS[0]?.id || "excel-mpk";
   });
 
   const activeModel =
-    MODELS.find((m) => m.id === activeModelId) || MODELS[0];
+    BIORAD_MODELS.find((m) => m.id === activeModelId) || BIORAD_MODELS[0];
 
-  // Turret preset keyboard shortcuts: [1] through [9]
+  const activeProduct =
+    PRODUCTS.find((p) => p.id === activeModel.productId) || PRODUCTS[0];
+
+  // Turret preset keyboard shortcuts: [1] through [9] strictly for Biorad products
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
       const num = parseInt(e.key, 10);
-      if (num >= 1 && num <= MODELS.length) {
-        setActiveModelId(MODELS[num - 1].id);
+      if (num >= 1 && num <= BIORAD_MODELS.length) {
+        setActiveModelId(BIORAD_MODELS[num - 1].id);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -55,14 +59,14 @@ export default function ShowcasePage() {
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#16a34a] animate-pulse motion-reduce:animate-none" />
               <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold">
-                Biorad Medisys · Precision CAD Viewport
+                Biorad Medisys Pune · 9 Certified Clinical Products
               </span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 font-montserrat">
-              Interactive 3D Tooling & Implant Inspection
+              Interactive 3D Tooling &amp; Implant Inspection
             </h1>
             <p className="text-sm sm:text-base text-zinc-600 mt-2 max-w-3xl font-poppins">
-              Centrally calibrated Three.js CAD inspection of Biorad Medisys Pune knee joints, hip stems, ureteral stents, and endoscopy tooling with real-time caliper telemetry.
+              Centrally calibrated Three.js CAD inspection of the 9 high-precision Biorad Medisys Pune products: knee joints, hip stems, dual-mobility cups, ureteral stents, and endoscopy instruments.
             </p>
           </div>
 
@@ -75,13 +79,13 @@ export default function ShowcasePage() {
           </Link>
         </div>
 
-        {/* Implant & Tooling Turret Selector */}
+        {/* 9 Biorad Implants Turret Selector */}
         <div className="flex flex-wrap items-center gap-2 p-3 sm:p-4 rounded-3xl bg-zinc-50/90 border border-zinc-200/90 shadow-xs">
-          <span className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold px-2">
-            Implant Selection:
+          <span className="text-xs font-mono uppercase tracking-wider text-zinc-900 font-bold px-2">
+            Biorad Catalog ({BIORAD_MODELS.length} Implants):
           </span>
           <div className="flex flex-wrap gap-2">
-            {MODELS.map((model, idx) => {
+            {BIORAD_MODELS.map((model, idx) => {
               const isSelected = activeModelId === model.id;
               const turretCode = `M-0${idx + 1}`;
               return (
@@ -136,6 +140,9 @@ export default function ShowcasePage() {
 
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="text-xs font-mono px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
+                {activeProduct?.category || "Orthopedic Knees"}
+              </span>
+              <span className="text-xs font-mono px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-800 font-bold">
                 {activeModel.geometryType}
               </span>
               <span className="text-xs font-mono text-zinc-500">
@@ -144,20 +151,20 @@ export default function ShowcasePage() {
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight font-montserrat">
-              {activeModel.name}
+              {activeProduct?.name || activeModel.name}
             </h2>
 
             <p className="text-sm text-zinc-600 mt-3 leading-relaxed font-poppins">
-              {activeModel.description}
+              {activeProduct?.description || activeModel.description}
             </p>
 
             <div className="mt-8 pt-6 border-t border-zinc-200">
               <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold mb-4">
-                Dimensional Tolerances & Material Metrics
+                Dimensional Tolerances &amp; Material Metrics
               </h3>
               <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-                {activeModel.specs &&
-                  Object.entries(activeModel.specs).map(([label, val]) => (
+                {activeProduct?.specs &&
+                  Object.entries(activeProduct.specs).map(([label, val]) => (
                     <div
                       key={label}
                       className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center"
@@ -170,11 +177,11 @@ export default function ShowcasePage() {
                   ))}
                 <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center">
                   <dt className="text-zinc-600">Manufacturing Standard</dt>
-                  <dd className="text-emerald-700 font-bold">ISO 5832 / ASTM F75</dd>
+                  <dd className="text-emerald-700 font-bold">ISO 5832 / ASTM F75 / ISO 13485</dd>
                 </div>
                 <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 flex justify-between items-center">
                   <dt className="text-zinc-600">Surface Finish (Ra)</dt>
-                  <dd className="text-emerald-700 font-bold">Ra ≤ 0.02 µm (Mirror Polish)</dd>
+                  <dd className="text-emerald-700 font-bold">Ra ≤ 0.02 µm (Electropolished Mirror)</dd>
                 </div>
               </dl>
             </div>
@@ -184,10 +191,10 @@ export default function ShowcasePage() {
           <div className="lg:col-span-4 rounded-3xl border border-zinc-200/90 bg-white p-6 sm:p-8 flex flex-col justify-between shadow-sm space-y-6">
             <div>
               <span className="text-xs font-mono uppercase tracking-widest text-emerald-700 font-bold block mb-2">
-                Production Unit
+                Biorad Production Unit
               </span>
               <h3 className="text-xl font-bold text-zinc-900 font-montserrat">
-                Procure or Inspect
+                Biorad Medisys Pune
               </h3>
               <p className="text-xs text-zinc-600 mt-2 font-poppins leading-relaxed">
                 Directly referenced from Biorad Medisys Pune manufacturing plant. Backed by verified MST blockchain telemetry records.
@@ -199,11 +206,19 @@ export default function ShowcasePage() {
                   <span className="font-bold text-zinc-900">{activeModel.id}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-zinc-500">Biorad Product ID:</span>
+                  <span className="font-bold text-emerald-800">{activeModel.productId}</span>
+                </div>
+                <div className="flex justify-between items-center text-xs font-mono">
                   <span className="text-zinc-500">Asset File:</span>
                   <span className="text-emerald-700 font-bold">{activeModel.glbPath?.replace('/3d-models-products/', '') || 'GLB'}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs font-mono">
-                  <span className="text-zinc-500">Ecosystem Reward:</span>
+                  <span className="text-zinc-500">Market Price:</span>
+                  <span className="text-zinc-900 font-bold">{activeProduct?.price ? `$${activeProduct.price} USD` : "Inquire"}</span>
+                </div>
+                <div className="flex justify-between items-center text-xs font-mono">
+                  <span className="text-zinc-500">Machinist Reward:</span>
                   <span className="text-orange-600 font-bold">10 EXPEN / Post</span>
                 </div>
               </div>
@@ -227,60 +242,63 @@ export default function ShowcasePage() {
           </div>
         </div>
 
-        {/* Dual Panel Comparison Grid */}
+        {/* Dual Panel Comparison Grid — Strictly the 9 Biorad Products */}
         <div className="pt-10 border-t border-zinc-200">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 font-montserrat">
-              Compare 3D Implants & Tooling
+              Compare 3D Implants &amp; Tooling
             </h2>
-            <span className="text-xs font-mono text-zinc-500">
-              9 Active Surgical Models
+            <span className="text-xs font-mono text-zinc-700 font-bold">
+              9 Active Biorad Medisys Surgical Products
             </span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {MODELS.map((item, idx) => (
-              <div
-                key={item.id}
-                className="rounded-2xl border border-zinc-200 bg-white p-5 hover:border-emerald-500/50 hover:shadow-md transition flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono text-emerald-700 font-bold">
-                      M-0{idx + 1} // {item.geometryType}
-                    </span>
-                    <span className="text-[11px] text-zinc-400 font-mono">
-                      {item.id}
-                    </span>
+            {BIORAD_MODELS.map((item, idx) => {
+              const prod = PRODUCTS.find((p) => p.id === item.productId);
+              return (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border border-zinc-200 bg-white p-5 hover:border-emerald-500/50 hover:shadow-md transition flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-mono text-emerald-700 font-bold">
+                        M-0{idx + 1} {'//'} {prod?.category || item.geometryType}
+                      </span>
+                      <span className="text-[11px] text-zinc-400 font-mono">
+                        {item.productId}
+                      </span>
+                    </div>
+                    <h3 className="text-sm font-bold text-zinc-900 font-montserrat">
+                      {prod?.name || item.name}
+                    </h3>
+                    <p className="text-xs text-zinc-600 mt-2 leading-relaxed line-clamp-2 font-poppins">
+                      {prod?.description || item.description}
+                    </p>
                   </div>
-                  <h3 className="text-sm font-bold text-zinc-900 font-montserrat">
-                    {item.name}
-                  </h3>
-                  <p className="text-xs text-zinc-600 mt-2 leading-relaxed line-clamp-2 font-poppins">
-                    {item.description}
-                  </p>
-                </div>
 
-                <div className="mt-5 pt-3 border-t border-zinc-100 flex items-center justify-between">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveModelId(item.id);
-                      window.scrollTo({ top: 120, behavior: "smooth" });
-                    }}
-                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 font-mono cursor-pointer"
-                  >
-                    Inspect in CAD HUD ↑
-                  </button>
-                  <Link
-                    href={`/marketplace/${item.productId}`}
-                    className="text-xs text-zinc-500 hover:text-zinc-900 font-medium"
-                  >
-                    Details ↗
-                  </Link>
+                  <div className="mt-5 pt-3 border-t border-zinc-100 flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveModelId(item.id);
+                        window.scrollTo({ top: 120, behavior: "smooth" });
+                      }}
+                      className="text-xs font-bold text-emerald-700 hover:text-emerald-800 font-mono cursor-pointer"
+                    >
+                      Inspect in CAD HUD ↑
+                    </button>
+                    <Link
+                      href={`/marketplace/${item.productId}`}
+                      className="text-xs text-zinc-600 hover:text-zinc-900 font-medium"
+                    >
+                      Details ↗
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

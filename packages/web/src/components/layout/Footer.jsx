@@ -30,14 +30,14 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 items-start">
           {/* Column 1: PLATFORM */}
           <div className="col-span-1 md:col-span-4 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-900 uppercase font-extrabold">
               PLATFORM
             </h2>
             <nav aria-label="Platform Links" className="space-y-2">
               <div>
                 <Link
                   href="/"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Home
                 </Link>
@@ -45,7 +45,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/about"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   About
                 </Link>
@@ -53,7 +53,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/heritage"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Biorad Heritage
                 </Link>
@@ -61,7 +61,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/marketplace"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   3D Marketplace
                 </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/chat"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Expendry AI Pulse
                 </Link>
@@ -79,14 +79,14 @@ export default function Footer() {
 
           {/* Column 2: ENGINEERING */}
           <div className="col-span-1 md:col-span-3 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-900 uppercase font-extrabold">
               ENGINEERING
             </h2>
             <nav aria-label="Engineering Links" className="space-y-2">
               <div>
                 <Link
                   href="/blueprints"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Blueprints
                 </Link>
@@ -94,7 +94,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/experience"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Experience
                 </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/patent"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Patents
                 </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/partners"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Partners
                 </Link>
@@ -120,14 +120,14 @@ export default function Footer() {
 
           {/* Column 3: ECOSYSTEM & COMPLIANCE */}
           <div className="col-span-1 md:col-span-3 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-900 uppercase font-extrabold">
               ECOSYSTEM &amp; LEGAL
             </h2>
             <div className="space-y-2">
               <div>
                 <Link
                   href="/privacy"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Privacy Policy
                 </Link>
@@ -135,7 +135,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/terms"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
                 >
                   Terms of Service
                 </Link>
@@ -145,10 +145,10 @@ export default function Footer() {
                   href="https://www.bioradmedisys.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
                   <span>Biorad Medisys Pune</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
                 </a>
               </div>
               <div>
@@ -156,10 +156,10 @@ export default function Footer() {
                   href="https://bridgekey.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
                   <span>BridgeKey Wallet</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
                 </a>
               </div>
               <div>
@@ -178,10 +178,10 @@ export default function Footer() {
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-medium text-zinc-600 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
                 >
                   <span>MSTScan Explorer</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-400" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
                 </a>
               </div>
             </div>
@@ -189,19 +189,19 @@ export default function Footer() {
 
           {/* Column 4: CONTACT & SHOP-FLOOR */}
           <div className="col-span-1 md:col-span-2 space-y-3">
-            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-400 uppercase font-bold">
+            <h2 className="footer-nav-label text-[11px] font-mono tracking-[0.2em] text-zinc-900 uppercase font-extrabold">
               SHOP-FLOOR
             </h2>
-            <div className="space-y-1.5 text-xs sm:text-sm text-zinc-600 font-mono">
+            <div className="space-y-1.5 text-xs sm:text-sm text-zinc-800 font-mono">
               <div>
                 <a
                   href="mailto:info@expendry.io"
-                  className="footer-nav-link text-zinc-800 hover:text-emerald-700 font-bold transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-zinc-900 hover:text-emerald-700 font-bold transition-colors leading-tight inline-block"
                 >
                   info@expendry.io
                 </a>
               </div>
-              <p className="text-zinc-500 pt-1 leading-relaxed">
+              <p className="text-zinc-700 pt-1 leading-relaxed font-medium">
                 Precision Cluster, Pune, MH, India
               </p>
             </div>
@@ -214,10 +214,17 @@ export default function Footer() {
           aria-hidden="true"
         />
 
-        {/* Monumental Hero Wordmark Statement with Radiant Background-Clip Gradient */}
+        {/* Monumental Hero Wordmark Statement with High-Contrast Fallback */}
         <div className="w-full overflow-hidden select-none py-4 sm:py-6 flex items-center justify-center">
           <div className="footer-hero-wordmark font-montserrat font-black tracking-tighter leading-none whitespace-nowrap text-5xl sm:text-7xl md:text-8xl lg:text-[11vw] flex items-baseline justify-center hover:scale-[1.01] transition-transform duration-300">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-800 via-teal-600 to-zinc-900 relative">
+            <span
+              className="bg-clip-text text-transparent bg-gradient-to-r from-zinc-950 via-zinc-900 to-emerald-950 relative"
+              style={{
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "currentColor",
+                color: "#09090b",
+              }}
+            >
               expendry
               <sup
                 className="text-[0.22em] font-extrabold text-emerald-600 align-super ml-1 sm:ml-2"
@@ -230,15 +237,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom Signoff Bar */}
-        <div className="footer-bottom-bar border-t border-zinc-100 pt-6 mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-mono gap-4">
+        <div className="footer-bottom-bar border-t border-zinc-200 pt-6 mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-800 font-mono gap-4">
           {/* Left: Location & Verified Chain */}
           <div className="flex items-center gap-2">
             <span
               className="h-2 w-2 rounded-full bg-emerald-600 animate-pulse"
               aria-hidden="true"
             />
-            <span className="text-zinc-600 font-medium">Pune Engineering Cluster, MH, IN</span>
-            <span className="text-zinc-300">·</span>
+            <span className="text-zinc-800 font-bold">Pune Engineering Cluster, MH, IN</span>
+            <span className="text-zinc-400">·</span>
             <a
               href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
               target="_blank"
@@ -250,7 +257,7 @@ export default function Footer() {
           </div>
 
           {/* Center: Copyright */}
-          <div className="text-center text-zinc-500 font-sans">
+          <div className="text-center text-zinc-800 font-sans font-medium">
             © 2026 Expendry Ecosystem. All Rights Reserved.
           </div>
 
@@ -258,7 +265,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-800 text-xs font-mono font-bold transition shadow-2xs active:scale-95 cursor-pointer inline-flex items-center gap-1.5 group"
+            className="px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900 text-xs font-mono font-bold transition shadow-2xs active:scale-95 cursor-pointer inline-flex items-center gap-1.5 group"
             aria-label="Scroll back to top of page"
           >
             <span>Back to top</span>

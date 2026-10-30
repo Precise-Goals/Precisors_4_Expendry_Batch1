@@ -417,6 +417,11 @@ export const MODELS = [
 ];
 
 /**
+ * Exactly 9 high-precision Biorad Medisys Pune orthopedic & endosurgical products
+ */
+export const BIORAD_MODELS = MODELS.slice(0, 9);
+
+/**
  * Returns model specification by ID or null.
  */
 export function getModelById(id) {

@@ -1,12 +1,29 @@
 import { describe, it, expect } from "bun:test";
 import {
   MODELS,
+  BIORAD_MODELS,
   getModelById,
   validateOrbitControlParams,
   generateFallbackGeometry,
 } from "../../data/models.js";
 
 describe("3D Showcase Models Registry", () => {
+  it("exports exactly 9 Biorad Medisys clinical models in BIORAD_MODELS", () => {
+    expect(BIORAD_MODELS.length).toBe(9);
+    const bioradIds = BIORAD_MODELS.map((m) => m.id);
+    expect(bioradIds).toEqual([
+      "excel-mpk",
+      "genius-cr",
+      "genius-ps",
+      "ouro-ps",
+      "signature-stem",
+      "signature-duo-cup",
+      "signature-nx-cup",
+      "dj-stent",
+      "indoscope-sleek",
+    ]);
+  });
+
   it("contains all registered models including 9 real Biorad Medisys GLBs", () => {
     expect(MODELS.length).toBeGreaterThanOrEqual(9);
     const modelIds = MODELS.map((m) => m.id);
