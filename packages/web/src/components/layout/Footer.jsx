@@ -37,7 +37,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Home
                 </Link>
@@ -45,7 +45,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/about"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   About
                 </Link>
@@ -53,7 +53,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/heritage"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Biorad Heritage
                 </Link>
@@ -61,7 +61,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/marketplace"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   3D Marketplace
                 </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/chat"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Expendry AI Pulse
                 </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/blueprints"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Blueprints
                 </Link>
@@ -94,7 +94,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/experience"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Experience
                 </Link>
@@ -102,7 +102,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/patent"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Patents
                 </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/partners"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Partners
                 </Link>
@@ -127,7 +127,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/privacy"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Privacy Policy
                 </Link>
@@ -135,7 +135,7 @@ export default function Footer() {
               <div>
                 <Link
                   href="/terms"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-block"
                 >
                   Terms of Service
                 </Link>
@@ -145,10 +145,10 @@ export default function Footer() {
                   href="https://www.bioradmedisys.com/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-flex items-center gap-1.5 group"
                 >
                   <span>Biorad Medisys Pune</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-700 group-hover:text-[#16a34a] transition-colors" />
                 </a>
               </div>
               <div>
@@ -156,10 +156,10 @@ export default function Footer() {
                   href="https://bridgekey.io/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-flex items-center gap-1.5 group"
                 >
                   <span>BridgeKey Wallet</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-700 group-hover:text-[#16a34a] transition-colors" />
                 </a>
               </div>
               <div>
@@ -167,10 +167,10 @@ export default function Footer() {
                   href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-bold text-emerald-800 hover:text-emerald-950 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-bold text-black hover:text-[#16a34a] transition-colors leading-tight inline-flex items-center gap-1.5 group"
                 >
                   <span>EXPEN Contract (MSTScan)</span>
-                  <IconExternal className="w-3.5 h-3.5 text-emerald-700" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-700 group-hover:text-[#16a34a] transition-colors" />
                 </a>
               </div>
               <div>
@@ -178,10 +178,10 @@ export default function Footer() {
                   href={EXPLORER_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-nav-link text-sm sm:text-base font-semibold text-zinc-800 hover:text-emerald-700 transition-colors leading-tight inline-flex items-center gap-1.5"
+                  className="footer-nav-link text-sm sm:text-base font-semibold text-black hover:text-[#16a34a] transition-colors leading-tight inline-flex items-center gap-1.5 group"
                 >
                   <span>MSTScan Explorer</span>
-                  <IconExternal className="w-3.5 h-3.5 text-zinc-600" />
+                  <IconExternal className="w-3.5 h-3.5 text-zinc-700 group-hover:text-[#16a34a] transition-colors" />
                 </a>
               </div>
             </div>
@@ -196,7 +196,7 @@ export default function Footer() {
               <div>
                 <a
                   href="mailto:info@expendry.io"
-                  className="footer-nav-link text-zinc-900 hover:text-emerald-700 font-bold transition-colors leading-tight inline-block"
+                  className="footer-nav-link text-black hover:text-[#16a34a] font-bold transition-colors leading-tight inline-block"
                 >
                   info@expendry.io
                 </a>

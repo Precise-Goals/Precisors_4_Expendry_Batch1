@@ -1,0 +1,38 @@
+/* ============================================================================
+   Expendry Design System — Color Palette Tokens
+   Primary Palette: White (Base), Machining Green, Obsidian Black, Calibrated Orange
+   ============================================================================ */
+
+:root {
+  /* --- Primary White Base & Backgrounds --- */
+  --color-base: #ffffff;
+  --color-secondary: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+
+  /* --- Obsidian Black & Dark Surfaces --- */
+  --color-black: #000000;
+  --color-obsidian: #0a0a0a;
+  --color-surface-dark: #121212;
+
+  /* --- Machining Green Tokens --- */
+  --color-accent: #16a34a;
+  --color-accent-hover: #15803d;
+  --color-accent-dim: rgba(22, 163, 74, 0.12);
+  --color-green: #26d464;
+
+  /* --- Calibrated Machining Orange Tokens --- */
+  --color-orange: #ea580c;
+  --color-orange-hover: #c2410c;
+  --color-orange-dim: rgba(234, 88, 12, 0.12);
+
+  /* --- Borders & Structural Lines --- */
+  --color-border: #e4e4e7;
+  --color-border-bright: #d4d4d8;
+
+  /* --- Text & Ink Typography Hierarchy --- */
+  --color-text: #09090b;
+  --color-text-dim: #3f3f46;
+  --color-text-muted: #71717a;
+}
+

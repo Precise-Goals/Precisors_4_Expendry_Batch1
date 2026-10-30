@@ -1,0 +1,21 @@
+/* ============================================================================
+   Expendry Design System — Footer Styles
+   ============================================================================ */
+
+/* Footer Navigation Links: Pitch Black, Machining Green on Hover */
+footer a,
+.footer-nav-link {
+  color: #000000 !important;
+  transition: color 0.15s ease-in-out;
+}
+
+footer a:hover,
+.footer-nav-link:hover {
+  color: #16a34a !important;
+}
+
+footer a:hover svg,
+.footer-nav-link:hover svg {
+  color: #16a34a !important;
+}
+
