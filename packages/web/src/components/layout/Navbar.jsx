@@ -3,30 +3,30 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { IconSpindle } from "@/components/ui/Icons";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/heritage", label: "Heritage" },
-  { href: "/chat", label: "Chat" },
-  { href: "/marketplace", label: "Marketplace" },
-  { href: "/experience", label: "Experience" },
+  { href: "/community", label: "Feed" },
+  { href: "/marketplace", label: "3D Market" },
   { href: "/blueprints", label: "Blueprints" },
-  { href: "/patent", label: "Patent" },
-  { href: "/partners", label: "Partners" },
+  { href: "/experience", label: "Tacit Audio" },
+  { href: "/showcase", label: "3D CAD" },
+  { href: "/chat", label: "AI Pulse" },
+  { href: "/heritage", label: "Heritage" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
+  // Monitor scroll offset to adjust elevation
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 15);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -58,18 +58,25 @@ export default function Navbar() {
       <div
         className={`relative flex h-14 sm:h-16 items-center justify-between px-3 sm:px-5 rounded-full liquid-glass-pill ring-1 ring-zinc-900/5 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/90 shadow-2xl border-zinc-300/90"
-            : "bg-white/75 shadow-lg border-zinc-200/80"
+            ? "shadow-2xl border-white/80"
+            : "shadow-lg border-white/60"
         }`}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo with logo1to1.png short icon */}
         <div className="flex items-center gap-2.5">
           <Link
             href="/"
             className="flex items-center gap-2 text-base sm:text-lg font-black tracking-tight text-zinc-950 hover:text-emerald-700 transition-colors font-montserrat"
+            aria-label="Expendry Home"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-2xs">
-              <IconSpindle className="w-4 h-4 text-emerald-600" />
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl overflow-hidden bg-white/90 border border-emerald-200/90 shadow-2xs shrink-0 p-0.5">
+              <img
+                src="/logo1to1.png"
+                alt="Expendry Short Icon"
+                width={28}
+                height={28}
+                className="w-full h-full object-contain"
+              />
             </span>
             <span className="tracking-wider">
               EXPEND<span className="text-emerald-700">RY</span>
@@ -80,7 +87,7 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <nav
           aria-label="Main navigation"
-          className="hidden xl:flex items-center gap-0.5 p-1 rounded-full bg-zinc-100/90 border border-zinc-200/80 shadow-2xs relative"
+          className="hidden xl:flex items-center gap-0.5 p-1 rounded-full bg-zinc-100/80 backdrop-blur-md border border-zinc-200/80 shadow-2xs relative"
         >
           {NAV_LINKS.map((link) => {
             const isActive =
@@ -96,7 +103,7 @@ export default function Navbar() {
                 className={`relative px-2.5 py-1 text-xs font-medium rounded-full transition-colors duration-150 flex items-center z-10 ${
                   isActive
                     ? "text-zinc-950 font-bold"
-                    : "text-zinc-600 hover:text-zinc-950"
+                    : "text-zinc-700 hover:text-zinc-950 font-medium"
                 }`}
               >
                 {isActive && (
@@ -107,7 +114,7 @@ export default function Navbar() {
                       stiffness: 400,
                       damping: 32,
                     }}
-                    className="absolute inset-0 bg-white border border-zinc-200/90 rounded-full shadow-2xs -z-10"
+                    className="absolute inset-0 bg-white/95 border border-zinc-200/90 rounded-full shadow-2xs -z-10"
                   />
                 )}
                 <span>{link.label}</span>
@@ -120,7 +127,7 @@ export default function Navbar() {
         <div className="hidden sm:flex items-center">
           <Link
             href="/login"
-            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-montserrat font-bold transition shadow-md shadow-emerald-950/20 active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-montserrat font-bold transition shadow-md shadow-emerald-950/20 active:scale-95 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2"
           >
             <span>Sign In</span>
             <span aria-hidden="true">→</span>
@@ -141,7 +148,7 @@ export default function Navbar() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav-menu"
             aria-label="Toggle navigation menu"
-            className="inline-flex items-center justify-center rounded-full p-2 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950 focus:outline-none focus:ring-2 focus:ring-emerald-600 transition"
+            className="inline-flex items-center justify-center rounded-full p-2 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-950 focus:outline-none focus:ring-2 focus:ring-emerald-600 transition cursor-pointer min-w-[44px] min-h-[44px]"
           >
             <span className="sr-only">Toggle navigation menu</span>
             {isMenuOpen ? (

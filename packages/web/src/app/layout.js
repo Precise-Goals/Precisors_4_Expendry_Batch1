@@ -19,6 +19,35 @@ export const metadata = {
     "Sarvam AI",
     "CNC tooling",
   ],
+  icons: {
+    icon: "/logo1to1.png",
+    shortcut: "/logo1to1.png",
+    apple: "/logo1to1.png",
+  },
+  openGraph: {
+    title: "Expendry — Manufacturing Tacit Knowledge & Token Ecosystem",
+    description:
+      "Community-driven manufacturing ecosystem connecting veteran machinists to earn EXPEN tokens on MST testnet, consult a Sarvam AI RAG assistant, and inspect 3D tooling.",
+    url: "https://expendry.mstblockchain.com",
+    siteName: "Expendry",
+    images: [
+      {
+        url: "/logo1to1.png",
+        width: 512,
+        height: 512,
+        alt: "Expendry Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Expendry — Manufacturing Tacit Knowledge & Token Ecosystem",
+    description:
+      "Community-driven manufacturing ecosystem connecting veteran machinists to earn EXPEN tokens on MST testnet, consult a Sarvam AI RAG assistant, and inspect 3D tooling.",
+    images: ["/logo1to1.png"],
+  },
 };
 
 export const viewport = {
@@ -46,7 +75,7 @@ export default function RootLayout({ children }) {
         <SmoothScrollProvider>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-white focus:font-semibold focus:rounded-xl"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-emerald-800 focus:text-white focus:font-semibold focus:rounded-xl"
           >
             Skip to content
           </a>

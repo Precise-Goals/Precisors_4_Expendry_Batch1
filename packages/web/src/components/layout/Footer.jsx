@@ -19,7 +19,7 @@ export default function Footer() {
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-6 select-none relative"
     >
       {/* Floating Island White Container */}
-      <div className="footer-container relative rounded-4xl bg-white border border-zinc-200/90 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] overflow-hidden p-8 sm:p-12 lg:p-16">
+      <div className="footer-container relative rounded-4xl bg-white/80 glass-panel border border-zinc-200/90 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.05)] overflow-hidden p-8 sm:p-12 lg:p-16">
         {/* Top Radiant Gradient Accent Strip */}
         <div
           className="footer-top-strip absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700"
@@ -245,7 +245,7 @@ export default function Footer() {
               aria-hidden="true"
             />
             <span className="text-zinc-800 font-bold">Pune Engineering Cluster, MH, IN</span>
-            <span className="text-zinc-400">·</span>
+            <span className="text-zinc-600 font-bold">·</span>
             <a
               href={`${EXPLORER_URL}/address/${EXPEN_ADDRESS}`}
               target="_blank"
@@ -265,7 +265,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900 text-xs font-mono font-bold transition shadow-2xs active:scale-95 cursor-pointer inline-flex items-center gap-1.5 group"
+            className="px-4 py-2 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900 text-xs font-mono font-bold transition shadow-2xs active:scale-95 cursor-pointer inline-flex items-center gap-1.5 group min-h-[44px]"
             aria-label="Scroll back to top of page"
           >
             <span>Back to top</span>

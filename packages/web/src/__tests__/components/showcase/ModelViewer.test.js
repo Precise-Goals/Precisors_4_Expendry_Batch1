@@ -15,7 +15,7 @@ mock.module("@react-three/drei", () => ({
   Center: ({ children }) => React.createElement("div", null, children),
 }));
 
-import ModelViewer, { ModelErrorBoundary, initDracoLoader } from "../../../components/showcase/ModelViewer.jsx";
+const { default: ModelViewer, ModelErrorBoundary, initDracoLoader } = await import("../../../components/showcase/ModelViewer.jsx");
 
 describe("ModelViewer — 3D CAD Workstation Component", () => {
   it("renders CAD workstation telemetry and viewport region with accessible labels", () => {

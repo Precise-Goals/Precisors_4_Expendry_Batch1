@@ -97,13 +97,13 @@ export default function Home() {
   const calculatedUsd = (calculatedMonthly * 0.5).toFixed(0);
 
   return (
-    <div className="flex flex-col w-full min-h-screen bg-white text-[#09090b] relative selection:bg-[#16a34a]/20 selection:text-black">
+    <div className="flex flex-col w-full min-h-screen bg-transparent text-[#09090b] relative selection:bg-[#16a34a]/20 selection:text-black">
       {/* ──────────────────────────────────────────────────────────
           1. HERO SECTION (High-Fidelity Architectural Layout)
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Hero Section"
-        className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-[#e4e4e7] bg-white min-h-[580px] lg:min-h-[640px] flex items-center"
+        className="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-[#e4e4e7] bg-transparent min-h-[580px] lg:min-h-[640px] flex items-center"
       >
         {/* Hero Background Photo (h.png) */}
         <div
@@ -137,7 +137,7 @@ export default function Home() {
               {/* Protocol Status Beacon */}
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#e4e4e7] shadow-sm"
+                className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full liquid-glass-pill border border-[#e4e4e7] shadow-sm"
               >
                 <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-pulse" />
                 <span className="text-xs font-mono font-medium text-zinc-800">
@@ -224,7 +224,7 @@ export default function Home() {
               <motion.div
                 whileHover={{ scale: 1.03, y: -2 }}
                 transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/90 backdrop-blur-md border-2 border-[#16a34a] shadow-xl shadow-emerald-950/10 text-xs font-mono select-none"
+                className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-2xl liquid-glass border-2 border-emerald-600 shadow-xl shadow-emerald-950/10 text-xs font-mono select-none"
               >
                 <span className="h-2.5 w-2.5 rounded-full bg-[#16a34a] animate-ping" />
                 <div className="flex flex-col text-left">
@@ -245,9 +245,9 @@ export default function Home() {
                 <div className="flex flex-col text-left">
                   <div className="flex items-center gap-1.5">
                     <span className="text-[#26d464] font-bold text-[13px]">±0.002 mm</span>
-                    <span className="text-zinc-400 text-[11px]">Verified CMM</span>
+                    <span className="text-zinc-300 font-semibold text-[11px]">Verified CMM</span>
                   </div>
-                  <span className="text-zinc-400 text-[10px]">MST-721 Digital Twin Provenance</span>
+                  <span className="text-zinc-300 text-[10px]">MST-721 Digital Twin Provenance</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -258,9 +258,9 @@ export default function Home() {
       {/* ──────────────────────────────────────────────────────────
           2. INTERACTIVE DRO MACHINING CONTROL DECK
          ────────────────────────────────────────────────────────── */}
-      <section className="py-12 sm:py-16 bg-white border-b border-[#e4e4e7] relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-transparent border-b border-[#e4e4e7] relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto rounded-3xl bg-white border border-zinc-200/90 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
+          <div className="max-w-4xl mx-auto rounded-3xl glass-card border border-zinc-200/90 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all relative overflow-hidden">
             {/* Header Telemetry Row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e4e4e7]">
               <div className="flex items-center gap-3">
@@ -429,7 +429,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Platform Architecture Portals"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#e4e4e7] pb-4">
@@ -447,7 +447,7 @@ export default function Home() {
             {/* 01: Experience Hub */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/experience" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -477,7 +477,7 @@ export default function Home() {
             {/* 02: Blueprints CAD/CAM */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/blueprints" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -507,7 +507,7 @@ export default function Home() {
             {/* 03: Sarvam AI Assistant */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/agent" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -537,7 +537,7 @@ export default function Home() {
             {/* 04: 3D CAD Tooling Inspector */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/showcase" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -567,7 +567,7 @@ export default function Home() {
             {/* 05: Prior Art Patent Ledger */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/patent" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -597,7 +597,7 @@ export default function Home() {
             {/* 06: Partners & Investors */}
             <MagneticTrack strength={0.12} specular={true} className="h-full">
               <Link href="/partners" className="group block h-full">
-                <div className="h-full p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
+                <div className="h-full p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/60 hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="p-2.5 rounded-lg bg-[#f4f4f5] border border-[#e4e4e7] text-[#16a34a] group-hover:scale-105 transition-transform flex items-center justify-center shadow-inner">
@@ -632,7 +632,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="How Expendry Works"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
@@ -743,7 +743,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="Veteran Insights"
-        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-white"
+        className="py-16 sm:py-24 border-b border-[#e4e4e7] bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="space-y-3 max-w-2xl">
@@ -757,7 +757,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Persona 1: Rameshwar */}
-            <div className="p-8 rounded-2xl bg-white border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="p-8 rounded-2xl glass-card border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-zinc-500 uppercase font-semibold">AEROSPACE INCONEL // 42 YRS EXP</span>
@@ -813,7 +813,7 @@ export default function Home() {
             </div>
 
             {/* Persona 2: Devendra */}
-            <div className="p-8 rounded-2xl bg-white border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div className="p-8 rounded-2xl glass-card border border-[#e4e4e7] space-y-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-xs font-mono">
                   <span className="text-zinc-500 uppercase font-semibold">FORGING DIES // 29 YRS EXP</span>
@@ -859,7 +859,7 @@ export default function Home() {
          ────────────────────────────────────────────────────────── */}
       <section
         aria-label="EXPEN Token Economics"
-        className="py-16 sm:py-24 bg-white"
+        className="py-16 sm:py-24 bg-transparent"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -875,7 +875,7 @@ export default function Home() {
               </div>
 
               {/* DRO Console Box */}
-              <div className="p-7 rounded-3xl bg-white border border-zinc-200/90 space-y-6 shadow-md">
+              <div className="p-7 rounded-3xl glass-card border border-zinc-200/90 space-y-6 shadow-md">
                 <div className="flex items-center justify-between border-b border-[#e4e4e7] pb-3 text-xs font-mono">
                   <span className="text-zinc-700 font-semibold">DAILY VALID CONTRIBUTIONS</span>
                   <div className="flex items-center gap-2">
@@ -947,7 +947,7 @@ export default function Home() {
 
             {/* Right: Milled Token Card */}
             <div className="lg:col-span-5 flex justify-center">
-              <div className="w-full max-w-sm rounded-3xl bg-white p-7 border border-zinc-200/90 shadow-xl shadow-black/5 space-y-6 relative overflow-hidden">
+              <div className="w-full max-w-sm rounded-3xl glass-card p-7 border border-zinc-200/90 shadow-xl shadow-black/5 space-y-6 relative overflow-hidden">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider font-mono text-zinc-600 font-bold">
                     ERC-20 Token

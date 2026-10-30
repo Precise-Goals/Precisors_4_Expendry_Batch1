@@ -104,7 +104,7 @@ export default function PostCard({ post }) {
 
   return (
     <article
-      className="p-6 sm:p-7 rounded-3xl bg-white border border-zinc-200/90 hover:border-emerald-500/50 transition-all duration-200 space-y-4 shadow-sm hover:shadow-xl"
+      className="p-6 sm:p-7 rounded-3xl glass-card border border-zinc-200/90 hover:border-emerald-500/50 transition-all duration-200 space-y-4 shadow-sm hover:shadow-xl"
       aria-labelledby={`post-title-${post.id || title.slice(0, 10)}`}
     >
       {/* Header: Type Badge, Icon, Timestamp, EXPEN Badge */}
@@ -116,8 +116,8 @@ export default function PostCard({ post }) {
             </span>
             <span>{type}</span>
           </Badge>
-          <span className="text-xs text-zinc-400">•</span>
-          <time dateTime={createdAt} className="text-xs text-zinc-500 font-mono">
+          <span className="text-xs text-zinc-600 font-bold">•</span>
+          <time dateTime={createdAt} className="text-xs text-zinc-700 font-mono font-medium">
             {formatRelativeTime(createdAt)}
           </time>
         </div>
@@ -137,23 +137,23 @@ export default function PostCard({ post }) {
       </h3>
 
       {/* Engineering Parameter Matrix (3-column micro-grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs font-mono">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 p-3.5 rounded-2xl bg-white/60 backdrop-blur-sm border border-zinc-200 text-xs font-mono">
         <div>
-          <span className="text-zinc-500 block text-[11px] uppercase tracking-wider font-semibold">MATERIAL</span>
-          <span className="text-zinc-900 font-bold truncate block">{params.material}</span>
+          <span className="text-zinc-600 block text-[11px] uppercase tracking-wider font-bold">MATERIAL</span>
+          <span className="text-zinc-950 font-bold truncate block">{params.material}</span>
         </div>
         <div>
-          <span className="text-zinc-500 block text-[11px] uppercase tracking-wider font-semibold">TOOL / PROCESS</span>
-          <span className="text-zinc-900 font-bold truncate block">{params.tool}</span>
+          <span className="text-zinc-600 block text-[11px] uppercase tracking-wider font-bold">TOOL / PROCESS</span>
+          <span className="text-zinc-950 font-bold truncate block">{params.tool}</span>
         </div>
         <div>
-          <span className="text-zinc-500 block text-[11px] uppercase tracking-wider font-semibold">CALIBRATION</span>
-          <span className="text-emerald-700 font-bold truncate block">{params.tolerance}</span>
+          <span className="text-zinc-600 block text-[11px] uppercase tracking-wider font-bold">CALIBRATION</span>
+          <span className="text-emerald-800 font-bold truncate block">{params.tolerance}</span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="text-sm text-zinc-700 leading-relaxed whitespace-pre-line font-body">
+      <div className="text-sm text-zinc-800 leading-relaxed whitespace-pre-line font-body">
         <p>{displayContent}</p>
         {isLongContent && (
           <button
@@ -166,7 +166,7 @@ export default function PostCard({ post }) {
               }
             }}
             aria-expanded={isExpanded}
-            className="mt-2 text-xs font-bold text-emerald-700 hover:text-emerald-900 hover:underline focus:outline-none focus:ring-1 focus:ring-emerald-600 rounded cursor-pointer font-mono"
+            className="mt-2 text-xs font-bold text-emerald-800 hover:text-emerald-950 hover:underline focus:outline-none focus:ring-1 focus:ring-emerald-600 rounded cursor-pointer font-mono"
           >
             {isExpanded ? "Show less ↑" : "Read full knowledge note →"}
           </button>
@@ -174,14 +174,14 @@ export default function PostCard({ post }) {
       </div>
 
       {/* Footer: Author metadata and transaction hash link */}
-      <div className="pt-4 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="pt-4 border-t border-zinc-200/80 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2.5">
           <div className="relative">
             <div className="h-8 w-8 rounded-xl bg-zinc-100 border border-zinc-200 flex items-center justify-center shadow-xs">
-              <IconWrench className="w-4 h-4 text-emerald-700" />
+              <IconWrench className="w-4 h-4 text-emerald-800" />
             </div>
             <span
-              className="absolute -bottom-1 -right-1 h-3.5 w-3.5 bg-emerald-600 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-2xs"
+              className="absolute -bottom-1 -right-1 h-3.5 w-3.5 bg-emerald-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center shadow-2xs"
               title="Verified Veteran Operator"
             >
               ✓
@@ -191,9 +191,9 @@ export default function PostCard({ post }) {
             <div className="font-bold text-zinc-900 flex items-center gap-1.5 font-montserrat">
               <span>{authorName || "Veteran Machinist"}</span>
             </div>
-            <div className="text-[11px] text-zinc-500 font-body">
+            <div className="text-[11px] text-zinc-600 font-body">
               {authorDesignation || "Shop Floor Operator"} •{" "}
-              <span className="font-mono text-zinc-600">{formattedWallet}</span>
+              <span className="font-mono text-zinc-700 font-semibold">{formattedWallet}</span>
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function PostCard({ post }) {
             href={`${EXPLORER_URL}/tx/${txHash}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono font-bold text-emerald-800 hover:underline inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs hover:border-emerald-300 transition"
+            className="text-xs font-mono font-bold text-emerald-800 hover:text-emerald-950 hover:underline inline-flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 shadow-xs hover:border-emerald-300 transition"
             title={`Verified on MST Testnet: ${txHash}`}
           >
             <span>Tx: {txHash.slice(0, 10)}...</span>

@@ -1,17 +1,19 @@
 import { describe, it, expect, mock } from "bun:test";
+import React from "react";
+import { renderToString } from "react-dom/server";
+
 mock.module("three", () => ({}));
 mock.module("@react-three/fiber", () => ({
   useFrame: () => {},
 }));
 mock.module("@react-three/drei", () => ({}));
-import React from "react";
-import { renderToString } from "react-dom/server";
-import {
+
+const {
   LatheToolGeometry,
   DrillBitGeometry,
   EndMillGeometry,
   FaceMillGeometry,
-} from "../../../components/showcase/PlaceholderGeometry.jsx";
+} = await import("../../../components/showcase/PlaceholderGeometry.jsx");
 
 describe("CAD Tooling Geometries Rendering", () => {
   it("renders LatheToolGeometry without errors", () => {

@@ -41,7 +41,7 @@ export default function HeroPicture() {
         }
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        className="group relative w-full rounded-2xl sm:rounded-3xl bg-white border-2 border-[#16a34a] shadow-2xl shadow-emerald-950/10 overflow-hidden cursor-crosshair transition-shadow duration-300 hover:shadow-emerald-500/20"
+        className="group relative w-full rounded-2xl sm:rounded-3xl liquid-glass border-2 border-emerald-600 shadow-2xl shadow-emerald-950/10 overflow-hidden cursor-crosshair transition-shadow duration-300 hover:shadow-emerald-500/20"
       >
         {/* Reticle / Optical Comparator Corner Marks */}
         <div
@@ -91,17 +91,17 @@ export default function HeroPicture() {
         {/* Floating Telemetry Chips */}
         <div className="absolute left-3 bottom-3 sm:left-4 sm:bottom-4 z-20 flex flex-wrap gap-2 max-w-[90%]">
           {/* Specimen Tag */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[#16a34a]/40 shadow-lg text-xs font-mono text-zinc-900 font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl liquid-glass-pill border border-emerald-600/40 shadow-lg text-xs font-mono text-zinc-950 font-bold">
             <span className="h-2 w-2 rounded-full bg-[#16a34a] animate-ping" />
             <span className="font-bold text-[#16a34a]">Ti-6Al-4V ELI</span>
-            <span className="text-zinc-400">|</span>
+            <span className="text-zinc-600 font-bold">|</span>
             <span className="text-zinc-700">5-Axis Orthopedic Joint</span>
           </div>
 
           {/* Tolerance Tag */}
           <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/90 backdrop-blur-md border border-white/20 shadow-lg text-xs font-mono text-white">
             <span className="text-[#26d464] font-bold">±0.002 mm</span>
-            <span className="text-zinc-400">Tolerance Checked</span>
+            <span className="text-zinc-300 font-medium">Tolerance Checked</span>
           </div>
         </div>
 

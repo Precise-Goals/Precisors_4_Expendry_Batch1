@@ -28,6 +28,19 @@ export const Card = React.forwardRef(function Card(
     if (onKeyDown) onKeyDown(e);
   };
 
+  const isLightBg =
+    className.includes("bg-white") ||
+    className.includes("bg-zinc-50") ||
+    className.includes("bg-zinc-100") ||
+    className.includes("glass") ||
+    className.includes("bg-emerald-50");
+
+  const defaultTextColor = className.includes("text-")
+    ? ""
+    : isLightBg
+      ? "text-zinc-950"
+      : "text-white";
+
   return (
     <div
       ref={ref}
@@ -35,15 +48,13 @@ export const Card = React.forwardRef(function Card(
       tabIndex={isClickable ? (tabIndex ?? 0) : tabIndex}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      className={`rounded-xl border border-[#262626] bg-[#121212] ${
-        className.includes("text-") ? "" : "text-white"
-      } transition-all ${
+      className={`rounded-xl border border-[#262626] bg-[#121212] ${defaultTextColor} transition-all ${
         hoverable || isClickable
           ? "hover:border-[#3f3f46] hover:bg-[#161616] cursor-pointer"
           : ""
       } ${
         isClickable
-          ? "focus:outline-none focus:ring-2 focus:ring-[#26d464] focus:ring-offset-2 focus:ring-offset-[#0a0a0a]"
+          ? "focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 focus:ring-offset-white"
           : ""
       } ${className}`.trim()}
       {...props}
@@ -60,7 +71,7 @@ export const CardHeader = React.forwardRef(function CardHeader(
   return (
     <div
       ref={ref}
-      className={`flex flex-col space-y-1.5 p-6 border-b border-[#1c1c1c] ${className}`.trim()}
+      className={`flex flex-col space-y-1.5 p-6 border-b border-inherit/15 ${className}`.trim()}
       {...props}
     >
       {children}
@@ -72,10 +83,11 @@ export const CardTitle = React.forwardRef(function CardTitle(
   { children, className = "", as: Component = "h3", ...props },
   ref
 ) {
+  const hasTextColor = className.includes("text-");
   return (
     <Component
       ref={ref}
-      className={`font-semibold tracking-tight text-white font-display text-lg ${className}`.trim()}
+      className={`font-semibold tracking-tight ${hasTextColor ? "" : "text-inherit"} font-display text-lg ${className}`.trim()}
       {...props}
     >
       {children}
@@ -87,10 +99,11 @@ export const CardDescription = React.forwardRef(function CardDescription(
   { children, className = "", ...props },
   ref
 ) {
+  const hasTextColor = className.includes("text-");
   return (
     <p
       ref={ref}
-      className={`text-sm text-[#a1a1aa] leading-relaxed ${className}`.trim()}
+      className={`text-sm ${hasTextColor ? "" : "text-zinc-600 dark:text-zinc-400"} leading-relaxed ${className}`.trim()}
       {...props}
     >
       {children}

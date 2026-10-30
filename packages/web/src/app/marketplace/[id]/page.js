@@ -45,7 +45,7 @@ export default async function ProductDetailPage({ params }) {
   const expenTokens = (product.price * 2).toFixed(0);
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900 font-body pt-16 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-transparent text-zinc-900 font-body pt-16 selection:bg-emerald-100 selection:text-emerald-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
         {/* Breadcrumb & Navigation Bar */}
         <nav

@@ -495,8 +495,8 @@ export default function ChatInterface({
                     <div
                       className={`px-5 py-3.5 rounded-2xl text-sm sm:text-base leading-relaxed ${
                         isUser
-                          ? "bg-[#16a34a] text-white rounded-br-xs shadow-xs font-poppins font-medium"
-                          : "bg-white border border-zinc-200/90 text-zinc-900 rounded-bl-xs shadow-2xs font-poppins"
+                          ? "bg-emerald-800 text-white rounded-br-xs shadow-sm font-poppins font-medium"
+                          : "glass-card border border-zinc-200/90 text-zinc-950 rounded-bl-xs shadow-2xs font-poppins"
                       }`}
                     >
                       {isUser ? (
@@ -561,7 +561,7 @@ export default function ChatInterface({
       <div className="p-3 sm:p-4 bg-transparent shrink-0">
         <form
           onSubmit={handleFormSubmit}
-          className="max-w-3xl sm:max-w-4xl w-full mx-auto rounded-full bg-zinc-200/70 hover:bg-zinc-200/90 focus-within:bg-white focus-within:ring-2 focus-within:ring-emerald-500/25 focus-within:border-emerald-600 border border-zinc-300/80 p-1.5 pl-5 sm:pl-6 flex items-center gap-2 transition-all shadow-xs"
+          className="max-w-3xl sm:max-w-4xl w-full mx-auto rounded-full liquid-glass-pill focus-within:bg-white focus-within:ring-2 focus-within:ring-emerald-600/30 focus-within:border-emerald-700 border border-zinc-300/80 p-1.5 pl-5 sm:pl-6 flex items-center gap-2 transition-all shadow-md"
         >
           <label htmlFor="expendry-chat-input" className="sr-only">
             Ask me anything
@@ -581,7 +581,7 @@ export default function ChatInterface({
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="rounded-full bg-[#16a34a] hover:bg-[#15803d] disabled:opacity-40 disabled:hover:bg-[#16a34a] text-white px-5 sm:px-6 py-2.5 font-poppins font-medium text-sm flex items-center justify-center gap-1.5 shadow-xs active:scale-95 transition-all cursor-pointer shrink-0"
+            className="rounded-full bg-emerald-800 hover:bg-emerald-900 disabled:opacity-40 disabled:hover:bg-emerald-800 text-white px-5 sm:px-6 py-2.5 font-poppins font-semibold text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer shrink-0"
             aria-label="Send message"
           >
             {isLoading ? (
