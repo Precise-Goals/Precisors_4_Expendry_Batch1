@@ -640,7 +640,8 @@ export default function Home() {
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#09090b] font-display">
               A Closed-Loop Knowledge Economy for Precision Manufacturing
             </h2>
-            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+            <p className="text-sm sm:text-base leading-relaxed"
+            style={{color:""}}>
               &quot;Where experience is never retired.&quot; We transform shop-floor
               wisdom into verifiable on-chain knowledge assets through a 3-step
               incentive loop.
