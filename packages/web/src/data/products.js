@@ -24,7 +24,7 @@ export const PRODUCTS = [
       "Precision-machined CoCrMo femoral knee component featuring medial pivot kinematics for anatomical stability, physiological rollback, and deep flexion wear reduction.",
     price: 850.0,
     category: "Orthopedic Knees",
-    imageUrl: "/images/products/end-mill.png",
+    imageUrl: "/products/excel-mpk.png",
     specs: {
       material: "CoCrMo Alloy (ISO 5832-4)",
       kinematics: "Medial Pivot Asymmetric",
@@ -45,7 +45,7 @@ export const PRODUCTS = [
       "Bone-conserving total knee arthroplasty femoral prosthesis engineered with physiological radius of curvature for optimal PCL retention.",
     price: 790.0,
     category: "Orthopedic Knees",
-    imageUrl: "/images/products/insert-set.png",
+    imageUrl: "/products/genius-cr.png",
     specs: {
       material: "Medical Grade CoCrMo ASTM F75",
       stability: "Cruciate Retaining (PCL Retained)",
@@ -65,7 +65,7 @@ export const PRODUCTS = [
       "Posterior stabilized knee arthroplasty component equipped with a high-efficiency cam-and-post mechanism accommodating up to 145° deep flexion.",
     price: 820.0,
     category: "Orthopedic Knees",
-    imageUrl: "/images/products/drill-set.png",
+    imageUrl: "/products/genius-ps.png",
     specs: {
       material: "Forged CoCrMo Multi-Axis Milled",
       camGeometry: "Rounded Anti-Jump Spine Contact",
@@ -85,7 +85,7 @@ export const PRODUCTS = [
       "Ergonomically contoured Asian-fit femoral knee component tailored for high-demand lifestyle activities including deep kneeling and squatting.",
     price: 890.0,
     category: "Orthopedic Knees",
-    imageUrl: "/images/products/boring-bars.png",
+    imageUrl: "/products/ouro-ps.png",
     specs: {
       material: "Forged CoCrMo ASTM F75",
       specialization: "High Flexion Lifestyle Adaptation",
@@ -105,7 +105,7 @@ export const PRODUCTS = [
       "Taper-wedge femoral stem precision turn-milled from Ti-6Al-4V ELI with proximal plasma-sprayed titanium and hydroxyapatite dual coating.",
     price: 950.0,
     category: "Hip Arthroplasty",
-    imageUrl: "/images/products/tap-die-set.png",
+    imageUrl: "/products/signature-stem.png",
     specs: {
       substrate: "Ti-6Al-4V ELI (ASTM F136)",
       coating: "Porous Ti Mesh + Hydroxyapatite",
@@ -125,7 +125,7 @@ export const PRODUCTS = [
       "Dual mobility spherical press-fit acetabular shell designed to eliminate hip dislocation in active patients through dual articulation biomechanics.",
     price: 680.0,
     category: "Hip Arthroplasty",
-    imageUrl: "/images/products/collet-set.png",
+    imageUrl: "/products/signature-duo.png",
     specs: {
       shellMaterial: "Stainless Steel / CoCrMo Dual Coating",
       innerBore: "Mirror Finish Ra < 0.015 µm",
@@ -145,7 +145,7 @@ export const PRODUCTS = [
       "Ultra-low-wear ceramic-on-ceramic/UHMWPE articulation pairing BIOLOX Delta alumina-zirconia composite ceramic head with press-fit Signature NX shell.",
     price: 1250.0,
     category: "Hip Arthroplasty",
-    imageUrl: "/images/products/vise.png",
+    imageUrl: "/products/signature-nx.png",
     specs: {
       headMaterial: "BIOLOX delta Alumina Composite Ceramic",
       cupMaterial: "Titanium Porous Plasma Shell",
@@ -165,7 +165,7 @@ export const PRODUCTS = [
       "Precision-extruded biocompatible polyurethane ureteral drainage stent with coiled pigtail anchors, side drainage eyes, and lubricious coating.",
     price: 145.0,
     category: "Endosurgical & Urology",
-    imageUrl: "/images/products/coolant-kit.png",
+    imageUrl: "/products/dj-stent.png",
     specs: {
       polymer: "Medical Grade Radiopaque Polyurethane",
       gauge: "4.5 Fr / 6.0 Fr / 7.0 Fr",
@@ -185,7 +185,7 @@ export const PRODUCTS = [
       "Compact semi-rigid ureterorenoscope engineered with German fiber-optic bundles and laser-welded stainless steel instrument channel.",
     price: 1480.0,
     category: "Endosurgical & Urology",
-    imageUrl: "/images/products/dial-indicator.png",
+    imageUrl: "/products/indoscope-sleek.png",
     specs: {
       outerSheath: "Seamless 316L Stainless Steel",
       distalTip: "Tapered 6.5 Fr Atraumatic Bevel",

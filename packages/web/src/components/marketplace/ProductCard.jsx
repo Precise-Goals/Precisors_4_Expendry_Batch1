@@ -14,7 +14,7 @@ export default function ProductCard({ product }) {
   return (
     <article className="flex flex-col rounded-3xl border border-zinc-200/90 bg-white hover:border-emerald-500/60 transition-all duration-200 overflow-hidden group hover:shadow-xl hover:-translate-y-1 motion-reduce:hover:translate-y-0 shadow-sm">
       {/* Packaging Frame / Visual Viewport */}
-      <div className="relative h-52 w-full bg-zinc-50 border-b border-zinc-200 flex items-center justify-center overflow-hidden">
+      <div className="relative h-56 w-full bg-white border-b border-zinc-100 flex items-center justify-center overflow-hidden">
         <Image
           src={product.imageUrl}
           alt={product.name}
@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           placeholder="blur"
           blurDataURL={BLUR_DATA_URL}
-          className="object-contain p-6 group-hover:scale-105 transition-transform duration-300 motion-reduce:group-hover:scale-100"
+          className="object-contain pt-10 pb-3 px-6 group-hover:scale-105 transition-transform duration-300 motion-reduce:group-hover:scale-100"
         />
 
         {product.has3DModel && (

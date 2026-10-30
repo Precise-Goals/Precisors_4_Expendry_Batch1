@@ -93,8 +93,8 @@ export default async function ProductDetailPage({ params }) {
             </div>
 
             {/* Inner Image Well */}
-            <div className="w-full rounded-2xl border border-zinc-200 bg-zinc-50/80 p-8 flex items-center justify-center relative min-h-[300px] overflow-hidden">
-              <div className="relative w-56 h-56 transition-transform duration-500 hover:scale-105 motion-reduce:hover:scale-100">
+            <div className="w-full rounded-2xl border border-zinc-200 bg-white p-8 flex items-center justify-center relative min-h-[300px] overflow-hidden">
+              <div className="relative w-64 h-64 transition-transform duration-500 hover:scale-105 motion-reduce:hover:scale-100">
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
